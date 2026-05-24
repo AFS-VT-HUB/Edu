@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="AFS Virtual Tutor Hub – Free platform connecting students with expert teachers for Pakistani & International curricula."/>
+  <title>AFS Virtual Tutor Hub – Find Expert Teachers Free</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <style>
+    /* Global Overrides for Theme Consistency */
+    :root {
+      --primary: #111111;
+      --accent: #FFD700;
+      --accent-hover: #e6c200;
+      --text-dark: #111111;
+    }
+
+    /* 1. UPGRADED TICKER (Black & Gold Combo) */
+    .ticker-wrap {
+      background: linear-gradient(90deg, #000000, #1c1a17, #111111);
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      border-bottom: 2px solid #FFD700;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      animation: ticker-loop 30s linear infinite;
+    }
+
+    .ticker-wrap:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 0.92rem;
+      padding: 0 40px;
+      letter-spacing: 0.5px;
+    }
+
+    .ticker-btn {
+      background: #FFD700;
+      color: #000000;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-left: 12px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    }
+
+    .ticker-btn:hover {
+      background: #ffffff;
+      color: #000000;
+      transform: scale(1.05);
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.4);
+    }
+
+    @keyframes ticker-loop {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* 2. CUSTOM HERO & BUTTON ELEMENTS */
+    .hero-badge {
+      background: rgba(255, 215, 0, 0.15) !important;
+      color: #FFD700 !important;
+      border: 1px solid #FFD700 !important;
+    }
+
+    .hero-content h1 span {
+      color: #FFD700 !important;
+    }
+
+    /* Dynamic overrides for buttons to force Black & Gold combo */
+    .btn-primary, .hero-btns .btn-primary {
+      background: #111111 !important;
+      color: #FFD700 !important;
+      border: 2px solid #FFD700 !important;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover, .hero-btns .btn-primary:hover {
+      background: #FFD700 !important;
+      color: #111111 !important;
+    }
+
+    .btn-accent, .hero-btns .btn-accent {
+      background: #FFD700 !important;
+      color: #111111 !important;
+      border: 2px solid #FFD700 !important;
+      transition: all 0.3s ease;
+    }
+    .btn-accent:hover, .hero-btns .btn-accent:hover {
+      background: #111111 !important;
+      color: #FFD700 !important;
+    }
+
+    .btn-outline, .hero-btns .btn-outline {
+      background: transparent !important;
+      color: #ffffff !important;
+      border: 2px solid #ffffff !important;
+    }
+    .btn-outline:hover, .hero-btns .btn-outline:hover {
+      background: #FFD700 !important;
+      color: #111111 !important;
+      border-color: #FFD700 !important;
+    }
+
+    /* Stat numbers and text customization */
+    .hero-stat strong {
+      color: #FFD700 !important;
+    }
+
+    /* FIX: Section Tag / Top Ranked badge visibility issue corrected */
+    .section-tag {
+      background: #111111 !important;
+      color: #FFD700 !important;
+      border: 1px solid #FFD700 !important;
+      padding: 6px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    /* Subject Tabs Active State */
+    .subject-tab.active {
+      background: #111111 !important;
+      color: #FFD700 !important;
+      border: 1.5px solid #FFD700 !important;
+    }
+
+    /* Teacher Cards custom outline */
+    .teacher-card {
+      border-top: 4px solid #FFD700 !important;
+    }
+    .tc-avatar {
+      background: #111111 !important;
+      color: #FFD700 !important;
+      border: 1px solid #FFD700;
+    }
+    .stars {
+      color: #FFD700 !important;
+    }
+    
+    /* Loading Spinner Styling */
+    .db-loader {
+      text-align: center;
+      padding: 40px;
+      font-size: 1.2rem;
+      color: #111;
+      width: 100%;
+    }
+
+    /* FIX: Custom styling for Hero Mini Showcase cards inside Black & Gold Container */
+    .hero-illus-title {
+      color: #FFD700 !important;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .hero-illus .mini-teacher-card {
+      background: #1a1a1a !important;
+      border: 1px solid #2d2d2d !important;
+      transition: transform 0.2s ease;
+    }
+    .hero-illus .mini-teacher-card:hover {
+      transform: translateX(5px);
+      border-color: #FFD700 !important;
+    }
+    .hero-illus .mini-info strong {
+      color: #ffffff !important;
+    }
+    .hero-illus .mini-info span {
+      color: #b3b3b3 !important;
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<div id="toast-container"></div>
+
+<nav class="navbar" style="border-bottom: 1px solid #eeeeeef5;">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="index.html">
+      <div class="navbar-logo-icon" style="background: #111; color: #FFD700;">AFS</div>
+      <div class="navbar-logo-text">Virtual Tutor Hub<span style="color: #FFD700;">Expert Teachers. Free Access.</span></div>
+    </a>
+    <div class="navbar-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="pages/faculty.html">Faculty</a>
+      <a href="pages/courses.html">Courses</a>
+      <a href="pages/about-ceo.html">About CEO</a>
+      <a href="pages/blog.html">Blog</a>
+      <a href="pages/faq.html">FAQ</a>
+      <a href="pages/contact.html">Contact</a>
+      <a href="pages/student-register.html" class="btn btn-outline btn-sm" style="color:#111 !important; border-color:#111 !important;">Sign Up</a>
+      <a href="pages/login.html" class="btn btn-primary btn-sm">Login</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="pages/faculty.html">Faculty</a>
+    <a href="pages/courses.html">Courses</a>
+    <a href="pages/about-ceo.html">About CEO</a>
+    <a href="pages/blog.html">Blog</a>
+    <a href="pages/faq.html">FAQ</a>
+    <a href="pages/contact.html">Contact</a>
+    <a href="pages/student-register.html">Sign Up as Student</a>
+    <a href="pages/teacher-register.html">Join as Teacher</a>
+    <a href="pages/login.html">Login</a>
+  </div>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item">🔥 Free Mock Test for O Level Math – 20 June <a href="pages/courses.html" class="ticker-btn">Register Test</a></span>
+    <span class="ticker-item">🚀 New verified teachers added for CSS/PMS preparation! <a href="pages/faculty.html" class="ticker-btn">View Faculty</a></span>
+    <span class="ticker-item">📚 Premium IGCSE Physics demo classes now live <a href="pages/faculty.html#demo" class="ticker-btn">Book Demo</a></span>
+    <span class="ticker-item">✨ Join AFS Network today – 100% Free Access <a href="pages/student-register.html" class="ticker-btn">Join Now</a></span>
+    
+    <span class="ticker-item">🔥 Free Mock Test for O Level Math – 20 June <a href="pages/courses.html" class="ticker-btn">Register Test</a></span>
+    <span class="ticker-item">🚀 New verified teachers added for CSS/PMS preparation! <a href="pages/faculty.html" class="ticker-btn">View Faculty</a></span>
+    <span class="ticker-item">📚 Premium IGCSE Physics demo classes now live <a href="pages/faculty.html#demo" class="ticker-btn">Book Demo</a></span>
+    <span class="ticker-item">✨ Join AFS Network today – 100% Free Access <a href="pages/student-register.html" class="ticker-btn">Join Now</a></span>
+  </div>
+</div>
+
+<section class="hero" style="background: linear-gradient(135deg, #0a0a0a, #1a1a1a); color: #fff;">
+  <div class="hero-inner">
+    <div class="hero-content animate-fadeInUp">
+      <div class="hero-badge"><i class="fa fa-star" style="color:#FFD700"></i> Pakistan's Free Tutor Platform</div>
+      <h1 style="color:#fff;">Find <span>Expert Teachers</span> for Any Curriculum – Free</h1>
+      <p style="color: rgba(255,255,255,0.8);">Connecting students & parents with verified, experienced teachers for Pakistani, Cambridge, IGCSE, GCSE, CSS/PMS, Cadet College & more.</p>
+      
+      <div class="hero-btns" id="hero-dynamic-btns">
+        <a href="pages/student-register.html" class="btn btn-primary"><i class="fa fa-user-graduate"></i> Sign Up as Student</a>
+        <a href="pages/teacher-register.html" class="btn btn-accent"><i class="fa fa-chalkboard-teacher"></i> Join as Teacher</a>
+        <a href="pages/faculty.html#demo" class="btn btn-outline"><i class="fa fa-play-circle"></i> Request Free Demo</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat"><strong id="stat-teachers">500+</strong><span style="color:rgba(255,255,255,0.7)">Expert Teachers</span></div>
+        <div class="hero-stat"><strong id="stat-students">2000+</strong><span style="color:rgba(255,255,255,0.7)">Students Enrolled</span></div>
+        <div class="hero-stat"><strong style="color:#FFD700">15+</strong><span style="color:rgba(255,255,255,0.7)">Curricula Covered</span></div>
+      </div>
+    </div>
+    <div class="hero-img-wrap animate-fadeInUp delay-2">
+      <div class="hero-illus" id="hero-mini-showcase" style="background: #0d0d0d; border: 2px solid #FFD700; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <div class="hero-illus-title" style="border-bottom: 1px solid #222; padding-bottom:12px; margin-bottom:12px;"><i class="fa fa-trophy" style="color:#FFD700"></i> Top Ranked Featured</div>
+        <div id="mini-showcase-list">
+           <div style="padding:20px; text-align:center; color:#FFD700;"><i class="fa fa-spinner fa-spin"></i></div>
+        </div>
+        <a href="pages/faculty.html" class="btn btn-accent btn-sm btn-block mt-16">See All Teachers →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" style="background: #fdfdfd;">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">⭐ Ranked by Students</div>
+      <h2>Top Ranked Teachers by Subject</h2>
+      <p>Manually curated and verified by CEO Muhammad Awais. Ranked by student ratings & experience.</p>
+    </div>
+    <div class="subject-tabs" id="subject-tabs">
+      <button class="subject-tab active" data-subject="all">All</button>
+      <button class="subject-tab" data-subject="math">Mathematics</button>
+      <button class="subject-tab" data-subject="physics">Physics</button>
+      <button class="subject-tab" data-subject="english">English</button>
+      <button class="subject-tab" data-subject="chemistry">Chemistry</button>
+      <button class="subject-tab" data-subject="css">CSS/PMS</button>
+    </div>
+    
+    <div class="teachers-grid" id="teachers-grid">
+      <div class="db-loader"><i class="fa fa-spinner fa-spin" style="color:#FFD700"></i> Loading Top Ranked Teachers...</div>
+    </div>
+    
+    <div class="text-center mt-24 reveal">
+      <a href="pages/faculty.html" class="btn btn-primary">See All Teachers <i class="fa fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Why Choose Us</div>
+      <h2>Why AFS Virtual Tutor Hub?</h2>
+      <p>Built by an educator, for students — completely free to explore.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">💸</div>
+        <h3>Free for Students</h3>
+        <p>Browse teachers, request demos, and access MCQs — all at zero cost.</p>
+      </div>
+      <div class="why-card reveal delay-1">
+        <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">🥇</div>
+        <h3>Verified Teachers</h3>
+        <p>Every teacher is manually reviewed and approved by CEO Muhammad Awais.</p>
+      </div>
+      <div class="why-card reveal delay-2">
+        <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">🌐</div>
+        <h3>All Curricula</h3>
+        <p>Pakistani, Cambridge, IGCSE, GCSE, Edexcel, CSS/PMS, Cadet College & more.</p>
+      </div>
+      <div class="why-card reveal delay-3">
+        <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">💬</div>
+        <h3>Direct WhatsApp</h3>
+        <p>Contact teachers instantly via WhatsApp Business — no middleman.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">📖</div>
+        <h3>Free MCQs & Notes</h3>
+        <p>Download subject-wise PDFs, past papers, and practice materials.</p>
+      </div>
+      <div class="why-card reveal delay-1">
+        <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">🎯</div>
+        <h3>Demo Class First</h3>
+        <p>Request a free demo before committing to any teacher or course.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Curricula Covered</div>
+      <h2>We Cover Every Major Curriculum</h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center" class="reveal">
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Pakistani (All Boards)</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Cambridge O/A Levels</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">IGCSE</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">GCSE</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Edexcel / Pearson</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">CSS / PMS</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">ISSB</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Cadet College</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Pre-Cadet</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Biomaths</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Indian Curriculum</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">Gulf Curriculum</span>
+      <span class="tag" style="font-size:.9rem;padding:8px 18px; background:#111; color:#FFD700;">European Boards</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:linear-gradient(135deg, #000000, #1c1a17); color:#fff; text-align:center; border-top: 3px solid #FFD700; border-bottom: 3px solid #FFD700;">
+  <div class="container reveal">
+    <h2 style="color:#FFF; margin-bottom:12px">Ready to Find Your Perfect Teacher?</h2>
+    <p style="color:rgba(255,255,255,0.85); margin-bottom:28px">Join thousands of students already learning with AFS Virtual Tutor Hub.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap">
+      <a href="pages/student-register.html" class="btn btn-accent"><i class="fa fa-user-graduate"></i> Sign Up Free</a>
+      <a href="pages/teacher-register.html" class="btn btn-outline"><i class="fa fa-chalkboard-teacher"></i> Join as Teacher</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" style="background: #050505; color: #aaa; border-top: 1px solid #1c1a17;">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="navbar-logo" style="margin-bottom:12px">
+        <div class="navbar-logo-icon" style="background: #FFD700; color: #111;">AFS</div>
+        <div class="navbar-logo-text" style="color:#fff">Virtual Tutor Hub<span style="color:#FFD700">Expert Teachers. Free Access.</span></div>
+      </div>
+      <p>Pakistan's free platform connecting students with verified expert teachers for all major curricula.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" aria-label="Facebook" style="background:#111; color:#FFD700;"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn" aria-label="Instagram" style="background:#111; color:#FFD700;"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-btn" aria-label="WhatsApp" style="background:#111; color:#FFD700;"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-btn" aria-label="YouTube" style="background:#111; color:#FFD700;"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4 style="color:#fff; border-left: 3px solid #FFD700; padding-left: 8px;">Quick Links</h4>
+      <ul>
+        <li><a href="pages/faculty.html">Find a Teacher</a></li>
+        <li><a href="pages/courses.html">Courses Offered</a></li>
+        <li><a href="pages/student-register.html">Student Registration</a></li>
+        <li><a href="pages/teacher-register.html">Teacher Registration</a></li>
+        <li><a href="pages/about-ceo.html">About CEO</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:#fff; border-left: 3px solid #FFD700; padding-left: 8px;">Support</h4>
+      <ul>
+        <li><a href="pages/faq.html">FAQ</a></li>
+        <li><a href="pages/blog.html">Blog</a></li>
+        <li><a href="pages/contact.html">Contact Us</a></li>
+        <li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="pages/privacy-policy.html#terms">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:#fff; border-left: 3px solid #FFD700; padding-left: 8px;">Contact</h4>
+      <ul>
+        <li><a href="mailto:info@afstutor.com"><i class="fa fa-envelope" style="color:#FFD700"></i> info@afstutor.com</a></li>
+        <li><a href="https://wa.me/923000000000" target="_blank"><i class="fab fa-whatsapp" style="color:#FFD700"></i> WhatsApp CEO</a></li>
+        <li><a href="#"><i class="fab fa-facebook" style="color:#FFD700"></i> Facebook Page</a></li>
+        <li><a href="#"><i class="fab fa-instagram" style="color:#FFD700"></i> Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="border-top: 1px solid #111;">
+    <span>© 2026 AFS Virtual Tutor Hub. All rights reserved.</span>
+    <span>Built with ❤️ by <strong style="color:#FFD700">Muhammad Idrees & Muhammad Awaia </strong></span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script type="module">
+  import { setupNavbar } from './js/navbar-auth.js';
+  setupNavbar({ basePath:'./', pagesPath:'pages/' });
+
+  import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAm01A9_MlZyuyk_7QsizK0_SpsLYJCNrw",
+    authDomain: "afs-virtual-tutor-hub.firebaseapp.com",
+    projectId: "afs-virtual-tutor-hub",
+    storageBucket: "afs-virtual-tutor-hub.firebasestorage.app",
+    messagingSenderId: "146570288811",
+    appId: "1:146570288811:web:96da475a769c18696321ee"
+  };
+  const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  let allTeachersData = [];
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      if (!snap.exists()) return;
+      const p = snap.data();
+      updateNavbar(p);
+      updateHeroButtons(p);
+    }
+  });
+
+  async function fetchRealTeachers() {
+    const gridContainer = document.getElementById('teachers-grid');
+    const miniShowcaseList = document.getElementById('mini-showcase-list');
+    
+    try {
+      const q = query(collection(db, 'users'), where('role', '==', 'teacher'));
+      const querySnapshot = await getDocs(q);
+      
+      allTeachersData = [];
+      querySnapshot.forEach((docSnap) => {
+        allTeachersData.push({ id: docSnap.id, ...docSnap.data() });
+      });
+
+      if(allTeachersData.length === 0) {
+        if(gridContainer) gridContainer.innerHTML = `<div style="text-align:center;width:100%;color:#888;">No verified teachers found in database yet.</div>`;
+        if(miniShowcaseList) miniShowcaseList.innerHTML = `<div style="padding:10px;color:#ccc;">No featured profiles.</div>`;
+        return;
+      }
+
+      allTeachersData.sort((a,b) => (b.rating || 5.0) - (a.rating || 5.0));
+
+      renderTeachersGrid(allTeachersData);
+      renderMiniShowcase(allTeachersData.slice(0, 3));
+
+    } catch (error) {
+      console.error("Database connection failed:", error);
+      if(gridContainer) gridContainer.innerHTML = `<div style="text-align:center;width:100%;color:red;">Error loading teachers.</div>`;
+    }
+  }
+
+  function renderTeachersGrid(teachers) {
+    const gridContainer = document.getElementById('teachers-grid');
+    if (!gridContainer) return;
+    
+    gridContainer.innerHTML = '';
+    
+    teachers.forEach((t, index) => {
+      const name = t.fullName || 'Expert Teacher';
+      const subject = t.subject || 'All Subjects';
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      const rating = t.rating || '5.0';
+      const experience = t.experience ? `${t.experience} yrs exp` : 'Verified';
+      const curriculum = t.curriculum || 'Cambridge / Pakistani';
+      const phone = t.phone || '923000000000';
+
+      const card = document.createElement('div');
+      card.className = `teacher-card reveal delay-${index % 3}`;
+      card.innerHTML = `
+        <div class="tc-top">
+          <div class="tc-avatar">${initials}</div>
+          <div>
+            <div class="tc-name">${name}</div>
+            <div class="tc-subject">${subject}</div>
+          </div>
+        </div>
+        <div class="tc-rating"><span class="stars">★★★★★</span> ${rating}</div>
+        <div class="tc-tags">
+          <span class="tag">${curriculum}</span>
+          <span class="tag-green tag" style="background:#111; color:#FFD700;">${experience}</span>
+        </div>
+        <div class="tc-actions">
+          <a href="pages/teacher-profile.html?id=${t.id}" class="btn btn-outline btn-sm" style="color:#111 !important; border-color:#111 !important;">View Profile</a>
+          <a href="https://wa.me/${phone}" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      `;
+      gridContainer.appendChild(card);
+    });
+  }
+
+  /* FIX: Inner fields style explicitly modified for Black & Gold theme compilation */
+  function renderMiniShowcase(topThree) {
+    const miniShowcaseList = document.getElementById('mini-showcase-list');
+    if(!miniShowcaseList) return;
+    
+    miniShowcaseList.innerHTML = '';
+    
+    topThree.forEach(t => {
+      const name = t.fullName || 'Expert Teacher';
+      const subject = t.subject || 'Specialist';
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      
+      const item = document.createElement('div');
+      item.className = 'mini-teacher-card';
+      item.style.cssText = "background: #1a1a1a !important; border: 1px solid #2d2d2d !important; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; margin-bottom: 10px;";
+      item.innerHTML = `
+        <div class="mini-avatar" style="background: #FFD700 !important; color: #111 !important; font-weight: bold; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">${initials}</div>
+        <div class="mini-info" style="display: flex; flex-direction: column;">
+          <strong style="color: #ffffff !important; font-size: 0.95rem; margin-bottom: 2px;">${name}</strong>
+          <span style="color: #b3b3b3 !important; font-size: 0.8rem; margin-bottom: 4px;">${subject}</span>
+          <div class="stars" style="color: #FFD700 !important; font-size: 0.8rem;">★★★★★ <small style="color:#FFD700; font-weight: bold; margin-left: 4px;">${t.rating || '5.0'}</small></div>
+        </div>
+      `;
+      miniShowcaseList.appendChild(item);
+    });
+  }
+
+  document.getElementById('subject-tabs')?.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('subject-tab')) return;
+    
+    document.querySelectorAll('.subject-tab').forEach(btn => btn.classList.remove('active'));
+    e.target.classList.add('active');
+    
+    const subjectFilter = e.target.getAttribute('data-subject').toLowerCase();
+    
+    if (subjectFilter === 'all') {
+      renderTeachersGrid(allTeachersData);
+    } else {
+      const filtered = allTeachersData.filter(t => 
+        (t.subject && t.subject.toLowerCase().includes(subjectFilter)) || 
+        (t.curriculum && t.curriculum.toLowerCase().includes(subjectFilter))
+      );
+      renderTeachersGrid(filtered);
+    }
+  });
+
+  function updateNavbar(p) {
+    const navLinks = document.querySelector('.navbar-links');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (!navLinks) return;
+
+    const nameToUse = p.fullName || "User";
+    const initials = nameToUse.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    
+    const profileCircleHTML = `
+      <div class="user-profile-nav" style="display: inline-flex; align-items: center; gap: 15px; margin-left: 15px; vertical-align: middle;">
+        <i class="fa fa-bell" style="color: #FFD700; cursor: pointer; font-size: 1.1rem;"></i>
+        <a href="pages/${p.role === 'admin' ? 'admin-panel' : p.role === 'teacher' ? 'teacher-dashboard' : 'student-dashboard'}.html" title="View Dashboard" style="text-decoration: none;">
+          <div class="profile-circle" style="width: 35px; height: 35px; background: #FFD700; color: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; border: 1px solid #111;">
+            ${initials}
+          </div>
+        </a>
+      </div>
+    `;
+
+    if (p.role === 'admin') {
+      navLinks.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="pages/faculty.html">Faculty</a>
+        <a href="pages/courses.html">Courses</a>
+        <a href="pages/about-ceo.html">About CEO</a>
+        <a href="pages/admin-panel.html" class="btn btn-primary btn-sm"><i class="fa fa-shield-alt"></i> Admin Panel</a>
+        ${profileCircleHTML}`;
+      mobileMenu.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="pages/admin-panel.html">Admin Panel</a>`;
+    } else if (p.role === 'teacher') {
+      navLinks.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="pages/faculty.html">Faculty</a>
+        <a href="pages/courses.html">Courses</a>
+        <a href="pages/about-ceo.html">About CEO</a>
+        <a href="pages/teacher-dashboard.html" class="btn btn-primary btn-sm"><i class="fa fa-tachometer-alt"></i> My Dashboard</a>
+        ${profileCircleHTML}`;
+      mobileMenu.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="pages/teacher-dashboard.html">My Dashboard</a>`;
+    } else {
+      navLinks.innerHTML = `
+        <a href="index.html" class="active">Home</a>
+        <a href="pages/faculty.html">Faculty</a>
+        <a href="pages/courses.html">Courses</a>
+        <a href="pages/about-ceo.html">About CEO</a>
+        <a href="pages/faq.html">FAQ</a>
+        <a href="pages/contact.html">Contact</a>
+        ${profileCircleHTML}`;
+      mobileMenu.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="pages/faculty.html">Faculty</a>
+        <a href="pages/student-dashboard.html">My Dashboard</a>`;
+    }
+  }
+
+  function updateHeroButtons(p) {
+    const heroBtnContainer = document.getElementById('hero-dynamic-btns');
+    if (!heroBtnContainer) return;
+
+    let targetDashboard = 'student-dashboard.html';
+    if (p.role === 'admin') targetDashboard = 'admin-panel.html';
+    if (p.role === 'teacher') targetDashboard = 'teacher-dashboard.html';
+
+    heroBtnContainer.innerHTML = `
+      <a href="pages/${targetDashboard}" class="btn btn-accent"><i class="fa fa-tachometer-alt"></i> Go to Dashboard</a>
+      <a href="pages/faculty.html#demo" class="btn btn-outline"><i class="fa fa-play-circle"></i> Request Free Demo</a>
+    `;
+  }
+
+  fetchRealTeachers();
+</script>
+</body>
+</html>

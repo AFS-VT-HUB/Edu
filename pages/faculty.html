@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty – AFS Virtual Tutor Hub</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <style>
+    :root {
+      --primary: #111111;
+      --accent: #FFD700;
+      --accent-hover: #e6c200;
+      --dark-bg: #0a0a0a;
+      --card-bg: #111111;
+      --input-bg: #1a1a1a;
+      --border-color: #262626;
+      --text-main: #ffffff;
+      --text-muted-custom: #aaaaaa;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-main);
+    }
+
+    /* WHITE NAVBAR STYLES */
+    .navbar {
+      background: #ffffff !important;
+      border-bottom: 1px solid #e5e7eb !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .navbar-logo-icon {
+      background: #111111 !important;
+      color: #FFD700 !important;
+      border: 1px solid #111111 !important;
+    }
+    .navbar-logo-text {
+      color: #111111 !important;
+    }
+    .navbar-logo-text span {
+      color: #666666 !important;
+    }
+    .navbar-links a {
+      color: #2d3748 !important;
+      font-weight: 500;
+    }
+    .navbar-links a:hover {
+      color: #FFD700 !important;
+    }
+    .navbar-links a.active {
+      color: #FFD700 !important;
+      font-weight: 700;
+    }
+    .navbar-links .btn-outline {
+      border-color: #cbd5e1 !important;
+      color: #2d3748 !important;
+    }
+    .navbar-links .btn-outline:hover {
+      border-color: #FFD700 !important;
+      color: #FFD700 !important;
+    }
+    .mobile-menu {
+      background: #ffffff !important;
+      border-bottom: 1px solid #e5e7eb !important;
+    }
+    .mobile-menu a {
+      color: #2d3748 !important;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .mobile-menu a:hover {
+      color: #FFD700 !important;
+    }
+    .hamburger span {
+      background-color: #111111 !important;
+    }
+
+    /* Wrap structure for grid items sorting */
+    .faculty-wrap { 
+      display: flex; 
+      gap: 28px; 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 40px 24px; 
+    }
+
+    /* Sidebar sticky filters customization */
+    .filters-sidebar {
+      width: 240px; 
+      flex-shrink: 0;
+      background: var(--card-bg) !important; 
+      border: 1px solid var(--accent) !important;
+      border-radius: var(--radius-lg); 
+      padding: 20px;
+      height: fit-content; 
+      position: sticky; 
+      top: 80px;
+      color: var(--text-main);
+    }
+    .filters-sidebar h3 { 
+      font-size: 0.9rem; 
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+      color: var(--accent) !important; 
+      margin-bottom: 16px; 
+    }
+
+    .filter-group { margin-bottom: 20px; }
+    .filter-group label { 
+      font-size: 0.85rem; 
+      font-weight: 600; 
+      color: var(--text-main); 
+      display: block; 
+      margin-bottom: 8px; 
+    }
+    .filter-group select { 
+      width: 100%; 
+      padding: 8px 10px; 
+      border: 1px solid var(--border-color) !important; 
+      background: var(--input-bg) !important;
+      border-radius: 8px; 
+      font-size: 0.88rem; 
+      color: var(--text-main) !important; 
+    }
+    .filter-group select:focus { 
+      outline: none; 
+      border-color: var(--accent) !important; 
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+    }
+    .filter-group select option {
+      background: var(--card-bg) !important;
+      color: var(--text-main) !important;
+    }
+
+    /* Main Grid & Cards Architecture */
+    .faculty-main { flex: 1; min-width: 0; }
+    .faculty-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 20px; 
+      flex-wrap: wrap; 
+      gap: 12px; 
+    }
+    .faculty-header h2 { font-size: 1.3rem; color: var(--text-main); }
+    
+    /* Search Box styling template override */
+    .search-box { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      background: var(--card-bg) !important; 
+      border: 1px solid var(--border-color) !important; 
+      border-radius: 8px; 
+      padding: 8px 14px; 
+      flex: 1; 
+      max-width: 320px; 
+    }
+    .search-box input { 
+      border: none; 
+      outline: none; 
+      font-size: 0.9rem; 
+      color: var(--text-main) !important; 
+      width: 100%; 
+      background: transparent; 
+    }
+    .search-box i { color: var(--accent) !important; }
+    
+    .results-count { font-size: 0.85rem; color: var(--text-muted-custom); margin-bottom: 16px; }
+
+    /* Dynamic runtime elements class matching targets */
+    .teacher-card {
+      background: var(--card-bg) !important;
+      border: 1px solid var(--border-color) !important;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      color: var(--text-main);
+      transition: all 0.3s ease;
+    }
+    .teacher-card:hover {
+      border-color: var(--accent) !important;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+      transform: translateY(-2px);
+    }
+    .tc-name { color: var(--text-main) !important; font-weight: 600; font-size: 1.1rem; }
+    .tc-subject { color: var(--accent) !important; font-size: 0.85rem; }
+    .stars { color: var(--accent) !important; }
+    
+    /* Dynamic tag elements overrides inside javascript injector loop */
+    .teacher-card .tag {
+      background: var(--input-bg) !important;
+      color: var(--text-main) !important;
+      border: 1px solid var(--border-color);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+    .teacher-card .tag-green {
+      border-color: var(--accent) !important;
+      color: var(--accent) !important;
+    }
+
+    /* Action buttons consistency setup overrides */
+    .btn-primary {
+      background: var(--accent) !important;
+      color: #111111 !important;
+      border: 1px solid var(--accent) !important;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: transparent !important;
+      color: var(--accent) !important;
+    }
+    .btn-outline {
+      background: transparent !important;
+      border: 1px solid var(--border-color) !important;
+      color: var(--text-main) !important;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent) !important;
+      color: var(--accent) !important;
+    }
+    .btn-wa {
+      background: #25D366 !important;
+      color: #fff !important;
+      border: 1px solid #25D366 !important;
+    }
+    .btn-wa:hover {
+      background: transparent !important;
+      color: #25D366 !important;
+    }
+
+    /* Fallback handler if query contains zero listings matches */
+    .no-results { 
+      text-align: center; 
+      padding: 60px 20px; 
+      background: var(--card-bg) !important; 
+      border: 1px solid var(--accent) !important; 
+      border-radius: var(--radius-lg); 
+    }
+    .no-results i { font-size: 3rem; color: var(--accent) !important; margin-bottom: 16px; }
+
+    /* Free Demo segment customized parameters */
+    .section-alt {
+      background: linear-gradient(135deg, #111111, #0a0a0a) !important;
+      border-top: 1px solid var(--border-color);
+      padding: 60px 0;
+    }
+    .section-tag {
+      background: rgba(255, 215, 0, 0.1) !important;
+      color: var(--accent) !important;
+      border: 1px solid var(--accent);
+    }
+    .demo-form-card {
+      background: #111111 !important;
+      border: 2px solid var(--accent) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      padding: 35px;
+    }
+    .demo-form-card label {
+      color: var(--accent) !important;
+      font-weight: 500;
+    }
+    .demo-form-card input, .demo-form-card select {
+      background: var(--input-bg) !important;
+      border: 1px solid var(--border-color) !important;
+      color: var(--text-main) !important;
+    }
+    .demo-form-card input:focus, .demo-form-card select:focus {
+      border-color: var(--accent) !important;
+    }
+
+    /* Skeleton Loading effect matched color gradients */
+    .skeleton {
+      background: linear-gradient(90deg, #1a1a1a 25%, #262626 50%, #1a1a1a 75%) !important;
+      background-size: 200% 100% !important;
+      animation: loading 1.5s infinite !important;
+    }
+
+    @media(max-width:768px){
+      .faculty-wrap { flex-direction:column; padding:20px 16px; }
+      .filters-sidebar { width:100%; position:static; margin-bottom: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+<div id="toast-container"></div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="../index.html">
+      <div class="navbar-logo-icon">AFS</div>
+      <div class="navbar-logo-text">Virtual Tutor Hub<span>Expert Teachers. Free Access.</span></div>
+    </a>
+    <div class="navbar-links" id="navbar-links">
+      <a href="../index.html">Home</a>
+      <a href="faculty.html" class="active">Faculty</a>
+      <a href="courses.html">Courses</a>
+      <a href="about-ceo.html">About CEO</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html" class="btn btn-outline btn-sm">Sign Up</a>
+      <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="faculty.html" style="color: #FFD700 !important;">Faculty</a>
+    <a href="courses.html">Courses</a>
+    <a href="about-ceo.html">About CEO</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="student-register.html">Sign Up</a>
+    <a href="login.html">Login</a>
+  </div>
+</nav>
+
+<div style="background: linear-gradient(135deg, #111111, #1a1a1a); padding:48px 24px; text-align:center; color:#fff; border-bottom: 1px solid #262626;">
+  <h1 style="color:#FFD700; margin-bottom:8px; font-weight: 700;">Our Expert Teachers</h1>
+  <p style="color:#aaaaaa; max-width: 600px; margin: 0 auto;">Verified & approved by CEO Muhammad Awais — All curricula covered</p>
+</div>
+
+<div class="faculty-wrap">
+
+  <div class="filters-sidebar animate-fadeInUp">
+    <h3><i class="fa fa-filter"></i> Filters</h3>
+    <div class="filter-group">
+      <label>Subject</label>
+      <select id="f-subject">
+        <option value="">All Subjects</option>
+        <option>Mathematics</option>
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Biology</option>
+        <option>English</option>
+        <option>Urdu</option>
+        <option>CSS/PMS</option>
+        <option>ISSB</option>
+        <option>Biomaths</option>
+        <option>Computer Science</option>
+        <option>Further Maths</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Curriculum</label>
+      <select id="f-curriculum">
+        <option value="">All Curricula</option>
+        <option>Pakistani Matric</option>
+        <option>FSc</option>
+        <option>Cambridge O Level</option>
+        <option>Cambridge A Level</option>
+        <option>IGCSE</option>
+        <option>GCSE</option>
+        <option>Edexcel</option>
+        <option>CSS/PMS</option>
+        <option>ISSB</option>
+        <option>Cadet College</option>
+        <option>Indian Curriculum</option>
+        <option>Gulf Curriculum</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Experience</label>
+      <select id="f-experience">
+        <option value="">Any Experience</option>
+        <option value="0-1">Less than 1 year</option>
+        <option value="1-2">1-2 years</option>
+        <option value="3-5">3-5 years</option>
+        <option value="5-10">5-10 years</option>
+        <option value="10+">10+ years</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sort By</label>
+      <select id="f-sort">
+        <option value="rating">Highest Rating</option>
+        <option value="experience">Most Experienced</option>
+        <option value="newest">Newest First</option>
+      </select>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="applyFilters()">
+      <i class="fa fa-search"></i> Apply Filters
+    </button>
+    <button class="btn btn-outline btn-block" style="margin-top: 8px;" onclick="clearFilters()">
+      Clear Filters
+    </button>
+  </div>
+
+  <div class="faculty-main">
+    <div class="faculty-header">
+      <h2 style="font-weight: 700;">All Approved Instructors</h2>
+      <div class="search-box">
+        <i class="fa fa-search"></i>
+        <input type="text" id="search-input" placeholder="Search teacher by name..."/>
+      </div>
+    </div>
+    
+    <div class="results-count" id="results-count">Loading...</div>
+    
+    <div class="teachers-grid" id="teachers-grid">
+      <div class="teacher-card">
+        <div class="tc-top">
+          <div class="skeleton" style="width:54px;height:54px;border-radius:50%"></div>
+          <div style="flex:1">
+            <div class="skeleton" style="height:16px;width:60%;margin-bottom:6px"></div>
+            <div class="skeleton" style="height:12px;width:40%"></div>
+          </div>
+        </div>
+        <div class="skeleton" style="height:12px;width:80%;margin:8px 0"></div>
+        <div class="skeleton" style="height:36px;border-radius:8px"></div>
+      </div>
+      <div class="teacher-card">
+        <div class="tc-top">
+          <div class="skeleton" style="width:54px;height:54px;border-radius:50%"></div>
+          <div style="flex:1">
+            <div class="skeleton" style="height:16px;width:60%;margin-bottom:6px"></div>
+            <div class="skeleton" style="height:12px;width:40%"></div>
+          </div>
+        </div>
+        <div class="skeleton" style="height:12px;width:80%;margin:8px 0"></div>
+        <div class="skeleton" style="height:36px;border-radius:8px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section section-alt" id="demo">
+  <div class="container" style="max-width:560px;">
+    <div class="section-header" style="text-align: center; margin-bottom: 28px;">
+      <div class="section-tag">Free Demo</div>
+      <h2 style="color: #fff; font-weight: 700; margin-top: 12px;">Request a Free Demo Class</h2>
+      <p style="color: var(--text-muted-custom);">Connect with any expert tutor for a live structural test session</p>
+    </div>
+    
+    <div class="form-wrap demo-form-card animate-fadeInUp">
+      <div class="form-group">
+        <label>Your Name <span style="color:red">*</span></label>
+        <input type="text" id="demo-name" placeholder="Muhammad Ali"/>
+      </div>
+      <div class="form-group">
+        <label>Phone / Email <span style="color:red">*</span></label>
+        <input type="text" id="demo-contact" placeholder="+92 300 ... or email"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Subject <span style="color:red">*</span></label>
+          <select id="demo-subject">
+            <option value="">Select</option>
+            <option>Mathematics</option>
+            <option>Physics</option>
+            <option>Chemistry</option>
+            <option>Biology</option>
+            <option>English</option>
+            <option>CSS/PMS</option>
+            <option>Biomaths</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Curriculum <span style="color:red">*</span></label>
+          <select id="demo-curriculum">
+            <option value="">Select</option>
+            <option>Pakistani Matric</option>
+            <option>Cambridge O/A</option>
+            <option>IGCSE/GCSE</option>
+            <option>CSS/PMS</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Preferred Time</label>
+        <input type="text" id="demo-time" placeholder="e.g. Weekdays 5pm-7pm"/>
+      </div>
+      <div class="form-group">
+        <label>Select Teacher <small style="color:var(--text-muted-custom)">(optional)</small></label>
+        <select id="demo-teacher-select" style="width:100%; padding:10px 14px; font-size:0.95rem;">
+          <option value="">Any available teacher</option>
+        </select>
+      </div>
+      <button class="btn btn-primary btn-block" id="btn-demo" style="margin-top: 10px;">
+        <i class="fa fa-paper-plane"></i> Send Demo Request
+      </button>
+    </div>
+  </div>
+</section>
+
+<script src="../js/main.js"></script>
+<script type="module">
+  import { setupNavbar } from '../js/navbar-auth.js';
+
+  import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+  import {
+    getFirestore, collection, getDocs, addDoc,
+    serverTimestamp, query, where, doc, getDoc
+  } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAm01A9_MlZyuyk_7QsizK0_SpsLYJCNrw",
+    authDomain: "afs-virtual-tutor-hub.firebaseapp.com",
+    projectId: "afs-virtual-tutor-hub",
+    storageBucket: "afs-virtual-tutor-hub.firebasestorage.app",
+    messagingSenderId: "146570288811",
+    appId: "1:146570288811:web:96da475a769c18696321ee"
+  };
+  const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+  const db  = getFirestore(app);
+  const auth = getAuth(app);
+
+  let allTeachers = [];
+
+  // ── Auth aware navbar handles white background dynamic states ──
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    if (!snap.exists()) return;
+    const p = snap.data();
+    const navLinks   = document.getElementById('navbar-links');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (p.role === 'admin') {
+      navLinks.innerHTML = `
+        <a href="../index.html">Home</a>
+        <a href="../pages/admin-panel.html" class="btn btn-primary btn-sm"><i class="fa fa-shield-alt"></i> Admin Panel</a>`;
+      mobileMenu.innerHTML = `
+        <a href="../index.html">Home</a>
+        <a href="admin-panel.html">Admin Panel</a>`;
+    } else if (p.role === 'teacher') {
+      navLinks.innerHTML = `
+        <a href="../index.html">Home</a>
+        <a href="teacher-dashboard.html" class="btn btn-primary btn-sm"><i class="fa fa-tachometer-alt"></i> My Dashboard</a>`;
+      mobileMenu.innerHTML = `
+        <a href="../index.html">Home</a>
+        <a href="teacher-dashboard.html">My Dashboard</a>`;
+    } else {
+      navLinks.innerHTML = `
+        <a href="../index.html">Home</a>
+        <a href="faculty.html" class="active" style="color: #FFD700 !important;">Faculty</a>
+        <a href="courses.html">Courses</a>
+        <a href="about-ceo.html">About CEO</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+        <a href="student-dashboard.html" class="btn btn-primary btn-sm"><i class="fa fa-tachometer-alt"></i> Dashboard</a>`;
+      mobileMenu.innerHTML = `
+        <a href="../index.html">Home</a>
+        <a href="faculty.html">Faculty</a>
+        <a href="student-dashboard.html">My Dashboard</a>`;
+    }
+  });
+
+  // ── Load teachers ──
+  async function loadTeachers() {
+    try {
+      const q = query(
+        collection(db, 'users'),
+        where('role', '==', 'teacher'),
+        where('isApproved', '==', true)
+      );
+      const snap = await getDocs(q);
+      allTeachers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderTeachers(allTeachers);
+      populateTeacherDropdown(allTeachers);
+    } catch(e) {
+      console.warn(e.message);
+      allTeachers = [];
+      renderTeachers([]);
+    }
+  }
+
+  // ── Populate teacher dropdown in demo form ──
+  function populateTeacherDropdown(teachers) {
+    const select = document.getElementById('demo-teacher-select');
+    select.innerHTML = '<option value="">Any available teacher</option>';
+    teachers.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t.id;
+      opt.textContent = `${t.fullName} — ${(t.subjects||[]).slice(0,2).join(', ')}`;
+      select.appendChild(opt);
+    });
+  }
+
+  // ── Render teacher cards ──
+  function renderTeachers(teachers) {
+    const grid  = document.getElementById('teachers-grid');
+    const count = document.getElementById('results-count');
+    count.textContent = `${teachers.length} teacher${teachers.length !== 1 ? 's' : ''} found`;
+
+    if (teachers.length === 0) {
+      grid.innerHTML = `
+        <div class="no-results" style="grid-column:1/-1">
+          <i class="fa fa-user-slash"></i>
+          <h3 style="color: #FFD700; font-weight:700;">No teachers found</h3>
+          <p style="color: #aaa; margin-bottom: 12px;">Try different filters or check back later</p>
+          <a href="teacher-register.html" class="btn btn-primary mt-16" style="display:inline-block; padding:10px 20px;">Register as Teacher</a>
+        </div>`;
+      return;
+    }
+
+    const badgeBackgrounds = [
+      'linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7)',
+      'linear-gradient(135deg, #d4af37, #85581A)',
+      'linear-gradient(135deg, #111, #333)'
+    ];
+
+    grid.innerHTML = teachers.map((t, i) => {
+      const initials = (t.fullName||'T').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      const bgStyle = badgeBackgrounds[i % badgeBackgrounds.length];
+      const fontColor = (i % badgeBackgrounds.length === 2) ? '#FFD700' : '#111';
+      const borderFix = (i % badgeBackgrounds.length === 2) ? '1px solid #FFD700' : 'none';
+      const stars = '★'.repeat(Math.round(t.avgRating||0)) + '☆'.repeat(5-Math.round(t.avgRating||0));
+      const waNum = (t.whatsapp||'').replace(/\D/g,'');
+      
+      return `
+        <div class="teacher-card animate-fadeInUp">
+          <div class="tc-top">
+            <div class="tc-avatar" style="background:${bgStyle}; color:${fontColor}; border:${borderFix}; font-weight:700; display:flex; align-items:center; justify-content:center;">${initials}</div>
+            <div>
+              <div class="tc-name">${t.fullName||'Teacher'}</div>
+              <div class="tc-subject">${(t.subjects||[]).slice(0,2).join(' • ')}</div>
+            </div>
+          </div>
+          <div class="tc-rating" style="margin: 8px 0; font-size:0.9rem;">
+            <span class="stars">${stars}</span>
+            <span style="color:#fff; font-weight:500; margin-left:4px;">${t.avgRating||0}</span>
+            <small style="color:#aaaaaa">(${t.reviewCount||0} reviews)</small>
+          </div>
+          <div class="tc-tags" style="margin-bottom: 10px; display:flex; gap:6px; flex-wrap:wrap;">
+            ${(t.curricula||[]).slice(0,2).map(c=>`<span class="tag">${c}</span>`).join('')}
+            ${t.experience ? `<span class="tag tag-green">${t.experience} exp</span>` : ''}
+          </div>
+          <div style="font-size:0.85rem; color:#cccccc; margin:4px 0 14px; line-height:1.4;">
+            ${t.bio ? t.bio.slice(0,80)+'...' : ''}
+          </div>
+          <div class="tc-actions" style="display:flex; gap:10px;">
+            <a href="teacher-profile.html?id=${t.id}" class="btn btn-outline btn-sm" style="flex:1; text-align:center;">
+              <i class="fa fa-user"></i> Profile
+            </a>
+            ${waNum ? `
+            <a href="https://wa.me/${waNum}?text=Hello, I found you on AFS Virtual Tutor Hub"
+               target="_blank" class="btn btn-wa btn-sm" style="flex:1; text-align:center;">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Filters ──
+  window.applyFilters = () => {
+    const subject    = document.getElementById('f-subject').value;
+    const curriculum = document.getElementById('f-curriculum').value;
+    const experience = document.getElementById('f-experience').value;
+    const sort       = document.getElementById('f-sort').value;
+    const search     = document.getElementById('search-input').value.toLowerCase();
+
+    let filtered = [...allTeachers];
+    if (subject)    filtered = filtered.filter(t => (t.subjects||[]).includes(subject));
+    if (curriculum) filtered = filtered.filter(t => (t.curricula||[]).includes(curriculum));
+    if (experience) filtered = filtered.filter(t => t.experience === experience);
+    if (search)     filtered = filtered.filter(t => (t.fullName||'').toLowerCase().includes(search));
+
+    if (sort === 'rating')     filtered.sort((a,b) => (b.avgRating||0)-(a.avgRating||0));
+    if (sort === 'experience') filtered.sort((a,b) => parseInt(b.experience||0)-parseInt(a.experience||0));
+    if (sort === 'newest')     filtered.sort((a,b) => (b.registeredAt?.seconds||0)-(a.registeredAt?.seconds||0));
+
+    renderTeachers(filtered);
+  };
+
+  window.clearFilters = () => {
+    document.getElementById('f-subject').value    = '';
+    document.getElementById('f-curriculum').value = '';
+    document.getElementById('f-experience').value = '';
+    document.getElementById('f-sort').value        = 'rating';
+    document.getElementById('search-input').value  = '';
+    renderTeachers(allTeachers);
+  };
+
+  document.getElementById('search-input').addEventListener('input', () => applyFilters());
+
+  // ── Demo request ──
+  document.getElementById('btn-demo').addEventListener('click', async () => {
+    const name       = document.getElementById('demo-name').value.trim();
+    const contact    = document.getElementById('demo-contact').value.trim();
+    const subject    = document.getElementById('demo-subject').value;
+    const curriculum = document.getElementById('demo-curriculum').value;
+    const time       = document.getElementById('demo-time').value.trim();
+    const select     = document.getElementById('demo-teacher-select');
+    const teacherId  = select.value;
+    const teacherName = teacherId
+      ? select.options[select.selectedIndex].text.split(' —')[0].trim()
+      : 'Any Teacher';
+
+    if (!name || !contact || !subject || !curriculum) {
+      showToast('Name, contact, subject and curriculum are required', 'error'); return;
+    }
+
+    const btn = document.getElementById('btn-demo');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
+
+    try {
+      await addDoc(collection(db, 'demo_requests'), {
+        studentName: name, contact, subject, curriculum,
+        preferredTime: time,
+        teacherId:   teacherId   || null,
+        teacherName: teacherName,
+        status: 'pending',
+        requestDate: serverTimestamp()
+      });
+      showToast('Demo request sent! ✅ We will contact you soon', 'success');
+      document.getElementById('demo-name').value    = '';
+      document.getElementById('demo-contact').value = '';
+      document.getElementById('demo-subject').value = '';
+      document.getElementById('demo-curriculum').value = '';
+      document.getElementById('demo-time').value    = '';
+      select.value = '';
+    } catch(e) {
+      showToast('Error: ' + e.message, 'error');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa fa-paper-plane"></i> Send Demo Request';
+  });
+
+  loadTeachers();
+</script>
+</body>
+</html>

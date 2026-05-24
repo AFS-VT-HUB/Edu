@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About CEO – AFS Virtual Tutor Hub</title>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#0a0a0a;color:#fff;font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;}
+    a{text-decoration:none;}
+
+    /* NAVBAR */
+    .top-nav{position:sticky;top:0;z-index:1000;background:#000;border-bottom:1px solid #333;box-shadow:0 2px 12px rgba(255,215,0,0.06);}
+    .top-nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:72px;}
+    .nav-logo{display:flex;align-items:center;gap:12px;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:8px;background:#FFD700;color:#000;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;}
+    .nav-logo-text{color:#fff;font-size:1rem;font-weight:700;line-height:1.2;}
+    .nav-logo-sub{font-size:0.7rem;color:#888;font-weight:400;}
+    .nav-links{display:flex;align-items:center;gap:4px;}
+    .nav-links a{padding:7px 11px;border-radius:6px;font-size:0.88rem;font-weight:500;color:#ccc;transition:color .15s,background .15s;}
+    .nav-links a:hover{color:#FFD700;background:#111;}
+    .nav-links a.active{color:#FFD700;font-weight:700;}
+    .btn-nav{padding:8px 18px;border-radius:8px;background:#FFD700;color:#000;font-size:0.88rem;font-weight:700;margin-left:6px;transition:background .15s;}
+    .btn-nav:hover{background:#f0c800;color:#000;}
+    .hamburger-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+    .hamburger-btn span{display:block;width:24px;height:2px;background:#FFD700;border-radius:2px;}
+    .mob-menu{display:none;flex-direction:column;background:#000;border-top:1px solid #222;padding:12px 24px 20px;}
+    .mob-menu.open{display:flex;}
+    .mob-menu a{padding:10px 0;border-bottom:1px solid #1a1a1a;color:#ccc;font-size:0.95rem;}
+    .mob-menu a:last-child{border-bottom:none;}
+    .mob-menu a.active{color:#FFD700;}
+    .nav-profile{position:relative;}
+    .nav-avatar{width:38px;height:38px;border-radius:50%;background:#FFD700;color:#000;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:800;cursor:pointer;border:2px solid #333;margin-left:10px;transition:border-color .15s;}
+    .nav-avatar:hover{border-color:#FFD700;}
+    .nav-dd{position:absolute;top:calc(100% + 10px);right:0;background:#111;border:1px solid #333;border-radius:12px;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.5);display:none;z-index:999;overflow:hidden;}
+    .nav-dd.open{display:block;}
+    .nav-dd-head{padding:14px 16px;border-bottom:1px solid #222;background:#0a0a0a;}
+    .nav-dd-head strong{display:block;color:#fff;font-size:0.9rem;}
+    .nav-dd-head span{font-size:0.75rem;color:#888;}
+    .nav-dd a,.nav-dd-item{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:0.88rem;color:#ccc;cursor:pointer;transition:background .12s;}
+    .nav-dd a:hover,.nav-dd-item:hover{background:#1a1a1a;color:#FFD700;}
+    .nav-dd-divider{height:1px;background:#222;}
+    .nav-dd-logout{color:#ef4444!important;}
+
+    /* PAGE */
+    .hero-strip{background:#111;border-bottom:1px solid #222;padding:64px 24px;text-align:center;}
+    .section-tag{display:inline-block;background:#1a1a1a;color:#FFD700;border:1px solid #FFD700;font-size:0.78rem;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+    .page-wrap{max-width:1000px;margin:0 auto;padding:52px 24px;}
+
+    /* CEO Card */
+    .ceo-grid{display:grid;grid-template-columns:300px 1fr;gap:40px;margin-bottom:56px;align-items:start;}
+    .ceo-card{background:#111;border:1px solid #222;border-radius:16px;padding:32px;text-align:center;position:sticky;top:90px;}
+    .ceo-avatar{width:120px;height:120px;border-radius:50%;background:#FFD700;color:#000;display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:900;margin:0 auto 16px;border:4px solid #333;}
+    .ceo-name{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:4px;}
+    .ceo-title{font-size:0.85rem;color:#FFD700;margin-bottom:16px;}
+    .ceo-meta{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;text-align:left;}
+    .ceo-meta-row{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:#888;}
+    .ceo-meta-row i{color:#FFD700;width:14px;}
+    .ceo-socials{display:flex;justify-content:center;gap:10px;margin-bottom:20px;}
+    .social-btn-dark{width:38px;height:38px;border-radius:8px;background:#1a1a1a;border:1px solid #333;display:flex;align-items:center;justify-content:center;color:#888;font-size:1rem;transition:all .15s;}
+    .social-btn-dark:hover{background:#FFD700;color:#000;border-color:#FFD700;}
+
+    /* Main content */
+    .ceo-main{}
+    .content-section{background:#111;border:1px solid #222;border-radius:14px;padding:28px;margin-bottom:20px;}
+    .content-section h3{font-size:1rem;font-weight:700;color:#FFD700;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+    .content-section p{color:#aaa;line-height:1.8;font-size:0.92rem;}
+    .expertise-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:4px;}
+    .expertise-tag{background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:10px 14px;font-size:0.82rem;color:#ccc;display:flex;align-items:center;gap:8px;transition:border-color .15s;}
+    .expertise-tag:hover{border-color:#FFD700;color:#FFD700;}
+    .expertise-tag i{color:#FFD700;font-size:0.9rem;}
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px;}
+    .stat-box{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:16px;text-align:center;}
+    .stat-box strong{display:block;font-size:1.6rem;color:#FFD700;font-weight:700;}
+    .stat-box span{font-size:0.78rem;color:#888;}
+    .vision-quote{background:#1a1a1a;border-left:3px solid #FFD700;border-radius:0 10px 10px 0;padding:20px 24px;margin-top:16px;font-size:0.95rem;color:#ccc;font-style:italic;line-height:1.8;}
+    .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin-top:4px;}
+    .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
+
+    /* Buttons */
+    .btn-yellow{background:#FFD700;color:#000;padding:10px 22px;border-radius:8px;font-size:0.9rem;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:background .15s,transform .1s;}
+    .btn-yellow:hover{background:#f0c800;color:#000;transform:translateY(-1px);}
+    .btn-wa-dark{background:#1a1a1a;color:#25D366;border:1px solid #25D366;padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .15s;}
+    .btn-wa-dark:hover{background:#25D366;color:#fff;}
+    .btn-outline-yellow{background:transparent;color:#FFD700;border:1px solid #FFD700;padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .15s;}
+    .btn-outline-yellow:hover{background:#FFD700;color:#000;}
+
+    /* Footer */
+    .site-footer{background:#000;border-top:1px solid #1a1a1a;padding:56px 24px 24px;}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid #1a1a1a;}
+    .footer-grid h4{color:#FFD700;font-size:0.95rem;margin-bottom:16px;}
+    .footer-grid ul{list-style:none;}
+    .footer-grid ul li{margin-bottom:8px;}
+    .footer-grid ul li a{color:#888;font-size:0.88rem;transition:color .15s;}
+    .footer-grid ul li a:hover{color:#FFD700;}
+    .footer-brand p{font-size:0.88rem;color:#888;margin:12px 0 20px;line-height:1.7;}
+    .footer-socials{display:flex;gap:10px;}
+    .footer-social-btn{width:36px;height:36px;border-radius:8px;background:#111;border:1px solid #222;display:flex;align-items:center;justify-content:center;color:#888;transition:all .15s;}
+    .footer-social-btn:hover{background:#FFD700;color:#000;border-color:#FFD700;}
+    .footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:0.82rem;color:#555;}
+
+    /* Responsive */
+    @media(max-width:768px){
+      .nav-links{display:none;}
+      .hamburger-btn{display:flex;}
+      .ceo-grid{grid-template-columns:1fr;}
+      .ceo-card{position:static;}
+      .stats-row{grid-template-columns:1fr 1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:480px){
+      .stats-row{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;}
+      .footer-bottom{flex-direction:column;gap:8px;text-align:center;}
+    }
+
+    #page-loader{position:fixed;inset:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s;}
+    #page-loader.hidden{opacity:0;pointer-events:none;}
+    .loader-ring{width:48px;height:48px;border-radius:50%;border:4px solid #222;border-top-color:#FFD700;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    #toast-container{position:fixed;bottom:24px;right:24px;z-index:9998;display:flex;flex-direction:column;gap:10px;}
+    .toast{background:#111;color:#fff;padding:12px 20px;border-radius:10px;font-size:0.9rem;min-width:220px;border-left:4px solid #FFD700;}
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+<div id="toast-container"></div>
+
+<!-- NAVBAR -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a class="nav-logo" href="../index.html">
+      <div class="nav-logo-icon">AFS</div>
+      <div><div class="nav-logo-text">Virtual Tutor Hub</div><div class="nav-logo-sub">Expert Teachers. Free Access.</div></div>
+    </a>
+    <div class="nav-links" id="navbar-links">
+      <a href="../index.html">Home</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="courses.html">Courses</a>
+      <a href="about-ceo.html" class="active">About CEO</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html" class="btn-nav">Sign Up</a>
+      <a href="login.html" class="btn-nav">Login</a>
+    </div>
+    <button class="hamburger-btn" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mob-menu" id="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="faculty.html">Faculty</a>
+    <a href="courses.html">Courses</a>
+    <a href="about-ceo.html" class="active">About CEO</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="student-register.html" style="color:#FFD700">Sign Up</a>
+    <a href="login.html" style="color:#FFD700">Login</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-strip">
+  <div class="section-tag">👨‍💼 Meet the CEO</div>
+  <h1 style="color:#fff;margin-bottom:8px;font-size:clamp(1.6rem,4vw,2.4rem);">Muhammad Awais</h1>
+  <p style="color:#888;max-width:560px;margin:0 auto;">Founder & CEO — AFS Virtual Tutor Hub | Maths Specialist | Biomaths Researcher</p>
+</div>
+
+<!-- MAIN -->
+<div class="page-wrap">
+  <div class="ceo-grid">
+
+    <!-- LEFT CARD -->
+    <div class="ceo-card animate-fadeInUp">
+      <div class="ceo-avatar">MA</div>
+      <div class="ceo-name">Muhammad Awais</div>
+      <div class="ceo-title">CEO & Founder | Maths Specialist</div>
+      <div class="ceo-meta">
+        <div class="ceo-meta-row"><i class="fa fa-map-marker-alt"></i> Pakistan</div>
+        <div class="ceo-meta-row"><i class="fa fa-graduation-cap"></i> Mathematics Specialist</div>
+        <div class="ceo-meta-row"><i class="fa fa-flask"></i> Biomaths Researcher</div>
+        <div class="ceo-meta-row"><i class="fa fa-chalkboard-teacher"></i> 10+ Years Experience</div>
+        <div class="ceo-meta-row"><i class="fa fa-star" style="color:#FFD700"></i> Expert: CSS/PMS, ISSB, Cadet</div>
+      </div>
+      <div class="ceo-socials">
+        <a href="#" class="social-btn-dark"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn-dark"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-btn-dark"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/923000000000" target="_blank" class="social-btn-dark" style="color:#25D366;border-color:#25D366"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <a href="https://wa.me/923000000000?text=Hello Sir, I want to learn more about AFS Virtual Tutor Hub" target="_blank" class="btn-wa-dark" style="justify-content:center"><i class="fab fa-whatsapp"></i> WhatsApp Me</a>
+        <a href="faculty.html" class="btn-outline-yellow" style="justify-content:center"><i class="fa fa-search"></i> Find Teachers</a>
+      </div>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="ceo-main">
+
+      <!-- Stats -->
+      <div class="content-section animate-fadeInUp">
+        <h3><i class="fa fa-chart-bar"></i> At a Glance</h3>
+        <div class="stats-row">
+          <div class="stat-box"><strong>10+</strong><span>Years Teaching</span></div>
+          <div class="stat-box"><strong>500+</strong><span>Students Taught</span></div>
+          <div class="stat-box"><strong>15+</strong><span>Curricula Covered</span></div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="content-section animate-fadeInUp delay-1">
+        <h3><i class="fa fa-user"></i> About Muhammad Awais</h3>
+        <p>Muhammad Awais is a highly qualified Mathematics specialist and Biomaths researcher with over 10 years of teaching experience. He has helped hundreds of students excel in Pakistani and international curricula including Cambridge O/A Levels, IGCSE, GCSE, CSS/PMS, ISSB, and Cadet College entrance exams.</p>
+        <p style="margin-top:12px">As the founder of AFS Virtual Tutor Hub, his mission is simple — democratize quality education by connecting students with the best teachers, completely free of charge.</p>
+        <div class="vision-quote">
+          "I built this platform because I believe every student deserves access to quality education, regardless of their financial situation. As a teacher myself, I understand the challenges students face. AFS Virtual Tutor Hub is my contribution to the future of Pakistan."
+          <div style="margin-top:10px;font-style:normal;font-size:0.85rem;color:#FFD700">— Muhammad Awais, CEO</div>
+        </div>
+      </div>
+
+      <!-- Expertise -->
+      <div class="content-section animate-fadeInUp delay-2">
+        <h3><i class="fa fa-star"></i> Areas of Expertise</h3>
+        <div class="expertise-grid">
+          <div class="expertise-tag"><i class="fa fa-calculator"></i> Mathematics</div>
+          <div class="expertise-tag"><i class="fa fa-flask"></i> Biomaths</div>
+          <div class="expertise-tag"><i class="fa fa-landmark"></i> CSS/PMS</div>
+          <div class="expertise-tag"><i class="fa fa-shield-alt"></i> ISSB</div>
+          <div class="expertise-tag"><i class="fa fa-school"></i> Cadet College</div>
+          <div class="expertise-tag"><i class="fa fa-graduation-cap"></i> Cambridge O Level</div>
+          <div class="expertise-tag"><i class="fa fa-graduation-cap"></i> Cambridge A Level</div>
+          <div class="expertise-tag"><i class="fa fa-globe"></i> IGCSE / GCSE</div>
+          <div class="expertise-tag"><i class="fa fa-book"></i> Pakistani Matric</div>
+          <div class="expertise-tag"><i class="fa fa-book"></i> FSc / Pre-Medical</div>
+          <div class="expertise-tag"><i class="fa fa-child"></i> Pre-Cadet Prep</div>
+          <div class="expertise-tag"><i class="fa fa-atom"></i> Further Maths</div>
+        </div>
+      </div>
+
+      <!-- Intro Video -->
+      <div class="content-section animate-fadeInUp">
+        <h3><i class="fab fa-youtube" style="color:#ff0000"></i> Introduction Video</h3>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p style="margin-top:10px;font-size:0.82rem;color:#666">Replace this YouTube link with CEO's actual intro video URL</p>
+      </div>
+
+      <!-- Why AFS -->
+      <div class="content-section animate-fadeInUp">
+        <h3><i class="fa fa-heart" style="color:#ef4444"></i> Why I Built AFS Virtual Tutor Hub</h3>
+        <p>After years of teaching, I noticed that many talented students couldn't afford quality tutoring. The AFS Virtual Tutor Hub was born from this gap — a completely free platform where students can browse verified teachers, request demo classes, and access free study materials without paying a single rupee to the platform.</p>
+        <p style="margin-top:12px">Every teacher on this platform is personally reviewed and approved by me to ensure the highest quality of education for our students.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;">
+          <a href="student-register.html" class="btn-yellow"><i class="fa fa-user-graduate"></i> Join as Student</a>
+          <a href="teacher-register.html" class="btn-outline-yellow"><i class="fa fa-chalkboard-teacher"></i> Join as Teacher</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div class="nav-logo-icon">AFS</div>
+        <div><div style="color:#fff;font-weight:700;">Virtual Tutor Hub</div><div style="font-size:0.7rem;color:#888;">Expert Teachers. Free Access.</div></div>
+      </div>
+      <p>Pakistan's free platform for quality education.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div><h4>Quick Links</h4><ul>
+      <li><a href="faculty.html">Find a Teacher</a></li>
+      <li><a href="student-register.html">Student Registration</a></li>
+      <li><a href="teacher-register.html">Teacher Registration</a></li>
+    </ul></div>
+    <div><h4>Support</h4><ul>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+    </ul></div>
+    <div><h4>Contact</h4><ul>
+      <li><a href="https://wa.me/923000000000" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp CEO</a></li>
+      <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+      <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 AFS Virtual Tutor Hub. All rights reserved.</span>
+    <span>Built with ❤️ by Muhammad Awais</span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load', () => {
+  const loader = document.getElementById('page-loader');
+  if (loader) { loader.classList.add('hidden'); setTimeout(() => loader.remove(), 400); }
+});
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+}
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-dd').forEach(d => d.classList.remove('open'));
+});
+</script>
+
+<script type="module">
+import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAm01A9_MlZyuyk_7QsizK0_SpsLYJCNrw",
+  authDomain: "afs-virtual-tutor-hub.firebaseapp.com",
+  projectId: "afs-virtual-tutor-hub",
+  storageBucket: "afs-virtual-tutor-hub.firebasestorage.app",
+  messagingSenderId: "146570288811",
+  appId: "1:146570288811:web:96da475a769c18696321ee"
+};
+const app  = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+onAuthStateChanged(auth, async (user) => {
+  const navLinks = document.getElementById('navbar-links');
+  const mobMenu  = document.getElementById('mobile-menu');
+  if (!user) return;
+  const snap = await getDoc(doc(db, 'users', user.uid));
+  if (!snap.exists()) return;
+  const p = snap.data();
+  const initials = (p.fullName||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const dashLink = p.role==='admin' ? 'admin-panel.html' : p.role==='teacher' ? 'teacher-dashboard.html' : 'student-dashboard.html';
+
+  navLinks.innerHTML = `
+    <a href="../index.html">Home</a>
+    ${p.role==='student'?'<a href="faculty.html">Faculty</a><a href="courses.html">Courses</a>':''}
+    <a href="about-ceo.html" class="active">About CEO</a>
+    <div class="nav-profile">
+      <div class="nav-avatar" id="nav-avatar">${initials}</div>
+      <div class="nav-dd" id="nav-dd">
+        <div class="nav-dd-head"><strong>${p.fullName}</strong><span>${p.role} Account</span></div>
+        <a href="${dashLink}"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+        <div class="nav-dd-divider"></div>
+        <div class="nav-dd-item nav-dd-logout" id="nav-logout"><i class="fa fa-sign-out-alt"></i> Logout</div>
+      </div>
+    </div>`;
+
+  mobMenu.innerHTML = `
+    <a href="../index.html">Home</a>
+    ${p.role==='student'?'<a href="faculty.html">Faculty</a>':''}
+    <a href="about-ceo.html" class="active">About CEO</a>
+    <a href="${dashLink}" style="color:#FFD700">Dashboard</a>
+    <a href="#" id="mob-logout" style="color:#ef4444">Logout</a>`;
+
+  document.getElementById('nav-avatar')?.addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('nav-dd')?.classList.toggle('open');
+  });
+  const doLogout = async () => { await signOut(auth); window.location.href = '../index.html'; };
+  document.getElementById('nav-logout')?.addEventListener('click', doLogout);
+  document.getElementById('mob-logout')?.addEventListener('click', doLogout);
+});
+</script>
+</body>
+</html>

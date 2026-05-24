@@ -1,0 +1,24 @@
+/* ── Responsive — Mobile First ── */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .navbar-links { display: none; }
+  .hamburger { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-btns { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-img-wrap { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .teachers-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .section { padding: 48px 16px; }
+  .form-wrap { padding: 24px 16px; }
+}
+@media (max-width: 480px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .hero { padding: 48px 16px; }
+  .tc-actions { flex-direction: column; }
+}

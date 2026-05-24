@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration – AFS Virtual Tutor Hub</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <style>
+    /* Global Overrides for Theme Consistency */
+    :root {
+      --primary: #111111;
+      --accent: #FFD700;
+      --accent-hover: #e6c200;
+    }
+
+    /* Spacious and balanced structural card wrapper */
+    .form-wrap {
+      background: #111111 !important;
+      border: 2px solid #FFD700 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      padding: 45px 35px;
+      color: #ffffff;
+      width: 100%;
+      max-width: 650px; /* Fields ke mutabiq perfect premium width */
+    }
+
+    .form-title {
+      color: #FFD700 !important;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    .form-sub {
+      color: #cccccc !important;
+    }
+
+    .form-group label {
+      color: #FFD700 !important;
+      font-weight: 500;
+    }
+
+    /* Input, Select, and Form controls custom styling */
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group select {
+      background: #1a1a1a !important;
+      border: 1px solid #333333 !important;
+      color: #ffffff !important;
+      border-radius: 6px;
+      padding: 12px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #FFD700 !important;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+    }
+
+    /* Option elements coloring for dark dropdowns */
+    .form-group select option {
+      background: #111111 !important;
+      color: #ffffff !important;
+    }
+
+    /* Divider gold theme compilation */
+    .divider span {
+      background: #111111 !important;
+      color: #888888 !important;
+      padding: 0 15px;
+    }
+    .divider::before {
+      background: #333333 !important;
+    }
+
+    /* Button custom overrides */
+    .btn-primary {
+      background: #FFD700 !important;
+      color: #111111 !important;
+      border: 2px solid #FFD700 !important;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #111111 !important;
+      color: #FFD700 !important;
+    }
+
+    .btn-google {
+      background: #1a1a1a !important;
+      border: 1px solid #333333 !important;
+      color: #ffffff !important;
+      transition: all 0.3s ease;
+    }
+    .btn-google:hover {
+      border-color: #FFD700 !important;
+      background: #222222 !important;
+    }
+
+    /* Checkbox & Radio Labels Custom Text Colors */
+    #subjects-wrap label,
+    .checkbox-group label,
+    label input[type="radio"] {
+      color: #e0e0e0 !important;
+    }
+    
+    .checkbox-group label a {
+      color: #FFD700 !important;
+      text-decoration: none;
+    }
+    .checkbox-group label a:hover {
+      text-decoration: underline;
+    }
+
+    /* Checkbox & Radio tint accents */
+    input[type="checkbox"], input[type="radio"] {
+      accent-color: #FFD700 !important;
+    }
+
+    /* Bottom dynamic redirection links links */
+    .form-wrap p {
+      color: #aaaaaa !important;
+    }
+    .form-wrap p a {
+      color: #FFD700 !important;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .form-wrap p a:hover {
+      color: #ffffff !important;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+<div id="toast-container"></div>
+
+<nav class="navbar" style="border-bottom: 1px solid #1c1a17; background: #0a0a0a;">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="../index.html">
+      <div class="navbar-logo-icon" style="background: #111; color: #FFD700; border: 1px solid #FFD700;">AFS</div>
+      <div class="navbar-logo-text" style="color: #fff;">Virtual Tutor Hub<span style="color: #FFD700;">Expert Teachers. Free Access.</span></div>
+    </a>
+    <div class="navbar-links">
+      <a href="../index.html" style="color: #fff;">Home</a>
+      <a href="faculty.html" style="color: #fff;">Faculty</a>
+      <a href="login.html" class="btn btn-outline btn-sm" style="color: #FFD700 !important; border-color: #FFD700 !important;">Login</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" style="background: #0a0a0a;">
+    <a href="../index.html" style="color: #fff;">Home</a>
+    <a href="faculty.html" style="color: #fff;">Faculty</a>
+    <a href="login.html" style="color: #FFD700;">Login</a>
+  </div>
+</nav>
+
+<section style="background: linear-gradient(135deg, #0a0a0a, #1a1a1a); padding:48px 24px; min-height:90vh; display: flex; align-items: center; justify-content: center;">
+  <div class="form-wrap animate-fadeInUp">
+
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="navbar-logo-icon" style="margin:0 auto 12px; width:48px; height:48px; font-size:1.3rem; background: #FFD700; color: #111; font-weight: bold; border: none;">AFS</div>
+      <div class="form-title">Student Registration</div>
+      <div class="form-sub">Free account — explore teachers & request demo classes</div>
+    </div>
+
+    <div class="social-login">
+      <button class="btn btn-google btn-block" id="btn-google">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" style="display:inline;margin-right:8px"/>
+        Continue with Google
+      </button>
+    </div>
+    <div class="divider"><span>or fill the form</span></div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name <span style="color:red">*</span></label>
+        <input type="text" id="fullName" placeholder="Muhammad Ali"/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number <span style="color:red">*</span></label>
+        <input type="tel" id="phone" placeholder="+92 300 1234567"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email Address <span style="color:red">*</span></label>
+        <input type="email" id="email" placeholder="ali@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Country <span style="color:red">*</span></label>
+        <select id="country">
+          <option value="">Select Country</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="India">India</option>
+          <option value="UAE">UAE</option>
+          <option value="Saudi Arabia">Saudi Arabia</option>
+          <option value="UK">UK</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Curriculum <span style="color:red">*</span></label>
+        <select id="curriculum">
+          <option value="">Select Curriculum</option>
+          <option>Pakistani (Matric/FSc)</option>
+          <option>Cambridge O/A Levels</option>
+          <option>IGCSE</option>
+          <option>GCSE</option>
+          <option>Edexcel / Pearson</option>
+          <option>CSS / PMS</option>
+          <option>ISSB</option>
+          <option>Cadet College</option>
+          <option>Pre-Cadet</option>
+          <option>Biomaths</option>
+          <option>Indian Curriculum</option>
+          <option>Gulf Curriculum</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Class / Grade <span style="color:red">*</span></label>
+        <select id="grade">
+          <option value="">Select Grade</option>
+          <option>Grade 6</option>
+          <option>Grade 7</option>
+          <option>Grade 8</option>
+          <option>Grade 9 / Matric Part 1</option>
+          <option>Grade 10 / Matric Part 2</option>
+          <option>Grade 11 / FSc Part 1</option>
+          <option>Grade 12 / FSc Part 2</option>
+          <option>O Level</option>
+          <option>A Level / AS Level</option>
+          <option>University</option>
+          <option>CSS/PMS Aspirant</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Subjects of Interest <span style="color:red">*</span></label>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;" id="subjects-wrap">
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Mathematics" class="subj-cb"/> Mathematics
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Physics" class="subj-cb"/> Physics
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Chemistry" class="subj-cb"/> Chemistry
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Biology" class="subj-cb"/> Biology
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="English" class="subj-cb"/> English
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Urdu" class="subj-cb"/> Urdu
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="CSS/PMS" class="subj-cb"/> CSS/PMS
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Biomaths" class="subj-cb"/> Biomaths
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Computer Science" class="subj-cb"/> Computer Science
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" value="Other" class="subj-cb"/> Other
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Language <span style="color:red">*</span></label>
+      <div style="display:flex;gap:24px;margin-top:8px;">
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;font-weight:400;cursor:pointer;">
+          <input type="radio" name="language" value="Urdu" checked/> Urdu
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;font-weight:400;cursor:pointer;">
+          <input type="radio" name="language" value="English"/> English
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;font-weight:400;cursor:pointer;">
+          <input type="radio" name="language" value="Both"/> Both
+        </label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Password <span style="color:red">*</span></label>
+        <input type="password" id="password" placeholder="Min 6 characters"/>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password <span style="color:red">*</span></label>
+        <input type="password" id="confirm-password" placeholder="Repeat password"/>
+      </div>
+    </div>
+
+    <div class="checkbox-group" style="margin-bottom:20px;">
+      <input type="checkbox" id="consent"/>
+      <label for="consent">
+        Main <a href="privacy-policy.html" target="_blank">Privacy Policy</a> aur
+        <a href="privacy-policy.html#terms" target="_blank">Terms of Use</a> se mutafiq hoon
+      </label>
+    </div>
+
+    <button class="btn btn-primary btn-block" id="btn-register">
+      <i class="fa fa-user-plus"></i> Create Free Account
+    </button>
+
+    <p style="text-align:center;margin-top:16px;font-size:0.88rem;">
+      Already have an account? <a href="login.html">Login karo</a>
+    </p>
+    <p style="text-align:center;margin-top:8px;font-size:0.88rem;">
+      Teacher? <a href="teacher-register.html">Teacher registration </a>
+    </p>
+
+  </div>
+</section>
+
+<script src="../js/main.js"></script>
+<script type="module">
+  import { setupNavbar } from '../js/navbar-auth.js';
+  setupNavbar({ basePath:'../', pagesPath:'', backLabel:'Back to Home', backHref:'../index.html' });
+  import { registerStudent, loginWithGoogle } from '../js/auth.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+  import { auth } from '../js/auth.js';
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+  import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAm01A9_MlZyuyk_7QsizK0_SpsLYJCNrw",
+    authDomain: "afs-virtual-tutor-hub.firebaseapp.com",
+    projectId: "afs-virtual-tutor-hub",
+    storageBucket: "afs-virtual-tutor-hub.firebasestorage.app",
+    messagingSenderId: "146570288811",
+    appId: "1:146570288811:web:96da475a769c18696321ee"
+  };
+  const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+  const db = getFirestore(app);
+
+  // Already logged in state validation
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      const role = snap.data()?.role;
+      if (role === 'admin') window.location.href = 'admin-panel.html';
+      else if (role === 'teacher') window.location.href = 'teacher-dashboard.html';
+      else window.location.href = 'student-dashboard.html';
+    }
+  });
+
+  // Register form compilation
+  document.getElementById('btn-register').addEventListener('click', async () => {
+    const fullName   = document.getElementById('fullName').value.trim();
+    const phone      = document.getElementById('phone').value.trim();
+    const email      = document.getElementById('email').value.trim();
+    const country    = document.getElementById('country').value;
+    const curriculum = document.getElementById('curriculum').value;
+    const grade      = document.getElementById('grade').value;
+    const language   = document.querySelector('input[name="language"]:checked').value;
+    const password   = document.getElementById('password').value;
+    const confirm    = document.getElementById('confirm-password').value;
+    const consent    = document.getElementById('consent').checked;
+    const subjects   = [...document.querySelectorAll('.subj-cb:checked')].map(c => c.value);
+
+    if (!fullName || !phone || !email || !country || !curriculum || !grade) {
+      showToast('Please fill all required fields', 'error'); return;
+    }
+    if (subjects.length === 0) { showToast('Select at least one subject', 'error'); return; }
+    if (password !== confirm)  { showToast('Passwords do not match', 'error'); return; }
+    if (password.length < 6)   { showToast('Password must be at least 6 characters', 'error'); return; }
+    if (!consent)              { showToast('Please accept Privacy Policy', 'error'); return; }
+
+    const btn = document.getElementById('btn-register');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Creating account...';
+    try {
+      await registerStudent({ fullName, phone, email, country, curriculum, grade, subjects, language, password });
+      showToast('Account created! ✅ Redirecting...', 'success');
+      setTimeout(() => window.location.href = 'student-dashboard.html', 1200);
+    } catch (e) {
+      if (e.code === 'auth/email-already-in-use') showToast('This email is already registered', 'error');
+      else showToast('Error: ' + e.message, 'error');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa fa-user-plus"></i> Create Free Account';
+    }
+  });
+
+  // Google Authentication Trigger
+  document.getElementById('btn-google').addEventListener('click', async () => {
+    try {
+      await loginWithGoogle('student');
+      showToast('Registered with Google! ✅', 'success');
+      setTimeout(() => window.location.href = 'student-dashboard.html', 1000);
+    } catch (e) {
+      showToast('Google signup failed: ' + e.message, 'error');
+    }
+  });
+</script>
+</body>
+</html>

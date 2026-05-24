@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel – AFS Virtual Tutor Hub</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <style>
+    /* ─── Global Dark & Gold Core Theme ─── */
+    :root {
+      --bg-dark: #0b0b0b;
+      --card-bg: #121212;
+      --panel-border: #222222;
+      --gold: #FFD700;
+      --gold-hover: #f0c800;
+      --text-main: #e0e0e0;
+      --text-muted: #888888;
+      --sidebar-bg: #111119;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      background: var(--bg-dark); 
+      color: var(--text-main);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .admin-wrap { display: flex; min-height: 100vh; }
+    
+    /* ─── Sidebar Beautiful Styling ─── */
+    .admin-sidebar {
+      width: 260px; background: var(--sidebar-bg); color: #a0aec0;
+      padding: 24px 0; flex-shrink: 0; position: sticky; top: 0; height: 100vh; 
+      overflow-y: auto; border-right: 1px solid var(--panel-border);
+    }
+    .admin-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--panel-border); margin-bottom: 16px; }
+    .admin-logo-text { color: #fff; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.5px; }
+    .admin-logo-sub { color: var(--gold); font-size: 0.75rem; margin-top: 4px; font-weight: 500; }
+    
+    .sidebar-section { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
+      color: #4a5568; padding: 20px 20px 8px; font-weight: 700; }
+    
+    .sidebar-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 20px; font-size: 0.9rem; cursor: pointer; color: #b3b3b3;
+      transition: all .2s ease; border-left: 3px solid transparent;
+    }
+    .sidebar-item:hover { background: #1a1a2e; color: #fff; }
+    .sidebar-item.active { background: #1e1e38; color: var(--gold); border-left-color: var(--gold); font-weight: 600; }
+    .sidebar-item i { width: 18px; text-align: center; }
+
+    /* Unread Counter Badge for Sidebar */
+    .unread-indicator {
+      margin-left: auto;
+      background: var(--gold);
+      color: #000;
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    /* ─── Main Content Area ─── */
+    .admin-main { flex: 1; background: var(--bg-dark); padding: 32px; overflow-y: auto; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid var(--panel-border); padding-bottom: 16px; }
+    .admin-header h1 { font-size: 1.6rem; color: #fff; font-weight: 600; }
+    
+    /* Badges */
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .badge-success { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .badge-info { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+    .badge-warning { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+
+    /* ─── Stats Grid Counter Cards ─── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px; }
+    .stat-card {
+      background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
+      padding: 24px; display: flex; align-items: center; gap: 18px; transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); }
+    .stat-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1; }
+    .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
+
+    /* ─── Premium Cards Layout ─── */
+    .panel-card {
+      background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
+      padding: 24px; margin-bottom: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .panel-card-title {
+      font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; color: var(--gold);
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #1f1f1f; padding-bottom: 12px;
+    }
+
+    /* ─── Tables Shading ─── */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; color: #d1d1d1; }
+    th { text-align: left; padding: 12px 14px; background: #161616;
+      border-bottom: 2px solid var(--panel-border); font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); }
+    td { padding: 14px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #161616; }
+    
+    .tc-mini { display: flex; align-items: center; gap: 12px; }
+    .tc-mini-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gold); color: #000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 800; flex-shrink: 0;
+    }
+    
+    /* ─── Form Elements Styling ─── */
+    .form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.85rem; color: #b3b3b3; font-weight: 500; }
+    .form-control, input[type="text"], input[type="date"], textarea {
+      width: 100%; background: #181818; border: 1px solid #333; border-radius: 8px;
+      padding: 11px 14px; color: #fff; font-size: 0.92rem; transition: all 0.2s;
+    }
+    .form-control:focus, input:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 6px rgba(255, 215, 0, 0.15); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+
+    /* Custom File Input Container */
+    .file-upload-wrap { position: relative; width: 100%; }
+    .file-upload-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: #181818; border: 1px dashed #444; padding: 11px;
+      border-radius: 8px; color: #ccc; cursor: pointer; font-size: 0.88rem; transition: all 0.2s;
+    }
+    .file-upload-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(255, 215, 0, 0.02); }
+    .hidden-file { position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+
+    /* ─── Buttons Controls ─── */
+    .btn {
+      padding: 10px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 8px; border: none; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--gold); color: #000; font-weight: 700; }
+    .btn-primary:hover { background: var(--gold-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2); }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; }
+    .btn-accent { background: rgba(255, 215, 0, 0.1); color: var(--gold); border: 1px solid rgba(255, 215, 0, 0.3); }
+    .btn-accent:hover { background: var(--gold); color: #000; }
+    .btn-wa { background: #25D366; color: #fff; }
+    .btn-wa:hover { background: #20ba5a; }
+
+    .action-btns { display: flex; gap: 6px; }
+    .tab-btns { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab-btn {
+      padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+      border: 1px solid #333; background: #161616; color: #aaa; cursor: pointer; transition: all 0.2s;
+    }
+    .tab-btn:hover { color: #fff; border-color: #555; }
+    .tab-btn.active { border-color: var(--gold); background: var(--gold); color: #000; font-weight: 700; }
+
+    /* ─── Cute Cards Inside Announcements List ─── */
+    .cute-ann-card {
+      background: #161616; border: 1px solid #252525; border-radius: 12px;
+      padding: 16px; margin-bottom: 14px; position: relative; transition: border-color 0.2s;
+    }
+    .cute-ann-card:hover { border-color: #383838; }
+    .cute-ann-title { font-size: 1.05rem; color: #fff; font-weight: 600; margin-bottom: 6px; padding-right: 30px; }
+    .cute-ann-msg { font-size: 0.88rem; color: #b3b3b3; line-height: 1.5; }
+    
+    .cute-ann-img {
+      margin-top: 12px; max-height: 180px; width: 100%; 
+      object-fit: cover; border-radius: 8px; border: 1px solid #222;
+    }
+    .cute-ann-date { font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; display: block; }
+
+    @media(max-width:768px){
+      .admin-sidebar{ display:none; }
+      .admin-main{ padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+<div id="toast-container"></div>
+
+<div class="admin-wrap">
+
+  <div class="admin-sidebar">
+    <div class="admin-logo">
+      <div class="admin-logo-text"><i class="fa-solid fa-shield-halved" style="color:var(--gold)"></i> AFS Admin Hub</div>
+      <div class="admin-logo-sub">CEO Muhammad Awais</div>
+    </div>
+    <div class="sidebar-section">Main Dashboard</div>
+    <div class="sidebar-item active" id="sb-dashboard" onclick="showTab('dashboard')">
+      <i class="fa fa-chart-bar"></i> Dashboard
+    </div>
+    <div class="sidebar-section">Teachers Management</div>
+    <div class="sidebar-item" id="sb-pending" onclick="showTab('pending')">
+      <i class="fa fa-clock"></i> Pending Approvals
+      <span id="pending-count" style="margin-left:auto;background:#ef4444;color:#fff;border-radius:20px;padding:2px 8px;font-size:0.7rem;font-weight:700;"></span>
+    </div>
+    <div class="sidebar-item" id="sb-teachers" onclick="showTab('teachers')">
+      <i class="fa fa-chalkboard-teacher"></i> All Faculty Members
+    </div>
+    <div class="sidebar-section">Students Desk</div>
+    <div class="sidebar-item" id="sb-students" onclick="showTab('students')">
+      <i class="fa fa-user-graduate"></i> Enrolled Students
+    </div>
+    <div class="sidebar-section">Global Content</div>
+    <div class="sidebar-item" id="sb-interactions" onclick="showTab('interactions')">
+      <i class="fa fa-comments"></i> User Interactions
+      <span id="interaction-badge" class="unread-indicator" style="display:none">0</span>
+    </div>
+    <div class="sidebar-item" id="sb-announcements" onclick="showTab('announcements')">
+      <i class="fa fa-bullhorn"></i> Announcements Panel
+    </div>
+    <div class="sidebar-item" id="sb-reviews" onclick="showTab('reviews')">
+      <i class="fa fa-star"></i> Student Reviews
+    </div>
+    <div class="sidebar-section">System Account</div>
+    <div class="sidebar-item" id="btn-logout" style="color:#ef4444;">
+      <i class="fa fa-sign-out-alt"></i> Secure Logout
+    </div>
+  </div>
+
+  <div class="admin-main">
+
+    <div id="tab-dashboard">
+      <div class="admin-header">
+        <h1>👋 Welcome back, Muhammad Awais</h1>
+        <span class="badge badge-success"><i class="fa fa-circle" style="font-size:6px; color:#10b981"></i> Root Administrator</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(255,215,0,0.1)">👨‍🏫</div>
+          <div><div class="stat-num" id="s-teachers">0</div><div class="stat-label">Total Teachers</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(59,130,246,0.1)">🎓</div>
+          <div><div class="stat-num" id="s-students">0</div><div class="stat-label">Total Students</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(239,68,68,0.1)">⏳</div>
+          <div><div class="stat-num" id="s-pending">0</div><div class="stat-label">Pending Verifications</div></div>
+        </div>
+        <div class="stat-card" style="cursor:pointer;" onclick="showTab('interactions')">
+          <div class="stat-icon" style="background:rgba(255,215,0,0.1)">📩</div>
+          <div><div class="stat-num" id="s-interactions">0</div><div class="stat-label">User Interactions</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(16,185,129,0.1)">⭐</div>
+          <div><div class="stat-num" id="s-reviews">0</div><div class="stat-label">Total Reviews</div></div>
+        </div>
+      </div>
+      <div class="panel-card">
+        <div class="panel-card-title">Recent Hub Registrations</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>User Profile Name</th><th>Portal Role</th><th>Email Address</th><th>Registration Date</th><th>Access Status</th></tr></thead>
+            <tbody id="recent-table"><tr><td colspan="5" style="text-align:center;color:var(--text-muted)">Syncing profiles database...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-pending" style="display:none">
+      <div class="admin-header"><h1>⏳ Teacher Applications Queue</h1></div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Teacher</th><th>Subjects</th><th>Curricula</th><th>Experience</th><th>WhatsApp</th><th>Actions</th></tr></thead>
+            <tbody id="pending-table"><tr><td colspan="6" style="text-align:center;color:var(--text-muted)">Loading submissions...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-teachers" style="display:none">
+      <div class="admin-header"><h1>👨‍🏫 Registered Faculty Directory</h1></div>
+      <div class="tab-btns">
+        <button class="tab-btn active" onclick="filterTeachers('all',this)">All Faculty</button>
+        <button class="tab-btn" onclick="filterTeachers('approved',this)">Active Verified</button>
+        <button class="tab-btn" onclick="filterTeachers('pending',this)">In Review</button>
+      </div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Teacher</th><th>Subjects Expertise</th><th>Average Rating</th><th>System Status</th><th>Actions</th></tr></thead>
+            <tbody id="teachers-table"><tr><td colspan="5" style="text-align:center;color:var(--text-muted)">Loading directory...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-students" style="display:none">
+      <div class="admin-header"><h1>🎓 Enrolled Global Students</h1></div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student</th><th>Curriculum Focus</th><th>Current Grade</th><th>Origin Country</th><th>Joined Date</th></tr></thead>
+            <tbody id="students-table"><tr><td colspan="5" style="text-align:center;color:var(--text-muted)">Loading accounts...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-interactions" style="display:none">
+      <div class="admin-header"><h1>📩 Contact Inbox & Issues Tickets</h1></div>
+      <div class="panel-card">
+        <div class="panel-card-title">Live Client Messages Pipeline</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>User Details</th>
+                <th>Contact Line</th>
+                <th>Subject Track</th>
+                <th>Message Content</th>
+                <th>Received Date</th>
+                <th>Actions Control</th>
+              </tr>
+            </thead>
+            <tbody id="interactions-table">
+              <tr><td colspan="6" style="text-align:center;color:var(--text-muted)">Syncing interactions log pipeline...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-announcements" style="display:none">
+      <div class="admin-header"><h1>📢 Global Announcements Console</h1></div>
+      <div class="panel-card" style="max-width:560px">
+        <div class="panel-card-title">Compose New Broadcast Card</div>
+        <div class="announce-form">
+          <div class="form-group">
+            <label>Announcement Title <span style="color:var(--gold)">*</span></label>
+            <input type="text" id="ann-title" placeholder="e.g. Free Online Mock Tests – Starting June 20"/>
+          </div>
+          <div class="form-group">
+            <label>Detailed Message Context</label>
+            <textarea id="ann-msg" rows="4" placeholder="Write full details for students & teachers view..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label>Add Banner/Featured Image (Optional)</label>
+            <div class="file-upload-wrap">
+              <div class="file-upload-btn" id="fileBtnText">
+                <i class="fa-regular fa-image" style="color:var(--gold)"></i> Attach Post Picture
+              </div>
+              <input type="file" id="ann-image" class="hidden-file" accept="image/*"/>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Publish Date</label>
+              <input type="date" id="ann-from"/>
+            </div>
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input type="date" id="ann-to"/>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="btn-add-ann" style="width:100%; justify-content:center;">
+            <i class="fa fa-paper-plane"></i> Publish System Alert
+          </button>
+        </div>
+      </div>
+      
+      <div class="panel-card">
+        <div class="panel-card-title">Live Published Feed</div>
+        <div id="ann-list"><p style="color:var(--text-muted)">Fetching live board feed...</p></div>
+      </div>
+    </div>
+
+    <div id="tab-reviews" style="display:none">
+      <div class="admin-header"><h1>⭐ Public Feedback Moderation</h1></div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student Submitting</th><th>Teacher Profile</th><th>Rating Score</th><th>Text Feedback</th><th>Approval Status</th><th>Actions Control</th></tr></thead>
+            <tbody id="reviews-table"><tr><td colspan="6" style="text-align:center;color:var(--text-muted)">Loading reviews logs...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script type="module">
+import { auth, db } from '../js/firebase-config.js';
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import {
+  collection, getDocs, doc, getDoc, updateDoc,
+  addDoc, serverTimestamp, query, where, orderBy, deleteDoc
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+let allTeachers = [];
+let allStudents = [];
+
+// Auth check — only admin verified allowed
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = 'login.html'; return; }
+  const snap = await getDoc(doc(db, 'users', user.uid));
+  const profile = snap.data();
+  if (profile?.role !== 'admin') { window.location.href = 'login.html'; return; }
+  loadAll();
+});
+
+// Logout action
+document.getElementById('btn-logout').addEventListener('click', async () => {
+  await signOut(auth);
+  window.location.href = 'login.html';
+});
+
+// Load all system tables
+async function loadAll() {
+  const snap = await getDocs(collection(db, 'users'));
+  const users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  allTeachers = users.filter(u => u.role === 'teacher');
+  allStudents = users.filter(u => u.role === 'student');
+  const pending = allTeachers.filter(t => !t.isApproved);
+
+  // Set counters
+  document.getElementById('s-teachers').textContent = allTeachers.length;
+  document.getElementById('s-students').textContent = allStudents.length;
+  document.getElementById('s-pending').textContent = pending.length;
+  const pendingCount = document.getElementById('pending-count');
+  if (pending.length > 0) pendingCount.textContent = pending.length;
+
+  const revSnap = await getDocs(collection(db, 'reviews'));
+  document.getElementById('s-reviews').textContent = revSnap.size;
+
+  renderRecent(users);
+  renderPending(pending);
+  renderTeachers(allTeachers);
+  renderStudents(allStudents);
+  loadAnnouncements();
+  loadReviews();
+  loadInteractions(); // Load the new interaction messages
+}
+
+// Visual dynamic changes to custom image label text
+const fileInput = document.getElementById('ann-image');
+const fileBtnText = document.getElementById('fileBtnText');
+if(fileInput) {
+  fileInput.addEventListener('change', (e) => {
+    if(e.target.files.length > 0) {
+      fileBtnText.innerHTML = `<i class="fa-solid fa-file-circle-check" style="color:var(--gold)"></i> ${e.target.files[0].name.slice(0, 20)}...`;
+    } else {
+      fileBtnText.innerHTML = `<i class="fa-regular fa-image" style="color:var(--gold)"></i> Attach Post Picture`;
+    }
+  });
+}
+
+// Render recent registered entries
+function renderRecent(users) {
+  const sorted = [...users].sort((a,b) => (b.registeredAt?.seconds||0) - (a.registeredAt?.seconds||0)).slice(0,8);
+  document.getElementById('recent-table').innerHTML = sorted.map(u => `
+    <tr>
+      <td><div class="tc-mini">
+        <div class="tc-mini-avatar">${u.fullName?.[0]||'?'}</div>
+        <strong>${u.fullName||'N/A'}</strong>
+      </div></td>
+      <td><span class="badge ${u.role==='teacher'?'badge-info':'badge-success'}">${u.role}</span></td>
+      <td>${u.email||''}</td>
+      <td>${u.registeredAt ? new Date(u.registeredAt.seconds*1000).toLocaleDateString() : 'N/A'}</td>
+      <td><span class="badge ${u.isApproved?'badge-success':'badge-warning'}">${u.isApproved?'Active':'Pending'}</span></td>
+    </tr>`).join('');
+}
+
+// Render queue entries
+function renderPending(pending) {
+  if (pending.length === 0) {
+    document.getElementById('pending-table').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted); padding:30px;">No pending verification request at the moment. ✅</td></tr>';
+    return;
+  }
+  document.getElementById('pending-table').innerHTML = pending.map(t => `
+    <tr>
+      <td><div class="tc-mini">
+        <div class="tc-mini-avatar">${t.fullName?.[0]||'?'}</div>
+        <div><strong>${t.fullName}</strong><br/><small style="color:var(--text-muted)">${t.email}</small></div>
+      </div></td>
+      <td>${(t.subjects||[]).join(', ')}</td>
+      <td>${(t.curricula||[]).join(', ')}</td>
+      <td>${t.experience||'N/A'}</td>
+      <td><a href="https://wa.me/${t.whatsapp?.replace(/\D/g,'')}" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Chat</a></td>
+      <td>
+        <div class="action-btns">
+          <button class="btn btn-primary btn-sm" onclick="approveTeacher('${t.id}')"><i class="fa fa-check"></i> Approve</button>
+          <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444;" onclick="rejectTeacher('${t.id}')"><i class="fa fa-times"></i> Reject</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+// All teachers listings mapping
+function renderTeachers(teachers) {
+  document.getElementById('teachers-table').innerHTML = teachers.map(t => `
+    <tr>
+      <td><div class="tc-mini">
+        <div class="tc-mini-avatar">${t.fullName?.[0]||'?'}</div>
+        <div><strong>${t.fullName}</strong><br/><small style="color:var(--text-muted)">${t.email}</small></div>
+      </div></td>
+      <td>${(t.subjects||[]).slice(0,2).join(', ')}${(t.subjects||[]).length>2?'...':''}</td>
+      <td>${t.avgRating||0} ⭐</td>
+      <td><span class="badge ${t.isApproved?'badge-success':'badge-warning'}">${t.isApproved?'Approved':'Pending'}</span></td>
+      <td>
+        <div class="action-btns">
+          ${!t.isApproved ? `<button class="btn btn-primary btn-sm" onclick="approveTeacher('${t.id}')">Approve</button>` : ''}
+          <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444;" onclick="deleteUser('${t.id}')"><i class="fa fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+// Students records tracking mapper
+function renderStudents(students) {
+  document.getElementById('students-table').innerHTML = students.map(s => `
+    <tr>
+      <td><div class="tc-mini">
+        <div class="tc-mini-avatar" style="background:var(--gold); color:#000;">${s.fullName?.[0]||'?'}</div>
+        <div><strong>${s.fullName||'N/A'}</strong><br/><small style="color:var(--text-muted)">${s.email}</small></div>
+      </div></td>
+      <td>${s.curriculum||'N/A'}</td>
+      <td>Grade ${s.grade||'N/A'}</td>
+      <td>${s.country||'N/A'}</td>
+      <td>${s.registeredAt ? new Date(s.registeredAt.seconds*1000).toLocaleDateString() : 'N/A'}</td>
+    </tr>`).join('');
+}
+
+// ─── NEW FUNCTION: FETCH AND RENDER INTERACTION TICKETS FROM DATABASE ───
+async function loadInteractions() {
+  try {
+    const snap = await getDocs(query(collection(db, 'contact_messages'), orderBy('timestamp', 'desc')));
+    const messages = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    // Update Dashboard Counter Stat
+    document.getElementById('s-interactions').textContent = messages.length;
+
+    // Update Sidebar Navigation Counter Badge (Only count 'unread' items)
+    const unreadCount = messages.filter(m => m.status === 'unread').length;
+    const badge = document.getElementById('interaction-badge');
+    if (badge) {
+      if (unreadCount > 0) {
+        badge.textContent = unreadCount;
+        badge.style.display = 'inline-block';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    const tableBody = document.getElementById('interactions-table');
+    if (messages.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted); padding:20px;">No interaction tickets submitted yet.</td></tr>';
+      return;
+    }
+
+    tableBody.innerHTML = messages.map(m => {
+      const dateString = m.timestamp ? new Date(m.timestamp.seconds * 1000).toLocaleDateString() : 'N/A';
+      const isUnread = m.status === 'unread';
+
+      return `
+        <tr style="${isUnread ? 'background: rgba(255,215,0,0.02); font-weight: 600;' : ''}">
+          <td>
+            <div class="tc-mini">
+              <div class="tc-mini-avatar" style="background: var(--panel-border); color: #fff;">${m.fullName?.[0]||'?'}</div>
+              <div><strong>${m.fullName || 'Anonymous'}</strong></div>
+            </div>
+          </td>
+          <td>
+            <div>${m.phone || 'N/A'}</div>
+            <small style="color:var(--text-muted);">${m.email || ''}</small>
+          </td>
+          <td><span class="badge badge-info">${m.subject || 'General Query'}</span></td>
+          <td style="max-width: 320px; white-space: normal; line-height: 1.4; color: #fff;">
+            ${m.message || ''}
+          </td>
+          <td>${dateString}</td>
+          <td>
+            <div class="action-btns">
+              ${isUnread ? `<button class="btn btn-primary btn-sm" onclick="markInteractionRead('${m.id}')"><i class="fa fa-check"></i> Read</button>` : '<span style="color:var(--text-success); font-size:0.8rem; padding-left:10px;"><i class="fa fa-envelope-open" style="color:var(--text-muted)"></i></span>'}
+              <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444;" onclick="deleteInteraction('${m.id}')"><i class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+
+  } catch (error) {
+    console.error("Error matching fields inside pipeline: ", error);
+  }
+}
+
+// Action controllers for interactions
+window.markInteractionRead = async (id) => {
+  await updateDoc(doc(db, 'contact_messages', id), { status: 'read' });
+  showToast('Message marked as reviewed. ✅', 'success');
+  loadAll();
+};
+
+window.deleteInteraction = async (id) => {
+  if (!confirm('Are you sure you want to delete this interaction trace?')) return;
+  await deleteDoc(doc(db, 'contact_messages', id));
+  showToast('Interaction data wiped successfully.', 'info');
+  loadAll();
+};
+
+// Trigger verify updates handles
+window.approveTeacher = async (id) => {
+  await updateDoc(doc(db, 'users', id), { isApproved: true });
+  showToast('Teacher approved successfully! ✅', 'success');
+  loadAll();
+};
+
+window.rejectTeacher = async (id) => {
+  if (!confirm('Are you sure you want to reject this teacher?')) return;
+  await deleteDoc(doc(db, 'users', id));
+  showToast('Application rejected.', 'info');
+  loadAll();
+};
+
+window.deleteUser = async (id) => {
+  if (!confirm('Are you sure you want to delete this account permanently?')) return;
+  await deleteDoc(doc(db, 'users', id));
+  showToast('User account deleted.', 'info');
+  loadAll();
+};
+
+// Cute Render Announcements Function
+async function loadAnnouncements() {
+  const snap = await getDocs(collection(db, 'announcements'));
+  const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  
+  document.getElementById('ann-list').innerHTML = items.length === 0
+    ? '<p style="color:var(--text-muted); text-align:center; padding:20px;">No broadcast alerts published yet.</p>'
+    : items.map(a => {
+        let imgTag = a.imageUrl ? `<img src="${a.imageUrl}" class="cute-ann-img" alt="Post graphic attachment">` : '';
+        
+        return `
+          <div class="cute-ann-card">
+            <button class="btn btn-sm" style="position:absolute; top:14px; right:14px; background:rgba(239,68,68,0.12); color:#ef4444;" onclick="deleteAnn('${a.id}')">
+              <i class="fa fa-trash"></i>
+            </button>
+            <div class="cute-ann-title">${a.title}</div>
+            <div class="cute-ann-msg">${a.message || ''}</div>
+            ${imgTag}
+            <span class="cute-ann-date"><i class="fa-regular fa-clock"></i> Active Framework Validity Range: ${a.displayFrom || 'Immediate'} to ${a.displayTo || 'Indefinite'}</span>
+          </div>`;
+      }).join('');
+}
+
+// Publishing actions
+const btnAddAnn = document.getElementById('btn-add-ann');
+if(btnAddAnn) {
+  btnAddAnn.addEventListener('click', async () => {
+    const title = document.getElementById('ann-title').value.trim();
+    const message = document.getElementById('ann-msg').value.trim();
+    const displayFrom = document.getElementById('ann-from').value;
+    const displayTo = document.getElementById('ann-to').value;
+    
+    if (!title) { showToast('Title field is required!', 'error'); return; }
+    
+    let imageUrl = '';
+    if(fileInput && fileInput.files.length > 0) {
+      imageUrl = await new Promise((res) => {
+        const reader = new FileReader();
+        reader.onload = () => res(reader.result);
+        reader.readAsDataURL(fileInput.files[0]);
+      });
+    }
+
+    await addDoc(collection(db, 'announcements'), {
+      title, message, displayFrom, displayTo, imageUrl, isActive: true, createdAt: serverTimestamp()
+    });
+    
+    showToast('Cute Announcement published! 📢✨', 'success');
+    document.getElementById('ann-title').value = '';
+    document.getElementById('ann-msg').value = '';
+    fileInput.value = '';
+    fileBtnText.innerHTML = `<i class="fa-regular fa-image" style="color:var(--gold)"></i> Attach Post Picture`;
+    loadAnnouncements();
+  });
+}
+
+window.deleteAnn = async (id) => {
+  if (!confirm('Delete this announcement post?')) return;
+  await deleteDoc(doc(db, 'announcements', id));
+  showToast('Announcement trace removed.', 'info');
+  loadAnnouncements();
+};
+
+// Reviews moderation logs loading updates
+async function loadReviews() {
+  const snap = await getDocs(collection(db, 'reviews'));
+  const reviews = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  document.getElementById('reviews-table').innerHTML = reviews.length === 0
+    ? '<tr><td colspan="6" style="text-align:center;color:var(--text-muted); padding:20px;">No public client reviews received yet.</td></tr>'
+    : reviews.map(r => `
+      <tr>
+        <td><strong>${r.studentName||'Student'}</strong></td>
+        <td>${r.teacherName||'Teacher'}</td>
+        <td style="color:var(--gold)">${'★'.repeat(r.rating||0)}${'☆'.repeat(5-(r.rating||0))}</td>
+        <td><small>${r.reviewText||''}</small></td>
+        <td><span class="badge ${r.status==='approved'?'badge-success':'badge-warning'}">${r.status||'pending'}</span></td>
+        <td>
+          <div class="action-btns">
+            ${r.status !== 'approved' ? `<button class="btn btn-primary btn-sm" onclick="approveReview('${r.id}')"><i class="fa fa-check"></i> Approve</button>` : ''}
+            <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444;" onclick="deleteReview('${r.id}')"><i class="fa fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>`).join('');
+}
+
+window.approveReview = async (id) => {
+  await updateDoc(doc(db, 'reviews', id), { status: 'approved' });
+  showToast('Review approved for public board! ✅', 'success');
+  loadReviews();
+};
+
+window.deleteReview = async (id) => {
+  if (!confirm('Remove this user review feedback permanently?')) return;
+  await deleteDoc(doc(db, 'reviews', id));
+  showToast('Review data removed.', 'info');
+  loadReviews();
+};
+
+// Tab filters handles
+window.filterTeachers = (filter, btn) => {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (filter === 'all') renderTeachers(allTeachers);
+  else if (filter === 'approved') renderTeachers(allTeachers.filter(t => t.isApproved));
+  else renderTeachers(allTeachers.filter(t => !t.isApproved));
+};
+
+// Tab toggles dashboard view switcher logic
+window.showTab = (tab) => {
+  ['dashboard','pending','teachers','students','interactions','announcements','reviews'].forEach(t => {
+    const el = document.getElementById('tab-'+t);
+    if(el) el.style.display = t === tab ? 'block' : 'none';
+  });
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  
+  const activeSidebarItem = document.getElementById('sb-' + tab);
+  if(activeSidebarItem) activeSidebarItem.classList.add('active');
+};
+</script>
+</body>
+</html>

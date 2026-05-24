@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Dashboard – AFS Virtual Tutor Hub</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ─── Global Dark & Gold Core Theme ─── */
+    :root {
+      --bg-dark: #0b0b0b;
+      --card-bg: #121212;
+      --panel-border: #222222;
+      --gold: #FFD700;
+      --gold-hover: #f0c800;
+      --text-main: #e0e0e0;
+      --text-muted: #888888;
+      --sidebar-bg: #111119;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      background: var(--bg-dark); 
+      color: var(--text-main);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .dash-wrap { display: flex; min-height: 100vh; }
+    
+    /* ─── Sidebar Beautiful Styling ─── */
+    .dash-sidebar {
+      width: 250px; background: var(--sidebar-bg); color: #a0aec0;
+      padding: 24px 0; flex-shrink: 0; position: sticky; top: 0; height: 100vh; 
+      overflow-y: auto; border-right: 1px solid var(--panel-border);
+    }
+    .dash-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--panel-border); margin-bottom: 16px; }
+    .dash-logo-name { color: #fff; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.5px; }
+    .dash-logo-role { color: var(--gold); font-size: 0.75rem; margin-top: 4px; font-weight: 500; }
+    
+    .sidebar-section { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
+      color: #4a5568; padding: 20px 20px 8px; font-weight: 700; }
+    
+    .sidebar-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 20px; font-size: 0.9rem; cursor: pointer; color: #b3b3b3;
+      transition: all .2s ease; border-left: 3px solid transparent;
+    }
+    .sidebar-item:hover { background: #1a1a2e; color: #fff; }
+    .sidebar-item.active { background: #1e1e38; color: var(--gold); border-left-color: var(--gold); font-weight: 600; }
+    .sidebar-item i { width: 18px; text-align: center; }
+
+    /* ─── Main Content Area ─── */
+    .dash-main { flex: 1; background: var(--bg-dark); padding: 32px; overflow-y: auto; }
+    .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid var(--panel-border); padding-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+    .dash-header h1 { font-size: 1.6rem; color: #fff; font-weight: 600; }
+    
+    /* Badges / Tags */
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .pending-tag { background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .approved-tag { background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .rejected-tag { background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
+    /* Notification Styling */
+    .unread-badge { margin-left: auto; background: #ef4444; color: #fff; border-radius: 20px; padding: 2px 8px; font-size: 0.7rem; font-weight: 700; }
+    .notification-item { padding: 16px; background: #161616; border: 1px solid var(--panel-border); border-radius: 12px; margin-bottom: 14px; display: flex; gap: 14px; }
+
+    /* ─── Stats Grid Counter Cards ─── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px; }
+    .stat-card {
+      background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
+      padding: 24px; display: flex; align-items: center; gap: 18px; transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); }
+    .stat-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1; }
+    .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
+
+    /* ─── Premium Cards Layout ─── */
+    .panel-card {
+      background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
+      padding: 24px; margin-bottom: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .panel-title {
+      font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; color: var(--gold);
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #1f1f1f; padding-bottom: 12px;
+    }
+
+    /* ─── Tables Shading ─── */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; color: #d1d1d1; }
+    th { text-align: left; padding: 12px 14px; background: #161616;
+      border-bottom: 2px solid var(--panel-border); font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); }
+    td { padding: 14px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #161616; }
+
+    /* ─── Banners ─── */
+    .not-approved-banner {
+      background: rgba(245, 158, 11, 0.1); border: 1px solid #ca8a04;
+      border-radius: 12px; padding: 20px 24px;
+      margin-bottom: 24px; display: flex; align-items: center; gap: 16px; color: #f59e0b;
+    }
+    
+    /* ─── Form Elements Styling ─── */
+    .form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.85rem; color: #b3b3b3; font-weight: 500; }
+    .form-control, input[type="text"], input[type="tel"], input[type="number"], input[type="url"], textarea, select {
+      width: 100%; background: #181818; border: 1px solid #333; border-radius: 8px;
+      padding: 11px 14px; color: #fff; font-size: 0.92rem; transition: all 0.2s;
+    }
+    .form-control:focus, input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 6px rgba(255, 215, 0, 0.15); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+
+    /* ─── Buttons Controls ─── */
+    .btn {
+      padding: 10px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 8px; border: none; transition: all 0.2s; text-decoration: none;
+    }
+    .btn-primary { background: var(--gold); color: #000; font-weight: 700; }
+    .btn-primary:hover { background: var(--gold-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2); }
+    .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+    .btn-outline:hover { background: var(--gold); color: #000; }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; }
+    .btn-success { background: #10b981; color: #fff; }
+    .btn-success:hover { background: #059669; }
+    .btn-wa { background: #25D366; color: #fff; }
+    .btn-wa:hover { background: #20ba5a; }
+    
+    .action-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .payment-details-box { background: #161616; border: 1px dashed #333; padding: 16px; border-radius: 10px; margin-top: 10px; }
+
+    @media(max-width:768px){ .dash-sidebar{ display:none; } .dash-main{ padding:16px; } }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+<div id="toast-container"></div>
+
+<div class="dash-wrap">
+
+  <div class="dash-sidebar">
+    <div class="dash-logo">
+      <div class="dash-logo-name" id="sidebar-name">Loading...</div>
+      <div class="dash-logo-role"><i class="fa fa-graduation-cap" style="color:var(--gold)"></i> Teacher Portal</div>
+    </div>
+    <div class="sidebar-section">Menu Options</div>
+    <div class="sidebar-item active" onclick="showTab('overview', this)">
+      <i class="fa fa-chart-bar"></i> Overview Board
+    </div>
+    <div class="sidebar-item" onclick="showTab('requests', this)">
+      <i class="fa fa-envelope"></i> Demo Requests
+      <span id="req-count" class="unread-badge" style="display:none;"></span>
+    </div>
+    <div class="sidebar-item" onclick="showTab('notifications', this)">
+      <i class="fa fa-bell"></i> Admin Notifications
+      <span id="notif-count" class="unread-badge" style="display:none;">0</span>
+    </div>
+    <div class="sidebar-item" onclick="showTab('reviews', this)">
+      <i class="fa fa-star"></i> Student Reviews
+    </div>
+    <div class="sidebar-item" onclick="showTab('profile', this)">
+      <i class="fa fa-user-edit"></i> Edit Profile Details
+    </div>
+    <div class="sidebar-section">Account Management</div>
+    <div class="sidebar-item" id="btn-logout" style="color:#ef4444;">
+      <i class="fa fa-sign-out-alt"></i> Logout Securely
+    </div>
+  </div>
+
+  <div class="dash-main">
+
+    <div class="not-approved-banner" id="pending-banner" style="display:none;">
+      <i class="fa fa-circle-notch fa-spin" style="font-size:1.8rem;color:#f59e0b;flex-shrink:0"></i>
+      <div>
+        <strong>Your verification status is: Pending Approval</strong>
+        <p style="font-size:0.88rem;margin-top:4px">CEO Muhammad Awais is reviewing your qualification files. Setup your workspace profile details while waiting.</p>
+      </div>
+    </div>
+
+    <div id="tab-overview">
+      <div class="dash-header">
+        <h1>Welcome back, <span id="teacher-name" style="color:var(--gold)">Teacher</span>!</h1>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(255,215,0,0.1)">📨</div>
+          <div><div class="stat-num" id="stat-requests">0</div><div class="stat-label">Total Demos</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(16,185,129,0.1)">⭐</div>
+          <div><div class="stat-num" id="stat-rating">0.0</div><div class="stat-label">Rating Score</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(59,130,246,0.1)">💬</div>
+          <div><div class="stat-num" id="stat-reviews">0</div><div class="stat-label">Feedbacks Logs</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(245,158,11,0.1)">📢</div>
+          <div><div class="stat-num" id="stat-notifs">0</div><div class="stat-label">Notifications</div></div>
+        </div>
+      </div>
+
+      <div class="panel-card" id="profile-summary">
+        <div class="panel-title">Your Live Workspace Summary</div>
+        <div id="summary-content" style="color:#b3b3b3">Loading active workspace data...</div>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-title">Recent Inbound Demo Alerts</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student Name</th><th>Subject Requested</th><th>Preferred Slot Time</th><th>Status Badge</th><th>Quick Actions Control</th></tr></thead>
+            <tbody id="recent-requests"><tr><td colspan="5" style="text-align:center;color:var(--text-muted)">Syncing incoming alert queue...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-requests" style="display:none">
+      <div class="dash-header"><h1>Manage All Incoming Demo Requests</h1></div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student Name</th><th>Contact Number</th><th>Subject Focus</th><th>Slot Preferred</th><th>Submission Date</th><th>Status State</th><th>Operational Actions</th></tr></thead>
+            <tbody id="all-requests"><tr><td colspan="7" style="text-align:center;color:var(--text-muted)">Syncing cloud log entries...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-notifications" style="display:none">
+      <div class="dash-header"><h1>Admin Notifications Hub</h1></div>
+      <div class="panel-card" id="notifications-panel">
+        <p style="color:var(--text-muted)">Syncing official broadcast channel alerts...</p>
+      </div>
+    </div>
+
+    <div id="tab-reviews" style="display:none">
+      <div class="dash-header"><h1>Student Feedback Desk Logs</h1></div>
+      <div class="panel-card" id="reviews-panel">
+        <p style="color:var(--text-muted)">Syncing public review items...</p>
+      </div>
+    </div>
+
+    <div id="tab-profile" style="display:none">
+      <div class="dash-header"><h1>Configure Workspace Profile Info</h1></div>
+      <div class="panel-card" style="max-width:650px">
+        <div class="form-group">
+          <label>Bio Summary / About Your Teaching Pedagogy</label>
+          <textarea id="edit-bio" rows="5" placeholder="Explain your professional experience, teaching methodologies, and success history..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>WhatsApp Contact Number (Students Consultation Line)</label>
+            <input type="tel" id="edit-whatsapp" placeholder="e.g. +923001234567"/>
+          </div>
+          <div class="form-group">
+            <label>Hourly Charges Rate (PKR)</label>
+            <input type="number" id="edit-rate" placeholder="e.g. 1200"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Introductory Lecture Video URL Link (YouTube Stream)</label>
+          <input type="url" id="edit-video" placeholder="https://www.youtube.com/watch?v=your_video_id"/>
+        </div>
+        
+        <div class="form-group">
+          <label>Preferred Remittance Tuition Payment Method Selector</label>
+          <select id="edit-payment">
+            <option value="Easypaisa">Easypaisa Mobile Account</option>
+            <option value="JazzCash">JazzCash Mobile Wallet</option>
+            <option value="Bank Transfer">Direct Bank Account Wire Transfer</option>
+            <option value="Easypaisa & JazzCash">Both Easypaisa & JazzCash Wallets</option>
+            <option value="All Methods">Accept All Local Remittance Gateways</option>
+          </select>
+        </div>
+        
+        <div class="payment-details-box">
+          <h4 style="font-size:0.9rem; color:var(--gold); margin-bottom:12px;"><i class="fa fa-wallet"></i> Remittance Receiving Details Extra</h4>
+          <div class="form-row" style="margin-bottom:0;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Account Number / IBAN</label>
+              <input type="text" id="edit-pay-number" placeholder="e.g. 03001234567 or Bank Account/IBAN"/>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Account Title Name</label>
+              <input type="text" id="edit-pay-title" placeholder="e.g. Muhammad Ali"/>
+            </div>
+          </div>
+        </div>
+        
+        <br/>
+        <button class="btn btn-primary" id="btn-save-profile" style="width:100%; justify-content:center;">
+          <i class="fa fa-save"></i> Save Changes Securely
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  window.addEventListener('error', function(e) {
+    if(e.filename && e.filename.includes('main.js')) {
+      console.warn("Caught main.js syntax error safely to unblock loader setup:", e.message);
+      const loader = document.getElementById('page-loader');
+      if(loader) loader.style.display = 'none';
+    }
+  });
+</script>
+<script src="../js/main.js"></script>
+
+<script type="module">
+import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, updateDoc,
+  collection, query, where, getDocs
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAm01A9_MlZyuyk_7QsizK0_SpsLYJCNrw",
+  authDomain: "afs-virtual-tutor-hub.firebaseapp.com",
+  projectId: "afs-virtual-tutor-hub",
+  storageBucket: "afs-virtual-tutor-hub.firebasestorage.app",
+  messagingSenderId: "146570288811",
+  appId: "1:146570288811:web:96da475a769c18696321ee"
+};
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentProfile = null;
+let currentUid = null;
+
+const dismissLoader = () => {
+  const loader = document.getElementById('page-loader');
+  if(loader) loader.style.display = 'none';
+};
+
+onAuthStateChanged(auth, async (user) => {
+  try {
+    if (!user) { window.location.href = 'login.html'; return; }
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    if (!snap.exists() || snap.data().role !== 'teacher') {
+      window.location.href = 'login.html'; return;
+    }
+    currentUid = user.uid;
+    currentProfile = snap.data();
+    loadDashboard(currentProfile);
+  } catch(err) {
+    console.error("Auth init tracking crashed:", err);
+    dismissLoader();
+  }
+});
+
+function loadDashboard(p) {
+  document.getElementById('teacher-name').textContent = p.fullName || 'Teacher';
+  document.getElementById('sidebar-name').textContent = p.fullName || 'Teacher';
+
+  if (!p.isApproved) {
+    document.getElementById('pending-banner').style.display = 'flex';
+  } else {
+    document.getElementById('pending-banner').style.display = 'none';
+  }
+
+  document.getElementById('stat-rating').textContent = (p.avgRating || 0).toFixed(1);
+  document.getElementById('stat-reviews').textContent = p.reviewCount || 0;
+
+  document.getElementById('summary-content').innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+      <div><strong style="color:var(--gold)">Qualification Academic</strong><p style="margin-top:4px;">${p.qualification || 'Not provided'}</p></div>
+      <div><strong style="color:var(--gold)">Years Experience</strong><p style="margin-top:4px;">${p.experience || 'Not provided'}</p></div>
+      <div><strong style="color:var(--gold)">Subjects Matrix</strong><p style="margin-top:4px;">${(p.subjects||[]).join(', ') || 'None configuration'}</p></div>
+      <div><strong style="color:var(--gold)">Curricula Systems</strong><p style="margin-top:4px;">${(p.curricula||[]).join(', ') || 'None configuration'}</p></div>
+      <div><strong style="color:var(--gold)">Consultation Wire</strong><p style="margin-top:4px;">${p.whatsapp || 'Not linked'}</p></div>
+      <div><strong style="color:var(--gold)">Hourly Charges Rate</strong><p style="margin-top:4px;">${p.hourlyRate ? 'PKR ' + p.hourlyRate + ' / hour' : 'Not set fee'}</p></div>
+    </div>`;
+
+  document.getElementById('edit-bio').value         = p.bio || '';
+  document.getElementById('edit-whatsapp').value    = p.whatsapp || '';
+  document.getElementById('edit-rate').value        = p.hourlyRate || '';
+  document.getElementById('edit-video').value       = p.introVideo || '';
+  document.getElementById('edit-payment').value     = p.paymentMethod || 'Easypaisa';
+  document.getElementById('edit-pay-number').value  = p.paymentNumber || '';
+  document.getElementById('edit-pay-title').value   = p.paymentTitle || '';
+
+  updateNavbarForTeacher(p);
+  loadRequests(currentUid);
+  loadReviews(currentUid);
+  loadAnnouncements(); // Fixed to sync from global announcements collection
+  
+  dismissLoader();
+}
+
+function updateNavbarForTeacher(p) {
+  const navLinks   = document.getElementById('navbar-links');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!navLinks) return;
+
+  const initials = (p.fullName||'T').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  navLinks.innerHTML = `
+    <a href="../index.html">Home</a>
+    <div class="nav-profile">
+      <div class="nav-avatar" id="nav-avatar" style="background:var(--gold); color:#000; font-weight:800;" title="${p.fullName}">${initials}</div>
+      <div class="nav-dropdown" id="nav-dropdown">
+        <div class="nav-dropdown-header">
+          <strong>${p.fullName||'Teacher'}</strong>
+          <span style="color:var(--gold)">Workspace Profile Faculty</span>
+        </div>
+        <a class="nav-dropdown-item" href="teacher-dashboard.html"><i class="fa fa-tachometer-alt"></i> Control Desk Dashboard</a>
+        <a class="nav-dropdown-item" href="teacher-dashboard.html"><i class="fa fa-user-edit"></i> Profile Workspace Settings</a>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-item danger" id="nav-logout-dd"><i class="fa fa-sign-out-alt"></i> Logout System</div>
+      </div>
+    </div>`;
+
+  if(mobileMenu) {
+    mobileMenu.innerHTML = `
+      <a href="../index.html">Home Hub</a>
+      <a href="teacher-dashboard.html">Dashboard Desk</a>
+      <a href="#" id="mobile-logout-dd" style="color:#ef4444">Logout Console</a>`;
+  }
+
+  document.getElementById('nav-avatar')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('nav-dropdown')?.classList.toggle('open');
+  });
+
+  document.addEventListener('click', () => {
+    document.getElementById('nav-dropdown')?.classList.remove('open');
+  });
+
+  async function doLogout() {
+    await signOut(auth);
+    window.location.href = 'login.html';
+  }
+  document.getElementById('nav-logout-dd')?.addEventListener('click', doLogout);
+  document.getElementById('mobile-logout-dd')?.addEventListener('click', doLogout);
+}
+
+async function loadRequests(uid) {
+  const q = query(collection(db,'demo_requests'), where('teacherId','==',uid));
+  const snap = await getDocs(q);
+  const requests = snap.docs.map(d=>({id:d.id,...d.data()}));
+
+  document.getElementById('stat-requests').textContent = requests.length;
+  const badge = document.getElementById('req-count');
+  if (requests.length > 0) {
+    badge.textContent = requests.length;
+    badge.style.display = 'inline';
+  } else {
+    badge.style.display = 'none';
+  }
+
+  const getStatusTag = (st) => {
+    if(st === 'approved' || st === 'accepted') return 'approved-tag';
+    if(st === 'rejected' || st === 'declined') return 'rejected-tag';
+    return 'pending-tag';
+  };
+
+  document.getElementById('recent-requests').innerHTML = requests.length === 0
+    ? '<tr><td colspan="5" style="text-align:center;color:var(--text-muted); padding:20px;">No inbound tuition demo alerts registered yet.</td></tr>'
+    : requests.slice(0,5).map(r => {
+        const cleanStatus = r.status || 'pending';
+        return `
+          <tr>
+            <td><strong>${r.studentName||'Student account'}</strong></td>
+            <td>${r.subject||'N/A'}</td>
+            <td><i class="fa-regular fa-clock" style="color:var(--gold)"></i> ${r.preferredTime||'Flexible slot'}</td>
+            <td><span class="${getStatusTag(cleanStatus)}">${cleanStatus.toUpperCase()}</span></td>
+            <td>
+              <div class="action-btns">
+                <a href="https://wa.me/${r.contact?.replace(/\D/g,'')}" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Chat</a>
+                ${cleanStatus === 'pending' ? `
+                  <button class="btn btn-success btn-sm" onclick="changeRequestState('${r.id}', 'approved')"><i class="fa fa-check"></i> Approve</button>
+                  <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444;" onclick="changeRequestState('${r.id}', 'rejected')"><i class="fa fa-times"></i> Reject</button>
+                ` : ''}
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+
+  document.getElementById('all-requests').innerHTML = requests.length === 0
+    ? '<tr><td colspan="7" style="text-align:center;color:var(--text-muted); padding:30px;">No inbound tuition demo alerts registered yet.</td></tr>'
+    : requests.map(r => {
+        const cleanStatus = r.status || 'pending';
+        return `
+          <tr>
+            <td><strong>${r.studentName||'Student'}</strong></td>
+            <td><code style="color:var(--gold); font-size:0.85rem;">${r.contact||'N/A'}</code></td>
+            <td><span class="badge badge-outline" style="border:1px solid #333; color:#fff;">${r.subject||'N/A'}</span></td>
+            <td>${r.preferredTime||'Flexible slot'}</td>
+            <td>${r.requestDate ? new Date(r.requestDate.seconds*1000).toLocaleDateString() : 'N/A'}</td>
+            <td><span class="${getStatusTag(cleanStatus)}">${cleanStatus.toUpperCase()}</span></td>
+            <td>
+              <div class="action-btns">
+                <a href="https://wa.me/${r.contact?.replace(/\D/g,'')}" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                ${cleanStatus === 'pending' ? `
+                  <button class="btn btn-success btn-sm" onclick="changeRequestState('${r.id}', 'approved')"><i class="fa fa-check"></i> Accept Demo</button>
+                  <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444;" onclick="changeRequestState('${r.id}', 'rejected')"><i class="fa fa-times"></i> Decline</button>
+                ` : ''}
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+}
+
+window.changeRequestState = async (requestId, nextState) => {
+  try {
+    await updateDoc(doc(db, 'demo_requests', requestId), { status: nextState });
+    if(typeof showToast === 'function') showToast(`Demo slot allocation status changed to ${nextState}! ✅`, 'success');
+    loadRequests(currentUid);
+  } catch(err) {
+    if(typeof showToast === 'function') showToast('Failed to update cloud collection entry: ' + err.message, 'error');
+  }
+};
+
+// ─── Fixed: Realtime Announcements Sync Pipeline ───
+async function loadAnnouncements() {
+  try {
+    // Student side ki tarha announcements collection se data utha rahe hain
+    const snap = await getDocs(query(collection(db, 'announcements'), where('isActive', '==', true)));
+    const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    
+    // Overview grid aur sidebar counter cards setup
+    document.getElementById('stat-notifs').textContent = items.length;
+    
+    const notifBadge = document.getElementById('notif-count');
+    if (items.length > 0) {
+      notifBadge.textContent = items.length;
+      notifBadge.style.display = 'inline';
+    } else {
+      notifBadge.style.display = 'none';
+    }
+
+    const panel = document.getElementById('notifications-panel');
+    if (items.length === 0) {
+      panel.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">No official system management alerts found right now.</p>';
+      return;
+    }
+
+    panel.innerHTML = items.map(a => `
+      <div class="notification-item">
+        <div style="font-size:1.5rem; padding-top:2px;">📢</div>
+        <div style="flex:1;">
+          <div style="display:flex; justify-content:between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:4px;">
+            <strong style="color:var(--gold); font-size:0.98rem;">${a.title || 'Official Bulletin'}</strong>
+            ${a.displayFrom ? `<span style="color:var(--text-muted); font-size:0.78rem; margin-left:auto;">${a.displayFrom}</span>` : ''}
+          </div>
+          <p style="font-size:0.9rem; color:#e0e0e0; line-height:1.4;">${a.message || ''}</p>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error("Announcements fetch failure: ", err);
+  }
+}
+
+async function loadReviews(uid) {
+  const q = query(collection(db,'reviews'), where('teacherId','==',uid));
+  const snap = await getDocs(q);
+  const reviews = snap.docs.map(d=>({id:d.id,...d.data()}));
+  const panel = document.getElementById('reviews-panel');
+  if (reviews.length === 0) {
+    panel.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">No public client verification reviews logged yet.</p>';
+    return;
+  }
+  panel.innerHTML = reviews.map(r => `
+    <div style="padding:16px; background:#161616; border:1px solid var(--panel-border); border-radius:12px; margin-bottom:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <strong style="font-size:0.95rem; color:#fff;">${r.studentName||'Verified Student User'}</strong>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="color:var(--gold); font-size:0.85rem;">${'★'.repeat(r.rating||0)}${'☆'.repeat(5-(r.rating||0))}</span>
+          <span class="${r.status==='approved'?'approved-tag':'pending-tag'}">${(r.status||'pending').toUpperCase()}</span>
+        </div>
+      </div>
+      <p style="font-size:0.9rem; color:#b3b3b3; line-height:1.4;">${r.reviewText||''}</p>
+    </div>`).join('');
+}
+
+document.getElementById('btn-save-profile').addEventListener('click', async () => {
+  const bio           = document.getElementById('edit-bio').value.trim();
+  const whatsapp      = document.getElementById('edit-whatsapp').value.trim();
+  const hourlyRate    = document.getElementById('edit-rate').value;
+  const introVideo    = document.getElementById('edit-video').value.trim();
+  const paymentMethod = document.getElementById('edit-payment').value;
+  const paymentNumber = document.getElementById('edit-pay-number').value.trim();
+  const paymentTitle  = document.getElementById('edit-pay-title').value.trim();
+  
+  const btn = document.getElementById('btn-save-profile');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Commit Cloud Sync Updates...';
+  
+  try {
+    await updateDoc(doc(db,'users',currentUid), { 
+      bio, 
+      whatsapp, 
+      hourlyRate, 
+      introVideo, 
+      paymentMethod,
+      paymentNumber,
+      paymentTitle
+    });
+    if(typeof showToast === 'function') showToast('Workspace adjustments saved successfully! ✅', 'success');
+    
+    const updatedSnap = await getDoc(doc(db, 'users', currentUid));
+    if(updatedSnap.exists()) loadDashboard(updatedSnap.data());
+    
+  } catch(e) { 
+    if(typeof showToast === 'function') showToast('Write operation error: ' + e.message, 'error'); 
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa fa-save"></i> Save Changes Securely';
+});
+
+document.getElementById('btn-logout').addEventListener('click', async () => {
+  await signOut(auth);
+  window.location.href = 'login.html';
+});
+
+window.showTab = (tab, el) => {
+  ['overview','requests','notifications','reviews','profile'].forEach(t => {
+    const component = document.getElementById('tab-'+t);
+    if(component) component.style.display = t===tab ? 'block' : 'none';
+  });
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  if(el) el.classList.add('active');
+};
+</script>
+</body>
+</html>
