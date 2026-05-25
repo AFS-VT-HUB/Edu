@@ -381,6 +381,11 @@ const db = getFirestore(app);
 let currentUid = null;
 let currentProfile = null;
 
+const dismissLoader = () => {
+  const loader = document.getElementById('page-loader');
+  if(loader) loader.style.display = 'none';
+};
+
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'login.html'; return; }
   const snap = await getDoc(doc(db, 'users', user.uid));
@@ -396,7 +401,6 @@ function loadDashboard(p) {
   document.getElementById('student-name').textContent = p.fullName?.split(' ')[0] || 'Student';
   document.getElementById('sidebar-name').textContent = p.fullName || 'Student';
 
-  // Profile info layout grids mapping
   document.getElementById('profile-info').innerHTML = `
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
       <div><strong style="color:var(--gold);">Full Legal Name</strong><p style="margin-top:4px;">${p.fullName||'N/A'}</p></div>
@@ -407,31 +411,37 @@ function loadDashboard(p) {
       <div><strong style="color:var(--gold);">Instruction Language Matrix</strong><p style="margin-top:4px;">${p.language||'N/A'}</p></div>
     </div>`;
 
-  // Settings controller tracking mapping setup
   document.getElementById('set-name').value = p.fullName || '';
   document.getElementById('set-phone').value = p.phone || '';
   document.getElementById('set-language').value = p.language || 'Both';
 
-  // Materials auto calculations mapping configurations
   const materials = document.querySelectorAll('.material-card');
   document.getElementById('stat-materials').textContent = materials.length;
 
-  loadRequests(currentUid);
+  loadRequests();
   loadSavedTeachers(currentUid);
   loadNotifications();
+  dismissLoader();
 }
 
-async function loadRequests(uid) {
-  const q = query(collection(db,'demo_requests'), where('studentName','!=',''));
+async function loadRequests() {
+  const q = query(collection(db, 'demo_requests'));
   const snap = await getDocs(q);
   const all = snap.docs.map(d=>({id:d.id,...d.data()}));
-  const mine = all.filter(r => r.contact === currentProfile?.email || r.contact === currentProfile?.phone);
+  
+  // Student ke apne email ya phone se request records cross-verify filter map script
+  const mine = all.filter(r => 
+    (currentProfile?.email && r.contact === currentProfile.email) || 
+    (currentProfile?.phone && r.contact === currentProfile.phone)
+  );
 
   document.getElementById('stat-requests').textContent = mine.length;
+  const badge = document.getElementById('req-badge');
   if (mine.length > 0) {
-    const badge = document.getElementById('req-badge');
     badge.textContent = mine.length;
     badge.style.display = 'inline';
+  } else {
+    badge.style.display = 'none';
   }
 
   const rowHtml = (rows, cols) => rows.length === 0
@@ -465,9 +475,7 @@ async function loadSavedTeachers(uid) {
     return;
   }
   
-  // Luxury Dark complementary backgrounds
-  const premiumShades = ['#1e1b4b','#064e3b','#581c87','#7c2d12'];
-  panel.innerHTML = saved.map((s,i) => `
+  panel.innerHTML = saved.map((s) => `
     <div class="saved-card">
       <div class="saved-info">
         <div class="saved-avatar" style="background:var(--gold); color:#000;">${(s.teacherName||'T')[0]}</div>
@@ -514,7 +522,6 @@ async function loadNotifications() {
     </div>`).join('');
 }
 
-// Save profile settings
 document.getElementById('btn-save-settings').addEventListener('click', async () => {
   const fullName = document.getElementById('set-name').value.trim();
   const phone    = document.getElementById('set-phone').value.trim();
@@ -534,7 +541,6 @@ document.getElementById('btn-save-settings').addEventListener('click', async () 
   btn.innerHTML = '<i class="fa fa-save"></i> Commit Identity Profile Changes';
 });
 
-// Materials filter logic script configuration
 window.filterMaterials = (subject, btn) => {
   document.querySelectorAll('.subject-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -543,13 +549,11 @@ window.filterMaterials = (subject, btn) => {
   });
 };
 
-// Logout system action desk
 document.getElementById('btn-logout').addEventListener('click', async () => {
   await signOut(auth);
   window.location.href = 'login.html';
 });
 
-// Tab switching core engines
 window.showTab = (tab, el) => {
   ['overview','requests','saved','materials','notifications','settings'].forEach(t => {
     const section = document.getElementById('tab-'+t);

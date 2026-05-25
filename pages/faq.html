@@ -1,12 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ</title>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frequently Asked Questions – AFS Virtual Tutor Hub</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ─── Global Dark & Gold Core Theme ─── */
+    :root {
+      --bg-dark: #0b0b0b;
+      --card-bg: #121212;
+      --panel-border: #222222;
+      --gold: #FFD700;
+      --gold-hover: #f0c800;
+      --text-main: #e0e0e0;
+      --text-muted: #888888;
+      --sidebar-bg: #111119;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      background: var(--bg-dark); 
+      color: var(--text-main);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Premium Sticky Navbar ─── */
+    .nav-container {
+      background: rgba(17, 17, 25, 0.95);
+      border-bottom: 1px solid var(--panel-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+    .nav-logo-name {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .nav-logo-tag {
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-links a {
+      color: #b3b3b3;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+    .btn-portal {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-portal:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* ─── FAQ Hero Header Section ─── */
+    .faq-hero {
+      text-align: center;
+      padding: 60px 24px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-hero h1 {
+      font-size: 2.2rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .faq-hero h1 span {
+      color: var(--gold);
+    }
+    .faq-hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* ─── FAQ Tabs Categorization ─── */
+    .faq-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      padding: 0 24px;
+    }
+    .faq-tab-btn {
+      background: #121212;
+      border: 1px solid var(--panel-border);
+      color: #b3b3b3;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .faq-tab-btn:hover {
+      border-color: var(--gold);
+      color: #fff;
+    }
+    .faq-tab-btn.active {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ─── Accordion Premium Styling ─── */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+      flex: 1;
+      width: 100%;
+    }
+    .faq-group {
+      display: none;
+    }
+    .faq-group.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover {
+      border-color: #333;
+    }
+    .faq-question {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-question h3 {
+      font-size: 1.05rem;
+      color: #fff;
+      font-weight: 600;
+      padding-right: 16px;
+    }
+    .faq-icon {
+      color: var(--gold);
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background: #161616;
+      border-top: 1px solid transparent;
+    }
+    .faq-answer-content {
+      padding: 20px 24px;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* Active Accordion State */
+    .faq-item.open {
+      border-color: var(--gold);
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(180deg);
+    }
+    .faq-item.open .faq-answer {
+      border-top-color: var(--panel-border);
+    }
+
+    /* ─── Premium Footer ─── */
+    footer {
+      background: #111119;
+      border-top: 1px solid var(--panel-border);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+    footer span {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media(max-width: 600px) {
+      .faq-hero h1 { font-size: 1.8rem; }
+      .faq-question { padding: 16px; }
+      .faq-answer-content { padding: 16px; }
+    }
+  </style>
 </head>
 <body>
-    
-    <h1>Coming Soon</h1>
-    </body>
+
+  <div class="nav-container">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-name">AFS Virtual Tutor Hub</span>
+        <span class="nav-logo-tag">Premium Learning Network</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="faculty.html">Find Tutors</a>
+        <a href="faq.html" style="color: var(--gold)">FAQs Track</a>
+        <a href="login.html" class="btn-portal">Login</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="faq-hero">
+    <h1>Frequently Asked <span>Questions</span></h1>
+    <p>Find instant detailed answers to your questions regarding our admission fee structures, premium physical locations, courses tracking, hiring pipelines, and support.</p>
+  </div>
+
+  <div class="faq-tabs">
+    <button class="faq-tab-btn active" onclick="switchFaqCategory('students', this)">Student & Course Info</button>
+    <button class="faq-tab-btn" onclick="switchFaqCategory('teachers', this)">Careers & Hiring</button>
+    <button class="faq-tab-btn" onclick="switchFaqCategory('management', this)">Corporate Desk & CEO</button>
+  </div>
+
+  <div class="faq-container">
+
+    <div idcat="students" class="faq-group active">
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>What is the tuition fee structure on this platform?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Registration on the platform is completely free for both students and parents. The actual tuition fee varies because instructors set their own hourly rates based on their experience and curriculum. Hourly rates are transparently displayed on each teacher's workspace profile card.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>What types of courses and educational streams are available?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            We support comprehensive curriculum paths, including Cambridge O Level, A Level, IGCSE, local board Matriculation, F.Sc Pre-Medical/Pre-Engineering, and highly specialized professional training tracking tracks such as CSS and PMS preparation focus tracks.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Do you offer physical home tuitions or only online classes?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            While our core delivery model utilizes an advanced online virtual streaming studio classroom setup, select certified premium instructors do offer specialized in-person home tuitions based on their geographical tracking zones and student requirements.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Are there any custom special classes or crash courses available?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes, our faculty regularly schedules specialized targeted exam preparation crash courses, mock evaluation paper checking runs, and intense special session tracks ahead of final board or Cambridge assessment windows.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Does AFS Virtual Tutor Hub provide scholarships?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes, under our social educational support framework, exceptional and deserving students scoring top ranks can apply for specialized platform scholarship slots to access standard tuition assistance files.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div idcat="teachers" class="faq-group">
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>What is the minimum qualification required to register as a teacher?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            To maintain our high premium teaching standards, instructors must hold at least a completed BS (Bachelor of Science) or equivalent degree from an accredited university. Prior experience teaching specialized target boards (Cambridge or local boards) is highly preferred.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>How does the teacher hiring and registration pipeline work?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Interested educators can complete their online registration form, submit their digital portfolio/credentials, and upload a dedicated video lecture link. Once submitted, your tracking file moves into our evaluation pipeline for administrative review and document screening.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div idcat="management" class="faq-group">
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Where is the physical operational base location of the platform?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Our operational headquarters and educational deployment center are located on Charsadda Road, Peshawar, Khyber Pakhtunkhwa. All digital streaming architectures and physical verification workflows are managed directly from this location.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>How can I directly contact the CEO for escalations or partnerships?</h3>
+          <i class="fa fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            For premium partnerships, institutional tie-ups, or executive escalations, you can request a formal digital appointment window. You can reach out directly via our corporate communications channel, or escalate an advisory ticket marked to the attention of CEO Muhammad Awais.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 <span>AFS Virtual Tutor Hub</span>. Engineered Securely. All Rights Reserved.
+  </footer>
+
+  <script>
+    // Accordion Interactive Core Engine
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        
+        if (item.classList.contains('open')) {
+          answer.style.maxHeight = null;
+          item.classList.remove('open');
+        } else {
+          const group = item.closest('.faq-group');
+          group.querySelectorAll('.faq-item.open').forEach(openItem => {
+            openItem.querySelector('.faq-answer').style.maxHeight = null;
+            openItem.classList.remove('open');
+          });
+          
+          answer.style.maxHeight = answer.scrollHeight + "px";
+          item.classList.add('open');
+        }
+      });
+    });
+
+    // Category Filter Switcher Logic
+    window.switchFaqCategory = (category, btn) => {
+      document.querySelectorAll('.faq-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.querySelectorAll('.faq-group').forEach(group => {
+        if (group.getAttribute('idcat') === category) {
+          group.classList.add('active');
+        } else {
+          group.classList.remove('active');
+          group.querySelectorAll('.faq-item.open').forEach(openItem => {
+            openItem.querySelector('.faq-answer').style.maxHeight = null;
+            openItem.classList.remove('open');
+          });
+        }
+      });
+    };
+  </script>
+</body>
+</html>

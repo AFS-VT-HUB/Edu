@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog – AFS Virtual Tutor Hub</title>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#0a0a0a;color:#fff;font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;}
+    a{text-decoration:none;}
+
+    /* ── Static Navbar styles ── */
+    .afs-nav{position:sticky;top:0;z-index:1000;background:#fff!important;border-bottom:1px solid #e2e8f0;box-shadow:0 1px 8px rgba(0,0,0,0.07);}
+    .afs-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;}
+    .afs-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .afs-logo-icon{width:38px;height:38px;border-radius:8px;background:#FFD700;color:#000;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;flex-shrink:0;}
+    .afs-logo-name{font-size:1rem;font-weight:700;color:#1a1a2e;line-height:1.2;}
+    .afs-logo-sub{display:block;font-size:0.7rem;color:#6b7280;font-weight:400;}
+    .afs-links{display:flex;align-items:center;gap:4px;}
+    .afs-links a{padding:6px 10px;border-radius:6px;font-size:0.88rem;font-weight:500;color:#374151;text-decoration:none;transition:background .15s,color .15s;}
+    .afs-links a:hover{background:#f3f4f6;color:#2C7DA0;}
+    .afs-links a.active{color:#2C7DA0;font-weight:600;}
+    .afs-btn-signup{padding:7px 16px!important;border-radius:8px!important;border:2px solid #2C7DA0!important;color:#2C7DA0!important;font-weight:600!important;background:transparent!important;margin-left:4px;}
+    .afs-btn-signup:hover{background:#2C7DA0!important;color:#fff!important;}
+    .afs-btn-login{padding:7px 16px!important;border-radius:8px!important;background:#FFD700!important;color:#000!important;font-weight:700!important;margin-left:4px;}
+    .afs-btn-login:hover{background:#f0c800!important;}
+    .afs-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+    .afs-hamburger span{display:block;width:24px;height:2px;background:#374151;border-radius:2px;}
+    .afs-mob-menu{display:none;flex-direction:column;background:#fff;border-top:1px solid #e2e8f0;padding:12px 24px 20px;}
+    .afs-mob-menu.open{display:flex;}
+    .afs-mob-menu a{padding:10px 0;border-bottom:1px solid #f3f4f6;color:#374151;font-size:0.95rem;text-decoration:none;}
+    .afs-mob-menu a:last-child{border-bottom:none;}
+    .afs-mob-menu a.active{color:#2C7DA0;}
+    .afs-profile{position:relative;margin-left:8px;}
+    .afs-avatar{width:36px;height:36px;border-radius:50%;background:#FFD700;color:#000;display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:800;cursor:pointer;border:2px solid #e2e8f0;overflow:hidden;}
+    .afs-avatar:hover{border-color:#FFD700;}
+    .afs-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+    .afs-dd{position:absolute;top:calc(100% + 10px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:12px;min-width:210px;box-shadow:0 8px 24px rgba(0,0,0,0.12);display:none;z-index:999;overflow:hidden;}
+    .afs-dd.open{display:block;}
+    .afs-dd-head{padding:14px 16px;border-bottom:1px solid #f3f4f6;background:#f9fafb;}
+    .afs-dd-head strong{display:block;font-size:0.9rem;color:#1a1a2e;}
+    .afs-dd-head span{font-size:0.75rem;color:#6b7280;}
+    .afs-dd a,.afs-dd-item{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:0.88rem;color:#374151;text-decoration:none;cursor:pointer;transition:background .12s;}
+    .afs-dd a:hover,.afs-dd-item:hover{background:#f9fafb;color:#2C7DA0;}
+    .afs-dd-divider{height:1px;background:#f3f4f6;}
+    .afs-dd-logout{color:#ef4444!important;}
+    .afs-bell{position:relative;cursor:pointer;padding:6px;margin-left:2px;display:flex;align-items:center;}
+    .afs-bell i{font-size:1.1rem;color:#6b7280;}
+    .afs-bell-badge{position:absolute;top:2px;right:2px;background:#ef4444;color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
+    @media(max-width:768px){.afs-links{display:none!important;}.afs-hamburger{display:flex!important;}}
+
+    /* ── Navbar white override ── */
+    .afs-nav{background:#fff!important;border-bottom:1px solid #e2e8f0!important;box-shadow:0 1px 8px rgba(0,0,0,0.07)!important;}
+    .afs-logo-name{color:#1a1a2e!important;}
+    .afs-logo-sub{color:#6b7280!important;}
+    .afs-links a{color:#374151!important;}
+    .afs-links a:hover{color:#2C7DA0!important;background:#f3f4f6!important;}
+    .afs-links a.active{color:#2C7DA0!important;font-weight:600!important;}
+    .afs-btn-signup{border-color:#2C7DA0!important;color:#2C7DA0!important;background:transparent!important;}
+    .afs-btn-signup:hover{background:#2C7DA0!important;color:#fff!important;}
+    .afs-btn-login{background:#FFD700!important;color:#000!important;}
+    .afs-hamburger span{background:#374151!important;}
+    .afs-mob-menu{background:#fff!important;border-top:1px solid #e2e8f0!important;}
+    .afs-mob-menu a{color:#374151!important;border-color:#f3f4f6!important;}
+    .afs-dd{background:#fff!important;border-color:#e2e8f0!important;}
+    .afs-dd-head{background:#f9fafb!important;border-color:#f3f4f6!important;}
+    .afs-dd-head strong{color:#1a1a2e!important;}
+    .afs-dd-head span{color:#6b7280!important;}
+    .afs-dd a,.afs-dd-item{color:#374151!important;}
+    .afs-dd a:hover,.afs-dd-item:hover{background:#f9fafb!important;color:#2C7DA0!important;}
+    .afs-bell i{color:#6b7280!important;}
+    .afs-avatar{background:#FFD700!important;color:#000!important;border-color:#e2e8f0!important;}
+
+    /* PAGE */
+    .hero-strip{background:#111;border-bottom:1px solid #222;padding:64px 24px;text-align:center;}
+    .section-tag{display:inline-block;background:#1a1a1a;color:#FFD700;border:1px solid #FFD700;font-size:0.78rem;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:12px;}
+    .page-wrap{max-width:1100px;margin:0 auto;padding:52px 24px;}
+
+    /* Blog Header */
+    .blog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:16px;}
+    .blog-header h2{font-size:1.3rem;color:#fff;}
+    .blog-search{display:flex;align-items:center;gap:8px;background:#111;border:1.5px solid #333;border-radius:8px;padding:8px 14px;min-width:260px;transition:border-color .15s;}
+    .blog-search:focus-within{border-color:#FFD700;}
+    .blog-search input{border:none;outline:none;background:transparent;font-size:0.9rem;color:#fff;width:100%;}
+    .blog-search input::placeholder{color:#666;}
+    .blog-search i{color:#666;}
+
+    /* Category tabs */
+    .cat-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
+    .cat-tab{padding:7px 18px;border-radius:20px;font-size:0.85rem;font-weight:600;border:1.5px solid #333;background:transparent;color:#888;cursor:pointer;transition:all .15s;}
+    .cat-tab.active,.cat-tab:hover{border-color:#FFD700;background:#FFD700;color:#000;}
+
+    /* Blog Grid */
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
+    .blog-card{background:#111;border:1px solid #1e1e1e;border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;}
+    .blog-card:hover{transform:translateY(-4px);border-color:#FFD700;box-shadow:0 8px 24px rgba(255,215,0,0.1);}
+    .blog-card-img{height:180px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden;flex-shrink:0;}
+    .blog-card-img img{width:100%;height:100%;object-fit:cover;}
+    .blog-cat-badge{position:absolute;top:12px;left:12px;background:#FFD700;color:#000;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+    .blog-card-body{padding:20px;display:flex;flex-direction:column;flex:1;}
+    .blog-card-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:0.78rem;color:#666;}
+    .blog-card-meta i{color:#FFD700;}
+    .blog-card h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4;}
+    .blog-card p{font-size:0.85rem;color:#888;line-height:1.6;margin-bottom:16px;flex:1;}
+    .blog-card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;}
+    .read-more{color:#FFD700;font-size:0.85rem;font-weight:600;display:flex;align-items:center;gap:6px;transition:gap .15s;}
+    .read-more:hover{gap:10px;}
+    .author-chip{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:#666;}
+    .author-dot{width:24px;height:24px;border-radius:50%;background:#FFD700;color:#000;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;}
+
+    /* Featured */
+    .featured-post{background:#111;border:1px solid #FFD700;border-radius:14px;padding:32px;margin-bottom:40px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+    .featured-post-img{height:240px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden;}
+    .featured-post-img img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
+    .featured-badge{display:inline-block;background:#FFD700;color:#000;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:12px;}
+    .featured-post h2{font-size:1.3rem;color:#fff;margin-bottom:12px;line-height:1.4;}
+    .featured-post p{color:#888;font-size:0.9rem;line-height:1.7;margin-bottom:20px;}
+
+    /* Modal */
+    .blog-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s;}
+    .blog-modal.open{opacity:1;pointer-events:all;}
+    .blog-modal-box{background:#111;border:1px solid #333;border-radius:16px;max-width:720px;width:100%;max-height:85vh;overflow-y:auto;animation:scaleIn .3s ease;}
+    @keyframes scaleIn{from{transform:scale(0.95);opacity:0}to{transform:scale(1);opacity:1}}
+    .modal-header{padding:24px 28px;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+    .modal-header h2{font-size:1.2rem;color:#fff;line-height:1.4;flex:1;}
+    .modal-close{background:none;border:none;color:#888;font-size:1.4rem;cursor:pointer;flex-shrink:0;transition:color .15s;}
+    .modal-close:hover{color:#FFD700;}
+    .modal-meta{display:flex;gap:16px;padding:12px 28px;border-bottom:1px solid #222;font-size:0.82rem;color:#666;flex-wrap:wrap;}
+    .modal-meta i{color:#FFD700;}
+    .modal-img{width:100%;height:220px;object-fit:cover;}
+    .modal-img-emoji{height:200px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);display:flex;align-items:center;justify-content:center;font-size:5rem;}
+    .modal-content{padding:28px;color:#bbb;line-height:1.8;font-size:0.92rem;white-space:pre-wrap;}
+
+    /* Empty state */
+    .empty-state{text-align:center;padding:80px 20px;color:#555;}
+    .empty-state i{font-size:3rem;margin-bottom:16px;display:block;}
+
+    /* Buttons */
+    .btn-yellow{background:#FFD700;color:#000;padding:10px 22px;border-radius:8px;font-size:0.9rem;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:background .15s;}
+    .btn-yellow:hover{background:#f0c800;color:#000;}
+
+    /* Newsletter */
+    .newsletter-box{background:#111;border:1px solid #FFD700;border-radius:14px;padding:40px;text-align:center;margin-top:48px;}
+    .newsletter-box h3{font-size:1.2rem;color:#FFD700;margin-bottom:8px;}
+    .newsletter-box p{color:#888;margin-bottom:24px;}
+    .newsletter-form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;}
+    .newsletter-form input{flex:1;padding:10px 16px;border-radius:8px;border:1.5px solid #333;background:#1a1a1a;color:#fff;font-size:0.9rem;min-width:200px;}
+    .newsletter-form input:focus{outline:none;border-color:#FFD700;}
+
+    /* Footer */
+    .site-footer{background:#000;border-top:1px solid #1a1a1a;padding:56px 24px 24px;margin-top:0;}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid #1a1a1a;}
+    .footer-grid h4{color:#FFD700;font-size:0.95rem;margin-bottom:16px;}
+    .footer-grid ul{list-style:none;}
+    .footer-grid ul li{margin-bottom:8px;}
+    .footer-grid ul li a{color:#888;font-size:0.88rem;transition:color .15s;}
+    .footer-grid ul li a:hover{color:#FFD700;}
+    .footer-brand p{font-size:0.88rem;color:#888;line-height:1.7;margin:12px 0 20px;}
+    .footer-socials{display:flex;gap:10px;}
+    .footer-social-btn{width:36px;height:36px;border-radius:8px;background:#111;border:1px solid #222;display:flex;align-items:center;justify-content:center;color:#888;transition:all .15s;}
+    .footer-social-btn:hover{background:#FFD700;color:#000;border-color:#FFD700;}
+    .footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:0.82rem;color:#555;}
+
+    #page-loader{position:fixed;inset:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s;}
+    #page-loader.hidden{opacity:0;pointer-events:none;}
+    .loader-ring{width:48px;height:48px;border-radius:50%;border:4px solid #222;border-top-color:#FFD700;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    #toast-container{position:fixed;bottom:24px;right:24px;z-index:9998;display:flex;flex-direction:column;gap:10px;}
+    .toast{background:#111;color:#fff;padding:12px 20px;border-radius:10px;font-size:0.9rem;min-width:220px;border-left:4px solid #FFD700;}
+    .toast.success{border-left-color:#22c55e;}
+    .toast.error{border-left-color:#ef4444;}
+
+    @media(max-width:768px){
+      .featured-post{grid-template-columns:1fr;}
+      .featured-post-img{height:160px;}
+      .blog-grid{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      .blog-header{flex-direction:column;align-items:flex-start;}
+      .blog-search{width:100%;}
+    }
+    @media(max-width:480px){
+      .footer-grid{grid-template-columns:1fr;}
+      .footer-bottom{flex-direction:column;gap:8px;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+<div id="toast-container"></div>
+
+<!-- NAVBAR — static HTML, auth updated by JS -->
+<nav class="afs-nav" id="afs-nav-static">
+  <div class="afs-inner">
+    <a class="afs-logo" href="../index.html">
+      <div class="afs-logo-icon">AFS</div>
+      <div>
+        <div class="afs-logo-name">Virtual Tutor Hub</div>
+        <span class="afs-logo-sub">Expert Teachers. Free Access.</span>
+      </div>
+    </a>
+    <div class="afs-links" id="afs-links">
+      <a href="../index.html">Home</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="courses.html">Courses</a>
+      <a href="about-ceo.html">About CEO</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html" class="afs-btn-signup">Sign Up</a>
+      <a href="login.html" class="afs-btn-login">Login</a>
+    </div>
+    <button class="afs-hamburger" id="afs-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="afs-mob-menu" id="afs-mob-menu">
+    <a href="../index.html">Home</a>
+    <a href="faculty.html">Faculty</a>
+    <a href="courses.html">Courses</a>
+    <a href="about-ceo.html">About CEO</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="student-register.html" style="color:#2C7DA0">Sign Up</a>
+    <a href="login.html" style="color:#000;background:#FFD700;padding:8px 12px;border-radius:6px;">Login</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-strip">
+  <div class="section-tag">📚 Study Tips & Guides</div>
+  <h1 style="color:#fff;margin-bottom:8px;font-size:clamp(1.6rem,4vw,2.4rem);">AFS Blog</h1>
+  <p style="color:#888;max-width:560px;margin:0 auto;">Study tips, exam strategies, curriculum guides & education news from our expert teachers</p>
+</div>
+
+<!-- MAIN -->
+<div class="page-wrap">
+
+  <!-- Featured post -->
+  <div id="featured-wrap"></div>
+
+  <!-- Blog header + search -->
+  <div class="blog-header">
+    <h2>All Articles <span id="post-count" style="font-size:0.85rem;color:#666;font-weight:400"></span></h2>
+    <div class="blog-search">
+      <i class="fa fa-search"></i>
+      <input type="text" id="blog-search" placeholder="Search articles..."/>
+    </div>
+  </div>
+
+  <!-- Category tabs -->
+  <div class="cat-tabs" id="cat-tabs">
+    <button class="cat-tab active" onclick="filterBlog('all',this)">All</button>
+    <button class="cat-tab" onclick="filterBlog('math',this)">Mathematics</button>
+    <button class="cat-tab" onclick="filterBlog('exam',this)">Exam Tips</button>
+    <button class="cat-tab" onclick="filterBlog('css',this)">CSS/PMS</button>
+    <button class="cat-tab" onclick="filterBlog('cambridge',this)">Cambridge</button>
+    <button class="cat-tab" onclick="filterBlog('career',this)">Career</button>
+    <button class="cat-tab" onclick="filterBlog('issb',this)">ISSB</button>
+    <button class="cat-tab" onclick="filterBlog('biomaths',this)">Biomaths</button>
+    <button class="cat-tab" onclick="filterBlog('cadet',this)">Cadet</button>
+    <button class="cat-tab" onclick="filterBlog('general',this)">General</button>
+  </div>
+
+  <!-- Blog Grid -->
+  <div class="blog-grid" id="blog-grid">
+    <!-- Skeleton -->
+    <div class="blog-card">
+      <div class="blog-card-img"><div class="skeleton" style="width:100%;height:100%"></div></div>
+      <div class="blog-card-body">
+        <div class="skeleton" style="height:14px;width:80%;margin-bottom:8px;border-radius:4px"></div>
+        <div class="skeleton" style="height:12px;width:100%;margin-bottom:6px;border-radius:4px"></div>
+        <div class="skeleton" style="height:12px;width:60%;border-radius:4px"></div>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-card-img"><div class="skeleton" style="width:100%;height:100%"></div></div>
+      <div class="blog-card-body">
+        <div class="skeleton" style="height:14px;width:80%;margin-bottom:8px;border-radius:4px"></div>
+        <div class="skeleton" style="height:12px;width:100%;margin-bottom:6px;border-radius:4px"></div>
+        <div class="skeleton" style="height:12px;width:60%;border-radius:4px"></div>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-card-img"><div class="skeleton" style="width:100%;height:100%"></div></div>
+      <div class="blog-card-body">
+        <div class="skeleton" style="height:14px;width:80%;margin-bottom:8px;border-radius:4px"></div>
+        <div class="skeleton" style="height:12px;width:100%;margin-bottom:6px;border-radius:4px"></div>
+        <div class="skeleton" style="height:12px;width:60%;border-radius:4px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter-box">
+    <div class="section-tag">📬 Stay Updated</div>
+    <h3>Get New Articles in Your Inbox</h3>
+    <p>Subscribe to receive study tips, exam strategies, and education news every week</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="your@email.com"/>
+      <button class="btn-yellow" id="btn-subscribe">
+        <i class="fa fa-paper-plane"></i> Subscribe
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Blog Post Modal -->
+<div class="blog-modal" id="blog-modal" onclick="closeBlogModal(event)">
+  <div class="blog-modal-box" id="modal-box">
+    <div class="modal-header">
+      <h2 id="modal-title">Loading...</h2>
+      <button class="modal-close" onclick="document.getElementById('blog-modal').classList.remove('open');document.body.style.overflow='';document.body.style.position='';document.documentElement.style.overflow='';">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-meta" id="modal-meta"></div>
+    <div id="modal-img-wrap"></div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:38px;height:38px;border-radius:8px;background:#FFD700;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900;">AFS</div>
+        <div>
+          <div style="color:#fff;font-weight:700;">Virtual Tutor Hub</div>
+          <div style="font-size:0.7rem;color:#888;">Expert Teachers. Free Access.</div>
+        </div>
+      </div>
+      <p>Pakistan's free platform for quality education.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div><h4>Quick Links</h4><ul>
+      <li><a href="faculty.html">Find a Teacher</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="student-register.html">Student Registration</a></li>
+      <li><a href="teacher-register.html">Teacher Registration</a></li>
+    </ul></div>
+    <div><h4>Support</h4><ul>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="about-ceo.html">About CEO</a></li>
+    </ul></div>
+    <div><h4>Contact</h4><ul>
+      <li><a href="https://wa.me/923000000000" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp CEO</a></li>
+      <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+      <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+      <li><a href="mailto:info@afstutor.com"><i class="fa fa-envelope"></i> Email</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 AFS Virtual Tutor Hub. All rights reserved.</span>
+    <span>Built with ❤️ by Muhammad Awais</span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load', () => {
+  const l = document.getElementById('page-loader');
+  if (l) { l.classList.add('hidden'); setTimeout(() => l.remove(), 400); }
+});
+function showToast(msg, type='info') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`; t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; setTimeout(() => t.remove(), 400); }, 3000);
+}
+window.showToast = showToast;
+
+const catLabels = {
+  math:'Mathematics', exam:'Exam Tips', css:'CSS/PMS',
+  cambridge:'Cambridge', career:'Career', issb:'ISSB',
+  biomaths:'Biomaths', cadet:'Cadet College', general:'General'
+};
+
+let allPosts = [];
+let currentFilter = 'all';
+
+// Open modal
+window.openBlog = (id) => {
+  const post = allPosts.find(p => p.id === id);
+  if (!post) return;
+  document.getElementById('modal-title').textContent = post.title;
+  document.getElementById('modal-meta').innerHTML = `
+    <span><i class="fa fa-user"></i> ${post.author||'Muhammad Awais'}</span>
+    <span><i class="fa fa-tag"></i> ${catLabels[post.category]||post.category||'General'}</span>
+    <span><i class="fa fa-clock"></i> ${post.readTime||5} min read</span>
+    <span><i class="fa fa-calendar"></i> ${post.createdAt ? new Date(post.createdAt.seconds*1000).toLocaleDateString('en-PK',{year:'numeric',month:'long',day:'numeric'}) : ''}</span>`;
+  const imgWrap = document.getElementById('modal-img-wrap');
+  if (post.imgUrl) {
+    imgWrap.innerHTML = `<img src="${post.imgUrl}" class="modal-img" onerror="this.parentElement.innerHTML='<div class=modal-img-emoji>${post.emoji||'📝'}</div>'"/>`;
+  } else {
+    imgWrap.innerHTML = `<div class="modal-img-emoji">${post.emoji||'📝'}</div>`;
+  }
+  document.getElementById('modal-content').textContent = post.content || post.description || '';
+  document.getElementById('blog-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeBlogModal = (e) => {
+  if (e.target === document.getElementById('blog-modal')) {
+    document.getElementById('blog-modal').classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.documentElement.style.overflow = '';
+  }
+};
+
+// Filter
+window.filterBlog = (cat, btn) => {
+  currentFilter = cat;
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPosts(cat === 'all' ? allPosts : allPosts.filter(p => p.category === cat));
+};
+
+// Search
+document.getElementById('blog-search').addEventListener('input', function() {
+  const val = this.value.toLowerCase();
+  const filtered = allPosts.filter(p =>
+    (p.title||'').toLowerCase().includes(val) ||
+    (p.description||'').toLowerCase().includes(val) ||
+    (p.content||'').toLowerCase().includes(val)
+  );
+  renderPosts(filtered);
+});
+
+// Render posts
+function renderPosts(posts) {
+  const grid = document.getElementById('blog-grid');
+  const count = document.getElementById('post-count');
+  count.textContent = `(${posts.length} articles)`;
+
+  if (posts.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1">
+        <i class="fa fa-file-alt" style="color:#333"></i>
+        <h3 style="color:#555;margin-bottom:8px">No articles found</h3>
+        <p style="color:#444">Try a different category or search term</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = posts.map(p => `
+    <div class="blog-card" data-cat="${p.category||'general'}">
+      <div class="blog-card-img">
+        ${p.imgUrl
+          ? `<img src="${p.imgUrl}" alt="${p.title}" onerror="this.parentElement.innerHTML='<span style=font-size:3.5rem>${p.emoji||'📝'}</span>'"/>`
+          : `<span>${p.emoji||'📝'}</span>`}
+        <span class="blog-cat-badge">${catLabels[p.category]||p.category||'General'}</span>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-card-meta">
+          <span><i class="fa fa-calendar"></i> ${p.createdAt ? new Date(p.createdAt.seconds*1000).toLocaleDateString('en-PK',{month:'short',year:'numeric'}) : ''}</span>
+          <span><i class="fa fa-clock"></i> ${p.readTime||5} min</span>
+        </div>
+        <h3>${p.title||'Untitled'}</h3>
+        <p>${(p.description||'').slice(0,120)}${(p.description||'').length>120?'...':''}</p>
+        <div class="blog-card-footer">
+          <a href="#" class="read-more" onclick="openBlog('${p.id}');return false;">
+            Read More <i class="fa fa-arrow-right"></i>
+          </a>
+          <div class="author-chip">
+            <div class="author-dot">${(p.author||'MA').split(' ').map(w=>w[0]).join('').slice(0,2)}</div>
+            ${(p.author||'Muhammad Awais').split(' ')[0]}
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// Featured post
+function renderFeatured(post) {
+  if (!post) return;
+  const wrap = document.getElementById('featured-wrap');
+  wrap.innerHTML = `
+    <div class="featured-post">
+      <div class="featured-post-img">
+        ${post.imgUrl
+          ? `<img src="${post.imgUrl}" alt="${post.title}" onerror="this.parentElement.innerHTML='<span style=font-size:4rem>${post.emoji||'📝'}</span>'"/>`
+          : `<span>${post.emoji||'📝'}</span>`}
+      </div>
+      <div>
+        <div class="featured-badge">⭐ Featured Post</div>
+        <h2>${post.title}</h2>
+        <p>${post.description||''}</p>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;font-size:0.82rem;color:#666;flex-wrap:wrap;">
+          <span><i class="fa fa-user" style="color:#FFD700"></i> ${post.author||'Muhammad Awais'}</span>
+          <span><i class="fa fa-clock" style="color:#FFD700"></i> ${post.readTime||5} min read</span>
+          <span><i class="fa fa-tag" style="color:#FFD700"></i> ${catLabels[post.category]||'General'}</span>
+        </div>
+        <a href="#" class="btn-yellow" onclick="openBlog('${post.id}');return false;">
+          <i class="fa fa-book-open"></i> Read Article
+        </a>
+      </div>
+    </div>`;
+}
+
+// Newsletter
+document.getElementById('btn-subscribe').addEventListener('click', () => {
+  const email = document.getElementById('newsletter-email').value.trim();
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email', 'error'); return; }
+  showToast('Subscribed successfully! ✅', 'success');
+  document.getElementById('newsletter-email').value = '';
+});
+</script>
+
+<script type="module">
+import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAm01A9_MlZyuyk_7QsizK0_SpsLYJCNrw",
+  authDomain: "afs-virtual-tutor-hub.firebaseapp.com",
+  projectId: "afs-virtual-tutor-hub",
+  storageBucket: "afs-virtual-tutor-hub.firebasestorage.app",
+  messagingSenderId: "146570288811",
+  appId: "1:146570288811:web:96da475a769c18696321ee"
+};
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const db   = getFirestore(app);
+const auth = getAuth(app);
+
+// ── Hamburger ──
+document.getElementById('afs-hamburger')?.addEventListener('click', () => {
+  document.getElementById('afs-mob-menu')?.classList.toggle('open');
+});
+
+// ── Close dropdown on outside click ──
+document.addEventListener('click', e => {
+  if (!e.target.closest('.afs-profile')) {
+    document.getElementById('afs-dd')?.classList.remove('open');
+  }
+});
+
+// ── Auth: update navbar when logged in ──
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+  const snap = await getDoc(doc(db, 'users', user.uid));
+  if (!snap.exists()) return;
+  const p = snap.data();
+  const initials = (p.fullName||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const photoHTML = p.photoURL ? `<img src="${p.photoURL}"/>` : initials;
+  const dashLink  = p.role==='admin' ? 'admin-panel.html' : p.role==='teacher' ? 'teacher-dashboard.html' : 'student-dashboard.html';
+  const roleLabel = p.role?.charAt(0).toUpperCase()+p.role?.slice(1);
+
+  let links = `<a href="../index.html">Home</a>`;
+  if (p.role === 'student') {
+    links += `<a href="faculty.html">Faculty</a><a href="courses.html">Courses</a><a href="about-ceo.html">About CEO</a><a href="blog.html" class="active">Blog</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>`;
+  } else if (p.role === 'teacher') {
+    links += `<a href="faculty.html">Faculty</a>`;
+  }
+
+  const unread = parseInt(localStorage.getItem('afs_unread_count')||'0');
+  if (p.role === 'student' && unread > 0) {
+    links += `<div class="afs-bell" id="afs-bell"><i class="fa fa-bell"></i><span class="afs-bell-badge">${unread}</span></div>`;
+  }
+
+  const ddItems = p.role==='admin' ? `<a href="admin-panel.html"><i class="fa fa-shield-alt"></i> Admin Panel</a>` :
+    p.role==='teacher' ? `<a href="teacher-dashboard.html"><i class="fa fa-tachometer-alt"></i> Dashboard</a>` :
+    `<a href="student-dashboard.html"><i class="fa fa-tachometer-alt"></i> Dashboard</a>`;
+
+  links += `
+    <div class="afs-profile">
+      <div class="afs-avatar" id="afs-avatar">${photoHTML}</div>
+      <div class="afs-dd" id="afs-dd">
+        <div class="afs-dd-head"><strong>${p.fullName||'User'}</strong><span>${roleLabel} Account</span></div>
+        ${ddItems}
+        <div class="afs-dd-divider"></div>
+        <div class="afs-dd-item afs-dd-logout" id="afs-logout"><i class="fa fa-sign-out-alt"></i> Logout</div>
+      </div>
+    </div>`;
+
+  document.getElementById('afs-links').innerHTML = links;
+  document.getElementById('afs-mob-menu').innerHTML = `
+    <a href="../index.html">Home</a>
+    ${p.role==='student'?'<a href="faculty.html">Faculty</a>':''}
+    <a href="blog.html" class="active">Blog</a>
+    <a href="${dashLink}" style="color:#2C7DA0;font-weight:600">My Dashboard</a>
+    <a href="#" id="mob-logout" style="color:#ef4444">Logout</a>`;
+
+  document.getElementById('afs-avatar')?.addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('afs-dd')?.classList.toggle('open');
+  });
+  document.getElementById('afs-bell')?.addEventListener('click', () => {
+    localStorage.removeItem('afs_unread_count');
+    window.location.href = 'student-dashboard.html';
+  });
+  async function doLogout() { await signOut(auth); window.location.href = '../index.html'; }
+  document.getElementById('afs-logout')?.addEventListener('click', doLogout);
+  document.getElementById('mob-logout')?.addEventListener('click', doLogout);
+});
+
+async function loadBlogPosts() {
+  try {
+    const q = query(
+      collection(db, 'blog_posts'),
+      where('status', '==', 'published')
+    );
+    const snap = await getDocs(q);
+    allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a,b) => (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0));
+
+    if (allPosts.length === 0) {
+      document.getElementById('blog-grid').innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1">
+          <i class="fa fa-pen-nib" style="color:#333"></i>
+          <h3 style="color:#555;margin-bottom:8px">No articles yet</h3>
+          <p style="color:#444">Check back soon — our team is writing amazing content for you!</p>
+        </div>`;
+      document.getElementById('post-count').textContent = '(0 articles)';
+      return;
+    }
+
+    renderFeatured(allPosts[0]);
+    renderPosts(allPosts);
+  } catch(e) {
+    console.warn('Blog load:', e.message);
+    document.getElementById('blog-grid').innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1">
+        <i class="fa fa-wifi" style="color:#333"></i>
+        <h3 style="color:#555">Could not load articles</h3>
+        <p style="color:#444">Please refresh the page</p>
+      </div>`;
+  }
+}
+
+loadBlogPosts();
+</script>
+</body>
+</html>

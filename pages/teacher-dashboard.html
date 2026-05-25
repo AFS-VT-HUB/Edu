@@ -31,7 +31,7 @@
 
     .dash-wrap { display: flex; min-height: 100vh; }
     
-    /* ─── Sidebar Beautiful Styling ─── */
+    /* ─── Sidebar Styling ─── */
     .dash-sidebar {
       width: 250px; background: var(--sidebar-bg); color: #a0aec0;
       padding: 24px 0; flex-shrink: 0; position: sticky; top: 0; height: 100vh; 
@@ -399,7 +399,7 @@ function loadDashboard(p) {
   updateNavbarForTeacher(p);
   loadRequests(currentUid);
   loadReviews(currentUid);
-  loadAnnouncements(); // Fixed to sync from global announcements collection
+  loadAnnouncements(); 
   
   dismissLoader();
 }
@@ -528,14 +528,11 @@ window.changeRequestState = async (requestId, nextState) => {
   }
 };
 
-// ─── Fixed: Realtime Announcements Sync Pipeline ───
 async function loadAnnouncements() {
   try {
-    // Student side ki tarha announcements collection se data utha rahe hain
     const snap = await getDocs(query(collection(db, 'announcements'), where('isActive', '==', true)));
     const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     
-    // Overview grid aur sidebar counter cards setup
     document.getElementById('stat-notifs').textContent = items.length;
     
     const notifBadge = document.getElementById('notif-count');

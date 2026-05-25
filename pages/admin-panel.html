@@ -221,6 +221,10 @@
     <div class="sidebar-item" id="sb-reviews" onclick="showTab('reviews')">
       <i class="fa fa-star"></i> Student Reviews
     </div>
+    <div class="sidebar-item" id="sb-blogs" onclick="showTab('blogs')">
+      <i class="fa fa-pen-nib"></i> Blog Posts
+      <span id="blog-count" style="margin-left:auto;background:#2C7DA0;color:#fff;border-radius:20px;padding:1px 8px;font-size:0.75rem;display:none"></span>
+    </div>
     <div class="sidebar-section">System Account</div>
     <div class="sidebar-item" id="btn-logout" style="color:#ef4444;">
       <i class="fa fa-sign-out-alt"></i> Secure Logout
@@ -388,10 +392,123 @@
           </table>
         </div>
       </div>
+    </div><!-- end tab-reviews -->
+
+    <!-- ══ BLOG POSTS TAB ══ -->
+    <div id="tab-blogs" style="display:none">
+      <div class="admin-header"><h1>📝 Blog Posts</h1></div>
+
+      <!-- Add Blog Form -->
+      <div class="panel-card" style="max-width:680px;margin-bottom:28px;">
+        <div class="panel-card-title">Add New Blog Post</div>
+
+        <div class="form-group">
+          <label>Title <span style="color:red">*</span></label>
+          <input type="text" id="blog-title" placeholder="e.g. How to Score A* in O Level Maths"/>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category <span style="color:red">*</span></label>
+            <select id="blog-category">
+              <option value="">Select Category</option>
+              <option value="math">Mathematics</option>
+              <option value="exam">Exam Tips</option>
+              <option value="css">CSS/PMS</option>
+              <option value="cambridge">Cambridge</option>
+              <option value="career">Career</option>
+              <option value="issb">ISSB</option>
+              <option value="biomaths">Biomaths</option>
+              <option value="cadet">Cadet College</option>
+              <option value="general">General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Read Time (minutes)</label>
+            <input type="number" id="blog-readtime" placeholder="5" min="1" value="5"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Short Description <span style="color:red">*</span></label>
+          <textarea id="blog-desc" rows="3" placeholder="Brief summary shown on blog card (2-3 sentences)..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Full Article Content <span style="color:red">*</span></label>
+          <textarea id="blog-content" rows="8" placeholder="Write the full blog post content here..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Cover Image <small style="color:var(--text-muted)">(optional)</small></label>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+
+            <!-- Upload from PC -->
+            <div id="blog-upload-btn" onclick="document.getElementById('blog-img-file').click()"
+              style="border:2px dashed #333;border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:border-color .15s;background:#1a1a1a;">
+              <i class="fa fa-cloud-upload-alt" style="font-size:1.5rem;color:#FFD700;margin-bottom:6px;display:block;"></i>
+              <div style="font-size:0.88rem;color:#888;">Click to upload image from PC</div>
+              <div style="font-size:0.75rem;color:#555;margin-top:4px;">JPG, PNG, WEBP — Max 5MB</div>
+            </div>
+            <input type="file" id="blog-img-file" accept="image/*" style="display:none;"/>
+
+            <!-- Preview -->
+            <div id="blog-img-preview" style="display:none;align-items:center;gap:12px;">
+              <img id="blog-img-preview-src" style="height:80px;border-radius:8px;border:1px solid #333;object-fit:cover;"/>
+              <div>
+                <div id="blog-img-name" style="font-size:0.82rem;color:#ccc;margin-bottom:4px;"></div>
+                <div id="blog-upload-status" style="font-size:0.78rem;color:#FFD700;"></div>
+                <button onclick="clearBlogImg()" style="margin-top:6px;background:#fee2e2;color:#ef4444;border:none;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:0.78rem;">Remove</button>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="flex:1;height:1px;background:#222;"></div>
+              <span style="font-size:0.75rem;color:#555;">or paste URL</span>
+              <div style="flex:1;height:1px;background:#222;"></div>
+            </div>
+
+            <input type="url" id="blog-img" placeholder="https://example.com/image.jpg"
+              style="width:100%;padding:10px 14px;border:1.5px solid #333;border-radius:8px;font-size:0.9rem;background:#1a1a1a;color:#fff;"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Cover Emoji <small style="color:var(--text-muted)">(if no image)</small></label>
+            <input type="text" id="blog-emoji" placeholder="📐" maxlength="4" value="📝"/>
+          </div>
+          <div class="form-group">
+            <label>Author Name</label>
+            <input type="text" id="blog-author" placeholder="Muhammad Awais" value="Muhammad Awais"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select id="blog-status">
+            <option value="published">Published (visible to all)</option>
+            <option value="draft">Draft (hidden)</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" id="btn-add-blog">
+          <i class="fa fa-plus"></i> Publish Blog Post
+        </button>
+      </div>
+
+      <!-- Blog Posts List -->
+      <div class="panel-card">
+        <div class="panel-card-title">
+          All Blog Posts
+          <span id="blog-total" style="font-size:0.82rem;color:var(--text-muted);font-weight:400"></span>
+        </div>
+        <div id="blogs-list"><p style="color:var(--text-muted)">Loading blog posts...</p></div>
+      </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- end admin-main -->
 
 <script src="../js/main.js"></script>
 <script type="module">
@@ -444,7 +561,8 @@ async function loadAll() {
   renderStudents(allStudents);
   loadAnnouncements();
   loadReviews();
-  loadInteractions(); // Load the new interaction messages
+  loadInteractions();
+  loadBlogs();
 }
 
 // Visual dynamic changes to custom image label text
@@ -742,14 +860,210 @@ window.filterTeachers = (filter, btn) => {
 
 // Tab toggles dashboard view switcher logic
 window.showTab = (tab) => {
-  ['dashboard','pending','teachers','students','interactions','announcements','reviews'].forEach(t => {
+  ['dashboard','pending','teachers','students','interactions','announcements','reviews','blogs'].forEach(t => {
     const el = document.getElementById('tab-'+t);
     if(el) el.style.display = t === tab ? 'block' : 'none';
   });
   document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-  
   const activeSidebarItem = document.getElementById('sb-' + tab);
   if(activeSidebarItem) activeSidebarItem.classList.add('active');
+};
+
+// ══ BLOG FUNCTIONS ══
+const catLabels = {
+  math:'Mathematics', exam:'Exam Tips', css:'CSS/PMS',
+  cambridge:'Cambridge', career:'Career', issb:'ISSB',
+  biomaths:'Biomaths', cadet:'Cadet College', general:'General'
+};
+
+async function loadBlogs() {
+  try {
+    const snap = await getDocs(collection(db, 'blog_posts'));
+    const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+      .sort((a,b) => (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0));
+
+    const badge = document.getElementById('blog-count');
+    const total = document.getElementById('blog-total');
+    if (posts.length > 0) { badge.textContent = posts.length; badge.style.display = 'inline'; }
+    if (total) total.textContent = `(${posts.length} posts)`;
+
+    const list = document.getElementById('blogs-list');
+    if (posts.length === 0) {
+      list.innerHTML = '<p style="color:var(--text-muted)">No blog posts yet. Add your first post above!</p>';
+      return;
+    }
+
+    list.innerHTML = posts.map(p => `
+      <div id="blog-row-${p.id}" style="display:flex;gap:16px;padding:16px;border:1px solid var(--border);border-radius:10px;margin-bottom:12px;align-items:flex-start;">
+        <!-- Cover -->
+        <div style="width:80px;height:80px;border-radius:10px;flex-shrink:0;overflow:hidden;
+          background:${p.imgUrl ? 'transparent' : 'linear-gradient(135deg,#1a1a2e,#2C7DA0)'};
+          display:flex;align-items:center;justify-content:center;font-size:2rem;">
+          ${p.imgUrl
+            ? `<img src="${p.imgUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.emoji||'📝'}';this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#2C7DA0)';"/>`
+            : (p.emoji||'📝')}
+        </div>
+        <!-- Info -->
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+            <strong style="font-size:0.95rem;">${p.title||'Untitled'}</strong>
+            <span style="background:${p.status==='published'?'#dcfce7':'#fef9c3'};color:${p.status==='published'?'#166534':'#854d0e'};padding:2px 8px;border-radius:20px;font-size:0.72rem;font-weight:700;">${p.status||'draft'}</span>
+            <span style="background:#e8f4fb;color:#2C7DA0;padding:2px 8px;border-radius:20px;font-size:0.72rem;">${catLabels[p.category]||p.category||'General'}</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:6px;line-height:1.5;">${(p.description||'').slice(0,120)}${(p.description||'').length>120?'...':''}</p>
+          <div style="font-size:0.78rem;color:var(--text-muted);display:flex;gap:12px;flex-wrap:wrap;">
+            <span><i class="fa fa-user"></i> ${p.author||'Muhammad Awais'}</span>
+            <span><i class="fa fa-clock"></i> ${p.readTime||5} min read</span>
+            <span><i class="fa fa-calendar"></i> ${p.createdAt ? new Date(p.createdAt.seconds*1000).toLocaleDateString() : 'N/A'}</span>
+          </div>
+        </div>
+        <!-- Actions -->
+        <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
+          <button class="btn btn-sm" style="background:${p.status==='published'?'#fef9c3':'#dcfce7'};color:${p.status==='published'?'#854d0e':'#166534'};border:1px solid ${p.status==='published'?'#ca8a04':'#86efac'}"
+            onclick="toggleBlogStatus('${p.id}','${p.status}')">
+            <i class="fa fa-${p.status==='published'?'eye-slash':'eye'}"></i>
+            ${p.status==='published'?'Unpublish':'Publish'}
+          </button>
+          <button class="btn btn-sm" style="background:#fee2e2;color:#ef4444;border:1px solid #fca5a5"
+            onclick="deleteBlog('${p.id}')">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>`).join('');
+  } catch(e) {
+    console.warn('Blog load error:', e.message);
+  }
+}
+
+// ── Cloudinary Config ──
+const CLOUDINARY_CLOUD = 'djh9jzdk4';
+const CLOUDINARY_PRESET = 'ci9b4bcn';
+let uploadedImgUrl = '';
+
+// File select handler
+document.getElementById('blog-img-file').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { showToast('Image must be under 5MB', 'error'); return; }
+
+  // Show preview
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    document.getElementById('blog-img-preview-src').src = ev.target.result;
+    document.getElementById('blog-img-name').textContent = file.name.slice(0, 30);
+    document.getElementById('blog-img-preview').style.display = 'flex';
+    document.getElementById('blog-upload-btn').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+
+  // Upload to Cloudinary
+  document.getElementById('blog-upload-status').textContent = 'Uploading...';
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_PRESET);
+
+  try {
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+      method: 'POST', body: formData
+    });
+    const data = await res.json();
+    if (data.secure_url) {
+      uploadedImgUrl = data.secure_url;
+      document.getElementById('blog-upload-status').textContent = '✅ Uploaded!';
+      document.getElementById('blog-upload-status').style.color = '#22c55e';
+    } else {
+      document.getElementById('blog-upload-status').textContent = '❌ Upload failed';
+      document.getElementById('blog-upload-status').style.color = '#ef4444';
+    }
+  } catch(e) {
+    document.getElementById('blog-upload-status').textContent = '❌ ' + e.message;
+    document.getElementById('blog-upload-status').style.color = '#ef4444';
+  }
+});
+
+// Drag & drop on upload btn
+const uploadBtn = document.getElementById('blog-upload-btn');
+uploadBtn?.addEventListener('dragover', (e) => { e.preventDefault(); uploadBtn.style.borderColor = '#FFD700'; });
+uploadBtn?.addEventListener('dragleave', () => { uploadBtn.style.borderColor = '#333'; });
+uploadBtn?.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadBtn.style.borderColor = '#333';
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    document.getElementById('blog-img-file').files = dt.files;
+    document.getElementById('blog-img-file').dispatchEvent(new Event('change'));
+  }
+});
+
+window.clearBlogImg = () => {
+  uploadedImgUrl = '';
+  document.getElementById('blog-img-file').value = '';
+  document.getElementById('blog-img-preview').style.display = 'none';
+  document.getElementById('blog-upload-btn').style.display = 'block';
+  document.getElementById('blog-upload-status').textContent = '';
+};
+
+document.getElementById('btn-add-blog').addEventListener('click', async () => {
+  const title    = document.getElementById('blog-title').value.trim();
+  const category = document.getElementById('blog-category').value;
+  const readTime = document.getElementById('blog-readtime').value || '5';
+  const desc     = document.getElementById('blog-desc').value.trim();
+  const content  = document.getElementById('blog-content').value.trim();
+  const imgUrl   = uploadedImgUrl || document.getElementById('blog-img').value.trim();
+  const emoji    = document.getElementById('blog-emoji').value.trim() || '📝';
+  const author   = document.getElementById('blog-author').value.trim() || 'Muhammad Awais';
+  const status   = document.getElementById('blog-status').value;
+
+  if (!title || !category || !desc || !content) {
+    showToast('Title, category, description and content are required', 'error'); return;
+  }
+
+  // Check if image still uploading
+  const uploadStatus = document.getElementById('blog-upload-status').textContent;
+  if (uploadStatus === 'Uploading...') {
+    showToast('Please wait — image is still uploading', 'info'); return;
+  }
+
+  const btn = document.getElementById('btn-add-blog');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Publishing...';
+
+  try {
+    await addDoc(collection(db, 'blog_posts'), {
+      title, category, readTime: parseInt(readTime),
+      description: desc, content,
+      imgUrl: imgUrl || '',
+      emoji, author, status,
+      createdAt: serverTimestamp()
+    });
+    showToast('Blog post published! ✅', 'success');
+    ['blog-title','blog-desc','blog-content','blog-img'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('blog-category').value = '';
+    document.getElementById('blog-emoji').value = '📝';
+    document.getElementById('blog-readtime').value = '5';
+    clearBlogImg();
+    loadBlogs();
+  } catch(e) {
+    showToast('Error: '+e.message, 'error');
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa fa-plus"></i> Publish Blog Post';
+});
+
+window.toggleBlogStatus = async (id, currentStatus) => {
+  const newStatus = currentStatus === 'published' ? 'draft' : 'published';
+  await updateDoc(doc(db, 'blog_posts', id), { status: newStatus });
+  showToast(`Post ${newStatus}! ✅`, 'success');
+  loadBlogs();
+};
+
+window.deleteBlog = async (id) => {
+  if (!confirm('Delete this blog post permanently?')) return;
+  await deleteDoc(doc(db, 'blog_posts', id));
+  showToast('Blog post deleted', 'info');
+  loadBlogs();
 };
 </script>
 </body>
