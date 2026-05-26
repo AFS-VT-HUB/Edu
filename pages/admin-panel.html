@@ -218,6 +218,14 @@
     <div class="sidebar-item" id="sb-announcements" onclick="showTab('announcements')">
       <i class="fa fa-bullhorn"></i> Announcements Panel
     </div>
+    <div class="sidebar-item" id="sb-demos" onclick="showTab('demos')">
+      <i class="fa fa-paper-plane"></i> Demo Requests
+      <span id="demo-badge" style="margin-left:auto;background:#ef4444;color:#fff;border-radius:20px;padding:1px 8px;font-size:0.75rem;display:none"></span>
+    </div>
+    <div class="sidebar-item" id="sb-enrollments" onclick="showTab('enrollments')">
+      <i class="fa fa-user-check"></i> Enrollments
+      <span id="enroll-badge" style="margin-left:auto;background:#FFD700;color:#000;border-radius:20px;padding:1px 8px;font-size:0.75rem;display:none"></span>
+    </div>
     <div class="sidebar-item" id="sb-reviews" onclick="showTab('reviews')">
       <i class="fa fa-star"></i> Student Reviews
     </div>
@@ -394,6 +402,42 @@
       </div>
     </div><!-- end tab-reviews -->
 
+    <!-- ══ DEMO REQUESTS TAB ══ -->
+    <div id="tab-demos" style="display:none">
+      <div class="admin-header"><h1>📋 Demo Requests</h1></div>
+      <div style="background:#e0f2fe;border:1px solid #7dd3fc;border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:0.88rem;color:#075985;">
+        <i class="fa fa-info-circle"></i> <strong>Workflow:</strong> Student submits request → You forward to a teacher → Teacher contacts student → Demo held → Student confirms enrollment
+      </div>
+      <div class="panel-card">
+        <div class="tab-btns" style="margin-bottom:16px;">
+          <button class="tab-btn active" onclick="filterDemos('all',this)">All</button>
+          <button class="tab-btn" onclick="filterDemos('pending',this)">Pending</button>
+          <button class="tab-btn" onclick="filterDemos('forwarded',this)">Forwarded</button>
+          <button class="tab-btn" onclick="filterDemos('completed',this)">Demo Done</button>
+          <button class="tab-btn" onclick="filterDemos('enrolled',this)">Enrolled</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student</th><th>Contact</th><th>Subject</th><th>Curriculum</th><th>Preferred Time</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="demos-table"><tr><td colspan="8" style="text-align:center;color:var(--text-muted)">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ENROLLMENTS TAB ══ -->
+    <div id="tab-enrollments" style="display:none">
+      <div class="admin-header"><h1>✅ Student Enrollments</h1></div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student</th><th>Teacher</th><th>Subject</th><th>Enrolled On</th><th>Contact</th></tr></thead>
+            <tbody id="enrollments-table"><tr><td colspan="5" style="text-align:center;color:var(--text-muted)">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <!-- ══ BLOG POSTS TAB ══ -->
     <div id="tab-blogs" style="display:none">
       <div class="admin-header"><h1>📝 Blog Posts</h1></div>
@@ -562,6 +606,7 @@ async function loadAll() {
   loadAnnouncements();
   loadReviews();
   loadInteractions();
+  loadDemoRequests();
   loadBlogs();
 }
 
@@ -860,13 +905,161 @@ window.filterTeachers = (filter, btn) => {
 
 // Tab toggles dashboard view switcher logic
 window.showTab = (tab) => {
-  ['dashboard','pending','teachers','students','interactions','announcements','reviews','blogs'].forEach(t => {
+  ['dashboard','pending','teachers','students','interactions','announcements','reviews','demos','enrollments','blogs'].forEach(t => {
     const el = document.getElementById('tab-'+t);
     if(el) el.style.display = t === tab ? 'block' : 'none';
   });
   document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
   const activeSidebarItem = document.getElementById('sb-' + tab);
   if(activeSidebarItem) activeSidebarItem.classList.add('active');
+};
+
+// ══ DEMO REQUEST FUNCTIONS ══
+let allDemos = [];
+let allApprovedTeachers = [];
+
+async function loadDemoRequests() {
+  try {
+    const [demoSnap, teacherSnap] = await Promise.all([
+      getDocs(collection(db, 'demo_requests')),
+      getDocs(query(collection(db,'users'), where('role','==','teacher'), where('isApproved','==',true)))
+    ]);
+
+    allDemos = demoSnap.docs.map(d => ({id:d.id,...d.data()}))
+      .sort((a,b) => (b.requestDate?.seconds||0)-(a.requestDate?.seconds||0));
+    allApprovedTeachers = teacherSnap.docs.map(d => ({id:d.id,...d.data()}));
+
+    const pending   = allDemos.filter(d => d.status==='pending').length;
+    const enrolled  = allDemos.filter(d => d.status==='enrolled').length;
+
+    if (pending > 0) {
+      document.getElementById('demo-badge').textContent = pending;
+      document.getElementById('demo-badge').style.display = 'inline';
+    }
+    if (enrolled > 0) {
+      document.getElementById('enroll-badge').textContent = enrolled;
+      document.getElementById('enroll-badge').style.display = 'inline';
+    }
+
+    renderDemos(allDemos);
+    renderEnrollments(allDemos.filter(d => d.status==='enrolled'));
+  } catch(e) {
+    console.warn('Demo load error:', e.message);
+  }
+}
+
+function demoStatusBadge(status) {
+  const map = {
+    pending:   'background:#fef9c3;color:#854d0e',
+    forwarded: 'background:#e0f2fe;color:#075985',
+    approved:  'background:#dcfce7;color:#166534',
+    completed: 'background:#f3e8ff;color:#6b21a8',
+    enrolled:  'background:#FFD700;color:#000',
+    rejected:  'background:#fee2e2;color:#991b1b',
+  };
+  const labels = {
+    pending:'Pending', forwarded:'Forwarded',
+    approved:'Demo Arranged', completed:'Demo Done',
+    enrolled:'Enrolled ✓', rejected:'Closed'
+  };
+  return `<span style="padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;${map[status]||map.pending}">${labels[status]||status}</span>`;
+}
+
+function buildTeacherSelect(requestId, currentTeacherId) {
+  const opts = allApprovedTeachers.map(t =>
+    `<option value="${t.id}" ${t.id===currentTeacherId?'selected':''}>${t.fullName} — ${(t.subjects||[]).slice(0,1).join('')}</option>`
+  ).join('');
+  return `<select id="teacher-sel-${requestId}" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:0.82rem;min-width:160px;">
+    <option value="">Select Teacher</option>${opts}
+  </select>`;
+}
+
+function renderDemos(demos) {
+  const tbody = document.getElementById('demos-table');
+  if (demos.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:32px">No demo requests yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = demos.map(d => `
+    <tr id="demo-row-${d.id}">
+      <td><strong>${d.studentName||'N/A'}</strong></td>
+      <td style="font-size:0.82rem">${d.contact||'N/A'}</td>
+      <td>${d.subject||'N/A'}</td>
+      <td style="font-size:0.82rem">${d.curriculum||'N/A'}</td>
+      <td style="font-size:0.82rem">${d.preferredTime||'Not specified'}</td>
+      <td style="font-size:0.82rem">${d.requestDate?new Date(d.requestDate.seconds*1000).toLocaleDateString():'N/A'}</td>
+      <td>${demoStatusBadge(d.status)}</td>
+      <td>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          ${d.status === 'pending' ? `
+            ${buildTeacherSelect(d.id, d.forwardedTo)}
+            <button class="btn btn-sm" style="background:#dcfce7;color:#166534;border:1px solid #86efac" onclick="forwardDemo('${d.id}')">
+              <i class="fa fa-share"></i> Forward
+            </button>` : ''}
+          ${d.status === 'forwarded' ? `
+            <span style="font-size:0.78rem;color:#075985">👨‍🏫 ${d.teacherName||'Teacher'}</span>
+            ${buildTeacherSelect(d.id, d.forwardedTo)}
+            <button class="btn btn-sm" style="background:#e0f2fe;color:#075985;border:1px solid #7dd3fc" onclick="forwardDemo('${d.id}')">
+              <i class="fa fa-sync"></i> Reassign
+            </button>` : ''}
+          ${d.status === 'completed' ? `<span style="color:#6b21a8;font-size:0.82rem;">⏳ Awaiting student</span>` : ''}
+          ${d.status === 'enrolled' ? `<span style="color:#166534;font-weight:700;font-size:0.82rem;">✅ Enrolled</span>` : ''}
+          ${!['enrolled','rejected'].includes(d.status) ? `
+            <button class="btn btn-sm" style="background:#fee2e2;color:#ef4444;border:1px solid #fca5a5" onclick="closeDemo('${d.id}')">
+              <i class="fa fa-times"></i> Close
+            </button>` : ''}
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+function renderEnrollments(enrolled) {
+  const tbody = document.getElementById('enrollments-table');
+  if (!tbody) return;
+  if (enrolled.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:32px">No enrollments yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = enrolled.map(d => `
+    <tr>
+      <td><strong>${d.studentName||'N/A'}</strong><br/><small style="color:var(--text-muted)">${d.studentEmail||''}</small></td>
+      <td>${d.teacherName||'N/A'}</td>
+      <td>${d.subject||'N/A'}</td>
+      <td>${d.enrolledAt?new Date(d.enrolledAt.seconds*1000).toLocaleDateString():'N/A'}</td>
+      <td>${d.contact?`<a href="https://wa.me/${d.contact.replace(/\D/g,'')}" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i></a>`:'N/A'}</td>
+    </tr>`).join('');
+}
+
+window.forwardDemo = async (id) => {
+  const select = document.getElementById('teacher-sel-'+id);
+  const teacherId = select?.value;
+  if (!teacherId) { showToast('Please select a teacher first', 'error'); return; }
+  const teacher = allApprovedTeachers.find(t => t.id === teacherId);
+  if (!teacher) return;
+  try {
+    await updateDoc(doc(db,'demo_requests',id), {
+      status: 'forwarded',
+      forwardedTo: teacherId,
+      teacherName: teacher.fullName,
+      teacherWhatsapp: teacher.whatsapp||'',
+      forwardedAt: serverTimestamp()
+    });
+    showToast(`Forwarded to ${teacher.fullName}! ✅`, 'success');
+    loadDemoRequests();
+  } catch(e) { showToast('Error: '+e.message,'error'); }
+};
+
+window.closeDemo = async (id) => {
+  if (!confirm('Close this demo request?')) return;
+  await updateDoc(doc(db,'demo_requests',id), { status:'rejected' });
+  showToast('Request closed', 'info');
+  loadDemoRequests();
+};
+
+window.filterDemos = (filter, btn) => {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderDemos(filter==='all' ? allDemos : allDemos.filter(d => d.status===filter));
 };
 
 // ══ BLOG FUNCTIONS ══

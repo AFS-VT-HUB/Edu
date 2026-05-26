@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../css/responsive.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    /* ─── Global Dark & Gold Core Theme ─── */
+    /* ─── Exact Admin Panel Core Theme ─── */
     :root {
       --bg-dark: #0b0b0b;
       --card-bg: #121212;
@@ -20,213 +20,107 @@
       --text-muted: #888888;
       --sidebar-bg: #111119;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    body { 
-      background: var(--bg-dark); 
-      color: var(--text-main);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .dash-wrap { display: flex; min-height: 100vh; }
-    
-    /* ─── Sidebar Premium Styling ─── */
-    .dash-sidebar {
-      width: 250px; background: var(--sidebar-bg); color: #a0aec0;
-      padding: 24px 0; flex-shrink: 0; position: sticky; top: 0; height: 100vh; 
-      overflow-y: auto; border-right: 1px solid var(--panel-border);
-    }
-    .dash-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--panel-border); margin-bottom: 16px; }
-    .dash-logo-name { color: #fff; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.5px; }
-    .dash-logo-role { color: var(--gold); font-size: 0.75rem; margin-top: 4px; font-weight: 500; }
-    
-    .sidebar-section { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
-      color: #4a5568; padding: 20px 20px 8px; font-weight: 700; }
-    
-    .sidebar-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 20px; font-size: 0.9rem; cursor: pointer; color: #b3b3b3;
-      transition: all .2s ease; border-left: 3px solid transparent;
-    }
-    .sidebar-item:hover { background: #1a1a2e; color: #fff; }
-    .sidebar-item.active { background: #1e1e38; color: var(--gold); border-left-color: var(--gold); font-weight: 600; }
-    .sidebar-item i { width: 18px; text-align: center; }
-
-    /* ─── Main Content Area ─── */
-    .dash-main { flex: 1; background: var(--bg-dark); padding: 32px; overflow-y: auto; }
-    .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid var(--panel-border); padding-bottom: 16px; flex-wrap: wrap; gap: 12px; }
-    .dash-header h1 { font-size: 1.6rem; color: #fff; font-weight: 600; }
-    
-    /* Badges / Tags */
-    .badge-warning { background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-    .badge-success { background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-    .unread-badge { margin-left: auto; background: #ef4444; color: #fff; border-radius: 20px; padding: 2px 8px; font-size: 0.7rem; font-weight: 700; }
-
-    /* ─── Stats Grid Counter Cards ─── */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px; }
-    .stat-card {
-      background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
-      padding: 24px; display: flex; align-items: center; gap: 18px; transition: transform 0.2s;
-    }
-    .stat-card:hover { transform: translateY(-3px); }
-    .stat-icon {
-      width: 52px; height: 52px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;
-    }
-    .stat-num { font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1; }
-    .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
-
-    /* ─── Premium Cards Layout ─── */
-    .panel-card {
-      background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
-      padding: 24px; margin-bottom: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    .panel-title {
-      font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; color: var(--gold);
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid #1f1f1f; padding-bottom: 12px;
-    }
-
-    /* ─── Tables Shading ─── */
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; color: #d1d1d1; }
-    th { text-align: left; padding: 12px 14px; background: #161616;
-      border-bottom: 2px solid var(--panel-border); font-size: 0.78rem;
-      text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); }
-    td { padding: 14px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: #161616; }
-
-    /* Materials and Saved Teacher Custom Cards */
-    .material-card, .saved-card, .notification-item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 16px; border: 1px solid var(--panel-border);
-      border-radius: 12px; margin-bottom: 12px; background: #161616;
-      transition: transform 0.2s;
-    }
-    .material-card:hover, .saved-card:hover { transform: translateX(4px); }
-    .material-icon, .saved-avatar { 
-      width: 44px; height: 44px; border-radius: 10px; 
-      display: flex; align-items: center; justify-content: center; 
-      font-size: 1.3rem; flex-shrink: 0; 
-    }
-    .saved-avatar { border-radius: 50%; color: #000; font-weight: 700; font-size: 1rem; }
-    .saved-info { display: flex; align-items: center; gap: 14px; flex: 1; }
-
-    /* Subject Tabs Buttons */
-    .subject-tab {
-      background: #161616; border: 1px solid var(--panel-border); color: #b3b3b3;
-      padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
-    }
-    .subject-tab:hover { border-color: var(--gold); color: #fff; }
-    .subject-tab.active { background: var(--gold); color: #000; font-weight: 600; border-color: var(--gold); }
-
-    /* ─── Form Elements Styling ─── */
-    .form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.85rem; color: #b3b3b3; font-weight: 500; }
-    .form-control, input[type="text"], input[type="tel"], select {
-      width: 100%; background: #181818; border: 1px solid #333; border-radius: 8px;
-      padding: 11px 14px; color: #fff; font-size: 0.92rem; transition: all 0.2s;
-    }
-    .form-control:focus, input:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 6px rgba(255, 215, 0, 0.15); }
-
-    /* ─── Buttons Controls ─── */
-    .btn {
-      padding: 10px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 600;
-      cursor: pointer; display: inline-flex; align-items: center; gap: 8px; border: none; transition: all 0.2s; text-decoration: none;
-    }
-    .btn-primary { background: var(--gold); color: #000; font-weight: 700; }
-    .btn-primary:hover { background: var(--gold-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2); }
-    .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
-    .btn-outline:hover { background: var(--gold); color: #000; }
-    .btn-sm { padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; }
-    .btn-wa { background: #25D366; color: #fff; }
-    .btn-wa:hover { background: #20ba5a; }
-
-    @media(max-width:768px){ .dash-sidebar{ display:none; } .dash-main{ padding:16px; } }
+    .dash-wrap{display:flex;min-height:100vh;background: var(--bg-dark);}
+    .dash-sidebar{width:240px;background: var(--sidebar-bg);color: var(--text-main);padding:24px 0;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;border-right: 1px solid var(--panel-border);}
+    .dash-logo{padding:0 20px 24px;border-bottom:1px solid var(--panel-border);margin-bottom:16px;}
+    .dash-logo-name{color: var(--gold);font-size:1rem;font-weight:700;}
+    .dash-logo-role{color: var(--text-muted);font-size:0.75rem;}
+    .sidebar-item{display:flex;align-items:center;gap:10px;padding:12px 20px;font-size:0.88rem;cursor:pointer;transition:all .15s;border-left:3px solid transparent;color: var(--text-main);}
+    .sidebar-item:hover{background: var(--card-bg);color:#fff;}
+    .sidebar-item.active{background: var(--card-bg);color: var(--gold);border-left-color: var(--gold);font-weight: 600;}
+    .sidebar-item i{width:18px;text-align:center;}
+    .sidebar-section{font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color: var(--text-muted);padding:16px 20px 6px;font-weight:700;}
+    .dash-main{flex:1;background: var(--bg-dark);color: var(--text-main);padding:32px;overflow-y:auto;}
+    .dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+    .dash-header h1{font-size:1.4rem;color:#fff;}
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;margin-bottom:28px;}
+    .stat-card{background: var(--card-bg);border:1px solid var(--panel-border);border-radius:var(--radius-lg);padding:20px;display:flex;align-items:center;gap:14px;}
+    .stat-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+    .stat-num{font-size:1.5rem;font-weight:700;color:#fff;line-height:1;}
+    .stat-label{font-size:0.78rem;color: var(--text-muted);margin-top:4px;}
+    .panel-card{background: var(--card-bg);border:1px solid var(--panel-border);border-radius:var(--radius-lg);padding:24px;margin-bottom:24px;}
+    .panel-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--panel-border);display:flex;justify-content:space-between;align-items:center;}
+    table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+    th{text-align:left;padding:10px 12px;background: var(--bg-dark);border-bottom:2px solid var(--panel-border);font-size:0.78rem;text-transform:uppercase;letter-spacing:.5px;color: var(--text-muted);}
+    td{padding:12px;border-bottom:1px solid var(--panel-border);vertical-align:middle;color: var(--text-main);}
+    tr:last-child td{border-bottom:none;}
+    tr:hover td{background: var(--bg-dark);}
+    .material-card{display:flex;align-items:center;gap:14px;padding:14px;background: var(--card-bg);border:1px solid var(--panel-border);border-radius:10px;margin-bottom:10px;transition:all .15s;}
+    .material-card:hover{border-color: var(--gold);box-shadow: var(--shadow);}
+    .material-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+    .saved-card{display:flex;align-items:center;justify-content:space-between;padding:14px;background: var(--card-bg);border:1px solid var(--panel-border);border-radius:10px;margin-bottom:10px;}
+    .saved-info{display:flex;align-items:center;gap:12px;}
+    .saved-avatar{width:40px;height:40px;border-radius:50%;background: var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;}
+    .status-badge{padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;display:inline-block;}
+    .status-pending{background:rgba(255,215,0,0.1);color: var(--gold);}
+    .status-forwarded{background:rgba(56,189,248,0.1);color:#38bdf8;}
+    .status-approved{background:rgba(34,197,94,0.1);color:#22c55e;}
+    .status-completed{background:rgba(168,85,247,0.1);color:#a855f7;}
+    .status-rejected{background:rgba(239,68,68,0.1);color:#ef4444;}
+    .status-enrolled{background: var(--gold);color:#000;}
+    .enroll-btn{background: var(--gold);color:#000;border:none;padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:background .15s;}
+    .enroll-btn:hover{background: var(--gold-hover);}
+    .btn-primary {background: var(--gold); color: #000; border: none;}
+    .btn-primary:hover {background: var(--gold-hover); color: #000;}
+    .form-group label {color: #fff; font-weight: 600;}
+    .form-group input, .form-group select, .form-group textarea {background: var(--bg-dark); border: 1px solid var(--panel-border); color: #fff;}
+    .form-group input:focus, .form-group select:focus {border-color: var(--gold); outline: none;}
+    .subject-tab {background: var(--bg-dark); color: var(--text-muted); border: 1px solid var(--panel-border); padding: 6px 14px; border-radius: 20px; cursor: pointer;}
+    .subject-tab.active {background: var(--gold); color: #000; border-color: var(--gold);}
+    @media(max-width:768px){.dash-sidebar{display:none;}.dash-main{padding:16px;}}
   </style>
 </head>
 <body>
-
 <div id="page-loader"><div class="loader-ring"></div></div>
 <div id="toast-container"></div>
 
 <div class="dash-wrap">
-
   <div class="dash-sidebar">
     <div class="dash-logo">
       <div class="dash-logo-name" id="sidebar-name">Loading...</div>
-      <div class="dash-logo-role"><i class="fa fa-user-graduate" style="color:var(--gold)"></i> Student Account</div>
+      <div class="dash-logo-role">Student Account</div>
     </div>
-    <div class="sidebar-section">Menu Options</div>
-    <div class="sidebar-item active" onclick="showTab('overview', this)">
-      <i class="fa fa-home"></i> Overview Board
-    </div>
-    <div class="sidebar-item" onclick="showTab('requests', this)">
+    <div class="sidebar-section">Menu</div>
+    <div class="sidebar-item active" onclick="showTab('overview',this)"><i class="fa fa-home"></i> Overview</div>
+    <div class="sidebar-item" onclick="showTab('requests',this)">
       <i class="fa fa-envelope"></i> My Demo Requests
-      <span id="req-badge" class="unread-badge" style="display:none"></span>
+      <span id="req-badge" style="margin-left:auto;background:#ef4444;color:#fff;border-radius:20px;padding:1px 8px;font-size:0.75rem;display:none"></span>
     </div>
-    <div class="sidebar-item" onclick="showTab('saved', this)">
-      <i class="fa fa-heart"></i> Saved Teachers
+    <div class="sidebar-item" onclick="showTab('saved',this)"><i class="fa fa-heart"></i> Saved Teachers</div>
+    <div class="sidebar-item" onclick="showTab('materials',this)"><i class="fa fa-file-pdf"></i> Free MCQs & Materials</div>
+    <div class="sidebar-item" onclick="showTab('notifications',this)">
+      <i class="fa fa-bell"></i> Notifications
+      <span id="notif-badge-sb" style="margin-left:auto;background:#ef4444;color:#fff;border-radius:20px;padding:1px 8px;font-size:0.75rem;display:none"></span>
     </div>
-    <div class="sidebar-item" onclick="showTab('materials', this)">
-      <i class="fa fa-file-pdf"></i> Free MCQs & Study Files
-    </div>
-    <div class="sidebar-item" onclick="showTab('notifications', this)">
-      <i class="fa fa-bell"></i> Notifications Hub
-      <span id="notif-count" class="unread-badge" style="display:none">0</span>
-    </div>
-    <div class="sidebar-section">Account Management</div>
-    <div class="sidebar-item" onclick="showTab('settings', this)">
-      <i class="fa fa-cog"></i> Settings Console
-    </div>
-    <div class="sidebar-item" id="btn-logout" style="color:#ef4444;">
-      <i class="fa fa-sign-out-alt"></i> Logout Securely
-    </div>
+    <div class="sidebar-section">Account</div>
+    <div class="sidebar-item" onclick="showTab('settings',this)"><i class="fa fa-cog"></i> Settings</div>
+    <div class="sidebar-item" id="btn-logout" style="color:#ef4444;"><i class="fa fa-sign-out-alt"></i> Logout</div>
   </div>
 
   <div class="dash-main">
 
     <div id="tab-overview">
       <div class="dash-header">
-        <h1>Welcome back, <span id="student-name" style="color:var(--gold)">Student</span>!</h1>
-        <a href="faculty.html" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Find Premium Teachers</a>
+        <h1>Welcome, <span id="student-name" style="color: var(--gold)">Student</span>!</h1>
+        <a href="faculty.html" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Find Teachers</a>
       </div>
-
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon" style="background:rgba(255,215,0,0.1)">📨</div>
-          <div><div class="stat-num" id="stat-requests">0</div><div class="stat-label">Demo Requests</div></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:rgba(255,215,0,0.1)">❤️</div>
-          <div><div class="stat-num" id="stat-saved">0</div><div class="stat-label">Saved Teachers</div></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:rgba(255,215,0,0.1)">📚</div>
-          <div><div class="stat-num" id="stat-materials">0</div><div class="stat-label">Study Files Available</div></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:rgba(255,215,0,0.1)">📢</div>
-          <div><div class="stat-num" id="stat-notifs">0</div><div class="stat-label">Official Bulletins</div></div>
-        </div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(56,189,248,0.1);">📨</div><div><div class="stat-num" id="stat-requests">0</div><div class="stat-label">Demo Requests</div></div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(255,215,0,0.1);">✅</div><div><div class="stat-num" id="stat-enrolled">0</div><div class="stat-label">Enrolled</div></div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(239,68,68,0.1);">❤️</div><div><div class="stat-num" id="stat-saved">0</div><div class="stat-label">Saved Teachers</div></div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(168,85,247,0.1);">📚</div><div><div class="stat-num" id="stat-materials">6</div><div class="stat-label">Materials Available</div></div></div>
       </div>
-
       <div class="panel-card">
-        <div class="panel-title">My Registered Profile Matrix</div>
-        <div id="profile-info" style="color:#b3b3b3">Syncing current workspace credentials...</div>
+        <div class="panel-title">My Profile</div>
+        <div id="profile-info" style="color:var(--text-muted)">Loading...</div>
       </div>
-
       <div class="panel-card">
-        <div class="panel-title">
-          Recent Demo Request Pipeline Alerts
-          <a href="#" onclick="showTab('requests',document.querySelectorAll('.sidebar-item')[1])" class="btn btn-outline btn-sm">View Full Logs</a>
-        </div>
-        <div class="table-wrap">
+        <div class="panel-title">Recent Demo Requests</div>
+        <div style="overflow-x:auto">
           <table>
-            <thead><tr><th>Assigned Teacher</th><th>Subject Track</th><th>Status Matrix</th><th>Creation Date</th></tr></thead>
-            <tbody id="recent-requests"><tr><td colspan="4" style="text-align:center;color:var(--text-muted)">Syncing recent alerts pipeline...</td></tr></tbody>
+            <thead><tr><th>Teacher</th><th>Subject</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="recent-requests"><tr><td colspan="4" style="text-align:center;color:var(--text-muted)">Loading...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -234,14 +128,14 @@
 
     <div id="tab-requests" style="display:none">
       <div class="dash-header">
-        <h1>My Private Demo Pipeline Requests</h1>
-        <a href="faculty.html#demo" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Initialize New Request</a>
+        <h1>My Demo Requests</h1>
+        <a href="faculty.html#demo" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New Request</a>
       </div>
       <div class="panel-card">
-        <div class="table-wrap">
+        <div style="overflow-x:auto">
           <table>
-            <thead><tr><th>Assigned Faculty</th><th>Subject Focus</th><th>Curriculum System</th><th>Preferred Target Slot</th><th>Timestamp Date</th><th>Status State</th></tr></thead>
-            <tbody id="all-requests"><tr><td colspan="6" style="text-align:center;color:var(--text-muted)">Syncing history data logs...</td></tr></tbody>
+            <thead><tr><th>Teacher</th><th>Subject</th><th>Curriculum</th><th>Preferred Time</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="all-requests"><tr><td colspan="7" style="text-align:center;color:var(--text-muted)">Loading...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -249,108 +143,46 @@
 
     <div id="tab-saved" style="display:none">
       <div class="dash-header">
-        <h1>My Favorites Bookmarked Faculty</h1>
-        <a href="faculty.html" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Browse Faculty Directory</a>
+        <h1>Saved Teachers</h1>
+        <a href="faculty.html" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Browse Teachers</a>
       </div>
-      <div class="panel-card" id="saved-panel">
-        <p style="color:var(--text-muted)">Syncing active bookmarks logs...</p>
-      </div>
+      <div class="panel-card" id="saved-panel"><p style="color:var(--text-muted)">Loading...</p></div>
     </div>
 
     <div id="tab-materials" style="display:none">
-      <div class="dash-header"><h1>Premium Free MCQs & Study Vault</h1></div>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
-        <button class="subject-tab active" onclick="filterMaterials('all',this)">All Tracks</button>
+      <div class="dash-header"><h1>Free MCQs & Study Materials</h1></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+        <button class="subject-tab active" onclick="filterMaterials('all',this)">All</button>
         <button class="subject-tab" onclick="filterMaterials('Mathematics',this)">Mathematics</button>
         <button class="subject-tab" onclick="filterMaterials('Physics',this)">Physics</button>
         <button class="subject-tab" onclick="filterMaterials('Chemistry',this)">Chemistry</button>
         <button class="subject-tab" onclick="filterMaterials('English',this)">English</button>
-        <button class="subject-tab" onclick="filterMaterials('CSS/PMS',this)">CSS/PMS Focus</button>
+        <button class="subject-tab" onclick="filterMaterials('CSS/PMS',this)">CSS/PMS</button>
       </div>
-
       <div id="materials-list">
-        <div class="material-card" data-subject="Mathematics">
-          <div class="material-icon" style="background:rgba(255,215,0,0.1);">📄</div>
-          <div style="flex:1">
-            <strong style="color:#fff;">O Level Mathematics MCQs Set 1</strong>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Cambridge O Level — 100 MCQs with answers complete key</p>
-          </div>
-          <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a>
-        </div>
-        <div class="material-card" data-subject="Physics">
-          <div class="material-icon" style="background:rgba(255,215,0,0.1);">📄</div>
-          <div style="flex:1">
-            <strong style="color:#fff;">IGCSE Physics Past Papers 2020-2023</strong>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Cambridge IGCSE — Complete past papers compilation files</p>
-          </div>
-          <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a>
-        </div>
-        <div class="material-card" data-subject="CSS/PMS">
-          <div class="material-icon" style="background:rgba(255,215,0,0.1);">📄</div>
-          <div style="flex:1">
-            <strong style="color:#fff;">CSS/PMS General Knowledge Comprehensive Notes</strong>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Official compilation set by CEO Muhammad Awais</p>
-          </div>
-          <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a>
-        </div>
-        <div class="material-card" data-subject="Mathematics">
-          <div class="material-icon" style="background:rgba(255,215,0,0.1);">📄</div>
-          <div style="flex:1">
-            <strong style="color:#fff;">Biomaths Practice Evaluation Questions</strong>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Engineered specifically for medical entry test preparation programs</p>
-          </div>
-          <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a>
-        </div>
-        <div class="material-card" data-subject="English">
-          <div class="material-icon" style="background:rgba(255,215,0,0.1);">📄</div>
-          <div style="flex:1">
-            <strong style="color:#fff;">English Grammar & Structural Composition Notes</strong>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Optimized tracking system for O Level & Pakistani educational boards</p>
-          </div>
-          <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a>
-        </div>
-        <div class="material-card" data-subject="Chemistry">
-          <div class="material-icon" style="background:rgba(255,215,0,0.1);">📄</div>
-          <div style="flex:1">
-            <strong style="color:#fff;">A Level Chemistry Dedicated MCQs Bank</strong>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Cambridge International AS & A Level standard key</p>
-          </div>
-          <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a>
-        </div>
+        <div class="material-card" data-subject="Mathematics"><div class="material-icon" style="background:rgba(56,189,248,0.1);">📄</div><div style="flex:1"><strong>O Level Mathematics MCQs Set 1</strong><p style="font-size:0.82rem; color:var(--text-muted)">Cambridge O Level — 100 MCQs with answers</p></div><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a></div>
+        <div class="material-card" data-subject="Physics"><div class="material-icon" style="background:rgba(34,197,94,0.1);">📄</div><div style="flex:1"><strong>IGCSE Physics Past Papers 2020-2023</strong><p style="font-size:0.82rem; color:var(--text-muted)">Cambridge IGCSE — Complete past papers</p></div><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a></div>
+        <div class="material-card" data-subject="CSS/PMS"><div class="material-icon" style="background:rgba(244,63,94,0.1);">📄</div><div style="flex:1"><strong>CSS/PMS General Knowledge Notes</strong><p style="font-size:0.82rem; color:var(--text-muted)">Compiled by CEO Muhammad Awais</p></div><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a></div>
+        <div class="material-card" data-subject="Mathematics"><div class="material-icon" style="background:rgba(255,215,0,0.1);">📄</div><div style="flex:1"><strong>Biomaths Practice Questions</strong><p style="font-size:0.82rem; color:var(--text-muted)">For medical entry test preparation</p></div><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a></div>
+        <div class="material-card" data-subject="English"><div class="material-icon" style="background:rgba(56,189,248,0.1);">📄</div><div style="flex:1"><strong>English Grammar & Composition Notes</strong><p style="font-size:0.82rem; color:var(--text-muted)">For O Level & Pakistani boards</p></div><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a></div>
+        <div class="material-card" data-subject="Chemistry"><div class="material-icon" style="background:rgba(34,197,94,0.1);">📄</div><div style="flex:1"><strong>A Level Chemistry MCQs Bank</strong><p style="font-size:0.82rem; color:var(--text-muted)">Cambridge AS & A Level</p></div><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a></div>
       </div>
     </div>
 
     <div id="tab-notifications" style="display:none">
-      <div class="dash-header"><h1>Official Broadcaster Alerts Hub</h1></div>
-      <div class="panel-card" id="notifs-panel">
-        <p style="color:var(--text-muted)">Syncing official broadcast channel alerts...</p>
-      </div>
+      <div class="dash-header"><h1>Notifications</h1></div>
+      <div class="panel-card" id="notifs-panel"><p style="color:var(--text-muted)">Loading notifications...</p></div>
     </div>
 
     <div id="tab-settings" style="display:none">
-      <div class="dash-header"><h1>Account Identity Settings</h1></div>
+      <div class="dash-header"><h1>Account Settings</h1></div>
       <div class="panel-card" style="max-width:520px">
-        <div class="form-group">
-          <label>Full Verified Name</label>
-          <input type="text" id="set-name" placeholder="Your name identity"/>
+        <div class="form-group"><label>Full Name</label><input type="text" id="set-name" placeholder="Your name"/></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="set-phone" placeholder="+92 300 ..."/></div>
+        <div class="form-group"><label>Preferred Language</label>
+          <select id="set-language"><option>Urdu</option><option>English</option><option>Both</option></select>
         </div>
-        <div class="form-group">
-          <label>Active Phone Contact Line</label>
-          <input type="tel" id="set-phone" placeholder="+92 300 ..."/>
-        </div>
-        <div class="form-group">
-          <label>Preferred Instruction Language Medium</label>
-          <select id="set-language">
-            <option value="Urdu">Urdu Medium Track</option>
-            <option value="English">English Medium Track</option>
-            <option value="Both">Bilingual Combined Profile (Both)</option>
-          </select>
-        </div>
-        <br/>
-        <button class="btn btn-primary" id="btn-save-settings" style="width:100%; justify-content:center;">
-          <i class="fa fa-save"></i> Commit Identity Profile Changes
-        </button>
+        <button class="btn btn-primary" id="btn-save-settings"><i class="fa fa-save"></i> Save Settings</button>
       </div>
     </div>
 
@@ -363,7 +195,7 @@ import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 import {
   getFirestore, doc, getDoc, getDocs, updateDoc,
-  collection, query, where
+  collection, query, where, addDoc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -374,24 +206,18 @@ const firebaseConfig = {
   messagingSenderId: "146570288811",
   appId: "1:146570288811:web:96da475a769c18696321ee"
 };
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const app  = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db   = getFirestore(app);
 
 let currentUid = null;
 let currentProfile = null;
-
-const dismissLoader = () => {
-  const loader = document.getElementById('page-loader');
-  if(loader) loader.style.display = 'none';
-};
+let myRequests = [];
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'login.html'; return; }
   const snap = await getDoc(doc(db, 'users', user.uid));
-  if (!snap.exists() || snap.data().role !== 'student') {
-    window.location.href = 'login.html'; return;
-  }
+  if (!snap.exists() || snap.data().role !== 'student') { window.location.href = 'login.html'; return; }
   currentUid = user.uid;
   currentProfile = snap.data();
   loadDashboard(currentProfile);
@@ -400,164 +226,227 @@ onAuthStateChanged(auth, async (user) => {
 function loadDashboard(p) {
   document.getElementById('student-name').textContent = p.fullName?.split(' ')[0] || 'Student';
   document.getElementById('sidebar-name').textContent = p.fullName || 'Student';
-
   document.getElementById('profile-info').innerHTML = `
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
-      <div><strong style="color:var(--gold);">Full Legal Name</strong><p style="margin-top:4px;">${p.fullName||'N/A'}</p></div>
-      <div><strong style="color:var(--gold);">Email Axis</strong><p style="margin-top:4px;">${p.email||'N/A'}</p></div>
-      <div><strong style="color:var(--gold);">Target Location Country</strong><p style="margin-top:4px;">${p.country||'N/A'}</p></div>
-      <div><strong style="color:var(--gold);">Curriculum Vector</strong><p style="margin-top:4px;">${p.curriculum||'N/A'}</p></div>
-      <div><strong style="color:var(--gold);">Grade Allocation Standard</strong><p style="margin-top:4px;">${p.grade||'N/A'}</p></div>
-      <div><strong style="color:var(--gold);">Instruction Language Matrix</strong><p style="margin-top:4px;">${p.language||'N/A'}</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;">
+      <div><strong>Name</strong><p>${p.fullName||'N/A'}</p></div>
+      <div><strong>Email</strong><p>${p.email||'N/A'}</p></div>
+      <div><strong>Country</strong><p>${p.country||'N/A'}</p></div>
+      <div><strong>Curriculum</strong><p>${p.curriculum||'N/A'}</p></div>
+      <div><strong>Grade</strong><p>${p.grade||'N/A'}</p></div>
+      <div><strong>Language</strong><p>${p.language||'N/A'}</p></div>
     </div>`;
-
-  document.getElementById('set-name').value = p.fullName || '';
-  document.getElementById('set-phone').value = p.phone || '';
+  document.getElementById('set-name').value    = p.fullName || '';
+  document.getElementById('set-phone').value   = p.phone || '';
   document.getElementById('set-language').value = p.language || 'Both';
-
-  const materials = document.querySelectorAll('.material-card');
-  document.getElementById('stat-materials').textContent = materials.length;
-
   loadRequests();
-  loadSavedTeachers(currentUid);
+  loadSavedTeachers();
   loadNotifications();
-  dismissLoader();
 }
 
 async function loadRequests() {
-  const q = query(collection(db, 'demo_requests'));
+  const q = query(collection(db,'demo_requests'), where('studentId','==',currentUid));
   const snap = await getDocs(q);
-  const all = snap.docs.map(d=>({id:d.id,...d.data()}));
-  
-  // Student ke apne email ya phone se request records cross-verify filter map script
-  const mine = all.filter(r => 
-    (currentProfile?.email && r.contact === currentProfile.email) || 
-    (currentProfile?.phone && r.contact === currentProfile.phone)
-  );
+  myRequests = snap.docs.map(d => ({ id:d.id, ...d.data() }))
+    .sort((a,b) => (b.requestDate?.seconds||0)-(a.requestDate?.seconds||0));
 
-  document.getElementById('stat-requests').textContent = mine.length;
-  const badge = document.getElementById('req-badge');
-  if (mine.length > 0) {
-    badge.textContent = mine.length;
-    badge.style.display = 'inline';
+  const allSnap = await getDocs(collection(db,'demo_requests'));
+  const legacyMatches = allSnap.docs
+    .map(d => ({id:d.id,...d.data()}))
+    .filter(r => !r.studentId && (r.contact === currentProfile?.email || r.contact === currentProfile?.phone));
+  
+  const combined = [...myRequests, ...legacyMatches];
+  const unique   = combined.filter((v,i,a) => a.findIndex(t=>t.id===v.id)===i);
+  myRequests = unique;
+
+  const enrolled = myRequests.filter(r => r.status === 'enrolled').length;
+  const pending  = myRequests.filter(r => ['pending','forwarded','approved','completed'].includes(r.status)).length;
+
+  document.getElementById('stat-requests').textContent = myRequests.length;
+  document.getElementById('stat-enrolled').textContent  = enrolled;
+
+  if (pending > 0) {
+    document.getElementById('req-badge').textContent = pending;
+    document.getElementById('req-badge').style.display = 'inline';
   } else {
-    badge.style.display = 'none';
+    document.getElementById('req-badge').style.display = 'none';
   }
 
-  const rowHtml = (rows, cols) => rows.length === 0
-    ? `<tr><td colspan="${cols}" style="text-align:center;color:var(--text-muted); padding:20px;">No custom demo request forms assigned yet — <a href="faculty.html#demo" style="color:var(--gold);">Initialize your first tracking desk now</a></td></tr>`
-    : rows.map(r => {
-        const statusClean = r.status || 'pending';
-        const tagClass = (statusClean==='approved' || statusClean==='accepted') ? 'badge-success' : 'badge-warning';
-        return `
-          <tr>
-            <td><strong>${r.teacherName||'Any Faculty Tutor'}</strong></td>
-            <td><span class="badge badge-outline" style="border:1px solid #333; color:#fff; padding:3px 8px; border-radius:6px; font-size:0.8rem;">${r.subject||'N/A'}</span></td>
-            ${cols===6 ? `<td>${r.curriculum||'N/A'}</td><td><i class="fa-regular fa-clock" style="color:var(--gold)"></i> ${r.preferredTime||'Flexible slot'}</td>` : ''}
-            <td>${r.requestDate ? new Date(r.requestDate.seconds*1000).toLocaleDateString() : 'N/A'}</td>
-            <td><span class="${tagClass}">${statusClean.toUpperCase()}</span></td>
-          </tr>`;
-      }).join('');
-
-  document.getElementById('recent-requests').innerHTML = rowHtml(mine.slice(0,4), 4);
-  document.getElementById('all-requests').innerHTML = rowHtml(mine, 6);
+  renderRecentRequests(myRequests.slice(0,4));
+  renderAllRequests(myRequests);
 }
 
-async function loadSavedTeachers(uid) {
-  const q = query(collection(db,'saved_teachers'), where('studentUserId','==',uid));
+function statusBadge(status) {
+  const map = {
+    pending:   ['status-badge status-pending',   'Pending'],
+    forwarded: ['status-badge status-forwarded',  'Teacher Assigned'],
+    approved:  ['status-badge status-approved',   'Demo Arranged'],
+    completed: ['status-badge status-completed',  'Demo Done'],
+    enrolled:  ['status-badge status-enrolled',   'Enrolled ✓'],
+    rejected:  ['status-badge status-rejected',   'Closed'],
+  };
+  const [cls, label] = map[status] || ['status-badge status-pending','Pending'];
+  return `<span class="${cls}">${label}</span>`;
+}
+
+function enrollBtn(r) {
+  if (r.status === 'completed') {
+    return `<button class="enroll-btn" onclick="window.enrollStudent('${r.id}')">
+      <i class="fa fa-check"></i> I Agree — Enroll Me
+    </button>`;
+  }
+  if (r.status === 'enrolled') return `<span style="color:#22c55e;font-weight:700">✅ Enrolled</span>`;
+  return '—';
+}
+
+function renderRecentRequests(requests) {
+  document.getElementById('recent-requests').innerHTML = requests.length === 0
+    ? `<tr><td colspan="4" style="text-align:center;color:var(--text-muted)">No demo requests yet — <a href="faculty.html#demo" style="color:var(--gold)">Request one now</a></td></tr>`
+    : requests.map(r => `
+        <tr>
+          <td><strong>${r.teacherName||'Any Teacher'}</strong></td>
+          <td>${r.subject||'N/A'}</td>
+          <td>${statusBadge(r.status)}</td>
+          <td>${enrollBtn(r)}</td>
+        </tr>`).join('');
+}
+
+function renderAllRequests(requests) {
+  document.getElementById('all-requests').innerHTML = requests.length === 0
+    ? `<tr><td colspan="7" style="text-align:center;color:var(--text-muted)">No demo requests yet — <a href="faculty.html#demo" style="color:var(--gold)">Request one now</a></td></tr>`
+    : requests.map(r => `
+        <tr>
+          <td><strong>${r.teacherName||'Any Teacher'}</strong></td>
+          <td>${r.subject||'N/A'}</td>
+          <td>${r.curriculum||'N/A'}</td>
+          <td>${r.preferredTime||'Not specified'}</td>
+          <td>${r.requestDate ? new Date(r.requestDate.seconds*1000).toLocaleDateString() : 'N/A'}</td>
+          <td>${statusBadge(r.status)}</td>
+          <td>${enrollBtn(r)}</td>
+        </tr>`).join('');
+}
+
+window.enrollStudent = async (requestId) => {
+  if (!confirm('Are you sure you want to enroll? This will notify the admin.')) return;
+  try {
+    await updateDoc(doc(db,'demo_requests',requestId), {
+      status: 'enrolled',
+      enrolledAt: serverTimestamp(),
+      studentId: currentUid,
+      studentName: currentProfile.fullName,
+      studentEmail: currentProfile.email
+    });
+    await addDoc(collection(db,'notifications'), {
+      type: 'enrollment',
+      message: `${currentProfile.fullName} has agreed to enroll!`,
+      requestId,
+      studentId: currentUid,
+      studentName: currentProfile.fullName,
+      forAdmin: true,
+      read: false,
+      createdAt: serverTimestamp()
+    });
+    if (typeof showToast === 'function') {
+      showToast('🎉 Enrolled successfully! Admin has been notified.', 'success');
+    } else {
+      alert('🎉 Enrolled successfully! Admin has been notified.');
+    }
+    loadRequests();
+  } catch(e) {
+    if (typeof showToast === 'function') {
+      showToast('Error: '+e.message, 'error');
+    } else {
+      alert('Error: ' + e.message);
+    }
+  }
+};
+
+async function loadSavedTeachers() {
+  const q = query(collection(db,'saved_teachers'), where('studentUserId','==',currentUid));
   const snap = await getDocs(q);
   const saved = snap.docs.map(d=>({id:d.id,...d.data()}));
   document.getElementById('stat-saved').textContent = saved.length;
-
   const panel = document.getElementById('saved-panel');
   if (saved.length === 0) {
-    panel.innerHTML = `<p style="color:var(--text-muted); text-align:center; padding:20px;">No saved teachers profiles tracked yet. <a href="faculty.html" style="color:var(--gold);">Browse our premium active directory</a> and save items.</p>`;
+    panel.innerHTML = `<p style="color:var(--text-muted)">No saved teachers yet. <a href="faculty.html" style="color:var(--gold)">Browse teachers</a> and save your favorites.</p>`;
     return;
   }
-  
-  panel.innerHTML = saved.map((s) => `
+  const colors = ['#2C7DA0','#2A9D8F','#7F77DD','#D85A30'];
+  panel.innerHTML = saved.map((s,i) => `
     <div class="saved-card">
       <div class="saved-info">
-        <div class="saved-avatar" style="background:var(--gold); color:#000;">${(s.teacherName||'T')[0]}</div>
-        <div>
-          <strong style="color:#fff; font-size:0.98rem;">${s.teacherName||'Premium Teacher Faculty'}</strong>
-          <p style="font-size:0.82rem;color:var(--text-muted); margin-top:4px;">${s.subjects||'General Track Educator'}</p>
-        </div>
+        <div class="saved-avatar" style="background:${colors[i%colors.length]}">${(s.teacherName||'T')[0]}</div>
+        <div><strong>${s.teacherName||'Teacher'}</strong><p style="font-size:0.82rem;color:var(--text-muted)">${s.subjects||''}</p></div>
       </div>
-      <div style="display:flex;gap:10px">
-        <a href="teacher-profile.html?id=${s.teacherUserId}" class="btn btn-outline btn-sm">View Profile</a>
-        <a href="https://wa.me/${(s.whatsapp||'').replace(/\D/g,'')}" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a>
+      <div style="display:flex;gap:8px">
+        <a href="teacher-profile.html?id=${s.teacherUserId}" class="btn btn-outline btn-sm" style="color:#fff; border-color:var(--panel-border)">View</a>
+        <a href="https://wa.me/${(s.whatsapp||'').replace(/\D/g,'')}" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>`).join('');
 }
 
 async function loadNotifications() {
-  const snap = await getDocs(query(collection(db,'announcements'), where('isActive','==',true)));
+  const snap  = await getDocs(query(collection(db,'announcements'), where('isActive','==',true)));
   const items = snap.docs.map(d=>({id:d.id,...d.data()}));
-  document.getElementById('stat-notifs').textContent = items.length;
-  
-  const notifBadge = document.getElementById('notif-count');
-  if(items.length > 0) {
-    notifBadge.textContent = items.length;
-    notifBadge.style.display = 'inline';
-  } else {
-    notifBadge.style.display = 'none';
+  const readIds = JSON.parse(localStorage.getItem('afs_read_notifs') || '[]');
+  const unread  = items.filter(i => !readIds.includes(i.id));
+
+  if (unread.length > 0) {
+    document.getElementById('notif-badge-sb').textContent = unread.length;
+    document.getElementById('notif-badge-sb').style.display = 'inline';
+    localStorage.setItem('afs_unread_count', String(unread.length));
   }
 
   const panel = document.getElementById('notifs-panel');
   if (items.length === 0) {
-    panel.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">No active official administrative broadcast bulletins logged right now.</p>';
+    panel.innerHTML = '<p style="color:var(--text-muted)">No notifications right now.</p>';
     return;
   }
   panel.innerHTML = items.map(a => `
-    <div class="notification-item">
-      <div style="font-size:1.5rem; padding-top:2px;">📢</div>
-      <div style="flex:1;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:4px;">
-          <strong style="color:var(--gold); font-size:0.98rem;">${a.title || 'Official Announcement'}</strong>
-          ${a.displayFrom ? `<span style="color:var(--text-muted); font-size:0.78rem; margin-left:auto;">${a.displayFrom}</span>` : ''}
+    <div style="display:flex;gap:14px;padding:14px;border:1px solid var(--panel-border);border-radius:10px;margin-bottom:10px;background:${readIds.includes(a.id)?'var(--bg-dark)':'var(--card-bg)'}">
+      <div style="font-size:1.4rem">${readIds.includes(a.id)?'🔔':'📢'}</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between">
+          <strong>${a.title}</strong>
+          ${!readIds.includes(a.id)?'<span style="background:#ef4444;color:#fff;border-radius:20px;padding:2px 8px;font-size:0.72rem">New</span>':'<span style="color:var(--text-muted);font-size:0.75rem">Read</span>'}
         </div>
-        <p style="font-size:0.9rem; color:#e0e0e0; line-height:1.4;">${a.message||''}</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-top:4px">${a.message||''}</p>
       </div>
     </div>`).join('');
+
+  localStorage.setItem('afs_read_notifs', JSON.stringify(items.map(i=>i.id)));
+  document.getElementById('notif-badge-sb').style.display = 'none';
+  localStorage.removeItem('afs_unread_count');
 }
+
+window.filterMaterials = (subject, btn) => {
+  document.querySelectorAll('.subject-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.material-card').forEach(card => {
+    card.style.display = (subject==='all' || card.dataset.subject===subject) ? 'flex' : 'none';
+  });
+};
 
 document.getElementById('btn-save-settings').addEventListener('click', async () => {
   const fullName = document.getElementById('set-name').value.trim();
   const phone    = document.getElementById('set-phone').value.trim();
   const language = document.getElementById('set-language').value;
   const btn = document.getElementById('btn-save-settings');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Syncing identity...';
+  btn.disabled = true; btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Saving...';
   try {
     await updateDoc(doc(db,'users',currentUid), { fullName, phone, language });
-    if(typeof showToast === 'function') showToast('Identity modifications updated! ✅', 'success');
+    showToast('Settings saved! ✅', 'success');
     document.getElementById('student-name').textContent = fullName.split(' ')[0];
-    document.getElementById('sidebar-name').textContent = fullName;
-  } catch(e) { 
-    if(typeof showToast === 'function') showToast('Error writing system config: '+e.message,'error'); 
-  }
-  btn.disabled = false;
-  btn.innerHTML = '<i class="fa fa-save"></i> Commit Identity Profile Changes';
+  } catch(e) { showToast('Error: '+e.message, 'error'); }
+  btn.disabled = false; btn.innerHTML = '<i class="fa fa-save"></i> Save Settings';
 });
 
-window.filterMaterials = (subject, btn) => {
-  document.querySelectorAll('.subject-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.material-card').forEach(card => {
-    card.style.display = (subject === 'all' || card.dataset.subject === subject) ? 'flex' : 'none';
-  });
-};
-
 document.getElementById('btn-logout').addEventListener('click', async () => {
-  await signOut(auth);
-  window.location.href = 'login.html';
+  await signOut(auth); window.location.href = '../index.html';
 });
 
 window.showTab = (tab, el) => {
   ['overview','requests','saved','materials','notifications','settings'].forEach(t => {
-    const section = document.getElementById('tab-'+t);
-    if(section) section.style.display = t===tab ? 'block' : 'none';
+    document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
   });
   document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
   if(el) el.classList.add('active');
