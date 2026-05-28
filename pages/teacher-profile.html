@@ -221,6 +221,7 @@
       background: transparent !important;
       border: 1px solid var(--border-color) !important;
       color: var(--text-main) !important;
+      cursor: pointer;
     }
     .btn-outline:hover {
       border-color: var(--accent) !important;
@@ -236,7 +237,7 @@
       color: #25D366 !important;
     }
 
-    /* REVIEW MODAL STYLES */
+    /* REVIEW & PROFILE MODAL STYLES */
     .modal {
       display: none;
       position: fixed;
@@ -276,6 +277,31 @@
     }
     .star-rating-input i { cursor: pointer; transition: color 0.2s; }
     .star-rating-input i.active { color: var(--accent); }
+
+    /* Stats Grid Container Inside Modal Box */
+    .pm-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 15px 0;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+    .pm-stat-box h4 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 2px;
+      font-weight: 700;
+    }
+    .pm-stat-box p {
+      font-size: 0.75rem;
+      color: var(--text-muted-custom);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
     /* Fallback handler if query contains zero listings matches */
     .no-results { 
@@ -328,6 +354,7 @@
     @media(max-width:768px){
       .faculty-wrap { flex-direction:column; padding:20px 16px; }
       .filters-sidebar { width:100%; position:static; margin-bottom: 20px; }
+      .pm-stats-grid { grid-template-columns: 1fr; gap: 12px; }
     }
   </style>
 </head>
@@ -491,6 +518,52 @@
     <button class="btn btn-primary btn-block" id="btn-submit-review" style="margin-top:15px;">
       <i class="fa fa-paper-plane"></i> Submit Review
     </button>
+  </div>
+</div>
+
+<div id="profile-modal" class="modal" style="display: none;">
+  <div class="modal-content animate-fadeInUp" style="max-width: 600px; width: 90%;">
+    <span class="close-modal" onclick="closeProfileModal()">&times;</span>
+    
+    <div style="text-align: center; margin-bottom: 12px;">
+      <div id="pm-avatar" style="width: 85px; height: 85px; border-radius: 50%; font-size: 2.2rem; font-weight: bold; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;"></div>
+      <h3 id="pm-name" style="color: var(--accent); font-weight: 700; margin-bottom: 4px; font-size: 1.5rem;">Teacher Name</h3>
+      <p id="pm-subject" style="color: var(--text-muted-custom); font-size: 0.9rem; margin-bottom: 4px;"></p>
+    </div>
+
+    <div class="pm-stats-grid">
+      <div class="pm-stat-box" style="border-right: 1px solid var(--border-color);">
+        <h4 id="pm-stat-rating">0.0</h4>
+        <p id="pm-stat-stars" style="color: var(--accent); margin-bottom: 2px; font-size: 0.75rem;">★★★★★</p>
+        <p id="pm-stat-reviews">0 Reviews</p>
+      </div>
+      <div class="pm-stat-box" style="border-right: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center;">
+        <h4 id="pm-stat-students">0</h4>
+        <p>Assigned Students</p>
+      </div>
+      <div class="pm-stat-box" style="display: flex; flex-direction: column; justify-content: center;">
+        <h4 id="pm-stat-demos">0</h4>
+        <p>Demos Given</p>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+      <div>
+        <strong style="color: var(--accent);"><i class="fa fa-graduation-cap"></i> Curricula Covered:</strong>
+        <p id="pm-curricula" style="margin-top: 4px; color: #fff; font-size: 0.9rem;"></p>
+      </div>
+      <div>
+        <strong style="color: var(--accent);"><i class="fa fa-briefcase"></i> Experience:</strong>
+        <p id="pm-experience" style="margin-top: 4px; color: #fff; font-size: 0.9rem;"></p>
+      </div>
+      <div>
+        <strong style="color: var(--accent);"><i class="fa fa-book"></i> About / Bio:</strong>
+        <p id="pm-bio" style="margin-top: 4px; color: #cccccc; line-height: 1.5; text-align: justify; font-size: 0.9rem;"></p>
+      </div>
+    </div>
+    
+    <div id="pm-whatsapp-container" style="margin-top: 20px;">
+      </div>
   </div>
 </div>
 
@@ -707,9 +780,9 @@
           </div>
           <div class="tc-actions" style="display:flex; flex-direction:column; gap:8px; margin-top:auto;">
             <div style="display:flex; gap:8px; width:100%;">
-              <a href="teacher-profile.html?id=${t.id}" class="btn btn-outline btn-sm" style="flex:1; text-align:center;">
+              <button onclick="openProfileModal('${t.id}')" class="btn btn-outline btn-sm" style="flex:1; text-align:center;">
                 <i class="fa fa-user"></i> Profile
-              </a>
+              </button>
               ${waNum ? `
               <a href="https://wa.me/${waNum}?text=Hello, I found you on AFS Virtual Tutor Hub"
                  target="_blank" class="btn btn-wa btn-sm" style="flex:1; text-align:center;">
@@ -723,6 +796,58 @@
         </div>`;
     }).join('');
   }
+
+  // ── Teacher Profile Modal Controls ──
+  window.openProfileModal = (teacherId) => {
+    const teacher = allTeachers.find(t => t.id === teacherId);
+    if (!teacher) return;
+
+    const initials = (teacher.fullName || 'T').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const badgeBackgrounds = [
+      'linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7)',
+      'linear-gradient(135deg, #d4af37, #85581A)',
+      'linear-gradient(135deg, #111, #333)'
+    ];
+    
+    const avatarEl = document.getElementById('pm-avatar');
+    avatarEl.style.background = badgeBackgrounds[Math.floor(Math.random() * badgeBackgrounds.length)];
+    avatarEl.style.color = avatarEl.style.background.includes('#111') ? '#FFD700' : '#111';
+    avatarEl.textContent = initials;
+
+    document.getElementById('pm-name').textContent = teacher.fullName || 'Teacher';
+    document.getElementById('pm-subject').textContent = (teacher.subjects || []).join(' • ') || 'N/A';
+    document.getElementById('pm-curricula').textContent = (teacher.curricula || []).join(', ') || 'N/A';
+    document.getElementById('pm-experience').textContent = teacher.experience ? `${teacher.experience} of experience` : 'N/A';
+    document.getElementById('pm-bio').textContent = teacher.bio || 'No biography details provided.';
+
+    // Dynamic Multi-Counters Injector Logic (Rating, Demos, Students Counters)
+    const ratingVal = teacher.avgRating || 0;
+    const starString = '★'.repeat(Math.round(ratingVal)) + '☆'.repeat(5 - Math.round(ratingVal));
+    
+    document.getElementById('pm-stat-rating').textContent = ratingVal;
+    document.getElementById('pm-stat-stars').textContent = starString;
+    document.getElementById('pm-stat-reviews').textContent = `${teacher.reviewCount || 0} Reviews`;
+    document.getElementById('pm-stat-students').textContent = teacher.assignedStudents || 0;
+    document.getElementById('pm-stat-demos').textContent = teacher.demosGiven || 0;
+
+    const waContainer = document.getElementById('pm-whatsapp-container');
+    const waNum = (teacher.whatsapp || '').replace(/\D/g, '');
+    if (waNum) {
+      waContainer.innerHTML = `
+        <a href="https://wa.me/${waNum}?text=Hello, I found you on AFS Virtual Tutor Hub"
+           target="_blank" class="btn btn-wa btn-block" style="text-align:center; display:block; width:100%;">
+          <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+        </a>`;
+    } else {
+      waContainer.innerHTML = '';
+    }
+
+    document.getElementById('profile-modal').style.display = 'flex';
+  };
+
+  window.closeProfileModal = () => {
+    document.getElementById('profile-modal').style.display = 'none';
+  };
 
   // ── Review Modal Controls ──
   window.openReviewModal = (teacherId, teacherName) => {
@@ -788,12 +913,10 @@
     btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
 
     try {
-      // Fetch student profile info for name tracking
       const studentSnap = await getDoc(doc(db, 'users', currentUser.uid));
       const studentData = studentSnap.exists() ? studentSnap.data() : {};
       const studentName = studentData.fullName || 'Anonymous Student';
 
-      // 1. Add review object to Firestore
       await addDoc(collection(db, 'reviews'), {
         teacherId: teacherId,
         studentId: currentUser.uid,
@@ -803,7 +926,6 @@
         createdAt: serverTimestamp()
       });
 
-      // 2. Fetch target teacher document to calculate updated aggregates
       const teacherRef = doc(db, 'users', teacherId);
       const teacherSnap = await getDoc(teacherRef);
       
@@ -823,7 +945,7 @@
 
       showToast('Review submitted successfully! ✅ Thank you', 'success');
       closeReviewModal();
-      loadTeachers(); // Reload grid items to display refreshed statistics
+      loadTeachers(); 
     } catch(e) {
       showToast('Database Error: ' + e.message, 'error');
     } finally {
@@ -831,7 +953,6 @@
       btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Review';
     }
   });
-
 
   // ── Filters ──
   window.applyFilters = () => {

@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     :root { --primary:#111111; --accent:#FFD700; }
-    .form-wrap { background:#111111!important; border:2px solid #FFD700!important; box-shadow:0 10px 30px rgba(0,0,0,0.5); border-radius:12px; padding:40px 30px; color:#fff; max-width:450px; }
+    .form-wrap { background:#111111!important; border:2px solid #FFD700!important; box-shadow:0 10px 30px rgba(0,0,0,0.5); border-radius:12px; padding:40px 30px; color:#fff; max-width:450px; position: relative; }
     .form-title { color:#FFD700!important; font-weight:700; }
     .form-sub { color:#ccc!important; }
     .form-group label { color:#FFD700!important; font-weight:500; }
-    .form-group input { background:#1a1a1a!important; border:1px solid #333!important; color:#fff!important; border-radius:6px; padding:12px; transition:all 0.3s; }
+    .form-group input { background:#1a1a1a!important; border:1px solid #333!important; color:#fff!important; border-radius:6px; padding:12px; transition:all 0.3s; width: 100%; box-sizing: border-box; }
     .form-group input:focus { border-color:#FFD700!important; box-shadow:0 0 8px rgba(255,215,0,0.2); }
     .divider span { background:#111!important; color:#888!important; padding:0 15px; }
     .divider::before { background:#333!important; }
@@ -25,6 +25,43 @@
     .form-wrap p { color:#aaa!important; }
     .form-wrap p a { color:#FFD700!important; text-decoration:none; font-weight:500; }
     .form-wrap p a:hover { color:#fff!important; text-decoration:underline; }
+
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; background: #1a1a1a!important; color: #888!important; border-color: #333!important; }
+
+    /* Professional Alert Box Design */
+    .auth-alert-box {
+      display: none;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #fca5a5;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      animation: fadeInAndShake 0.4s ease-in-out;
+    }
+    .auth-alert-box i {
+      color: #ef4444;
+      font-size: 1.05rem;
+      margin-top: 2px;
+    }
+    .auth-alert-box.info-type {
+      background: rgba(255, 215, 0, 0.08);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      color: #ffe066;
+    }
+    .auth-alert-box.info-type i {
+      color: #FFD700;
+    }
+
+    @keyframes fadeInAndShake {
+      0% { opacity: 0; transform: translateY(-6px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
 
     /* Forgot password modal */
     .fp-modal { position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:2000; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .3s; }
@@ -46,7 +83,6 @@
 <div id="page-loader"><div class="loader-ring"></div></div>
 <div id="toast-container"></div>
 
-<!-- NAVBAR -->
 <nav class="navbar" style="border-bottom:1px solid #1c1a17;background:#0a0a0a;">
   <div class="navbar-inner">
     <a class="navbar-logo" href="../index.html">
@@ -67,7 +103,6 @@
   </div>
 </nav>
 
-<!-- LOGIN FORM -->
 <section style="min-height:85vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:40px 24px;">
   <div class="form-wrap animate-fadeInUp">
     <div style="text-align:center;margin-bottom:24px">
@@ -76,7 +111,6 @@
       <div class="form-sub">Login to your AFS Virtual Tutor Hub account</div>
     </div>
 
-    <!-- Google -->
     <div class="social-login">
       <button class="btn btn-google btn-block" id="btn-google">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" style="display:inline;margin-right:8px"/>
@@ -86,18 +120,21 @@
 
     <div class="divider"><span>or login with email</span></div>
 
-    <!-- Email & Password -->
     <div class="form-group">
       <label>Email Address</label>
       <input type="email" id="login-email" placeholder="yourname@email.com"/>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="margin-top: 14px;">
       <label>Password</label>
       <input type="password" id="login-password" placeholder="Enter your password"/>
     </div>
 
-    <!-- Forgot password link -->
-    <div style="text-align:right;margin:-8px 0 16px;">
+    <div class="auth-alert-box" id="auth-error-box" style="margin-top: 15px; margin-bottom: 10px;">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span id="auth-error-text">Wrong password. Try again or click "Forgot password?" for more options.</span>
+    </div>
+
+    <div style="text-align:right;margin:10px 0 20px;">
       <a href="#" id="btn-forgot" style="color:#FFD700;font-size:0.82rem;font-weight:500;">Forgot Password?</a>
     </div>
 
@@ -112,7 +149,6 @@
   </div>
 </section>
 
-<!-- FORGOT PASSWORD MODAL -->
 <div class="fp-modal" id="fp-modal">
   <div class="fp-box">
     <h3><i class="fa fa-lock"></i> Reset Password</h3>
@@ -141,7 +177,64 @@ function redirectByRole(role) {
   else                         window.location.href = 'student-dashboard.html';
 }
 
-// Already logged in
+const errorBox = document.getElementById('auth-error-box');
+const errorText = document.getElementById('auth-error-text');
+
+function triggerAlert(msg, type = 'error') {
+  errorText.innerText = msg;
+  if (type === 'info') {
+    errorBox.classList.add('info-type');
+  } else {
+    errorBox.classList.remove('info-type');
+  }
+  errorBox.style.display = 'flex';
+}
+
+function hideAlert() {
+  errorBox.style.display = 'none';
+}
+
+let loginAttempts = parseInt(localStorage.getItem('loginAttempts') || '0');
+let lockUntil     = parseInt(localStorage.getItem('lockUntil') || '0');
+
+function checkLock() {
+  const now = Date.now();
+  if (lockUntil > now) {
+    const secs = Math.ceil((lockUntil - now) / 1000);
+    triggerAlert(`Too many attempts! System locked. Try again in ${secs} seconds.`, 'error');
+    return true;
+  }
+  if (lockUntil && lockUntil <= now) {
+    localStorage.removeItem('loginAttempts');
+    localStorage.removeItem('lockUntil');
+    loginAttempts = 0;
+    lockUntil = 0;
+    hideAlert();
+  }
+  return false;
+}
+
+function startCountdown() {
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true;
+
+  const interval = setInterval(() => {
+    const now      = Date.now();
+    const lockTime = parseInt(localStorage.getItem('lockUntil') || '0');
+    const secs     = Math.ceil((lockTime - now) / 1000);
+
+    if (secs <= 0) {
+      clearInterval(interval);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa fa-sign-in-alt"></i> Login';
+      triggerAlert('Lock expired. You can safely try logging in again.', 'info');
+      return;
+    }
+    btn.innerHTML = `<i class="fa fa-lock"></i> Locked (${secs}s)`;
+    triggerAlert(`System locked due to excessive failed attempts. Please wait ${secs} seconds.`, 'error');
+  }, 1000);
+}
+
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     const snap = await getDoc(doc(db, 'users', user.uid));
@@ -149,43 +242,62 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// Email login
 document.getElementById('btn-login').addEventListener('click', async () => {
+  hideAlert();
+  if (checkLock()) return;
+
   const email    = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
-  if (!email || !password) { showToast('Email and password required', 'error'); return; }
+  if (!email || !password) { 
+    triggerAlert('Email address and password fields are required.', 'error'); 
+    return; 
+  }
+  
   const btn = document.getElementById('btn-login');
   btn.disabled = true;
   btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Logging in...';
+  
   try {
     const { profile } = await loginUser(email, password);
+    localStorage.removeItem('loginAttempts');
+    localStorage.removeItem('lockUntil');
     showToast('Login successful! ✅', 'success');
     setTimeout(() => redirectByRole(profile?.role), 800);
   } catch (e) {
-    if (e.code === 'auth/user-not-found' || e.code === 'auth/invalid-credential') {
-      showToast('Email or password incorrect', 'error');
-    } else if (e.code === 'auth/wrong-password') {
-      showToast('Wrong password', 'error');
+    loginAttempts++;
+    localStorage.setItem('loginAttempts', loginAttempts);
+    const remaining = 5 - loginAttempts;
+
+    if (loginAttempts >= 5) {
+      const lockTime = Date.now() + (60 * 1000);
+      localStorage.setItem('lockUntil', lockTime);
+      localStorage.setItem('loginAttempts', '0');
+      startCountdown();
     } else {
-      showToast('Login failed: ' + e.message, 'error');
+      if (e.code === 'auth/user-not-found' || e.code === 'auth/invalid-credential') {
+        triggerAlert(`Wrong password or email. Try again or click "Forgot password?" for more options. (${remaining} attempts left)`, 'error');
+      } else if (e.code === 'auth/wrong-password') {
+        triggerAlert(`Wrong password. Try again or click "Forgot password?" for more options. (${remaining} attempts left)`, 'error');
+      } else {
+        triggerAlert('Login failed: ' + e.message, 'error');
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa fa-sign-in-alt"></i> Login';
     }
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa fa-sign-in-alt"></i> Login';
   }
 });
 
-// Google login
 document.getElementById('btn-google').addEventListener('click', async () => {
+  hideAlert();
   try {
     const { profile } = await loginWithGoogle('student');
     showToast('Google login successful! ✅', 'success');
     setTimeout(() => redirectByRole(profile?.role || 'student'), 800);
   } catch (e) {
-    showToast('Google login failed: ' + e.message, 'error');
+    triggerAlert('Google login failed: ' + e.message, 'error');
   }
 });
 
-// ── FORGOT PASSWORD ──
 const fpModal  = document.getElementById('fp-modal');
 const fpStatus = document.getElementById('fp-status');
 
@@ -200,7 +312,6 @@ document.getElementById('btn-fp-cancel').addEventListener('click', () => {
   fpModal.classList.remove('open');
 });
 
-// Close on backdrop click
 fpModal.addEventListener('click', (e) => {
   if (e.target === fpModal) fpModal.classList.remove('open');
 });
@@ -233,6 +344,11 @@ document.getElementById('btn-fp-send').addEventListener('click', async () => {
     btn.disabled = false;
     btn.innerHTML = '<i class="fa fa-paper-plane"></i> Send Reset Link';
   }
+});
+
+window.addEventListener('load', () => {
+  const lockTime = parseInt(localStorage.getItem('lockUntil') || '0');
+  if (lockTime > Date.now()) startCountdown();
 });
 </script>
 </body>

@@ -122,11 +122,11 @@
     /* ─── Form Elements Styling ─── */
     .form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
     .form-group label { font-size: 0.85rem; color: #b3b3b3; font-weight: 500; }
-    .form-control, input[type="text"], input[type="date"], textarea {
+    .form-control, input[type="text"], input[type="date"], input[type="number"], input[type="url"], select, textarea {
       width: 100%; background: #181818; border: 1px solid #333; border-radius: 8px;
       padding: 11px 14px; color: #fff; font-size: 0.92rem; transition: all 0.2s;
     }
-    .form-control:focus, input:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 6px rgba(255, 215, 0, 0.15); }
+    .form-control:focus, input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 6px rgba(255, 215, 0, 0.15); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
 
     /* Custom File Input Container */
@@ -209,6 +209,10 @@
     <div class="sidebar-section">Students Desk</div>
     <div class="sidebar-item" id="sb-students" onclick="showTab('students')">
       <i class="fa fa-user-graduate"></i> Enrolled Students
+    </div>
+    <div class="sidebar-item" id="sb-materials" onclick="showTab('materials')">
+      <i class="fa fa-book-open"></i> Study Materials
+      <span id="material-count" style="margin-left:auto;background:#FFD700;color:#000;border-radius:20px;padding:1px 8px;font-size:0.75rem;display:none"></span>
     </div>
     <div class="sidebar-section">Global Content</div>
     <div class="sidebar-item" id="sb-interactions" onclick="showTab('interactions')">
@@ -320,6 +324,74 @@
       </div>
     </div>
 
+    <div id="tab-materials" style="display:none">
+      <div class="admin-header"><h1>📚 Study Materials Dashboard</h1></div>
+      
+      <div class="panel-card" style="max-width:680px; margin-bottom:28px;">
+        <div class="panel-card-title">Upload New Study Document</div>
+        
+        <div class="form-group">
+          <label>Material Title <span style="color:red">*</span></label>
+          <input type="text" id="mat-title" placeholder="e.g. Grade 10 Computer Science SLO Notes"/>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Curriculum Category <span style="color:red">*</span></label>
+            <select id="mat-curriculum">
+              <option value="">Select Curriculum</option>
+              <option value="kpk">KPK Textbook Board</option>
+              <option value="federal">Federal Board</option>
+              <option value="cambridge">Cambridge (O/A Level)</option>
+              <option value="punjab">Punjab Board</option>
+              <option value="general">General Resource</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Target Grade / Class <span style="color:red">*</span></label>
+            <input type="text" id="mat-grade" placeholder="e.g. Class 9, Class 10, O-Level"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Resource Description <span style="color:red">*</span></label>
+          <textarea id="mat-desc" rows="3" placeholder="Brief details about what this syllabus/notes cover..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>File Access Download URL <span style="color:red">*</span></label>
+          <input type="url" id="mat-url" placeholder="https://drive.google.com/file/d/... or Cloud URL"/>
+        </div>
+
+        <button class="btn btn-primary" id="btn-add-material">
+          <i class="fa fa-plus"></i> Upload Study Material
+        </button>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-title">
+          Published Learning Resources 
+          <span id="mat-total" style="font-size:0.82rem; color:var(--text-muted); font-weight:400"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Resource Details</th>
+                <th>Curriculum</th>
+                <th>Grade Target</th>
+                <th>Added On</th>
+                <th>Action Control</th>
+              </tr>
+            </thead>
+            <tbody id="materials-table">
+              <tr><td colspan="5" style="text-align:center; color:var(--text-muted)">Loading study files collection...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <div id="tab-interactions" style="display:none">
       <div class="admin-header"><h1>📩 Contact Inbox & Issues Tickets</h1></div>
       <div class="panel-card">
@@ -400,9 +472,8 @@
           </table>
         </div>
       </div>
-    </div><!-- end tab-reviews -->
+    </div>
 
-    <!-- ══ DEMO REQUESTS TAB ══ -->
     <div id="tab-demos" style="display:none">
       <div class="admin-header"><h1>📋 Demo Requests</h1></div>
       <div style="background:#e0f2fe;border:1px solid #7dd3fc;border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:0.88rem;color:#075985;">
@@ -425,7 +496,6 @@
       </div>
     </div>
 
-    <!-- ══ ENROLLMENTS TAB ══ -->
     <div id="tab-enrollments" style="display:none">
       <div class="admin-header"><h1>✅ Student Enrollments</h1></div>
       <div class="panel-card">
@@ -438,11 +508,9 @@
       </div>
     </div>
 
-    <!-- ══ BLOG POSTS TAB ══ -->
     <div id="tab-blogs" style="display:none">
       <div class="admin-header"><h1>📝 Blog Posts</h1></div>
 
-      <!-- Add Blog Form -->
       <div class="panel-card" style="max-width:680px;margin-bottom:28px;">
         <div class="panel-card-title">Add New Blog Post</div>
 
@@ -487,7 +555,6 @@
           <label>Cover Image <small style="color:var(--text-muted)">(optional)</small></label>
           <div style="display:flex;flex-direction:column;gap:10px;">
 
-            <!-- Upload from PC -->
             <div id="blog-upload-btn" onclick="document.getElementById('blog-img-file').click()"
               style="border:2px dashed #333;border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:border-color .15s;background:#1a1a1a;">
               <i class="fa fa-cloud-upload-alt" style="font-size:1.5rem;color:#FFD700;margin-bottom:6px;display:block;"></i>
@@ -496,7 +563,6 @@
             </div>
             <input type="file" id="blog-img-file" accept="image/*" style="display:none;"/>
 
-            <!-- Preview -->
             <div id="blog-img-preview" style="display:none;align-items:center;gap:12px;">
               <img id="blog-img-preview-src" style="height:80px;border-radius:8px;border:1px solid #333;object-fit:cover;"/>
               <div>
@@ -506,7 +572,6 @@
               </div>
             </div>
 
-            <!-- Divider -->
             <div style="display:flex;align-items:center;gap:10px;">
               <div style="flex:1;height:1px;background:#222;"></div>
               <span style="font-size:0.75rem;color:#555;">or paste URL</span>
@@ -542,7 +607,6 @@
         </button>
       </div>
 
-      <!-- Blog Posts List -->
       <div class="panel-card">
         <div class="panel-card-title">
           All Blog Posts
@@ -552,9 +616,7 @@
       </div>
     </div>
 
-  </div><!-- end admin-main -->
-
-<script src="../js/main.js"></script>
+  </div><script src="../js/main.js"></script>
 <script type="module">
 import { auth, db } from '../js/firebase-config.js';
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
@@ -608,6 +670,7 @@ async function loadAll() {
   loadInteractions();
   loadDemoRequests();
   loadBlogs();
+  loadMaterials(); // Load study materials
 }
 
 // Visual dynamic changes to custom image label text
@@ -905,7 +968,7 @@ window.filterTeachers = (filter, btn) => {
 
 // Tab toggles dashboard view switcher logic
 window.showTab = (tab) => {
-  ['dashboard','pending','teachers','students','interactions','announcements','reviews','demos','enrollments','blogs'].forEach(t => {
+  ['dashboard','pending','teachers','students','materials','interactions','announcements','reviews','demos','enrollments','blogs'].forEach(t => {
     const el = document.getElementById('tab-'+t);
     if(el) el.style.display = t === tab ? 'block' : 'none';
   });
@@ -1088,7 +1151,6 @@ async function loadBlogs() {
 
     list.innerHTML = posts.map(p => `
       <div id="blog-row-${p.id}" style="display:flex;gap:16px;padding:16px;border:1px solid var(--border);border-radius:10px;margin-bottom:12px;align-items:flex-start;">
-        <!-- Cover -->
         <div style="width:80px;height:80px;border-radius:10px;flex-shrink:0;overflow:hidden;
           background:${p.imgUrl ? 'transparent' : 'linear-gradient(135deg,#1a1a2e,#2C7DA0)'};
           display:flex;align-items:center;justify-content:center;font-size:2rem;">
@@ -1096,7 +1158,6 @@ async function loadBlogs() {
             ? `<img src="${p.imgUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='${p.emoji||'📝'}';this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#2C7DA0)';"/>`
             : (p.emoji||'📝')}
         </div>
-        <!-- Info -->
         <div style="flex:1;min-width:0;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
             <strong style="font-size:0.95rem;">${p.title||'Untitled'}</strong>
@@ -1110,7 +1171,6 @@ async function loadBlogs() {
             <span><i class="fa fa-calendar"></i> ${p.createdAt ? new Date(p.createdAt.seconds*1000).toLocaleDateString() : 'N/A'}</span>
           </div>
         </div>
-        <!-- Actions -->
         <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
           <button class="btn btn-sm" style="background:${p.status==='published'?'#fef9c3':'#dcfce7'};color:${p.status==='published'?'#854d0e':'#166534'};border:1px solid ${p.status==='published'?'#ca8a04':'#86efac'}"
             onclick="toggleBlogStatus('${p.id}','${p.status}')">
@@ -1134,45 +1194,48 @@ const CLOUDINARY_PRESET = 'ci9b4bcn';
 let uploadedImgUrl = '';
 
 // File select handler
-document.getElementById('blog-img-file').addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 5 * 1024 * 1024) { showToast('Image must be under 5MB', 'error'); return; }
+const blogImgFile = document.getElementById('blog-img-file');
+if(blogImgFile) {
+  blogImgFile.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { showToast('Image must be under 5MB', 'error'); return; }
 
-  // Show preview
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    document.getElementById('blog-img-preview-src').src = ev.target.result;
-    document.getElementById('blog-img-name').textContent = file.name.slice(0, 30);
-    document.getElementById('blog-img-preview').style.display = 'flex';
-    document.getElementById('blog-upload-btn').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      document.getElementById('blog-img-preview-src').src = ev.target.result;
+      document.getElementById('blog-img-name').textContent = file.name.slice(0, 30);
+      document.getElementById('blog-img-preview').style.display = 'flex';
+      document.getElementById('blog-upload-btn').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
 
-  // Upload to Cloudinary
-  document.getElementById('blog-upload-status').textContent = 'Uploading...';
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('upload_preset', CLOUDINARY_PRESET);
+    // Upload to Cloudinary
+    document.getElementById('blog-upload-status').textContent = 'Uploading...';
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_PRESET);
 
-  try {
-    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
-      method: 'POST', body: formData
-    });
-    const data = await res.json();
-    if (data.secure_url) {
-      uploadedImgUrl = data.secure_url;
-      document.getElementById('blog-upload-status').textContent = '✅ Uploaded!';
-      document.getElementById('blog-upload-status').style.color = '#22c55e';
-    } else {
-      document.getElementById('blog-upload-status').textContent = '❌ Upload failed';
+    try {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+        method: 'POST', body: formData
+      });
+      const data = await res.json();
+      if (data.secure_url) {
+        uploadedImgUrl = data.secure_url;
+        document.getElementById('blog-upload-status').textContent = '✅ Uploaded!';
+        document.getElementById('blog-upload-status').style.color = '#22c55e';
+      } else {
+        document.getElementById('blog-upload-status').textContent = '❌ Upload failed';
+        document.getElementById('blog-upload-status').style.color = '#ef4444';
+      }
+    } catch(e) {
+      document.getElementById('blog-upload-status').textContent = '❌ ' + e.message;
       document.getElementById('blog-upload-status').style.color = '#ef4444';
     }
-  } catch(e) {
-    document.getElementById('blog-upload-status').textContent = '❌ ' + e.message;
-    document.getElementById('blog-upload-status').style.color = '#ef4444';
-  }
-});
+  });
+}
 
 // Drag & drop on upload btn
 const uploadBtn = document.getElementById('blog-upload-btn');
@@ -1198,52 +1261,55 @@ window.clearBlogImg = () => {
   document.getElementById('blog-upload-status').textContent = '';
 };
 
-document.getElementById('btn-add-blog').addEventListener('click', async () => {
-  const title    = document.getElementById('blog-title').value.trim();
-  const category = document.getElementById('blog-category').value;
-  const readTime = document.getElementById('blog-readtime').value || '5';
-  const desc     = document.getElementById('blog-desc').value.trim();
-  const content  = document.getElementById('blog-content').value.trim();
-  const imgUrl   = uploadedImgUrl || document.getElementById('blog-img').value.trim();
-  const emoji    = document.getElementById('blog-emoji').value.trim() || '📝';
-  const author   = document.getElementById('blog-author').value.trim() || 'Muhammad Awais';
-  const status   = document.getElementById('blog-status').value;
+const btnAddBlog = document.getElementById('btn-add-blog');
+if(btnAddBlog) {
+  btnAddBlog.addEventListener('click', async () => {
+    const title    = document.getElementById('blog-title').value.trim();
+    const category = document.getElementById('blog-category').value;
+    const readTime = document.getElementById('blog-readtime').value || '5';
+    const desc     = document.getElementById('blog-desc').value.trim();
+    const content  = document.getElementById('blog-content').value.trim();
+    const imgUrl   = uploadedImgUrl || document.getElementById('blog-img').value.trim();
+    const emoji    = document.getElementById('blog-emoji').value.trim() || '📝';
+    const author   = document.getElementById('blog-author').value.trim() || 'Muhammad Awais';
+    const status   = document.getElementById('blog-status').value;
 
-  if (!title || !category || !desc || !content) {
-    showToast('Title, category, description and content are required', 'error'); return;
-  }
+    if (!title || !category || !desc || !content) {
+      showToast('Title, category, description and content are required', 'error'); return;
+    }
 
-  // Check if image still uploading
-  const uploadStatus = document.getElementById('blog-upload-status').textContent;
-  if (uploadStatus === 'Uploading...') {
-    showToast('Please wait — image is still uploading', 'info'); return;
-  }
+    // Check if image still uploading
+    const uploadStatus = document.getElementById('blog-upload-status').textContent;
+    if (uploadStatus === 'Uploading...') {
+      showToast('Please wait — image is still uploading', 'info'); return;
+    }
 
-  const btn = document.getElementById('btn-add-blog');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Publishing...';
+    const btn = document.getElementById('btn-add-blog');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Publishing...';
 
-  try {
-    await addDoc(collection(db, 'blog_posts'), {
-      title, category, readTime: parseInt(readTime),
-      description: desc, content,
-      imgUrl: imgUrl || '',
-      emoji, author, status,
-      createdAt: serverTimestamp()
-    });
-    showToast('Blog post published! ✅', 'success');
-    ['blog-title','blog-desc','blog-content','blog-img'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('blog-category').value = '';
-    document.getElementById('blog-emoji').value = '📝';
-    document.getElementById('blog-readtime').value = '5';
-    clearBlogImg();
-    loadBlogs();
-  } catch(e) {
-    showToast('Error: '+e.message, 'error');
-  }
-  btn.disabled = false;
-  btn.innerHTML = '<i class="fa fa-plus"></i> Publish Blog Post';
-});
+    try {
+      await addDoc(collection(db, 'blog_posts'), {
+        title, category, readTime: parseInt(readTime),
+        description: desc, content,
+        imgUrl: imgUrl || '',
+        emoji, author, status,
+        createdAt: serverTimestamp()
+      });
+      showToast('Blog post published! ✅', 'success');
+      ['blog-title','blog-desc','blog-content','blog-img'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('blog-category').value = '';
+      document.getElementById('blog-emoji').value = '📝';
+      document.getElementById('blog-readtime').value = '5';
+      clearBlogImg();
+      loadBlogs();
+    } catch(e) {
+      showToast('Error: '+e.message, 'error');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa fa-plus"></i> Publish Blog Post';
+  });
+}
 
 window.toggleBlogStatus = async (id, currentStatus) => {
   const newStatus = currentStatus === 'published' ? 'draft' : 'published';
@@ -1257,6 +1323,102 @@ window.deleteBlog = async (id) => {
   await deleteDoc(doc(db, 'blog_posts', id));
   showToast('Blog post deleted', 'info');
   loadBlogs();
+};
+
+// ══ STUDY MATERIALS FUNCTIONS ══
+const curLabels = {
+  kpk: 'KPK Textbook Board',
+  federal: 'Federal Board',
+  cambridge: 'Cambridge (O/A Level)',
+  punjab: 'Punjab Board',
+  general: 'General Resource'
+};
+
+async function loadMaterials() {
+  try {
+    const snap = await getDocs(query(collection(db, 'study_materials'), orderBy('createdAt', 'desc')));
+    const materials = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    const badge = document.getElementById('material-count');
+    const total = document.getElementById('mat-total');
+    if (badge) {
+      if (materials.length > 0) {
+        badge.textContent = materials.length;
+        badge.style.display = 'inline';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+    if (total) total.textContent = `(${materials.length} resources)`;
+
+    const tbody = document.getElementById('materials-table');
+    if (materials.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:24px">No study materials uploaded yet.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = materials.map(m => `
+      <tr>
+        <td>
+          <div><strong>${m.title || 'Untitled'}</strong></div>
+          <small style="color:var(--text-muted); display:block; margin-top:4px;">${m.description || ''}</small>
+        </td>
+        <td><span class="badge badge-info">${curLabels[m.curriculum] || m.curriculum || 'General'}</span></td>
+        <td><span class="badge badge-success">${m.grade || 'N/A'}</span></td>
+        <td style="font-size:0.82rem">${m.createdAt ? new Date(m.createdAt.seconds * 1000).toLocaleDateString() : 'N/A'}</td>
+        <td>
+          <div class="action-btns">
+            <a href="${m.fileUrl}" target="_blank" class="btn btn-sm btn-accent"><i class="fa fa-download"></i> View</a>
+            <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444;" onclick="deleteMaterial('${m.id}')">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>`).join('');
+  } catch (e) {
+    console.warn('Material load error:', e.message);
+  }
+}
+
+const btnAddMaterial = document.getElementById('btn-add-material');
+if(btnAddMaterial) {
+  btnAddMaterial.addEventListener('click', async () => {
+    const title = document.getElementById('mat-title').value.trim();
+    const curriculum = document.getElementById('mat-curriculum').value;
+    const grade = document.getElementById('mat-grade').value.trim();
+    const description = document.getElementById('mat-desc').value.trim();
+    const fileUrl = document.getElementById('mat-url').value.trim();
+
+    if (!title || !curriculum || !grade || !description || !fileUrl) {
+      showToast('All standard fields marked with asterisk are required', 'error'); return;
+    }
+
+    const btn = document.getElementById('btn-add-material');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Uploading...';
+
+    try {
+      await addDoc(collection(db, 'study_materials'), {
+        title, curriculum, grade, description, fileUrl,
+        createdAt: serverTimestamp()
+      });
+      showToast('Study Material reference added to student desk! 📚✅', 'success');
+      ['mat-title','mat-grade','mat-desc','mat-url'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('mat-curriculum').value = '';
+      loadMaterials();
+    } catch (e) {
+      showToast('Error: ' + e.message, 'error');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa fa-plus"></i> Upload Study Material';
+  });
+}
+
+window.deleteMaterial = async (id) => {
+  if (!confirm('Are you sure you want to delete this learning resource permanently?')) return;
+  await deleteDoc(doc(db, 'study_materials', id));
+  showToast('Study document link deleted.', 'info');
+  loadMaterials();
 };
 </script>
 </body>

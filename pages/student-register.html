@@ -10,14 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   
   <style>
-    /* Global Overrides for Theme Consistency */
     :root {
       --primary: #111111;
       --accent: #FFD700;
       --accent-hover: #e6c200;
     }
 
-    /* Spacious and balanced structural card wrapper */
     .form-wrap {
       background: #111111 !important;
       border: 2px solid #FFD700 !important;
@@ -26,7 +24,7 @@
       padding: 45px 35px;
       color: #ffffff;
       width: 100%;
-      max-width: 650px; /* Fields ke mutabiq perfect premium width */
+      max-width: 650px;
     }
 
     .form-title {
@@ -44,7 +42,6 @@
       font-weight: 500;
     }
 
-    /* Input, Select, and Form controls custom styling */
     .form-group input[type="text"],
     .form-group input[type="tel"],
     .form-group input[type="email"],
@@ -66,13 +63,11 @@
       box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
     }
 
-    /* Option elements coloring for dark dropdowns */
     .form-group select option {
       background: #111111 !important;
       color: #ffffff !important;
     }
 
-    /* Divider gold theme compilation */
     .divider span {
       background: #111111 !important;
       color: #888888 !important;
@@ -82,7 +77,6 @@
       background: #333333 !important;
     }
 
-    /* Button custom overrides */
     .btn-primary {
       background: #FFD700 !important;
       color: #111111 !important;
@@ -106,7 +100,6 @@
       background: #222222 !important;
     }
 
-    /* Checkbox & Radio Labels Custom Text Colors */
     #subjects-wrap label,
     .checkbox-group label,
     label input[type="radio"] {
@@ -121,12 +114,10 @@
       text-decoration: underline;
     }
 
-    /* Checkbox & Radio tint accents */
     input[type="checkbox"], input[type="radio"] {
       accent-color: #FFD700 !important;
     }
 
-    /* Bottom dynamic redirection links links */
     .form-wrap p {
       color: #aaaaaa !important;
     }
@@ -139,6 +130,33 @@
     .form-wrap p a:hover {
       color: #ffffff !important;
       text-decoration: underline;
+    }
+
+    /* Professional Alert Box Design */
+    .auth-alert-box {
+      display: none;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #fca5a5;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      text-align: left;
+      animation: fadeInAndShake 0.4s ease-in-out;
+    }
+    .auth-alert-box i {
+      color: #ef4444;
+      font-size: 1.05rem;
+      margin-top: 2px;
+    }
+    @keyframes fadeInAndShake {
+      0% { opacity: 0; transform: translateY(-6px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -308,12 +326,17 @@
     <div class="form-row">
       <div class="form-group">
         <label>Password <span style="color:red">*</span></label>
-        <input type="password" id="password" placeholder="Min 6 characters"/>
+        <input type="password" id="password" placeholder="Min 8 chars (A-Z, a-z, 0-9, special)"/>
       </div>
       <div class="form-group">
         <label>Confirm Password <span style="color:red">*</span></label>
         <input type="password" id="confirm-password" placeholder="Repeat password"/>
       </div>
+    </div>
+
+    <div class="auth-alert-box" id="auth-error-box" style="margin-top: 15px; margin-bottom: 15px;">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span id="auth-error-text"></span>
     </div>
 
     <div class="checkbox-group" style="margin-bottom:20px;">
@@ -359,7 +382,29 @@
   const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
   const db = getFirestore(app);
 
-  // Already logged in state validation
+  const errorBox = document.getElementById('auth-error-box');
+  const errorText = document.getElementById('auth-error-text');
+
+  function triggerAlert(msg) {
+    errorText.innerText = msg;
+    errorBox.style.display = 'flex';
+    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function hideAlert() {
+    errorBox.style.display = 'none';
+  }
+
+  function validatePassword(password) {
+    const errors = [];
+    if (password.length < 8)                      errors.push('at least 8 characters');
+    if (!/[A-Z]/.test(password))                  errors.push('one uppercase letter');
+    if (!/[a-z]/.test(password))                  errors.push('one lowercase letter');
+    if (!/[0-9]/.test(password))                  errors.push('one number');
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) errors.push('one special character');
+    return errors;
+  }
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       const snap = await getDoc(doc(db, 'users', user.uid));
@@ -370,8 +415,9 @@
     }
   });
 
-  // Register form compilation
   document.getElementById('btn-register').addEventListener('click', async () => {
+    hideAlert();
+    
     const fullName   = document.getElementById('fullName').value.trim();
     const phone      = document.getElementById('phone').value.trim();
     const email      = document.getElementById('email').value.trim();
@@ -385,12 +431,18 @@
     const subjects   = [...document.querySelectorAll('.subj-cb:checked')].map(c => c.value);
 
     if (!fullName || !phone || !email || !country || !curriculum || !grade) {
-      showToast('Please fill all required fields', 'error'); return;
+      triggerAlert('Please fill all required fields completely.'); return;
     }
-    if (subjects.length === 0) { showToast('Select at least one subject', 'error'); return; }
-    if (password !== confirm)  { showToast('Passwords do not match', 'error'); return; }
-    if (password.length < 6)   { showToast('Password must be at least 6 characters', 'error'); return; }
-    if (!consent)              { showToast('Please accept Privacy Policy', 'error'); return; }
+    if (subjects.length === 0) { triggerAlert('Please select at least one subject of interest.'); return; }
+    if (password !== confirm)  { triggerAlert('Passwords do not match. Please re-check.'); return; }
+    
+    const pwErrors = validatePassword(password);
+    if (pwErrors.length > 0) {
+      triggerAlert('Password requires: ' + pwErrors.join(', ') + '.');
+      return;
+    }
+    
+    if (!consent) { triggerAlert('Please read and accept the Privacy Policy & Terms of Use to proceed.'); return; }
 
     const btn = document.getElementById('btn-register');
     btn.disabled = true;
@@ -400,21 +452,21 @@
       showToast('Account created! ✅ Redirecting...', 'success');
       setTimeout(() => window.location.href = 'student-dashboard.html', 1200);
     } catch (e) {
-      if (e.code === 'auth/email-already-in-use') showToast('This email is already registered', 'error');
-      else showToast('Error: ' + e.message, 'error');
+      if (e.code === 'auth/email-already-in-use') triggerAlert('This email address is already registered under another account.');
+      else triggerAlert('Registration Failed: ' + e.message);
       btn.disabled = false;
       btn.innerHTML = '<i class="fa fa-user-plus"></i> Create Free Account';
     }
   });
 
-  // Google Authentication Trigger
   document.getElementById('btn-google').addEventListener('click', async () => {
+    hideAlert();
     try {
       await loginWithGoogle('student');
       showToast('Registered with Google! ✅', 'success');
       setTimeout(() => window.location.href = 'student-dashboard.html', 1000);
     } catch (e) {
-      showToast('Google signup failed: ' + e.message, 'error');
+      triggerAlert('Google signup failed: ' + e.message);
     }
   });
 </script>

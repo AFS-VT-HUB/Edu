@@ -305,8 +305,8 @@
         </div>
 
         <div class="hero-stats">
-          <div class="hero-stat"><strong id="stat-teachers">500+</strong><span style="color:rgba(255,255,255,0.7)">Expert Teachers</span></div>
-          <div class="hero-stat"><strong id="stat-students">2000+</strong><span style="color:rgba(255,255,255,0.7)">Students Enrolled</span></div>
+          <div class="hero-stat"><strong id="stat-teachers">50+</strong><span style="color:rgba(255,255,255,0.7)">Expert Teachers</span></div>
+          <div class="hero-stat"><strong id="stat-students">200+</strong><span style="color:rgba(255,255,255,0.7)">Students Enrolled</span></div>
           <div class="hero-stat"><strong style="color:#FFD700">15+</strong><span style="color:rgba(255,255,255,0.7)">Curricula Covered</span></div>
         </div>
       </div>
@@ -370,11 +370,6 @@
           <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">🌐</div>
           <h3>All Curricula</h3>
           <p>Pakistani, Cambridge, IGCSE, GCSE, Edexcel, CSS/PMS, Cadet College & more.</p>
-        </div>
-        <div class="why-card reveal delay-3">
-          <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">💬</div>
-          <h3>Direct WhatsApp</h3>
-          <p>Contact teachers instantly via WhatsApp Business — no middleman.</p>
         </div>
         <div class="why-card reveal">
           <div class="why-icon" style="background: #111; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color:#FFD700">📖</div>
@@ -465,16 +460,16 @@
     <div>
       <h3 style="color:#fff; border-left: 3px solid #FFD700; padding-left: 8px; font-size: 1.2rem; font-weight:600;">Contact</h3>
       <ul>
-        <li><a href="mailto:info@afstutor.com"><i class="fa fa-envelope" style="color:#FFD700"></i> info@afstutor.com</a></li>
-        <li><a href="https://wa.me/923000000000" target="_blank"><i class="fab fa-whatsapp" style="color:#FFD700"></i> WhatsApp CEO</a></li>
-        <li><a href="#"><i class="fab fa-facebook" style="color:#FFD700"></i> Facebook Page</a></li>
+        <li><a href="mailto:afsvirtualtutorhub369@gmail.com"><i class="fa fa-envelope" style="color:#FFD700"></i> afsvirtualtutorhub369@gmail.com</a></li>
+        <li><a href="https://wa.me/923120940518" target="_blank"><i class="fab fa-whatsapp" style="color:#FFD700"></i> WhatsApp CEO</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61555784668106"><i class="fab fa-facebook" style="color:#FFD700"></i> Facebook Page</a></li>
         <li><a href="#"><i class="fab fa-instagram" style="color:#FFD700"></i> Instagram</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom" style="border-top: 1px solid #111;">
     <span>© 2026 AFS Virtual Tutor Hub. All rights reserved.</span>
-    <span>Built with ❤️ by <strong style="color:#FFD700">Muhammad Idrees & Muhammad Awais</strong></span>
+    <span>Developer❤️ by <strong style="color:#FFD700">Muhammad Idrees</strong></span>
   </div>
 </footer>
 
@@ -516,7 +511,7 @@
     const miniShowcaseList = document.getElementById('mini-showcase-list');
     
     try {
-      const q = query(collection(db, 'users'), where('role', '==', 'teacher'));
+      const q = query(collection(db, 'users'), where('role', '==', 'teacher'), where('isApproved', '==', true));
       const querySnapshot = await getDocs(q);
       
       allTeachersData = [];
