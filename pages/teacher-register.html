@@ -189,7 +189,7 @@
       <div class="form-title">Teacher Registration</div>
       <div class="form-sub">Apply to join AFS Virtual Tutor Hub — CEO Muhammad Awais will review your application</div>
       <div style="margin-top:14px; background:#1a1813; border:1px solid #FFD700; border-radius:8px; padding:12px 14px; font-size:0.85rem; color:#FFD700;">
-        <i class="fa fa-clock"></i> Admin approval required — aapko 24-48 hours mein email aayega
+        <i class="fa fa-clock"></i> Admin approval required — it takes 1-2 hours.
       </div>
     </div>
 
@@ -388,33 +388,33 @@
 
     // 1. General Fields Check
     if (!fullName || !email || !phone || !whatsapp || !qualification || !experience || !paymentMethod || !bio) {
-      triggerAlert('Sare zaroori fields (asterisk *) fill karna lazmi hai.'); 
+      triggerAlert('Please fill all required fields completely.'); 
       return; 
     }
     if (subjects.length === 0) {
-      triggerAlert('Kam az kam ek subject select karna zaroori hai.'); 
+      triggerAlert('at least one subject must be selected.'); 
       return; 
     }
     if (curricula.length === 0) {
-      triggerAlert('Kam az kam ek curriculum select karna zaroori hai.'); 
+      triggerAlert('at least one curricula must be selected.'); 
       return; 
     }
 
     // 2. STRICT COMPLEX PASSWORD VALIDATION (Blocks "123456" completely)
     if (password !== confirm) {
-      triggerAlert('Passwords aapas mein match nahi kar rahe. Dobara check karein.'); 
+      triggerAlert('Passwords do not match. Please re-check'); 
       return; 
     }
 
     // Password regex rule definition
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!passwordRegex.test(password)) {
-      triggerAlert('Password rules match nahi hue! Password kam az kam 8 characters ka hona chahiye, jismein ek barha letter (A-Z), ek chota letter (a-z), aur ek number (0-9) hona zaroori hai.');
+      triggerAlert('Passworrd must be at least 8 characters long and contain at least one uppercase letter, one lowercase leter, and one number.');
       return;
     }
 
     if (!consent) {
-      triggerAlert('Afs Virtual Tutor Hub ki Privacy Policy aur Terms accept karna lazmi hai.'); 
+      triggerAlert('Please read and accept the Privacy Policy & Terms of Use to proceed.'); 
       return; 
     }
 
@@ -432,7 +432,7 @@
       setTimeout(() => window.location.href = 'login.html', 2000);
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') {
-        triggerAlert('Yeh email address pehle se hi registered hai.');
+        triggerAlert('This email address is already registered under another account.');
       } else {
         triggerAlert('Error: ' + e.message);
       }
