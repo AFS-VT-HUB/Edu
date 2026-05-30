@@ -158,13 +158,7 @@
     .step-card h3 { font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 8px; }
     .step-card p { font-size: 0.88rem; color: #666; line-height: 1.65; }
 
-    /* ── Stats bar ── */
-    .stats-bar { background: linear-gradient(135deg, #000, #1a1600, #111); border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); padding: 40px 24px; }
-    .stats-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0; }
-    .stat-item { text-align: center; padding: 20px; border-right: 1px solid #2a2a00; }
-    .stat-item:last-child { border-right: none; }
-    .stat-num { font-size: 2.4rem; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 6px; }
-    .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.06em; }
+    
 
     /* ── Services Grid ── */
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -345,6 +339,32 @@
       .cookie-text { font-size: 0.8rem; }
       .int-link { font-size: 0.82rem; padding: 8px 14px; }
     }
+
+    /* ── City Section ── */
+    .city-section { background: #f0f4ff; padding: 80px 24px; }
+    .city-scroll-wrap { position: relative; }
+    .city-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .city-scroll::-webkit-scrollbar { display: none; }
+    .city-card { flex: 0 0 200px; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,0.08); cursor: pointer; scroll-snap-align: start; transition: transform 0.25s, box-shadow 0.25s; border: 2px solid transparent; text-decoration: none; }
+    .city-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.14); border-color: var(--gold); }
+    .city-img { width: 100%; height: 140px; object-fit: cover; display: block; transition: transform 0.4s; }
+    .city-card:hover .city-img { transform: scale(1.06); }
+    .city-info { padding: 12px 14px 14px; }
+    .city-name { font-size: 0.97rem; font-weight: 700; color: #111; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+    .city-name i { color: #2563eb; font-size: 0.8rem; }
+    .city-count { font-size: 0.78rem; color: #888; }
+    .city-scroll-btn { position: absolute; top: 50%; transform: translateY(-60%); background: #fff; border: 1.5px solid #e0e0e0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.1); z-index: 2; transition: all 0.2s; font-size: 0.85rem; color: #333; }
+    .city-scroll-btn:hover { background: var(--gold); border-color: var(--gold); color: #000; }
+    .city-scroll-btn.prev { left: -18px; }
+    .city-scroll-btn.next { right: -18px; }
+    .city-no-city { text-align: center; margin-top: 20px; font-size: 0.9rem; color: #888; }
+    .city-no-city a { color: #2563eb; font-weight: 600; text-decoration: none; }
+    .city-no-city a:hover { text-decoration: underline; }
+    @media(max-width: 600px) {
+      .city-card { flex: 0 0 160px; }
+      .city-img { height: 110px; }
+      .city-scroll-btn { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -467,14 +487,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ── STATS BAR ── -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat-item reveal">
-        <div class="stat-num" id="count-teachers">50+</div>
-        <div class="stat-label">Verified Teachers</div>
-      </div>
       <div class="stat-item reveal delay-1">
         <div class="stat-num">200+</div>
         <div class="stat-label">Students Enrolled</div>
@@ -676,7 +688,7 @@
     <div class="container">
       <div class="section-header reveal">
         <div class="section-tag">Why Choose Us</div>
-        <h2>Why AFS Virtual Tutor Hub?</h2>
+        <h2 style="color:#f4efef">Why AFS Virtual Tutor Hub?</h2>
         <p>Built by an educator, for students — completely free to explore.</p>
       </div>
       <div class="why-grid">
@@ -740,12 +752,104 @@
     </div>
   </section>
 
+  <!-- ── FIND TUTORS IN YOUR CITY ── -->
+  <section class="city-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag" style="background:#2563eb;color:#fff;border:none;"><i class="fa fa-location-dot"></i> Our Reach</div>
+        <h2 style="color:#111;">Find Tutors in Your City</h2>
+        <p style="color:#555;">We connect students with qualified home and online tutors across major cities in Pakistan.</p>
+      </div>
+      <div class="city-scroll-wrap reveal">
+        <button class="city-scroll-btn prev" onclick="scrollCities(-1)" aria-label="Scroll left"><i class="fa fa-chevron-left"></i></button>
+        <div class="city-scroll" id="cityScroll">
+
+          <a href="pages/faculty.html?city=lahore" class="city-card">
+            <img class="city-img" src="assets/images/lahore.jpg" alt="Lahore tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Lahore</div>
+              <div class="city-count">120+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html?city=karachi" class="city-card">
+            <img class="city-img" src="assets/images/Karachi.jpg" alt="Karachi tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Karachi</div>
+              <div class="city-count">85+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html?city=rawalpindi" class="city-card">
+            <img class="city-img" src="assets/images/faisalabad.jpg"  alt="Faisalabad tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Faisalabad</div>
+              <div class="city-count">15+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html?city=islamabad" class="city-card">
+            <img class="city-img" src="assets/images/icb.jpg" alt="Islamabad tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Islamabad</div>
+              <div class="city-count">40+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html?city=faisalabad" class="city-card">
+            <img class="city-img" src="assets/images/peshawar.jpg"  alt="Peshawar tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Peshawar</div>
+              <div class="city-count">8+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html?city=peshawar" class="city-card">
+            <img class="city-img" src="assets/images/madina.jpg" alt="Peshawar tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Madina</div>
+              <div class="city-count">6+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html?city=multan" class="city-card">
+            <img class="city-img" src="assets/images/makkah.jpg"  alt="Multan tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Makkah</div>
+              <div class="city-count">5+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html?city=quetta" class="city-card">
+            <img class="city-img" src="assets/images/kashmir.jpg"  alt="Quetta tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            <div class="city-info">
+              <div class="city-name"><i class="fa fa-location-dot"></i> Kashmir</div>
+              <div class="city-count">4+ tutors</div>
+            </div>
+          </a>
+
+          <a href="pages/faculty.html" class="city-card" style="background:#111;border-color:#333;">
+             <img class="city-img" src="assets/images/india.jpg"  alt="Quetta tutors" loading="lazy" onerror="this.src='assets/card.png'"/>
+            
+            <div class="city-info">
+              <div class="city-name" style="color:var(--gold);"><i class="fa fa-globe"></i> India</div>
+              <div class="city-count" style="color:#888;">India</div>
+            </div>
+          </a>
+
+        </div>
+        <button class="city-scroll-btn next" onclick="scrollCities(1)" aria-label="Scroll right"><i class="fa fa-chevron-right"></i></button>
+      </div>
+      <p class="city-no-city">Don't see your city? <a href="pages/contact.html">Contact us</a> — we serve all of Pakistan online.</p>
+    </div>
+  </section>
+
   <!-- ── TESTIMONIALS ── -->
   <section class="section">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-tag"><i class="fa fa-quote-left"></i> Student Reviews</div>
-        <h2>What Our Students Say</h2>
+        <h2 style="color:#f2eeeef8;" >What Our Students Say</h2>
         <p>Real feedback from students who found their perfect tutor on AFS Virtual Tutor Hub.</p>
       </div>
       <div class="testimonials-grid">
@@ -785,6 +889,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- ── CTA BANNER ── -->
   <div class="cta-banner">
@@ -1033,6 +1138,13 @@
 </script>
 
 <script>
+
+  // City scroll buttons
+  window.scrollCities = function(dir) {
+    const el = document.getElementById('cityScroll');
+    if (el) el.scrollBy({ left: dir * 220, behavior: 'smooth' });
+  };
+
   // ── Demo Modal ──
   function openDemoModal(subject) {
     const overlay = document.getElementById('demo-modal-overlay');
