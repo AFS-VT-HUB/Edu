@@ -1,0 +1,5 @@
+# ads.txt — AFS Virtual Tutor Hub
+# No ad networks currently authorized.
+# This file satisfies ads.txt validation requirements.
+# If you add Google AdSense in future, replace this with:
+# google.com, pub-XXXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

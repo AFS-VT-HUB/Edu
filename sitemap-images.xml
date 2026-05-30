@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://afs-virtual-tutor-hub.vercel.app/index.html</loc>
+    <image:image>
+      <image:loc>https://afs-virtual-tutor-hub.vercel.app/assets/og-image.jpg</image:loc>
+      <image:title>AFS Virtual Tutor Hub — Free Online Tutoring Pakistan</image:title>
+      <image:caption>Pakistan's free online tutoring platform for Cambridge, IGCSE, CSS/PMS, Matric/FSc students</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://afs-virtual-tutor-hub.vercel.app/pages/faculty.html</loc>
+    <image:image>
+      <image:loc>https://afs-virtual-tutor-hub.vercel.app/assets/og-image.jpg</image:loc>
+      <image:title>Verified Online Tutors — AFS Virtual Tutor Hub</image:title>
+      <image:caption>Browse verified expert teachers for Cambridge, IGCSE, CSS/PMS and Pakistani board subjects</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://afs-virtual-tutor-hub.vercel.app/pages/courses.html</loc>
+    <image:image>
+      <image:loc>https://afs-virtual-tutor-hub.vercel.app/assets/og-image.jpg</image:loc>
+      <image:title>Online Courses — AFS Virtual Tutor Hub</image:title>
+      <image:caption>All courses and curricula available on AFS Virtual Tutor Hub</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://afs-virtual-tutor-hub.vercel.app/pages/about-ceo.html</loc>
+    <image:image>
+      <image:loc>https://afs-virtual-tutor-hub.vercel.app/assets/og-image.jpg</image:loc>
+      <image:title>Muhammad Awais — CEO AFS Virtual Tutor Hub</image:title>
+      <image:caption>Muhammad Awais, CEO and founder of AFS Virtual Tutor Hub, Mathematics specialist and CSS/PMS expert</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://afs-virtual-tutor-hub.vercel.app/pages/faq.html</loc>
+    <image:image>
+      <image:loc>https://afs-virtual-tutor-hub.vercel.app/assets/og-image.jpg</image:loc>
+      <image:title>FAQ — AFS Virtual Tutor Hub</image:title>
+      <image:caption>Frequently asked questions about AFS Virtual Tutor Hub free online tutoring platform</image:caption>
+    </image:image>
+  </url>
+
+</urlset>

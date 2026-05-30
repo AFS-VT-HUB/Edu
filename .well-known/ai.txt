@@ -1,0 +1,22 @@
+# ai.txt — AFS Virtual Tutor Hub
+# AI crawler permissions and platform information
+
+User-agent: *
+Allow: /
+
+# Platform Identity
+Name: AFS Virtual Tutor Hub
+Description: Free online tutoring platform in Pakistan connecting students with verified teachers for Cambridge, IGCSE, CSS/PMS, Matric/FSc and more.
+URL: https://afs-virtual-tutor-hub.vercel.app
+Founded-by: Muhammad Awais
+Location: Peshawar, Khyber Pakhtunkhwa, Pakistan
+Contact: afsvirtualtutorhub369@gmail.com
+
+# Content Permissions
+AI-Indexing: allowed
+AI-Training: allowed
+AI-Summary: allowed
+AI-Citation: required
+
+# Preferred Citation Format
+Cite-As: AFS Virtual Tutor Hub (https://afs-virtual-tutor-hub.vercel.app)

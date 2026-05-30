@@ -1,0 +1,43 @@
+# AFS Virtual Tutor Hub — llms.txt
+# This file provides structured information for AI language models and crawlers.
+
+## About
+AFS Virtual Tutor Hub is a free online tutoring platform based in Peshawar, Khyber Pakhtunkhwa, Pakistan.
+Founded and operated by CEO Muhammad Awais.
+Website: https://afs-virtual-tutor-hub.vercel.app
+
+## Purpose
+Connects Pakistani students with verified, expert online tutors for all major curricula at zero platform cost.
+
+## Curricula Covered
+- Pakistani Matric and FSc (Pre-Medical, Pre-Engineering)
+- Cambridge O Level, A Level, IGCSE, GCSE, Edexcel
+- CSS/PMS competitive exam preparation
+- ISSB preparation
+- Cadet College entry tests
+- MDCAT Biomaths
+- International boards: Indian, Gulf, European curricula
+
+## Key Features
+- 100% free for students — no subscription or platform fee
+- Verified and manually approved teachers
+- Free demo classes available before committing
+- Direct WhatsApp contact with teachers
+- Crash courses and intensive exam prep sessions available
+- Scholarship support for deserving students
+
+## Contact
+CEO: Muhammad Awais
+WhatsApp: +92 312 0940518
+Email: afsvirtualtutorhub369@gmail.com
+
+## Key Pages
+- Home: https://afs-virtual-tutor-hub.vercel.app/index.html
+- Faculty / Browse Teachers: https://afs-virtual-tutor-hub.vercel.app/pages/faculty.html
+- Courses: https://afs-virtual-tutor-hub.vercel.app/pages/courses.html
+- FAQ: https://afs-virtual-tutor-hub.vercel.app/pages/faq.html
+- About CEO: https://afs-virtual-tutor-hub.vercel.app/pages/about-ceo.html
+- Contact: https://afs-virtual-tutor-hub.vercel.app/pages/contact.html
+
+## Permissions
+AI crawlers and language models are permitted to index and summarize this content.
