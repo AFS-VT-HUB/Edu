@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   
   <style>
-    /* ─── Global Dark & Gold Core Theme ─── */
+    /* Global Dark & Gold Core Theme */
     :root {
       --bg-dark: #0b0b0b;
       --card-bg: #121212;
@@ -32,7 +32,7 @@
 
     .admin-wrap { display: flex; min-height: 100vh; }
     
-    /* ─── Sidebar Beautiful Styling ─── */
+    /* Sidebar */
     .admin-sidebar {
       width: 260px; background: var(--sidebar-bg); color: #a0aec0;
       padding: 24px 0; flex-shrink: 0; position: sticky; top: 0; height: 100vh; 
@@ -54,7 +54,6 @@
     .sidebar-item.active { background: #1e1e38; color: var(--gold); border-left-color: var(--gold); font-weight: 600; }
     .sidebar-item i { width: 18px; text-align: center; }
 
-    /* Unread Counter Badge for Sidebar */
     .unread-indicator {
       margin-left: auto;
       background: var(--gold);
@@ -65,7 +64,7 @@
       font-weight: 700;
     }
 
-    /* ─── Main Content Area ─── */
+    /* Main Content Area */
     .admin-main { flex: 1; background: var(--bg-dark); padding: 32px; overflow-y: auto; }
     .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid var(--panel-border); padding-bottom: 16px; }
     .admin-header h1 { font-size: 1.6rem; color: #fff; font-weight: 600; }
@@ -76,7 +75,7 @@
     .badge-info { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
     .badge-warning { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
 
-    /* ─── Stats Grid Counter Cards ─── */
+    /* Stats Grid */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px; }
     .stat-card {
       background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
@@ -90,7 +89,7 @@
     .stat-num { font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1; }
     .stat-label { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
 
-    /* ─── Premium Cards Layout ─── */
+    /* Panel Cards */
     .panel-card {
       background: var(--card-bg); border: 1px solid var(--panel-border); border-radius: 14px;
       padding: 24px; margin-bottom: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -101,7 +100,7 @@
       border-bottom: 1px solid #1f1f1f; padding-bottom: 12px;
     }
 
-    /* ─── Tables Shading ─── */
+    /* Tables */
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 0.9rem; color: #d1d1d1; }
     th { text-align: left; padding: 12px 14px; background: #161616;
@@ -119,7 +118,7 @@
       font-size: 0.85rem; font-weight: 800; flex-shrink: 0;
     }
     
-    /* ─── Form Elements Styling ─── */
+    /* Form Elements */
     .form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
     .form-group label { font-size: 0.85rem; color: #b3b3b3; font-weight: 500; }
     .form-control, input[type="text"], input[type="date"], input[type="number"], input[type="url"], select, textarea {
@@ -129,7 +128,7 @@
     .form-control:focus, input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 6px rgba(255, 215, 0, 0.15); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
 
-    /* Custom File Input Container */
+    /* File Upload */
     .file-upload-wrap { position: relative; width: 100%; }
     .file-upload-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -139,7 +138,7 @@
     .file-upload-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(255, 215, 0, 0.02); }
     .hidden-file { position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
 
-    /* ─── Buttons Controls ─── */
+    /* Buttons */
     .btn {
       padding: 10px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 600;
       cursor: pointer; display: inline-flex; align-items: center; gap: 8px; border: none; transition: all 0.2s;
@@ -161,7 +160,7 @@
     .tab-btn:hover { color: #fff; border-color: #555; }
     .tab-btn.active { border-color: var(--gold); background: var(--gold); color: #000; font-weight: 700; }
 
-    /* ─── Cute Cards Inside Announcements List ─── */
+    /* Announcement Cards */
     .cute-ann-card {
       background: #161616; border: 1px solid #252525; border-radius: 12px;
       padding: 16px; margin-bottom: 14px; position: relative; transition: border-color 0.2s;
@@ -169,16 +168,19 @@
     .cute-ann-card:hover { border-color: #383838; }
     .cute-ann-title { font-size: 1.05rem; color: #fff; font-weight: 600; margin-bottom: 6px; padding-right: 30px; }
     .cute-ann-msg { font-size: 0.88rem; color: #b3b3b3; line-height: 1.5; }
-    
     .cute-ann-img {
       margin-top: 12px; max-height: 180px; width: 100%; 
       object-fit: cover; border-radius: 8px; border: 1px solid #222;
     }
     .cute-ann-date { font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; display: block; }
 
+    /* Export button styles */
+    .export-btn-wrap { display: flex; gap: 10px; align-items: center; }
+
     @media(max-width:768px){
       .admin-sidebar{ display:none; }
       .admin-main{ padding: 16px; }
+      .export-btn-wrap { flex-direction: column; }
     }
   </style>
 </head>
@@ -237,6 +239,7 @@
       <i class="fa fa-pen-nib"></i> Blog Posts
       <span id="blog-count" style="margin-left:auto;background:#2C7DA0;color:#fff;border-radius:20px;padding:1px 8px;font-size:0.75rem;display:none"></span>
     </div>
+    
     <div class="sidebar-section">System Account</div>
     <div class="sidebar-item" id="btn-logout" style="color:#ef4444;">
       <i class="fa fa-sign-out-alt"></i> Secure Logout
@@ -245,6 +248,7 @@
 
   <div class="admin-main">
 
+    <!-- DASHBOARD TAB -->
     <div id="tab-dashboard">
       <div class="admin-header">
         <h1>👋 Welcome back, Muhammad Awais</h1>
@@ -283,6 +287,7 @@
       </div>
     </div>
 
+    <!-- PENDING TAB -->
     <div id="tab-pending" style="display:none">
       <div class="admin-header"><h1>⏳ Teacher Applications Queue</h1></div>
       <div class="panel-card">
@@ -295,8 +300,32 @@
       </div>
     </div>
 
+    <!-- TEACHERS TAB -->
     <div id="tab-teachers" style="display:none">
-      <div class="admin-header"><h1>👨‍🏫 Registered Faculty Directory</h1></div>
+      <div class="admin-header">
+        <h1>👨‍🏫 Registered Faculty Directory</h1>
+      </div>
+      <!-- Export button clearly visible above filters -->
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button onclick="exportTeachersExcel()" style="
+          background: linear-gradient(135deg, #FFD700, #f0c800);
+          color: #000;
+          font-weight: 700;
+          font-size: 0.9rem;
+          padding: 10px 22px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          box-shadow: 0 4px 14px rgba(255,215,0,0.3);
+          transition: all 0.2s;
+        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          <i class="fa fa-file-excel" style="font-size:1rem;"></i>
+          Export All Faculty to Excel
+        </button>
+      </div>
       <div class="tab-btns">
         <button class="tab-btn active" onclick="filterTeachers('all',this)">All Faculty</button>
         <button class="tab-btn" onclick="filterTeachers('approved',this)">Active Verified</button>
@@ -312,8 +341,32 @@
       </div>
     </div>
 
+    <!-- STUDENTS TAB -->
     <div id="tab-students" style="display:none">
-      <div class="admin-header"><h1>🎓 Enrolled Global Students</h1></div>
+      <div class="admin-header">
+        <h1>🎓 Enrolled Global Students</h1>
+      </div>
+      <!-- Export button clearly visible above table -->
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button onclick="exportStudentsExcel()" style="
+          background: linear-gradient(135deg, #FFD700, #f0c800);
+          color: #000;
+          font-weight: 700;
+          font-size: 0.9rem;
+          padding: 10px 22px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          box-shadow: 0 4px 14px rgba(255,215,0,0.3);
+          transition: all 0.2s;
+        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          <i class="fa fa-file-excel" style="font-size:1rem;"></i>
+          Export All Students to Excel
+        </button>
+      </div>
       <div class="panel-card">
         <div class="table-wrap">
           <table>
@@ -324,6 +377,7 @@
       </div>
     </div>
 
+    <!-- MATERIALS TAB -->
     <div id="tab-materials" style="display:none">
       <div class="admin-header"><h1>📚 Study Materials Dashboard</h1></div>
       
@@ -392,6 +446,7 @@
       </div>
     </div>
 
+    <!-- INTERACTIONS TAB -->
     <div id="tab-interactions" style="display:none">
       <div class="admin-header"><h1>📩 Contact Inbox & Issues Tickets</h1></div>
       <div class="panel-card">
@@ -416,6 +471,7 @@
       </div>
     </div>
 
+    <!-- ANNOUNCEMENTS TAB -->
     <div id="tab-announcements" style="display:none">
       <div class="admin-header"><h1>📢 Global Announcements Console</h1></div>
       <div class="panel-card" style="max-width:560px">
@@ -462,6 +518,7 @@
       </div>
     </div>
 
+    <!-- REVIEWS TAB -->
     <div id="tab-reviews" style="display:none">
       <div class="admin-header"><h1>⭐ Public Feedback Moderation</h1></div>
       <div class="panel-card">
@@ -474,6 +531,7 @@
       </div>
     </div>
 
+    <!-- DEMOS TAB -->
     <div id="tab-demos" style="display:none">
       <div class="admin-header"><h1>📋 Demo Requests</h1></div>
       <div style="background:#e0f2fe;border:1px solid #7dd3fc;border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:0.88rem;color:#075985;">
@@ -496,6 +554,7 @@
       </div>
     </div>
 
+    <!-- ENROLLMENTS TAB -->
     <div id="tab-enrollments" style="display:none">
       <div class="admin-header"><h1>✅ Student Enrollments</h1></div>
       <div class="panel-card">
@@ -508,6 +567,7 @@
       </div>
     </div>
 
+    <!-- BLOGS TAB -->
     <div id="tab-blogs" style="display:none">
       <div class="admin-header"><h1>📝 Blog Posts</h1></div>
 
@@ -616,7 +676,64 @@
       </div>
     </div>
 
-  </div><script src="../js/main.js"></script>
+
+    <!-- EXPORT DATA TAB -->
+    <div id="tab-export" style="display:none">
+      <div class="admin-header">
+        <h1>&#128228; Export Data</h1>
+        <span class="badge badge-info"><i class="fa fa-database"></i> Firebase Live Data</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;max-width:800px;">
+
+        <div id="export-card-students" onclick="switchExportView('students')" style="background:#121212;border:2px solid #222;border-radius:18px;padding:36px 28px;cursor:pointer;transition:all 0.25s;text-align:center;"
+          onmouseover="this.style.borderColor='#FFD700';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(255,215,0,0.12)';"
+          onmouseout="if(!this.classList.contains('ecard-active')){this.style.borderColor='#222';this.style.transform='translateY(0)';this.style.boxShadow='none';}">
+          <div style="font-size:3.2rem;margin-bottom:14px;">&#127891;</div>
+          <div style="font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:8px;">Students Data</div>
+          <div style="font-size:0.85rem;color:#888;line-height:1.6;margin-bottom:16px;">View and export all enrolled students with complete profile details</div>
+          <div id="export-students-count" style="background:rgba(255,215,0,0.12);color:#FFD700;border-radius:20px;padding:5px 16px;font-size:0.82rem;font-weight:700;display:inline-block;">Loading...</div>
+        </div>
+
+        <div id="export-card-teachers" onclick="switchExportView('teachers')" style="background:#121212;border:2px solid #222;border-radius:18px;padding:36px 28px;cursor:pointer;transition:all 0.25s;text-align:center;"
+          onmouseover="this.style.borderColor='#FFD700';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(255,215,0,0.12)';"
+          onmouseout="if(!this.classList.contains('ecard-active')){this.style.borderColor='#222';this.style.transform='translateY(0)';this.style.boxShadow='none';}">
+          <div style="font-size:3.2rem;margin-bottom:14px;">&#128104;&#8205;&#127979;</div>
+          <div style="font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:8px;">Teachers Data</div>
+          <div style="font-size:0.85rem;color:#888;line-height:1.6;margin-bottom:16px;">View and export all registered faculty with complete profile details</div>
+          <div id="export-teachers-count" style="background:rgba(255,215,0,0.12);color:#FFD700;border-radius:20px;padding:5px 16px;font-size:0.82rem;font-weight:700;display:inline-block;">Loading...</div>
+        </div>
+      </div>
+
+      <div id="export-data-section" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h2 id="export-section-title" style="font-size:1.2rem;color:#fff;font-weight:700;"></h2>
+            <p id="export-section-sub" style="font-size:0.82rem;color:#888;margin-top:4px;"></p>
+          </div>
+          <button onclick="triggerExcelDownload()" style="background:linear-gradient(135deg,#FFD700,#e6c200);color:#000;font-weight:800;font-size:0.95rem;padding:12px 28px;border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 6px 20px rgba(255,215,0,0.35);transition:all 0.2s;letter-spacing:0.3px;"
+            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 28px rgba(255,215,0,0.5)';"
+            onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 20px rgba(255,215,0,0.35)';">
+            <i class="fa fa-file-excel" style="font-size:1.1rem;"></i>
+            Download Excel File
+          </button>
+        </div>
+        <div class="panel-card" style="padding:0;overflow:hidden;">
+          <div class="table-wrap">
+            <table>
+              <thead id="export-thead"></thead>
+              <tbody id="export-tbody">
+                <tr><td colspan="10" style="text-align:center;color:var(--text-muted);padding:30px;">Select a category above to preview data.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<script src="../js/main.js"></script>
 <script type="module">
 import { auth, db } from '../js/firebase-config.js';
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
@@ -628,7 +745,7 @@ import {
 let allTeachers = [];
 let allStudents = [];
 
-// Auth check — only admin verified allowed
+// Auth check — only admin allowed
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'login.html'; return; }
   const snap = await getDoc(doc(db, 'users', user.uid));
@@ -637,21 +754,27 @@ onAuthStateChanged(auth, async (user) => {
   loadAll();
 });
 
-// Logout action
+// Logout
 document.getElementById('btn-logout').addEventListener('click', async () => {
   await signOut(auth);
   window.location.href = 'login.html';
 });
 
-// Load all system tables
+// Load all tables
 async function loadAll() {
   const snap = await getDocs(collection(db, 'users'));
   const users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
   allTeachers = users.filter(u => u.role === 'teacher');
   allStudents = users.filter(u => u.role === 'student');
+  window._adminTeachers = allTeachers;
+  window._adminStudents = allStudents;
+  // Update export tab counts
+  const scEl = document.getElementById('export-students-count');
+  const tcEl = document.getElementById('export-teachers-count');
+  if (scEl) scEl.textContent = allStudents.length + ' Students';
+  if (tcEl) tcEl.textContent = allTeachers.length + ' Teachers';
   const pending = allTeachers.filter(t => !t.isApproved);
 
-  // Set counters
   document.getElementById('s-teachers').textContent = allTeachers.length;
   document.getElementById('s-students').textContent = allStudents.length;
   document.getElementById('s-pending').textContent = pending.length;
@@ -670,15 +793,15 @@ async function loadAll() {
   loadInteractions();
   loadDemoRequests();
   loadBlogs();
-  loadMaterials(); // Load study materials
+  loadMaterials();
 }
 
-// Visual dynamic changes to custom image label text
+// File label update for announcement image
 const fileInput = document.getElementById('ann-image');
 const fileBtnText = document.getElementById('fileBtnText');
-if(fileInput) {
+if (fileInput) {
   fileInput.addEventListener('change', (e) => {
-    if(e.target.files.length > 0) {
+    if (e.target.files.length > 0) {
       fileBtnText.innerHTML = `<i class="fa-solid fa-file-circle-check" style="color:var(--gold)"></i> ${e.target.files[0].name.slice(0, 20)}...`;
     } else {
       fileBtnText.innerHTML = `<i class="fa-regular fa-image" style="color:var(--gold)"></i> Attach Post Picture`;
@@ -686,7 +809,7 @@ if(fileInput) {
   });
 }
 
-// Render recent registered entries
+// Render recent registrations
 function renderRecent(users) {
   const sorted = [...users].sort((a,b) => (b.registeredAt?.seconds||0) - (a.registeredAt?.seconds||0)).slice(0,8);
   document.getElementById('recent-table').innerHTML = sorted.map(u => `
@@ -702,10 +825,10 @@ function renderRecent(users) {
     </tr>`).join('');
 }
 
-// Render queue entries
+// Render pending teacher applications
 function renderPending(pending) {
   if (pending.length === 0) {
-    document.getElementById('pending-table').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted); padding:30px;">No pending verification request at the moment. ✅</td></tr>';
+    document.getElementById('pending-table').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted); padding:30px;">No pending verification requests at the moment. ✅</td></tr>';
     return;
   }
   document.getElementById('pending-table').innerHTML = pending.map(t => `
@@ -727,7 +850,7 @@ function renderPending(pending) {
     </tr>`).join('');
 }
 
-// All teachers listings mapping
+// Render all teachers
 function renderTeachers(teachers) {
   document.getElementById('teachers-table').innerHTML = teachers.map(t => `
     <tr>
@@ -747,7 +870,7 @@ function renderTeachers(teachers) {
     </tr>`).join('');
 }
 
-// Students records tracking mapper
+// Render all students
 function renderStudents(students) {
   document.getElementById('students-table').innerHTML = students.map(s => `
     <tr>
@@ -762,16 +885,14 @@ function renderStudents(students) {
     </tr>`).join('');
 }
 
-// ─── NEW FUNCTION: FETCH AND RENDER INTERACTION TICKETS FROM DATABASE ───
+// Load and render interaction tickets
 async function loadInteractions() {
   try {
     const snap = await getDocs(query(collection(db, 'contact_messages'), orderBy('timestamp', 'desc')));
     const messages = snap.docs.map(d => ({ id: d.id, ...d.data() }));
 
-    // Update Dashboard Counter Stat
     document.getElementById('s-interactions').textContent = messages.length;
 
-    // Update Sidebar Navigation Counter Badge (Only count 'unread' items)
     const unreadCount = messages.filter(m => m.status === 'unread').length;
     const badge = document.getElementById('interaction-badge');
     if (badge) {
@@ -792,7 +913,6 @@ async function loadInteractions() {
     tableBody.innerHTML = messages.map(m => {
       const dateString = m.timestamp ? new Date(m.timestamp.seconds * 1000).toLocaleDateString() : 'N/A';
       const isUnread = m.status === 'unread';
-
       return `
         <tr style="${isUnread ? 'background: rgba(255,215,0,0.02); font-weight: 600;' : ''}">
           <td>
@@ -806,9 +926,7 @@ async function loadInteractions() {
             <small style="color:var(--text-muted);">${m.email || ''}</small>
           </td>
           <td><span class="badge badge-info">${m.subject || 'General Query'}</span></td>
-          <td style="max-width: 320px; white-space: normal; line-height: 1.4; color: #fff;">
-            ${m.message || ''}
-          </td>
+          <td style="max-width: 320px; white-space: normal; line-height: 1.4; color: #fff;">${m.message || ''}</td>
           <td>${dateString}</td>
           <td>
             <div class="action-btns">
@@ -818,27 +936,26 @@ async function loadInteractions() {
           </td>
         </tr>`;
     }).join('');
-
   } catch (error) {
-    console.error("Error matching fields inside pipeline: ", error);
+    console.error("Error loading interactions:", error);
   }
 }
 
-// Action controllers for interactions
+// Interaction actions
 window.markInteractionRead = async (id) => {
   await updateDoc(doc(db, 'contact_messages', id), { status: 'read' });
-  showToast('Message marked as reviewed. ✅', 'success');
+  showToast('Message marked as read. ✅', 'success');
   loadAll();
 };
 
 window.deleteInteraction = async (id) => {
-  if (!confirm('Are you sure you want to delete this interaction trace?')) return;
+  if (!confirm('Are you sure you want to delete this message?')) return;
   await deleteDoc(doc(db, 'contact_messages', id));
-  showToast('Interaction data wiped successfully.', 'info');
+  showToast('Interaction deleted successfully.', 'info');
   loadAll();
 };
 
-// Trigger verify updates handles
+// Teacher approval/rejection
 window.approveTeacher = async (id) => {
   await updateDoc(doc(db, 'users', id), { isApproved: true });
   showToast('Teacher approved successfully! ✅', 'success');
@@ -846,29 +963,28 @@ window.approveTeacher = async (id) => {
 };
 
 window.rejectTeacher = async (id) => {
-  if (!confirm('Are you sure you want to reject this teacher?')) return;
+  if (!confirm('Are you sure you want to reject this teacher application?')) return;
   await deleteDoc(doc(db, 'users', id));
   showToast('Application rejected.', 'info');
   loadAll();
 };
 
 window.deleteUser = async (id) => {
-  if (!confirm('Are you sure you want to delete this account permanently?')) return;
+  if (!confirm('Are you sure you want to permanently delete this account?')) return;
   await deleteDoc(doc(db, 'users', id));
-  showToast('User account deleted.', 'info');
+  showToast('User account deleted successfully.', 'info');
   loadAll();
 };
 
-// Cute Render Announcements Function
+// Load announcements
 async function loadAnnouncements() {
   const snap = await getDocs(collection(db, 'announcements'));
   const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
   
   document.getElementById('ann-list').innerHTML = items.length === 0
-    ? '<p style="color:var(--text-muted); text-align:center; padding:20px;">No broadcast alerts published yet.</p>'
+    ? '<p style="color:var(--text-muted); text-align:center; padding:20px;">No announcements published yet.</p>'
     : items.map(a => {
-        let imgTag = a.imageUrl ? `<img src="${a.imageUrl}" class="cute-ann-img" alt="Post graphic attachment">` : '';
-        
+        let imgTag = a.imageUrl ? `<img src="${a.imageUrl}" class="cute-ann-img" alt="Announcement image">` : '';
         return `
           <div class="cute-ann-card">
             <button class="btn btn-sm" style="position:absolute; top:14px; right:14px; background:rgba(239,68,68,0.12); color:#ef4444;" onclick="deleteAnn('${a.id}')">
@@ -877,14 +993,14 @@ async function loadAnnouncements() {
             <div class="cute-ann-title">${a.title}</div>
             <div class="cute-ann-msg">${a.message || ''}</div>
             ${imgTag}
-            <span class="cute-ann-date"><i class="fa-regular fa-clock"></i> Active Framework Validity Range: ${a.displayFrom || 'Immediate'} to ${a.displayTo || 'Indefinite'}</span>
+            <span class="cute-ann-date"><i class="fa-regular fa-clock"></i> Active: ${a.displayFrom || 'Immediate'} to ${a.displayTo || 'Indefinite'}</span>
           </div>`;
       }).join('');
 }
 
-// Publishing actions
+// Publish announcement
 const btnAddAnn = document.getElementById('btn-add-ann');
-if(btnAddAnn) {
+if (btnAddAnn) {
   btnAddAnn.addEventListener('click', async () => {
     const title = document.getElementById('ann-title').value.trim();
     const message = document.getElementById('ann-msg').value.trim();
@@ -894,7 +1010,7 @@ if(btnAddAnn) {
     if (!title) { showToast('Title field is required!', 'error'); return; }
     
     let imageUrl = '';
-    if(fileInput && fileInput.files.length > 0) {
+    if (fileInput && fileInput.files.length > 0) {
       imageUrl = await new Promise((res) => {
         const reader = new FileReader();
         reader.onload = () => res(reader.result);
@@ -906,7 +1022,7 @@ if(btnAddAnn) {
       title, message, displayFrom, displayTo, imageUrl, isActive: true, createdAt: serverTimestamp()
     });
     
-    showToast('Cute Announcement published! 📢✨', 'success');
+    showToast('Announcement published successfully! 📢✨', 'success');
     document.getElementById('ann-title').value = '';
     document.getElementById('ann-msg').value = '';
     fileInput.value = '';
@@ -916,18 +1032,18 @@ if(btnAddAnn) {
 }
 
 window.deleteAnn = async (id) => {
-  if (!confirm('Delete this announcement post?')) return;
+  if (!confirm('Delete this announcement?')) return;
   await deleteDoc(doc(db, 'announcements', id));
-  showToast('Announcement trace removed.', 'info');
+  showToast('Announcement deleted.', 'info');
   loadAnnouncements();
 };
 
-// Reviews moderation logs loading updates
+// Load reviews
 async function loadReviews() {
   const snap = await getDocs(collection(db, 'reviews'));
   const reviews = snap.docs.map(d => ({ id: d.id, ...d.data() }));
   document.getElementById('reviews-table').innerHTML = reviews.length === 0
-    ? '<tr><td colspan="6" style="text-align:center;color:var(--text-muted); padding:20px;">No public client reviews received yet.</td></tr>'
+    ? '<tr><td colspan="6" style="text-align:center;color:var(--text-muted); padding:20px;">No reviews received yet.</td></tr>'
     : reviews.map(r => `
       <tr>
         <td><strong>${r.studentName||'Student'}</strong></td>
@@ -946,18 +1062,18 @@ async function loadReviews() {
 
 window.approveReview = async (id) => {
   await updateDoc(doc(db, 'reviews', id), { status: 'approved' });
-  showToast('Review approved for public board! ✅', 'success');
+  showToast('Review approved successfully! ✅', 'success');
   loadReviews();
 };
 
 window.deleteReview = async (id) => {
-  if (!confirm('Remove this user review feedback permanently?')) return;
+  if (!confirm('Remove this review permanently?')) return;
   await deleteDoc(doc(db, 'reviews', id));
-  showToast('Review data removed.', 'info');
+  showToast('Review deleted.', 'info');
   loadReviews();
 };
 
-// Tab filters handles
+// Tab filter for teachers
 window.filterTeachers = (filter, btn) => {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -966,18 +1082,18 @@ window.filterTeachers = (filter, btn) => {
   else renderTeachers(allTeachers.filter(t => !t.isApproved));
 };
 
-// Tab toggles dashboard view switcher logic
+// Tab switcher
 window.showTab = (tab) => {
-  ['dashboard','pending','teachers','students','materials','interactions','announcements','reviews','demos','enrollments','blogs'].forEach(t => {
+  ['dashboard','pending','teachers','students','materials','interactions','announcements','reviews','demos','enrollments','blogs','export'].forEach(t => {
     const el = document.getElementById('tab-'+t);
-    if(el) el.style.display = t === tab ? 'block' : 'none';
+    if (el) el.style.display = t === tab ? 'block' : 'none';
   });
   document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
   const activeSidebarItem = document.getElementById('sb-' + tab);
-  if(activeSidebarItem) activeSidebarItem.classList.add('active');
+  if (activeSidebarItem) activeSidebarItem.classList.add('active');
 };
 
-// ══ DEMO REQUEST FUNCTIONS ══
+// Demo requests
 let allDemos = [];
 let allApprovedTeachers = [];
 
@@ -992,8 +1108,8 @@ async function loadDemoRequests() {
       .sort((a,b) => (b.requestDate?.seconds||0)-(a.requestDate?.seconds||0));
     allApprovedTeachers = teacherSnap.docs.map(d => ({id:d.id,...d.data()}));
 
-    const pending   = allDemos.filter(d => d.status==='pending').length;
-    const enrolled  = allDemos.filter(d => d.status==='enrolled').length;
+    const pending  = allDemos.filter(d => d.status==='pending').length;
+    const enrolled = allDemos.filter(d => d.status==='enrolled').length;
 
     if (pending > 0) {
       document.getElementById('demo-badge').textContent = pending;
@@ -1040,7 +1156,7 @@ function buildTeacherSelect(requestId, currentTeacherId) {
 function renderDemos(demos) {
   const tbody = document.getElementById('demos-table');
   if (demos.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:32px">No demo requests yet</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:32px">No demo requests yet.</td></tr>';
     return;
   }
   tbody.innerHTML = demos.map(d => `
@@ -1080,7 +1196,7 @@ function renderEnrollments(enrolled) {
   const tbody = document.getElementById('enrollments-table');
   if (!tbody) return;
   if (enrolled.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:32px">No enrollments yet</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:32px">No enrollments yet.</td></tr>';
     return;
   }
   tbody.innerHTML = enrolled.map(d => `
@@ -1096,7 +1212,7 @@ function renderEnrollments(enrolled) {
 window.forwardDemo = async (id) => {
   const select = document.getElementById('teacher-sel-'+id);
   const teacherId = select?.value;
-  if (!teacherId) { showToast('Please select a teacher first', 'error'); return; }
+  if (!teacherId) { showToast('Please select a teacher first.', 'error'); return; }
   const teacher = allApprovedTeachers.find(t => t.id === teacherId);
   if (!teacher) return;
   try {
@@ -1107,7 +1223,7 @@ window.forwardDemo = async (id) => {
       teacherWhatsapp: teacher.whatsapp||'',
       forwardedAt: serverTimestamp()
     });
-    showToast(`Forwarded to ${teacher.fullName}! ✅`, 'success');
+    showToast(`Demo forwarded to ${teacher.fullName} successfully! ✅`, 'success');
     loadDemoRequests();
   } catch(e) { showToast('Error: '+e.message,'error'); }
 };
@@ -1115,7 +1231,7 @@ window.forwardDemo = async (id) => {
 window.closeDemo = async (id) => {
   if (!confirm('Close this demo request?')) return;
   await updateDoc(doc(db,'demo_requests',id), { status:'rejected' });
-  showToast('Request closed', 'info');
+  showToast('Demo request closed.', 'info');
   loadDemoRequests();
 };
 
@@ -1125,7 +1241,7 @@ window.filterDemos = (filter, btn) => {
   renderDemos(filter==='all' ? allDemos : allDemos.filter(d => d.status===filter));
 };
 
-// ══ BLOG FUNCTIONS ══
+// Blog functions
 const catLabels = {
   math:'Mathematics', exam:'Exam Tips', css:'CSS/PMS',
   cambridge:'Cambridge', career:'Career', issb:'ISSB',
@@ -1188,20 +1304,18 @@ async function loadBlogs() {
   }
 }
 
-// ── Cloudinary Config ──
+// Cloudinary config
 const CLOUDINARY_CLOUD = 'djh9jzdk4';
 const CLOUDINARY_PRESET = 'ci9b4bcn';
 let uploadedImgUrl = '';
 
-// File select handler
 const blogImgFile = document.getElementById('blog-img-file');
-if(blogImgFile) {
+if (blogImgFile) {
   blogImgFile.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { showToast('Image must be under 5MB', 'error'); return; }
+    if (file.size > 5 * 1024 * 1024) { showToast('Image must be under 5MB.', 'error'); return; }
 
-    // Show preview
     const reader = new FileReader();
     reader.onload = (ev) => {
       document.getElementById('blog-img-preview-src').src = ev.target.result;
@@ -1211,7 +1325,6 @@ if(blogImgFile) {
     };
     reader.readAsDataURL(file);
 
-    // Upload to Cloudinary
     document.getElementById('blog-upload-status').textContent = 'Uploading...';
     const formData = new FormData();
     formData.append('file', file);
@@ -1227,7 +1340,7 @@ if(blogImgFile) {
         document.getElementById('blog-upload-status').textContent = '✅ Uploaded!';
         document.getElementById('blog-upload-status').style.color = '#22c55e';
       } else {
-        document.getElementById('blog-upload-status').textContent = '❌ Upload failed';
+        document.getElementById('blog-upload-status').textContent = '❌ Upload failed.';
         document.getElementById('blog-upload-status').style.color = '#ef4444';
       }
     } catch(e) {
@@ -1237,7 +1350,6 @@ if(blogImgFile) {
   });
 }
 
-// Drag & drop on upload btn
 const uploadBtn = document.getElementById('blog-upload-btn');
 uploadBtn?.addEventListener('dragover', (e) => { e.preventDefault(); uploadBtn.style.borderColor = '#FFD700'; });
 uploadBtn?.addEventListener('dragleave', () => { uploadBtn.style.borderColor = '#333'; });
@@ -1262,7 +1374,7 @@ window.clearBlogImg = () => {
 };
 
 const btnAddBlog = document.getElementById('btn-add-blog');
-if(btnAddBlog) {
+if (btnAddBlog) {
   btnAddBlog.addEventListener('click', async () => {
     const title    = document.getElementById('blog-title').value.trim();
     const category = document.getElementById('blog-category').value;
@@ -1275,13 +1387,12 @@ if(btnAddBlog) {
     const status   = document.getElementById('blog-status').value;
 
     if (!title || !category || !desc || !content) {
-      showToast('Title, category, description and content are required', 'error'); return;
+      showToast('Title, category, description, and content are required.', 'error'); return;
     }
 
-    // Check if image still uploading
     const uploadStatus = document.getElementById('blog-upload-status').textContent;
     if (uploadStatus === 'Uploading...') {
-      showToast('Please wait — image is still uploading', 'info'); return;
+      showToast('Please wait — image is still uploading.', 'info'); return;
     }
 
     const btn = document.getElementById('btn-add-blog');
@@ -1296,7 +1407,7 @@ if(btnAddBlog) {
         emoji, author, status,
         createdAt: serverTimestamp()
       });
-      showToast('Blog post published! ✅', 'success');
+      showToast('Blog post published successfully! ✅', 'success');
       ['blog-title','blog-desc','blog-content','blog-img'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('blog-category').value = '';
       document.getElementById('blog-emoji').value = '📝';
@@ -1314,18 +1425,18 @@ if(btnAddBlog) {
 window.toggleBlogStatus = async (id, currentStatus) => {
   const newStatus = currentStatus === 'published' ? 'draft' : 'published';
   await updateDoc(doc(db, 'blog_posts', id), { status: newStatus });
-  showToast(`Post ${newStatus}! ✅`, 'success');
+  showToast(`Post ${newStatus === 'published' ? 'published' : 'unpublished'} successfully! ✅`, 'success');
   loadBlogs();
 };
 
 window.deleteBlog = async (id) => {
   if (!confirm('Delete this blog post permanently?')) return;
   await deleteDoc(doc(db, 'blog_posts', id));
-  showToast('Blog post deleted', 'info');
+  showToast('Blog post deleted.', 'info');
   loadBlogs();
 };
 
-// ══ STUDY MATERIALS FUNCTIONS ══
+// Study Materials functions
 const curLabels = {
   kpk: 'KPK Textbook Board',
   federal: 'Federal Board',
@@ -1342,12 +1453,8 @@ async function loadMaterials() {
     const badge = document.getElementById('material-count');
     const total = document.getElementById('mat-total');
     if (badge) {
-      if (materials.length > 0) {
-        badge.textContent = materials.length;
-        badge.style.display = 'inline';
-      } else {
-        badge.style.display = 'none';
-      }
+      if (materials.length > 0) { badge.textContent = materials.length; badge.style.display = 'inline'; }
+      else { badge.style.display = 'none'; }
     }
     if (total) total.textContent = `(${materials.length} resources)`;
 
@@ -1381,16 +1488,16 @@ async function loadMaterials() {
 }
 
 const btnAddMaterial = document.getElementById('btn-add-material');
-if(btnAddMaterial) {
+if (btnAddMaterial) {
   btnAddMaterial.addEventListener('click', async () => {
-    const title = document.getElementById('mat-title').value.trim();
-    const curriculum = document.getElementById('mat-curriculum').value;
-    const grade = document.getElementById('mat-grade').value.trim();
+    const title       = document.getElementById('mat-title').value.trim();
+    const curriculum  = document.getElementById('mat-curriculum').value;
+    const grade       = document.getElementById('mat-grade').value.trim();
     const description = document.getElementById('mat-desc').value.trim();
-    const fileUrl = document.getElementById('mat-url').value.trim();
+    const fileUrl     = document.getElementById('mat-url').value.trim();
 
     if (!title || !curriculum || !grade || !description || !fileUrl) {
-      showToast('All standard fields marked with asterisk are required', 'error'); return;
+      showToast('All required fields must be filled in.', 'error'); return;
     }
 
     const btn = document.getElementById('btn-add-material');
@@ -1402,7 +1509,7 @@ if(btnAddMaterial) {
         title, curriculum, grade, description, fileUrl,
         createdAt: serverTimestamp()
       });
-      showToast('Study Material reference added to student desk! 📚✅', 'success');
+      showToast('Study material uploaded successfully! 📚✅', 'success');
       ['mat-title','mat-grade','mat-desc','mat-url'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('mat-curriculum').value = '';
       loadMaterials();
@@ -1415,11 +1522,85 @@ if(btnAddMaterial) {
 }
 
 window.deleteMaterial = async (id) => {
-  if (!confirm('Are you sure you want to delete this learning resource permanently?')) return;
+  if (!confirm('Are you sure you want to delete this study material permanently?')) return;
   await deleteDoc(doc(db, 'study_materials', id));
-  showToast('Study document link deleted.', 'info');
+  showToast('Study material deleted.', 'info');
   loadMaterials();
 };
+
+
+</script>
+
+<!-- ══ EXCEL EXPORT — plain script so onclick can reach these functions globally ══ -->
+<script>
+  // Shared data references — populated by the module above via window
+  // The module sets window._adminTeachers and window._adminStudents after loadAll()
+
+  function loadSheetJS(callback) {
+    if (window.XLSX) { callback(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    s.onload = callback;
+    s.onerror = () => showToast('Failed to load Excel library. Check your connection.', 'error');
+    document.head.appendChild(s);
+  }
+
+  function exportTeachersExcel() {
+    const data = window._adminTeachers || [];
+    if (data.length === 0) { showToast('No faculty data available to export.', 'error'); return; }
+    loadSheetJS(() => {
+      const today = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
+      const rows = data.map((t, i) => ({
+        '#':              i + 1,
+        'Full Name':      t.fullName     || 'N/A',
+        'Email Address':  t.email        || 'N/A',
+        'WhatsApp':       t.whatsapp     || 'N/A',
+        'Subjects':       (t.subjects  || []).join(', ') || 'N/A',
+        'Curricula':      (t.curricula || []).join(', ') || 'N/A',
+        'Experience':     t.experience   || 'N/A',
+        'Average Rating': t.avgRating    || 0,
+        'Status':         t.isApproved   ? 'Approved' : 'Pending',
+        'Registered On':  t.registeredAt ? new Date(t.registeredAt.seconds * 1000).toLocaleDateString() : 'N/A'
+      }));
+      const wb = window.XLSX.utils.book_new();
+      const ws = window.XLSX.utils.json_to_sheet(rows);
+      ws['!cols'] = [
+        {wch:4},{wch:24},{wch:30},{wch:18},
+        {wch:30},{wch:26},{wch:14},{wch:14},{wch:12},{wch:16}
+      ];
+      window.XLSX.utils.book_append_sheet(wb, ws, 'Faculty Members');
+      window.XLSX.writeFile(wb, `AFS_Faculty_Members_${today}.xlsx`);
+      showToast('Faculty data exported to Excel successfully! ✅', 'success');
+    });
+  }
+
+  function exportStudentsExcel() {
+    const data = window._adminStudents || [];
+    if (data.length === 0) { showToast('No student data available to export.', 'error'); return; }
+    loadSheetJS(() => {
+      const today = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
+      const rows = data.map((s, i) => ({
+        '#':              i + 1,
+        'Full Name':      s.fullName     || 'N/A',
+        'Email Address':  s.email        || 'N/A',
+        'WhatsApp':       s.whatsapp     || 'N/A',
+        'Curriculum':     s.curriculum   || 'N/A',
+        'Grade / Class':  s.grade        ? `Grade ${s.grade}` : 'N/A',
+        'Country':        s.country      || 'N/A',
+        'Status':         s.isApproved   ? 'Active' : 'Pending',
+        'Registered On':  s.registeredAt ? new Date(s.registeredAt.seconds * 1000).toLocaleDateString() : 'N/A'
+      }));
+      const wb = window.XLSX.utils.book_new();
+      const ws = window.XLSX.utils.json_to_sheet(rows);
+      ws['!cols'] = [
+        {wch:4},{wch:24},{wch:30},{wch:18},
+        {wch:20},{wch:14},{wch:16},{wch:12},{wch:16}
+      ];
+      window.XLSX.utils.book_append_sheet(wb, ws, 'Enrolled Students');
+      window.XLSX.writeFile(wb, `AFS_Enrolled_Students_${today}.xlsx`);
+      showToast('Student data exported to Excel successfully! ✅', 'success');
+    });
+  }
 </script>
 </body>
 </html>
