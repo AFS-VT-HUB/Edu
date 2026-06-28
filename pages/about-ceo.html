@@ -111,7 +111,6 @@
       height: 130px;
       border-radius: 50%;
       margin: 0 auto 16px;
-      /* Gold ring layers */
       border: 4px solid #FFD700;
       box-shadow:
         0 0 0 5px rgba(255, 215, 0, 0.18),
@@ -230,8 +229,9 @@
       <a href="about-ceo.html" class="active">About CEO</a>
       <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
-      <a href="student-register.html" class="btn-nav">Sign Up</a>
-      <a href="login.html" class="btn-nav">Login</a>
+      <!-- Text color forced to black via !important -->
+      <a href="student-register.html" class="btn-nav" style="color: #000000 !important;">Sign Up</a>
+      <a href="login.html" class="btn-nav" style="color: #000000 !important;">Login</a>
     </div>
     <button class="hamburger-btn" id="hamburger"><span></span><span></span><span></span></button>
   </div>
@@ -242,8 +242,9 @@
     <a href="about-ceo.html" class="active">About CEO</a>
     <a href="faq.html">FAQ</a>
     <a href="contact.html">Contact</a>
-    <a href="student-register.html" style="color:#FFD700">Sign Up</a>
-    <a href="login.html" style="color:#FFD700">Login</a>
+    <!-- Mobile dropdown buttons text color set to black -->
+    <a href="student-register.html" style="color: #000000 !important; background: #FFD700; font-weight: 700; text-align: center; border-radius: 6px; margin-top: 5px;">Sign Up</a>
+    <a href="login.html" style="color: #000000 !important; background: #FFD700; font-weight: 700; text-align: center; border-radius: 6px; margin-top: 5px;">Login</a>
   </div>
 </nav>
 
@@ -351,9 +352,6 @@
           <div class="expertise-tag"><i class="fa fa-graduation-cap"></i> Cambridge A Level</div>
           <div class="expertise-tag"><i class="fa fa-globe"></i> IGCSE / GCSE</div>
           <div class="expertise-tag"><i class="fa fa-book"></i> Pakistani Matric</div>
-          <div class="expertise-tag"><i class="fa fa-book"></i> FSc / Pre-Medical</div>
-          <div class="expertise-tag"><i class="fa fa-child"></i> Pre-Cadet Prep</div>
-          <div class="expertise-tag"><i class="fa fa-atom"></i> Further Maths</div>
         </div>
       </div>
 
@@ -361,9 +359,10 @@
       <div class="content-section animate-fadeInUp">
         <h3><i class="fab fa-youtube" style="color:#ff0000"></i> Introduction Video</h3>
         <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+          <!-- YouTube Short replaced with correct embedded player path -->
+          <iframe src="https://www.youtube.com/embed/UJu6gnKwRCo" frameborder="0" allowfullscreen></iframe>
         </div>
-        <p style="margin-top:10px;font-size:0.82rem;color:#666;">Replace this YouTube link with CEO's actual intro video URL.</p>
+        <p style="margin-top:10px;font-size:0.82rem;color:#666;">Introduction video of AFS Virtual Tutor Hub CEO.</p>
       </div>
 
       <!-- Why AFS -->
@@ -435,15 +434,15 @@
     <div>
       <h4>Contact</h4>
       <ul>
-        <li><a href="https://wa.me/923120940518" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp CEO</a></li>
+        <li><a href="https://wa.me/923120940518" target="_blank"><i class="fab fa-whatsapp"></i> AFS TEAM</a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61555784668106"><i class="fab fa-facebook"></i> Facebook</a></li>
         <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 AFS Virtual Tutor Hub. All rights reserved.</span>
-    <span>Dev ❤️ by Muhammad Idrees</span>
+    <span style="color:#fcfcfc" >© 2026 AFS Virtual Tutor Hub. All rights reserved.</span>
+    <span style="color:#fcfcfc" >Dev ❤️ by Muhammad Idrees</span>
   </div>
 </footer>
 
