@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -818,3 +819,825 @@
 </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — AFS Virtual Tutor Hub</title>
+  <meta name="description" content="Read AFS Virtual Tutor Hub's Privacy Policy. Learn how we collect, use, and protect your personal data on Pakistan's most trusted free online tutoring platform."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://afs-virtual-tutor-hub.vercel.app/pages/privacy-policy.html"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"/>
+
+  <style>
+    :root {
+      --gold: #FFD700;
+      --gold-hover: #e6c200;
+      --dark: #0a0a0a;
+      --dark2: #111111;
+      --dark3: #1a1a1a;
+      --dark4: #222222;
+      --text: #e8e8e8;
+      --text-muted: #888888;
+      --border: #2a2a2a;
+      --font: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: hidden; scroll-behavior: smooth; }
+    body { font-family: var(--font); background: #f8f8f8; color: #111; overflow-x: hidden; }
+
+    /* ── Navbar ── */
+    .navbar { background: #fff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+    .navbar-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .navbar-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .navbar-logo-icon { width: 40px; height: 40px; background: #111; color: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0; }
+    .navbar-logo-text { font-size: 0.95rem; font-weight: 700; color: #111; line-height: 1.2; }
+    .navbar-logo-text span { display: block; font-size: 0.68rem; font-weight: 500; background: #111; color: var(--gold); padding: 1px 6px; border-radius: 4px; margin-top: 2px; }
+    .navbar-links { display: flex; align-items: center; gap: 4px; }
+    .navbar-links a { font-size: 0.875rem; color: #374151; text-decoration: none; padding: 6px 10px; border-radius: 6px; font-weight: 500; transition: all 0.2s; }
+    .navbar-links a:hover, .navbar-links a.active { color: #b8860b; background: #FFF9E0; }
+    .navbar-links .btn-signup { background: transparent; color: #111; border: 2px solid #111; padding: 6px 16px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; }
+    .navbar-links .btn-signup:hover { background: #111; color: var(--gold); }
+    .navbar-links .btn-login { background: var(--gold); color: #000; border: none; padding: 7px 18px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; }
+    .navbar-links .btn-login:hover { background: var(--gold-hover); }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 200; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #111; border-radius: 2px; transition: all 0.3s; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu { display: none; flex-direction: column; background: #fff; border-top: 1.5px solid #eee; padding: 8px 0 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { padding: 12px 24px; color: #374151; text-decoration: none; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; transition: background 0.15s, color 0.15s; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { background: #FFF9E0; color: #b8860b; }
+    .mobile-menu a:nth-last-child(2) { background: #111; color: var(--gold); font-weight: 700; margin: 10px 24px 4px; border-radius: 8px; border: none; text-align: center; }
+    .mobile-menu a:last-child { background: var(--gold); color: #000; font-weight: 700; margin: 4px 24px 0; border-radius: 8px; border: none; text-align: center; }
+
+    /* ── Page Hero ── */
+    .page-hero {
+      background: linear-gradient(135deg, #050505 0%, #111 60%, #0d0d0d 100%);
+      padding: 56px 24px 52px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid var(--gold);
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,215,0,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .page-hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,215,0,0.1); color: var(--gold);
+      border: 1px solid rgba(255,215,0,0.3);
+      font-size: 0.78rem; font-weight: 600;
+      padding: 5px 14px; border-radius: 999px; margin-bottom: 18px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .page-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.75; max-width: 600px; margin: 0 auto; }
+
+    /* ── Layout ── */
+    .pp-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── TOC Sidebar ── */
+    .pp-toc {
+      position: sticky;
+      top: 84px;
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-top: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .pp-toc h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .pp-toc ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .pp-toc ul li a {
+      display: flex; align-items: center; gap: 8px;
+      color: #555; text-decoration: none;
+      font-size: 0.83rem; font-weight: 500;
+      padding: 7px 10px; border-radius: 8px;
+      transition: all 0.2s; line-height: 1.4;
+    }
+    .pp-toc ul li a i { color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
+    .pp-toc ul li a:hover { background: #FFF9E0; color: #b8860b; }
+    .pp-toc ul li a.active { background: #111; color: var(--gold); }
+
+    .toc-updated {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+      font-size: 0.78rem;
+      color: #999;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .toc-updated i { color: var(--gold); }
+
+    /* ── Content ── */
+    .pp-content { display: flex; flex-direction: column; gap: 32px; }
+
+    .pp-section {
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+    }
+    .pp-section:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.08); }
+
+    .pp-section-header {
+      background: #111;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pp-section-icon {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; color: #111; flex-shrink: 0;
+    }
+    .pp-section-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+
+    .pp-section-body { padding: 28px; }
+
+    .pp-section-body p {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .pp-section-body p:last-child { margin-bottom: 0; }
+
+    .pp-section-body h3 {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: #111;
+      margin: 22px 0 10px;
+      padding-left: 12px;
+      border-left: 3px solid var(--gold);
+    }
+    .pp-section-body h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #333;
+      margin: 18px 0 8px;
+    }
+
+    .pp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .pp-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.65;
+    }
+    .pp-list li::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    /* Data Table */
+    .pp-table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 10px; border: 1px solid #e8e8e8; }
+    .pp-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+    .pp-table thead tr { background: #111; }
+    .pp-table thead th { padding: 12px 16px; color: var(--gold); font-weight: 700; text-align: left; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+    .pp-table tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
+    .pp-table tbody tr:last-child { border-bottom: none; }
+    .pp-table tbody tr:hover { background: #FFFDF0; }
+    .pp-table td { padding: 12px 16px; color: #444; line-height: 1.6; vertical-align: top; }
+    .pp-table td:first-child { font-weight: 600; color: #111; white-space: nowrap; }
+
+    /* Cookie type badges */
+    .cookie-type {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .cookie-essential { background: #dcfce7; color: #166534; }
+    .cookie-functional { background: #dbeafe; color: #1e40af; }
+    .cookie-analytics  { background: #FFF9E0; color: #92400e; }
+
+    /* Info box */
+    .pp-info-box {
+      background: #FFFDF0;
+      border: 1.5px solid rgba(255,215,0,0.4);
+      border-left: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .pp-info-box i { color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+    .pp-info-box p { font-size: 0.88rem; color: #555; line-height: 1.7; margin: 0; }
+
+    /* Contact card */
+    .pp-contact-card {
+      background: #111;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .pp-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ccc;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pp-contact-item:hover { color: var(--gold); }
+    .pp-contact-item i { color: var(--gold); font-size: 1rem; width: 18px; }
+
+    /* ── Footer ── */
+    .footer { background: #050505; color: #aaa; border-top: 1px solid #1c1a17; padding: 56px 24px 0; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 40px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; color: #888; margin-top: 14px; max-width: 280px; }
+    .footer-socials { display: flex; gap: 10px; margin-top: 18px; }
+    .social-btn { width: 36px; height: 36px; background: #111; color: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border: 1px solid #222; }
+    .social-btn:hover { background: var(--gold); color: #000; }
+    .footer h3 { color: #fff; border-left: 3px solid var(--gold); padding-left: 10px; font-size: 1rem; font-weight: 700; margin-bottom: 18px; }
+    .footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer ul li a { color: #888; text-decoration: none; font-size: 0.87rem; transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+    .footer ul li a:hover { color: var(--gold); }
+    .footer ul li a i { color: var(--gold); width: 14px; }
+    .footer-bottom { border-top: 1px solid #111; padding: 18px 0; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; flex-wrap: wrap; gap: 8px; }
+
+    /* ── Loader ── */
+    #page-loader { position: fixed; inset: 0; background: #050505; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s; }
+    #page-loader.hidden { opacity: 0; pointer-events: none; }
+    .loader-ring { width: 44px; height: 44px; border: 3px solid #222; border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media(max-width: 900px) {
+      .pp-layout { grid-template-columns: 1fr; }
+      .pp-toc { position: static; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width: 768px) {
+      .navbar-links { display: none !important; }
+      .hamburger { display: flex !important; }
+      .pp-layout { padding: 32px 16px 60px; gap: 24px; }
+      .pp-section-body { padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media(max-width: 480px) {
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="../index.html">
+      <div class="navbar-logo-icon">AFS</div>
+      <div class="navbar-logo-text">Virtual Tutor Hub<span>Expert Teachers. Free Access.</span></div>
+    </a>
+    <div class="navbar-links">
+      <a href="../index.html">Home</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="courses.html">Courses</a>
+      <a href="about-ceo.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html" class="btn-signup">Sign Up</a>
+      <a href="login.html" class="btn-login">Login</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="faculty.html">Faculty</a>
+    <a href="courses.html">Courses</a>
+    <a href="about-ceo.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="student-register.html">Sign Up as Student</a>
+    <a href="login.html">Login</a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-badge"><i class="fa fa-shield-halved"></i> Legal & Privacy</div>
+    <h1>Privacy <span>Policy</span></h1>
+    <p>We respect your privacy. This policy explains what data we collect, how we use it, and how we keep it safe — in plain language.</p>
+  </div>
+</div>
+
+<!-- Main Layout -->
+<div class="pp-layout">
+
+  <!-- Sidebar TOC -->
+  <aside class="pp-toc">
+    <h3><i class="fa fa-list"></i> Contents</h3>
+    <ul>
+      <li><a href="#interpretation" class="toc-link"><i class="fa fa-circle"></i> Interpretation & Definitions</a></li>
+      <li><a href="#data-collected" class="toc-link"><i class="fa fa-circle"></i> Data We Collect</a></li>
+      <li><a href="#cookies" class="toc-link"><i class="fa fa-circle"></i> Cookies</a></li>
+      <li><a href="#use-of-data" class="toc-link"><i class="fa fa-circle"></i> How We Use Your Data</a></li>
+      <li><a href="#sharing" class="toc-link"><i class="fa fa-circle"></i> Sharing Your Data</a></li>
+      <li><a href="#retention" class="toc-link"><i class="fa fa-circle"></i> Data Retention</a></li>
+      <li><a href="#transfer" class="toc-link"><i class="fa fa-circle"></i> Data Transfer</a></li>
+      <li><a href="#delete" class="toc-link"><i class="fa fa-circle"></i> Delete Your Data</a></li>
+      <li><a href="#disclosure" class="toc-link"><i class="fa fa-circle"></i> Disclosure</a></li>
+      <li><a href="#security" class="toc-link"><i class="fa fa-circle"></i> Security</a></li>
+      <li><a href="#children" class="toc-link"><i class="fa fa-circle"></i> Children's Privacy</a></li>
+      <li><a href="#links" class="toc-link"><i class="fa fa-circle"></i> External Links</a></li>
+      <li><a href="#changes" class="toc-link"><i class="fa fa-circle"></i> Policy Changes</a></li>
+      <li><a href="#contact" class="toc-link"><i class="fa fa-circle"></i> Contact Us</a></li>
+    </ul>
+    <div class="toc-updated"><i class="fa fa-calendar"></i> Last updated: June 21, 2026</div>
+  </aside>
+
+  <!-- Content -->
+  <main class="pp-content">
+
+    <!-- Intro box -->
+    <div class="pp-info-box reveal">
+      <i class="fa fa-circle-info fa-lg"></i>
+      <p>This Privacy Policy describes how <strong>AFS Virtual Tutor Hub</strong> collects, uses, and discloses your information when you use our platform. By using our service, you agree to the collection and use of information in accordance with this policy.</p>
+    </div>
+
+    <!-- 1. Interpretation & Definitions -->
+    <div class="pp-section reveal" id="interpretation">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-book"></i></div>
+        <h2>Interpretation &amp; Definitions</h2>
+      </div>
+      <div class="pp-section-body">
+        <h3>Interpretation</h3>
+        <p>Words with capitalized initial letters have meanings defined below. These definitions apply whether they appear in singular or plural form.</p>
+        <h3>Definitions</h3>
+        <div class="pp-table-wrap">
+          <table class="pp-table">
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Account</td><td>A unique account created for you to access our Service or parts of it.</td></tr>
+              <tr><td>Affiliate</td><td>An entity that controls, is controlled by, or is under common control with a party (ownership of 50%+ shares or voting rights).</td></tr>
+              <tr><td>Company</td><td>AFS Virtual Tutor Hub — referred to as "We," "Us," or "Our" in this policy.</td></tr>
+              <tr><td>Cookies</td><td>Small files placed on your device by a website, containing browsing history details.</td></tr>
+              <tr><td>Country</td><td>Pakistan</td></tr>
+              <tr><td>Device</td><td>Any device that can access the Service, such as a computer, phone, or tablet.</td></tr>
+              <tr><td>Personal Data</td><td>Any information that relates to an identified or identifiable individual.</td></tr>
+              <tr><td>Service</td><td>Refers to our Website.</td></tr>
+              <tr><td>Service Provider</td><td>A third-party company or individual that processes data on our behalf.</td></tr>
+              <tr><td>Usage Data</td><td>Data collected automatically from the Service infrastructure (e.g., page visit duration).</td></tr>
+              <tr><td>Website</td><td>AFS Virtual Tutor Hub — <a href="https://afs-virtual-tutor-hub.vercel.app/" target="_blank" rel="noopener" style="color:#2563eb;">afs-virtual-tutor-hub.vercel.app</a></td></tr>
+              <tr><td>You</td><td>The individual accessing or using the Service.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Data Collected -->
+    <div class="pp-section reveal" id="data-collected">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-database"></i></div>
+        <h2>Data We Collect</h2>
+      </div>
+      <div class="pp-section-body">
+        <h3>Personal Data</h3>
+        <p>While using our Service, we may ask you to provide certain personally identifiable information. This may include:</p>
+        <ul class="pp-list">
+          <li>Email address</li>
+          <li>First name and last name</li>
+          <li>Phone number</li>
+          <li>Address, city, province, postal code</li>
+        </ul>
+
+        <h3>Usage Data</h3>
+        <p>Usage Data is collected automatically when you use the Service. It may include your device's IP address, browser type and version, pages visited, time and date of visits, time spent on pages, and unique device identifiers.</p>
+        <p>When you access the Service via a mobile device, we may also collect information such as your mobile device type, unique device ID, mobile operating system, and mobile browser type.</p>
+      </div>
+    </div>
+
+    <!-- 3. Cookies -->
+    <div class="pp-section reveal" id="cookies">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-cookie-bite"></i></div>
+        <h2>Cookies &amp; Tracking Technologies</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>We use Cookies and similar tracking technologies (beacons, tags, scripts) to track activity on our Service and store certain information.</p>
+
+        <h3>Types of Cookies We Use</h3>
+        <div class="pp-table-wrap">
+          <table class="pp-table">
+            <thead>
+              <tr><th>Cookie Type</th><th>Administered By</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="cookie-type cookie-essential">Necessary / Essential</span></td>
+                <td>Us</td>
+                <td>Session Cookies essential to provide services and authenticate users. Without these, certain features cannot function.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-type cookie-analytics">Policy Acceptance</span></td>
+                <td>Us</td>
+                <td>Persistent Cookies that identify if users have accepted the use of cookies on our website.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-type cookie-functional">Functionality</span></td>
+                <td>Us</td>
+                <td>Persistent Cookies that remember your choices (e.g., login details, language) for a more personalized experience.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pp-info-box">
+          <i class="fa fa-circle-info"></i>
+          <p>You can instruct your browser to refuse all cookies or to notify you when a cookie is being sent. However, if you do not accept cookies, some parts of the Service may not function correctly. Where required by law, non-essential cookies are only used with your consent.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Use of Data -->
+    <div class="pp-section reveal" id="use-of-data">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-gear"></i></div>
+        <h2>How We Use Your Data</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>AFS Virtual Tutor Hub may use your Personal Data for the following purposes:</p>
+        <ul class="pp-list">
+          <li><strong>Providing and maintaining our Service</strong> — including monitoring usage to ensure reliability.</li>
+          <li><strong>Managing your Account</strong> — to register you as a user and give you access to relevant features.</li>
+          <li><strong>Fulfilling contracts</strong> — to process and complete any agreements made through the Service.</li>
+          <li><strong>Contacting you</strong> — via email, SMS, or push notifications for updates, security alerts, and informational communications.</li>
+          <li><strong>Sending news and offers</strong> — about services similar to those you've already used, unless you opt out.</li>
+          <li><strong>Managing your requests</strong> — to attend and respond to inquiries submitted to us.</li>
+          <li><strong>Business transfers</strong> — to evaluate or conduct a merger, acquisition, or asset sale where your data may be among assets transferred.</li>
+          <li><strong>Analytics and improvement</strong> — data analysis, usage trends, and effectiveness of promotional campaigns to improve the Service.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. Sharing -->
+    <div class="pp-section reveal" id="sharing">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-share-nodes"></i></div>
+        <h2>Sharing Your Data</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>We may share your Personal Data in the following situations:</p>
+        <ul class="pp-list">
+          <li><strong>With Service Providers</strong> — to monitor and analyze Service usage or to contact you on our behalf.</li>
+          <li><strong>For business transfers</strong> — during negotiations of a merger, sale, financing, or acquisition of all or part of our business.</li>
+          <li><strong>With Affiliates</strong> — who are required to honor this Privacy Policy; includes parent company, subsidiaries, and joint ventures.</li>
+          <li><strong>With business partners</strong> — to offer you certain products, services, or promotions.</li>
+          <li><strong>With other users</strong> — if you interact in public areas of the Service, your information may be viewed by other users.</li>
+          <li><strong>With your consent</strong> — for any other purpose where you have explicitly consented to disclosure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. Retention -->
+    <div class="pp-section reveal" id="retention">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-clock"></i></div>
+        <h2>Data Retention</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>We retain your Personal Data only as long as necessary for the purposes set out in this policy or to comply with legal obligations. The following are maximum retention periods:</p>
+        <div class="pp-table-wrap">
+          <table class="pp-table">
+            <thead>
+              <tr><th>Data Category</th><th>Retention Period</th><th>Reason</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>User Accounts</td><td>Duration of account + up to 24 months after closure</td><td>Post-termination issues and dispute resolution</td></tr>
+              <tr><td>Support Tickets</td><td>Up to 24 months from ticket closure</td><td>Follow-up inquiries, service quality, legal claims</td></tr>
+              <tr><td>Chat Transcripts</td><td>Up to 24 months</td><td>Quality assurance and staff training</td></tr>
+              <tr><td>Analytics Data (cookies, IPs)</td><td>Up to 24 months from collection</td><td>Trend analysis while respecting privacy</td></tr>
+              <tr><td>Server Logs</td><td>Up to 24 months</td><td>Security monitoring and troubleshooting</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We may retain data beyond these periods if required by law, for legal claims, at your explicit request, or due to technical backup limitations. When periods expire, data is securely deleted or anonymized.</p>
+      </div>
+    </div>
+
+    <!-- 7. Transfer -->
+    <div class="pp-section reveal" id="transfer">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-globe"></i></div>
+        <h2>Transfer of Your Data</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>Your information, including Personal Data, is processed at the Company's operating offices and wherever the parties involved in processing are located. This means your data may be transferred to and maintained on computers outside your jurisdiction where data protection laws may differ.</p>
+        <p>Where required by applicable law, we ensure international transfers are subject to appropriate safeguards. We take all steps reasonably necessary to ensure your data is treated securely and that no transfer occurs to an organization or country without adequate controls in place.</p>
+      </div>
+    </div>
+
+    <!-- 8. Delete Your Data -->
+    <div class="pp-section reveal" id="delete">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-trash-can"></i></div>
+        <h2>Delete Your Data</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>You have the right to delete or request that we assist in deleting the Personal Data we have collected about you.</p>
+        <p>You may update, amend, or delete your information at any time by signing in to your Account and visiting the account settings section. You may also contact us directly to request access to, correct, or delete any Personal Data you have provided.</p>
+        <div class="pp-info-box">
+          <i class="fa fa-triangle-exclamation"></i>
+          <p>Please note that we may need to retain certain information where we have a legal obligation or lawful basis to do so, even after a deletion request.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Disclosure -->
+    <div class="pp-section reveal" id="disclosure">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-scale-balanced"></i></div>
+        <h2>Disclosure of Your Data</h2>
+      </div>
+      <div class="pp-section-body">
+        <h3>Business Transactions</h3>
+        <p>If the Company is involved in a merger, acquisition, or asset sale, your Personal Data may be transferred. We will provide notice before your data is transferred and becomes subject to a different Privacy Policy.</p>
+
+        <h3>Law Enforcement</h3>
+        <p>Under certain circumstances, we may be required to disclose your Personal Data if required by law or in response to valid requests by public authorities such as a court or government agency.</p>
+
+        <h3>Other Legal Requirements</h3>
+        <p>The Company may disclose your Personal Data in good faith when necessary to:</p>
+        <ul class="pp-list">
+          <li>Comply with a legal obligation</li>
+          <li>Protect and defend the rights or property of the Company</li>
+          <li>Prevent or investigate possible wrongdoing in connection with the Service</li>
+          <li>Protect the personal safety of users of the Service or the public</li>
+          <li>Protect against legal liability</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10. Security -->
+    <div class="pp-section reveal" id="security">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-lock"></i></div>
+        <h2>Security of Your Data</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>The security of your Personal Data is important to us. We strive to use commercially reasonable means to protect your information.</p>
+        <div class="pp-info-box">
+          <i class="fa fa-circle-info"></i>
+          <p>Please remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we do our best to protect your Personal Data, we cannot guarantee its absolute security.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Children -->
+    <div class="pp-section reveal" id="children">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-child"></i></div>
+        <h2>Children's Privacy</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>Our Service does not address anyone under the age of 16. We do not knowingly collect personally identifiable information from anyone under 16.</p>
+        <p>If you are a parent or guardian and you are aware that your child has provided us with Personal Data, please contact us immediately. If we become aware that we have collected Personal Data from anyone under 16 without verification of parental consent, we take steps to remove that information from our servers.</p>
+        <p>If we need to rely on consent as a legal basis for processing and your country requires parental consent, we may require your parent's consent before collecting and using that information.</p>
+      </div>
+    </div>
+
+    <!-- 12. Links -->
+    <div class="pp-section reveal" id="links">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-link"></i></div>
+        <h2>Links to Other Websites</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>Our Service may contain links to other websites that are not operated by us. If you click on a third-party link, you will be directed to that site.</p>
+        <div class="pp-info-box">
+          <i class="fa fa-circle-info"></i>
+          <p>We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Changes -->
+    <div class="pp-section reveal" id="changes">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-rotate"></i></div>
+        <h2>Changes to This Privacy Policy</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+        <p>We will also notify you via email and/or a prominent notice on our Service prior to changes becoming effective, and update the "Last updated" date at the top of this page.</p>
+        <p>You are advised to review this Privacy Policy periodically for any changes. Changes are effective when posted on this page.</p>
+      </div>
+    </div>
+
+    <!-- 14. Contact -->
+    <div class="pp-section reveal" id="contact">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-envelope"></i></div>
+        <h2>Contact Us</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>If you have any questions about this Privacy Policy or how we handle your data, you can reach us through any of the following:</p>
+        <div class="pp-contact-card">
+          <a href="mailto:afsvirtualtutorhub369@gmail.com" class="pp-contact-item">
+            <i class="fa fa-envelope"></i>
+            afsvirtualtutorhub369@gmail.com
+          </a>
+          <a href="https://wa.me/923120940518" target="_blank" rel="noopener" class="pp-contact-item">
+            <i class="fab fa-whatsapp"></i>
+            +92 312 0940518 (WhatsApp)
+          </a>
+          <a href="https://afs-virtual-tutor-hub.vercel.app/pages/contact.html" class="pp-contact-item">
+            <i class="fa fa-globe"></i>
+            Contact Form on our Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="navbar-logo" href="../index.html" style="text-decoration:none">
+        <div class="navbar-logo-icon" style="background:var(--gold);color:#111;">AFS</div>
+        <div class="navbar-logo-text" style="color:#fff">Virtual Tutor Hub<span>Expert Teachers. Free Access.</span></div>
+      </a>
+      <p>Pakistan's free platform connecting students with verified expert teachers for all major curricula — Cambridge, IGCSE, CSS/PMS, Matric &amp; more.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/profile.php?id=61555784668106" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/923120940518" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="faculty.html"><i class="fa fa-chevron-right"></i> Find a Teacher</a></li>
+        <li><a href="courses.html"><i class="fa fa-chevron-right"></i> Courses Offered</a></li>
+        <li><a href="student-register.html"><i class="fa fa-chevron-right"></i> Student Registration</a></li>
+        <li><a href="teacher-register.html"><i class="fa fa-chevron-right"></i> Teacher Registration</a></li>
+        <li><a href="about-ceo.html"><i class="fa fa-chevron-right"></i> About</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Support</h3>
+      <ul>
+        <li><a href="faq.html"><i class="fa fa-chevron-right"></i> FAQ</a></li>
+        <li><a href="blog.html"><i class="fa fa-chevron-right"></i> Blog</a></li>
+        <li><a href="contact.html"><i class="fa fa-chevron-right"></i> Contact Us</a></li>
+        <li><a href="privacy-policy.html" class="active"><i class="fa fa-chevron-right"></i> Privacy Policy</a></li>
+        <li><a href="privacy-policy.html#terms"><i class="fa fa-chevron-right"></i> Terms of Use</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:afsvirtualtutorhub369@gmail.com"><i class="fa fa-envelope"></i> afsvirtualtutorhub369@gmail.com</a></li>
+        <li><a href="https://wa.me/923120940518" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61555784668106"><i class="fab fa-facebook"></i> Facebook Page</a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AFS Virtual Tutor Hub. All rights reserved.</span>
+    <span>Developer ❤️ <strong style="color:var(--gold)">Muhammad Idrees</strong></span>
+  </div>
+</footer>
+
+<script>
+  // Page loader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('page-loader')?.classList.add('hidden'), 300);
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', function(e) {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // TOC active highlight on scroll
+  const sections = document.querySelectorAll('.pp-section, .pp-info-box');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const scrollObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const id = entry.target.getAttribute('id');
+        if (id) {
+          const active = document.querySelector(`.toc-link[href="#${id}"]`);
+          if (active) active.classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[id]').forEach(el => scrollObs.observe(el));
+</script>
+</body>
+</html>
+>>>>>>> c2ccaab18fc93a28acb87f98d3307bd9e9ed9fea
