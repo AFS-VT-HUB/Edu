@@ -4,7 +4,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
-  <!-- Optimized Meta Title & Description -->
   <title>AFS Virtual Tutor Hub — Online Tutors in Pakistan & O/A Levels</title>
   <meta name="title" content="AFS Virtual Tutor Hub — Online Tutors in Pakistan & O/A Levels"/>
   <meta name="description" content="Find verified online tutors for O/A Levels, IGCSE, Matric, FSc, CSS/PMS & Cadet Colleges. Connect directly via WhatsApp."/>
@@ -12,16 +11,13 @@
   <meta name="author" content="Muhammad Awais"/>
   <meta name="robots" content="index, follow"/>
   
-  <!-- Fixed Canonical Link (Official Domain) -->
   <link rel="canonical" href="https://www.afsvirtualtutorhub.org/"/>
   
-  <!-- Favicon & Apple Icons -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
 
-  <!-- Social Media Meta Tags -->
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://www.afsvirtualtutorhub.org/"/>
   <meta property="og:title" content="AFS Virtual Tutor Hub — Online Tutors in Pakistan & O/A Levels"/>
@@ -47,7 +43,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
-  <!-- Structured Schema Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -206,12 +201,15 @@
     .section-dark .section-header h2 { color: #fff; }
     .section-dark .section-header p { color: #888; }
 
+    /* Card Titles Replacement for Headings SEO optimization */
+    .card-title-text { font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .card-title-dark { color: #fff; }
+
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; position: relative; }
     .steps-grid::before { content: ''; position: absolute; top: 36px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), rgba(255,215,0,0.2)); z-index: 0; }
     .step-card { background: #fff; border: 1.5px solid #e8e8e8; border-radius: var(--radius); padding: 32px 24px; text-align: center; position: relative; z-index: 1; transition: all 0.3s; }
     .step-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-4px); }
     .step-num { width: 52px; height: 52px; background: var(--gold); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; margin: 0 auto 18px; border: 4px solid #fff; box-shadow: 0 0 0 2px var(--gold); }
-    .step-card h3 { font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 8px; }
     .step-card p { font-size: 0.88rem; color: #666; line-height: 1.65; }
 
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -231,7 +229,7 @@
     .badge-skill { background: #2563eb; color: #fff; }
     .badge-cambridge { background: #0891b2; color: #fff; }
     .svc-body { padding: 20px 20px 18px; flex: 1; display: flex; flex-direction: column; }
-    .svc-body h3 { font-size: 1.05rem; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .svc-body .card-title-text { font-size: 1.05rem; margin-bottom: 8px; }
     .svc-body p { font-size: 0.85rem; color: #555; line-height: 1.65; flex: 1; margin-bottom: 16px; }
     .svc-link { display: inline-flex; align-items: center; gap: 6px; color: #2563eb; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: gap 0.2s; }
     .svc-card:hover .svc-link { gap: 10px; color: #b8860b; }
@@ -273,7 +271,7 @@
     .why-card { background: #fff; border: 1.5px solid #e8e8e8; border-radius: var(--radius); padding: 28px 22px; text-align: center; transition: all 0.25s; }
     .why-card:hover { border-color: var(--gold); box-shadow: 0 6px 24px rgba(0,0,0,0.07); transform: translateY(-3px); }
     .why-icon { width: 52px; height: 52px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.3rem; }
-    .why-card h3 { font-size: 0.97rem; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .why-card .card-title-text { font-size: 0.97rem; }
     .why-card p { font-size: 0.86rem; color: #666; line-height: 1.65; }
 
     /* ── Testimonials ── */
@@ -306,7 +304,7 @@
     .footer-socials { display: flex; gap: 10px; margin-top: 18px; }
     .social-btn { width: 36px; height: 36px; background: #111; color: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border: 1px solid #222; }
     .social-btn:hover { background: var(--gold); color: #000; }
-    .footer h3 { color: #fff; border-left: 3px solid var(--gold); padding-left: 10px; font-size: 1rem; font-weight: 700; margin-bottom: 18px; }
+    .footer-title { color: #fff; border-left: 3px solid var(--gold); padding-left: 10px; font-size: 1rem; font-weight: 700; margin-bottom: 18px; }
     .footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer ul li a { color: #888; text-decoration: none; font-size: 0.87rem; transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
     .footer ul li a:hover { color: var(--gold); }
@@ -386,7 +384,7 @@
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .section-header h2 { font-size: 1.35rem; }
       .hero-content h1 { font-size: 1.5rem; }
-      .svc-body h3 { font-size: 0.97rem; }
+      .svc-body .card-title-text { font-size: 0.97rem; }
       .curriculum-tag { font-size: 0.8rem; padding: 6px 12px; }
       .faq-tabs { gap: 6px; }
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -426,12 +424,12 @@
     </a>
     <div class="navbar-links">
       <a href="index.html" class="active">Home</a>
-      <a href="pages/faculty.html">Faculty</a>
-      <a href="pages/courses.html">Courses</a>
-      <a href="pages/about-ceo.html">About</a>
-      <a href="pages/blog.html">Blog</a>
-      <a href="pages/faq.html">FAQ</a>
-      <a href="pages/contact.html">Contact</a>
+      <a href="pages/faculty.html">Verified Faculty</a>
+      <a href="pages/courses.html">Our Courses</a>
+      <a href="pages/about-ceo.html">About Us</a>
+      <a href="pages/blog.html">Latest Blog</a>
+      <a href="pages/faq.html">Help FAQs</a>
+      <a href="pages/contact.html">Get in Touch</a>
       <a href="pages/student-register.html" class="btn-signup">Sign Up</a>
       <a href="pages/login.html" class="btn-login">Login</a>
     </div>
@@ -440,16 +438,16 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html">Home</a>
-    <a href="pages/faculty.html">Faculty</a>
-    <a href="pages/courses.html">Courses</a>
-    <a href="pages/about-ceo.html">About</a>
-    <a href="pages/blog.html">Blog</a>
-    <a href="pages/faq.html">FAQ</a>
-    <a href="pages/contact.html">Contact</a>
+    <a href="index.html">Home Page</a>
+    <a href="pages/faculty.html">Browse Teachers</a>
+    <a href="pages/courses.html">Available Courses</a>
+    <a href="pages/about-ceo.html">About Platform</a>
+    <a href="pages/blog.html">Articles & Blog</a>
+    <a href="pages/faq.html">Frequent Questions</a>
+    <a href="pages/contact.html">Support Contact</a>
     <a href="pages/student-register.html">Sign Up as Student</a>
     <a href="pages/teacher-register.html">Join as Teacher</a>
-    <a href="pages/login.html">Login</a>
+    <a href="pages/login.html">Account Login</a>
   </div>
 </nav>
 
@@ -458,11 +456,7 @@
   <div class="ticker-track" id="ticker-track">
     <span class="ticker-item">🔥 Free Mock Test for O Level Math – 20 June <a href="pages/courses.html" class="ticker-btn">Register</a></span>
     <span class="ticker-item">🚀 New verified teachers added for CSS/PMS preparation! <a href="pages/faculty.html" class="ticker-btn">View Faculty</a></span>
-    <span class="ticker-item">📚 Premium IGCSE Physics demo classes now live <a href="pages/faculty.html#demo" class="ticker-btn">Book Demo</a></span>
-    <span class="ticker-item">✨ Join AFS Network today – 100% Free Access <a href="pages/student-register.html" class="ticker-btn">Join Now</a></span>
-    <span class="ticker-item">🔥 Free Mock Test for O Level Math – 20 June <a href="pages/courses.html" class="ticker-btn">Register</a></span>
-    <span class="ticker-item">🚀 New verified teachers added for CSS/PMS preparation! <a href="pages/faculty.html" class="ticker-btn">View Faculty</a></span>
-    <span class="ticker-item">📚 Premium IGCSE Physics demo classes now live <a href="pages/faculty.html#demo" class="ticker-btn">Book Demo</a></span>
+    <span class="ticker-item">📚 Premium IGCSE Physics demo classes now live <a href="pages/faculty.html#demo" class="ticker-btn" rel="nofollow">Book Demo</a></span>
     <span class="ticker-item">✨ Join AFS Network today – 100% Free Access <a href="pages/student-register.html" class="ticker-btn">Join Now</a></span>
   </div>
 </div>
@@ -479,7 +473,7 @@
         <div class="hero-btns" id="hero-dynamic-btns">
           <a href="pages/student-register.html" class="btn btn-gold"><i class="fa fa-user-graduate"></i> Sign Up Free</a>
           <a href="pages/teacher-register.html" class="btn btn-black"><i class="fa fa-chalkboard-teacher"></i> Join as Teacher</a>
-          <a href="pages/faculty.html#demo" class="btn btn-dark"><i class="fa fa-play-circle"></i> Request Demo</a>
+          <a href="pages/faculty.html#demo" class="btn btn-dark" rel="nofollow"><i class="fa fa-play-circle"></i> Request Demo</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><strong id="stat-teachers">50+</strong><span>Expert Teachers</span></div>
@@ -490,7 +484,7 @@
       </div>
       <div class="hero-img-wrap animate-fadeInUp delay-2">
         <div class="hero-illus">
-          <div class="hero-illus-title"><i class="fa fa-trophy"></i></div>
+          <div class="hero-illus-title"><i class="fa fa-trophy"></i> Featured Tutors</div>
           <div id="mini-showcase-list">
             <div style="padding:20px;text-align:center;color:var(--gold);"><i class="fa fa-spinner fa-spin"></i></div>
           </div>
@@ -511,22 +505,22 @@
       <div class="steps-grid reveal">
         <div class="step-card">
           <div class="step-num">1</div>
-          <h3>Browse Teachers</h3>
+          <div class="card-title-text">Browse Teachers</div>
           <p>Search verified tutors by subject, curriculum, and availability. All profiles are manually approved.</p>
         </div>
         <div class="step-card">
           <div class="step-num">2</div>
-          <h3>Request Free Demo</h3>
+          <div class="card-title-text">Request Free Demo</div>
           <p>Book a free demo class with any teacher — no commitment, no payment required upfront.</p>
         </div>
         <div class="step-card">
           <div class="step-num">3</div>
-          <h3>Connect via WhatsApp</h3>
+          <div class="card-title-text">Connect via WhatsApp</div>
           <p>Contact your chosen teacher directly on WhatsApp — fast, simple, no middleman.</p>
         </div>
         <div class="step-card">
           <div class="step-num">4</div>
-          <h3>Start Learning</h3>
+          <div class="card-title-text">Start Learning</div>
           <p>Begin your classes online via Google Meet or Zoom. Study at your own pace and schedule.</p>
         </div>
       </div>
@@ -543,70 +537,65 @@
       </div>
       <div class="services-grid reveal">
 
-        <!-- Card 1: Home Tutoring -->
         <div class="svc-card" onclick="openDemoModal('Home Tutoring')">
           <div class="svc-img-wrap">
             <img src="assets/images/home-male.jpg" alt="Home Tutoring by Male Tutor — AFS Virtual Tutor Hub" loading="lazy" onerror="this.src='assets/images/home.jpg'"/>
             <span class="svc-badge badge-popular">Most Popular</span>
           </div>
           <div class="svc-body">
-            <h3>Home Tutoring</h3>
+            <div class="card-title-text">Home Tutoring</div>
             <span class="svc-cert"><i class="fa fa-certificate"></i> AFS Certificate Provided</span>
             <p>Expert male tutors come directly to your doorstep for personalized one-on-one sessions. Available for all grades — Primary, Matric, Intermediate, O/A Level, and University. <em style="font-size:0.8rem;color:#888;">(In-Person: Peshawar only)</em></p>
             <span class="svc-link">Get a Tutor →</span>
           </div>
         </div>
 
-        <!-- Card 2: Online Tutoring -->
         <div class="svc-card" onclick="openDemoModal('Online Tutoring')">
           <div class="svc-img-wrap">
             <img src="assets/images/online.jpg" alt="Online Tutoring — AFS Virtual Tutor Hub" loading="lazy"/>
             <span class="svc-badge badge-trending">Trending</span>
           </div>
           <div class="svc-body">
-            <h3>Online Tutoring</h3>
+            <div class="card-title-text">Online Tutoring</div>
             <span class="svc-cert"><i class="fa fa-certificate"></i> AFS Certificate Provided</span>
             <p>Learn from the comfort of your home via interactive virtual sessions. Our online tutors cover all subjects and are available worldwide — for students everywhere.</p>
             <span class="svc-link">Get a Tutor →</span>
           </div>
         </div>
 
-        <!-- Card 3: Exam Preparation -->
         <div class="svc-card" onclick="openDemoModal('Exam Preparation')">
           <div class="svc-img-wrap">
             <img src="assets/images/ep.jpg" alt="Exam Preparation — AFS Virtual Tutor Hub" loading="lazy"/>
             <span class="svc-badge badge-demand">High Demand</span>
           </div>
           <div class="svc-body">
-            <h3>Exam Preparation</h3>
+            <div class="card-title-text">Exam Preparation</div>
             <span class="svc-cert"><i class="fa fa-certificate"></i> AFS Certificate Provided</span>
             <p>Specialized coaching for board exams, entry tests, and university admissions. MDCAT, ECAT, GAT, SAT, GRE, IELTS — our experts ensure you score top marks.</p>
             <span class="svc-link">Get a Tutor →</span>
           </div>
         </div>
 
-        <!-- Card 4: Skillset Development -->
         <div class="svc-card" onclick="openDemoModal('Skillset Development')">
           <div class="svc-img-wrap">
             <img src="assets/images/sd.jpg" alt="Skillset Development — AFS Virtual Tutor Hub" loading="lazy"/>
             <span class="svc-badge badge-skill">Skills</span>
           </div>
           <div class="svc-body">
-            <h3>Skillset Development</h3>
+            <div class="card-title-text">Skillset Development</div>
             <span class="svc-cert"><i class="fa fa-certificate"></i> Learn with Certificate</span>
             <p>Go beyond academics with expert tutors in Coding, web development, graphic design, languages, mental math, and more for career-ready skills. Earn an AFS certificate upon completion.</p>
             <span class="svc-link">Get a Tutor →</span>
           </div>
         </div>
 
-        <!-- Card 5: O/A Level Tutors -->
         <div class="svc-card" onclick="openDemoModal('O/A Level Tutors')">
           <div class="svc-img-wrap">
             <img src="assets/images/o.jpg" alt="O/A Level Tutors — AFS Virtual Tutor Hub" loading="lazy"/>
             <span class="svc-badge badge-cambridge">Cambridge</span>
           </div>
           <div class="svc-body">
-            <h3>O/A Level Tutors</h3>
+            <div class="card-title-text">O/A Level Tutors</div>
             <span class="svc-cert"><i class="fa fa-certificate"></i> AFS Certificate Provided</span>
             <p>Highly qualified tutors specializing in the Cambridge curriculum for O Level and A Level. Covering Maths, Sciences, English, Business, and all IGCSE subjects.</p>
             <span class="svc-link">Get a Tutor →</span>
@@ -625,7 +614,7 @@
         <div style="width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;">🎓</div>
         <span style="color:var(--gold);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Free Demo Class</span>
       </div>
-      <h3 id="demo-modal-title" style="color:#fff;font-size:1.3rem;font-weight:800;margin-bottom:6px;">Request a Free Demo</h3>
+      <div id="demo-modal-title" style="color:#fff;font-size:1.3rem;font-weight:800;margin-bottom:6px;">Request a Free Demo</div>
       <p style="color:#888;font-size:0.86rem;margin-bottom:24px;line-height:1.6;">Fill in your details — our team will match you with the best verified teacher and schedule your free demo class within 24 hours.</p>
       <div id="demo-form-area">
         <div style="display:flex;flex-direction:column;gap:14px;">
@@ -711,32 +700,32 @@
       <div class="why-grid">
         <div class="why-card reveal">
           <div class="why-icon">💸</div>
-          <h3>Free for Students</h3>
+          <div class="card-title-text">Free for Students</div>
           <p>Browse teachers, request demos, and access MCQs — all at zero cost to you.</p>
         </div>
         <div class="why-card reveal delay-1">
           <div class="why-icon">🥇</div>
-          <h3>Verified Teachers</h3>
+          <div class="card-title-text">Verified Teachers</div>
           <p>Every teacher is manually reviewed and personally approved by AFS MANAGEMENT.</p>
         </div>
         <div class="why-card reveal delay-2">
           <div class="why-icon">🌐</div>
-          <h3>All Curricula</h3>
+          <div class="card-title-text">All Curricula</div>
           <p>Pakistani, Cambridge, IGCSE, GCSE, Edexcel, CSS/PMS, Cadet College &amp; more.</p>
         </div>
         <div class="why-card reveal">
           <div class="why-icon">📖</div>
-          <h3>Free MCQs &amp; Notes</h3>
+          <div class="card-title-text">Free MCQs &amp; Notes</div>
           <p>Download subject-wise PDFs, past papers, and practice materials anytime.</p>
         </div>
         <div class="why-card reveal delay-1">
           <div class="why-icon">🎯</div>
-          <h3>Demo Class First</h3>
+          <div class="card-title-text">Demo Class First</div>
           <p>Request a free demo before committing to any teacher or course — no risk.</p>
         </div>
         <div class="why-card reveal delay-2">
           <div class="why-icon">🏅</div>
-          <h3>AFS Certificates</h3>
+          <div class="card-title-text">AFS Certificates</div>
           <p>Earn recognized AFS certificates upon successful completion of tuition, online, and exam prep programs.</p>
         </div>
       </div>
@@ -752,7 +741,6 @@
         <p>From Pakistani Matric to Cambridge A Levels — one platform for all students worldwide.</p>
       </div>
 
-      <!-- Category Tabs -->
       <div class="curricula-tabs reveal" id="curr-tabs">
         <button class="curr-tab active" data-panel="pakistan">🇵🇰 Pakistan</button>
         <button class="curr-tab" data-panel="uk">🇬🇧 UK &amp; International</button>
@@ -764,7 +752,6 @@
         <button class="curr-tab" data-panel="madrassa">🕌 Madrassa / Islamic</button>
       </div>
 
-      <!-- Panels -->
       <div class="curr-panel active reveal" id="panel-pakistan">
         <div class="curr-list">
           <span class="curriculum-tag">Federal Board (FBISE)</span>
@@ -894,52 +881,52 @@
       <div class="country-scroll-wrap reveal">
         <button class="country-scroll-btn prev" onclick="scrollCountries(-1)" aria-label="Scroll left"><i class="fa fa-chevron-left"></i></button>
         <div class="country-scroll" id="countryScroll">
-          <a href="pages/faculty.html?country=pakistan" class="country-card"><div class="country-flag">🇵🇰</div><div class="country-name">Pakistan</div></a>
-          <a href="pages/faculty.html?country=uk" class="country-card"><div class="country-flag">🇬🇧</div><div class="country-name">United Kingdom</div></a>
-          <a href="pages/faculty.html?country=india" class="country-card"><div class="country-flag">🇮🇳</div><div class="country-name">India</div></a>
-          <a href="pages/faculty.html?country=bangladesh" class="country-card"><div class="country-flag">🇧🇩</div><div class="country-name">Bangladesh</div></a>
-          <a href="pages/faculty.html?country=sri-lanka" class="country-card"><div class="country-flag">🇱🇰</div><div class="country-name">Sri Lanka</div></a>
-          <a href="pages/faculty.html?country=nepal" class="country-card"><div class="country-flag">🇳🇵</div><div class="country-name">Nepal</div></a>
-          <a href="pages/faculty.html?country=maldives" class="country-card"><div class="country-flag">🇲🇻</div><div class="country-name">Maldives</div></a>
-          <a href="pages/faculty.html?country=uae" class="country-card"><div class="country-flag">🇦🇪</div><div class="country-name">UAE</div></a>
-          <a href="pages/faculty.html?country=saudi-arabia" class="country-card"><div class="country-flag">🇸🇦</div><div class="country-name">Saudi Arabia</div></a>
-          <a href="pages/faculty.html?country=kuwait" class="country-card"><div class="country-flag">🇰🇼</div><div class="country-name">Kuwait</div></a>
-          <a href="pages/faculty.html?country=qatar" class="country-card"><div class="country-flag">🇶🇦</div><div class="country-name">Qatar</div></a>
-          <a href="pages/faculty.html?country=oman" class="country-card"><div class="country-flag">🇴🇲</div><div class="country-name">Oman</div></a>
-          <a href="pages/faculty.html?country=bahrain" class="country-card"><div class="country-flag">🇧🇭</div><div class="country-name">Bahrain</div></a>
-          <a href="pages/faculty.html?country=malaysia" class="country-card"><div class="country-flag">🇲🇾</div><div class="country-name">Malaysia</div></a>
-          <a href="pages/faculty.html?country=singapore" class="country-card"><div class="country-flag">🇸🇬</div><div class="country-name">Singapore</div></a>
-          <a href="pages/faculty.html?country=hong-kong" class="country-card"><div class="country-flag">🇭🇰</div><div class="country-name">Hong Kong</div></a>
-          <a href="pages/faculty.html?country=china" class="country-card"><div class="country-flag">🇨🇳</div><div class="country-name">China</div></a>
-          <a href="pages/faculty.html?country=indonesia" class="country-card"><div class="country-flag">🇮🇩</div><div class="country-name">Indonesia</div></a>
-          <a href="pages/faculty.html?country=thailand" class="country-card"><div class="country-flag">🇹🇭</div><div class="country-name">Thailand</div></a>
-          <a href="pages/faculty.html?country=vietnam" class="country-card"><div class="country-flag">🇻🇳</div><div class="country-name">Vietnam</div></a>
-          <a href="pages/faculty.html?country=philippines" class="country-card"><div class="country-flag">🇵🇭</div><div class="country-name">Philippines</div></a>
-          <a href="pages/faculty.html?country=egypt" class="country-card"><div class="country-flag">🇪🇬</div><div class="country-name">Egypt</div></a>
-          <a href="pages/faculty.html?country=nigeria" class="country-card"><div class="country-flag">🇳🇬</div><div class="country-name">Nigeria</div></a>
-          <a href="pages/faculty.html?country=kenya" class="country-card"><div class="country-flag">🇰🇪</div><div class="country-name">Kenya</div></a>
-          <a href="pages/faculty.html?country=south-africa" class="country-card"><div class="country-flag">🇿🇦</div><div class="country-name">South Africa</div></a>
-          <a href="pages/faculty.html?country=zimbabwe" class="country-card"><div class="country-flag">🇿🇼</div><div class="country-name">Zimbabwe</div></a>
-          <a href="pages/faculty.html?country=ghana" class="country-card"><div class="country-flag">🇬🇭</div><div class="country-name">Ghana</div></a>
-          <a href="pages/faculty.html?country=mauritius" class="country-card"><div class="country-flag">🇲🇺</div><div class="country-name">Mauritius</div></a>
-          <a href="pages/faculty.html?country=seychelles" class="country-card"><div class="country-flag">🇸🇨</div><div class="country-name">Seychelles</div></a>
-          <a href="pages/faculty.html?country=jamaica" class="country-card"><div class="country-flag">🇯🇲</div><div class="country-name">Jamaica</div></a>
-          <a href="pages/faculty.html?country=trinidad" class="country-card"><div class="country-flag">🇹🇹</div><div class="country-name">Trinidad &amp; Tobago</div></a>
-          <a href="pages/faculty.html?country=guyana" class="country-card"><div class="country-flag">🇬🇾</div><div class="country-name">Guyana</div></a>
-          <a href="pages/faculty.html?country=belgium" class="country-card"><div class="country-flag">🇧🇪</div><div class="country-name">Belgium</div></a>
-          <a href="pages/faculty.html?country=france" class="country-card"><div class="country-flag">🇫🇷</div><div class="country-name">France</div></a>
-          <a href="pages/faculty.html?country=germany" class="country-card"><div class="country-flag">🇩🇪</div><div class="country-name">Germany</div></a>
-          <a href="pages/faculty.html?country=italy" class="country-card"><div class="country-flag">🇮🇹</div><div class="country-name">Italy</div></a>
-          <a href="pages/faculty.html?country=spain" class="country-card"><div class="country-flag">🇪🇸</div><div class="country-name">Spain</div></a>
-          <a href="pages/faculty.html?country=usa" class="country-card"><div class="country-flag">🇺🇸</div><div class="country-name">United States</div></a>
-          <a href="pages/faculty.html?country=canada" class="country-card"><div class="country-flag">🇨🇦</div><div class="country-name">Canada</div></a>
-          <a href="pages/faculty.html?country=australia" class="country-card"><div class="country-flag">🇦🇺</div><div class="country-name">Australia</div></a>
-          <a href="pages/faculty.html?country=new-zealand" class="country-card"><div class="country-flag">🇳🇿</div><div class="country-name">New Zealand</div></a>
-          <a href="pages/faculty.html?country=japan" class="country-card"><div class="country-flag">🇯🇵</div><div class="country-name">Japan</div></a>
-          <a href="pages/faculty.html?country=south-korea" class="country-card"><div class="country-flag">🇰🇷</div><div class="country-name">South Korea</div></a>
-          <a href="pages/faculty.html?country=turkey" class="country-card"><div class="country-flag">🇹🇷</div><div class="country-name">Turkey</div></a>
-          <a href="pages/faculty.html?country=mexico" class="country-card"><div class="country-flag">🇲🇽</div><div class="country-name">Mexico</div></a>
-          <a href="pages/faculty.html?country=brazil" class="country-card"><div class="country-flag">🇧🇷</div><div class="country-name">Brazil</div></a>
+          <a href="pages/faculty.html?country=pakistan" rel="nofollow" class="country-card"><div class="country-flag">🇵🇰</div><div class="country-name">Pakistan</div></a>
+          <a href="pages/faculty.html?country=uk" rel="nofollow" class="country-card"><div class="country-flag">🇬🇧</div><div class="country-name">United Kingdom</div></a>
+          <a href="pages/faculty.html?country=india" rel="nofollow" class="country-card"><div class="country-flag">🇮🇳</div><div class="country-name">India</div></a>
+          <a href="pages/faculty.html?country=bangladesh" rel="nofollow" class="country-card"><div class="country-flag">🇧🇩</div><div class="country-name">Bangladesh</div></a>
+          <a href="pages/faculty.html?country=sri-lanka" rel="nofollow" class="country-card"><div class="country-flag">🇱🇰</div><div class="country-name">Sri Lanka</div></a>
+          <a href="pages/faculty.html?country=nepal" rel="nofollow" class="country-card"><div class="country-flag">🇳🇵</div><div class="country-name">Nepal</div></a>
+          <a href="pages/faculty.html?country=maldives" rel="nofollow" class="country-card"><div class="country-flag">🇲🇻</div><div class="country-name">Maldives</div></a>
+          <a href="pages/faculty.html?country=uae" rel="nofollow" class="country-card"><div class="country-flag">🇦🇪</div><div class="country-name">UAE</div></a>
+          <a href="pages/faculty.html?country=saudi-arabia" rel="nofollow" class="country-card"><div class="country-flag">🇸🇦</div><div class="country-name">Saudi Arabia</div></a>
+          <a href="pages/faculty.html?country=kuwait" rel="nofollow" class="country-card"><div class="country-flag">🇰🇼</div><div class="country-name">Kuwait</div></a>
+          <a href="pages/faculty.html?country=qatar" rel="nofollow" class="country-card"><div class="country-flag">🇶🇦</div><div class="country-name">Qatar</div></a>
+          <a href="pages/faculty.html?country=oman" rel="nofollow" class="country-card"><div class="country-flag">🇴🇲</div><div class="country-name">Oman</div></a>
+          <a href="pages/faculty.html?country=bahrain" rel="nofollow" class="country-card"><div class="country-flag">🇧🇭</div><div class="country-name">Bahrain</div></a>
+          <a href="pages/faculty.html?country=malaysia" rel="nofollow" class="country-card"><div class="country-flag">🇲🇾</div><div class="country-name">Malaysia</div></a>
+          <a href="pages/faculty.html?country=singapore" rel="nofollow" class="country-card"><div class="country-flag">🇸🇬</div><div class="country-name">Singapore</div></a>
+          <a href="pages/faculty.html?country=hong-kong" rel="nofollow" class="country-card"><div class="country-flag">🇭🇰</div><div class="country-name">Hong Kong</div></a>
+          <a href="pages/faculty.html?country=china" rel="nofollow" class="country-card"><div class="country-flag">🇨🇳</div><div class="country-name">China</div></a>
+          <a href="pages/faculty.html?country=indonesia" rel="nofollow" class="country-card"><div class="country-flag">🇮🇩</div><div class="country-name">Indonesia</div></a>
+          <a href="pages/faculty.html?country=thailand" rel="nofollow" class="country-card"><div class="country-flag">🇹🇭</div><div class="country-name">Thailand</div></a>
+          <a href="pages/faculty.html?country=vietnam" rel="nofollow" class="country-card"><div class="country-flag">🇻🇳</div><div class="country-name">Vietnam</div></a>
+          <a href="pages/faculty.html?country=philippines" rel="nofollow" class="country-card"><div class="country-flag">🇵🇭</div><div class="country-name">Philippines</div></a>
+          <a href="pages/faculty.html?country=egypt" rel="nofollow" class="country-card"><div class="country-flag">🇪🇬</div><div class="country-name">Egypt</div></a>
+          <a href="pages/faculty.html?country=nigeria" rel="nofollow" class="country-card"><div class="country-flag">🇳🇬</div><div class="country-name">Nigeria</div></a>
+          <a href="pages/faculty.html?country=kenya" rel="nofollow" class="country-card"><div class="country-flag">🇰🇪</div><div class="country-name">Kenya</div></a>
+          <a href="pages/faculty.html?country=south-africa" rel="nofollow" class="country-card"><div class="country-flag">🇿🇦</div><div class="country-name">South Africa</div></a>
+          <a href="pages/faculty.html?country=zimbabwe" rel="nofollow" class="country-card"><div class="country-flag">🇿🇼</div><div class="country-name">Zimbabwe</div></a>
+          <a href="pages/faculty.html?country=ghana" rel="nofollow" class="country-card"><div class="country-flag">🇬🇭</div><div class="country-name">Ghana</div></a>
+          <a href="pages/faculty.html?country=mauritius" rel="nofollow" class="country-card"><div class="country-flag">🇲🇺</div><div class="country-name">Mauritius</div></a>
+          <a href="pages/faculty.html?country=seychelles" rel="nofollow" class="country-card"><div class="country-flag">🇸🇨</div><div class="country-name">Seychelles</div></a>
+          <a href="pages/faculty.html?country=jamaica" rel="nofollow" class="country-card"><div class="country-flag">🇯🇲</div><div class="country-name">Jamaica</div></a>
+          <a href="pages/faculty.html?country=trinidad" rel="nofollow" class="country-card"><div class="country-flag">🇹🇹</div><div class="country-name">Trinidad &amp; Tobago</div></a>
+          <a href="pages/faculty.html?country=guyana" rel="nofollow" class="country-card"><div class="country-flag">🇬🇾</div><div class="country-name">Guyana</div></a>
+          <a href="pages/faculty.html?country=belgium" rel="nofollow" class="country-card"><div class="country-flag">🇧🇪</div><div class="country-name">Belgium</div></a>
+          <a href="pages/faculty.html?country=france" rel="nofollow" class="country-card"><div class="country-flag">🇫🇷</div><div class="country-name">France</div></a>
+          <a href="pages/faculty.html?country=germany" rel="nofollow" class="country-card"><div class="country-flag">🇩🇪</div><div class="country-name">Germany</div></a>
+          <a href="pages/faculty.html?country=italy" rel="nofollow" class="country-card"><div class="country-flag">🇮🇹</div><div class="country-name">Italy</div></a>
+          <a href="pages/faculty.html?country=spain" rel="nofollow" class="country-card"><div class="country-flag">🇪🇸</div><div class="country-name">Spain</div></a>
+          <a href="pages/faculty.html?country=usa" rel="nofollow" class="country-card"><div class="country-flag">🇺🇸</div><div class="country-name">United States</div></a>
+          <a href="pages/faculty.html?country=canada" rel="nofollow" class="country-card"><div class="country-flag">🇨🇦</div><div class="country-name">Canada</div></a>
+          <a href="pages/faculty.html?country=australia" rel="nofollow" class="country-card"><div class="country-flag">🇦🇺</div><div class="country-name">Australia</div></a>
+          <a href="pages/faculty.html?country=new-zealand" rel="nofollow" class="country-card"><div class="country-flag">🇳🇿</div><div class="country-name">New Zealand</div></a>
+          <a href="pages/faculty.html?country=japan" rel="nofollow" class="country-card"><div class="country-flag">🇯🇵</div><div class="country-name">Japan</div></a>
+          <a href="pages/faculty.html?country=south-korea" rel="nofollow" class="country-card"><div class="country-flag">🇰🇷</div><div class="country-name">South Korea</div></a>
+          <a href="pages/faculty.html?country=turkey" rel="nofollow" class="country-card"><div class="country-flag">🇹🇷</div><div class="country-name">Turkey</div></a>
+          <a href="pages/faculty.html?country=mexico" rel="nofollow" class="country-card"><div class="country-flag">🇲🇽</div><div class="country-name">Mexico</div></a>
+          <a href="pages/faculty.html?country=brazil" rel="nofollow" class="country-card"><div class="country-flag">🇧🇷</div><div class="country-name">Brazil</div></a>
         </div>
         <button class="country-scroll-btn next" onclick="scrollCountries(1)" aria-label="Scroll right"><i class="fa fa-chevron-right"></i></button>
       </div>
@@ -1015,12 +1002,12 @@
         <p>From finding the right tutor to preparing for competitive exams — AFS Virtual Tutor Hub has you covered.</p>
       </div>
       <div class="internal-links-grid reveal">
-        <a href="pages/faculty.html" class="int-link"><i class="fa fa-users"></i> Browse All Teachers</a>
-        <a href="pages/courses.html" class="int-link"><i class="fa fa-book"></i> View All Courses</a>
-        <a href="pages/blog.html" class="int-link"><i class="fa fa-pen"></i> Study Tips &amp; Guides</a>
-        <a href="pages/faq.html" class="int-link"><i class="fa fa-question-circle"></i> FAQs</a>
-        <a href="pages/about-ceo.html" class="int-link"><i class="fa fa-user-tie"></i> About</a>
-        <a href="pages/contact.html" class="int-link"><i class="fa fa-envelope"></i> Contact Us</a>
+        <a href="pages/faculty.html" class="int-link"><i class="fa fa-users"></i> Explore All Tutors</a>
+        <a href="pages/courses.html" class="int-link"><i class="fa fa-book"></i> Browse All Academic Courses</a>
+        <a href="pages/blog.html" class="int-link"><i class="fa fa-pen"></i> Read Study Guides & Tips</a>
+        <a href="pages/faq.html" class="int-link"><i class="fa fa-question-circle"></i> Frequently Asked Questions</a>
+        <a href="pages/about-ceo.html" class="int-link"><i class="fa fa-user-tie"></i> Learn About Founder</a>
+        <a href="pages/contact.html" class="int-link"><i class="fa fa-envelope"></i> Reach Out To Support</a>
       </div>
     </div>
   </div>
@@ -1044,27 +1031,27 @@
       </div>
     </div>
     <div>
-      <h3>Quick Links</h3>
+      <div class="footer-title">Navigation Links</div>
       <ul>
-        <li><a href="pages/faculty.html"><i class="fa fa-chevron-right"></i> Find a Teacher</a></li>
-        <li><a href="pages/courses.html"><i class="fa fa-chevron-right"></i> Courses Offered</a></li>
-        <li><a href="pages/student-register.html"><i class="fa fa-chevron-right"></i> Student Registration</a></li>
-        <li><a href="pages/teacher-register.html"><i class="fa fa-chevron-right"></i> Teacher Registration</a></li>
-        <li><a href="pages/about-ceo.html"><i class="fa fa-chevron-right"></i> About</a></li>
+        <li><a href="pages/faculty.html"><i class="fa fa-chevron-right"></i> Search Academic Teachers</a></li>
+        <li><a href="pages/courses.html"><i class="fa fa-chevron-right"></i> Available Tuitions & Prep</a></li>
+        <li><a href="pages/student-register.html"><i class="fa fa-chevron-right"></i> Student Portal Registration</a></li>
+        <li><a href="pages/teacher-register.html"><i class="fa fa-chevron-right"></i> Become an Instructor</a></li>
+        <li><a href="pages/about-ceo.html"><i class="fa fa-chevron-right"></i> Founder Vision</a></li>
       </ul>
     </div>
     <div>
-      <h3>Support</h3>
+      <div class="footer-title">Help & Legal</div>
       <ul>
-        <li><a href="pages/faq.html"><i class="fa fa-chevron-right"></i> FAQ</a></li>
-        <li><a href="pages/blog.html"><i class="fa fa-chevron-right"></i> Blog</a></li>
-        <li><a href="pages/contact.html"><i class="fa fa-chevron-right"></i> Contact Us</a></li>
-        <li><a href="pages/privacy-policy.html"><i class="fa fa-chevron-right"></i> Privacy Policy</a></li>
-        <li><a href="pages/terms-conditions.html"><i class="fa fa-chevron-right"></i> Terms & Conditions</a></li>
+        <li><a href="pages/faq.html"><i class="fa fa-chevron-right"></i> Frequently Asked Questions</a></li>
+        <li><a href="pages/blog.html"><i class="fa fa-chevron-right"></i> Educational Articles</a></li>
+        <li><a href="pages/contact.html"><i class="fa fa-chevron-right"></i> Official Support Channel</a></li>
+        <li><a href="pages/privacy-policy.html"><i class="fa fa-chevron-right"></i> Data Privacy Policy</a></li>
+        <li><a href="pages/terms-conditions.html"><i class="fa fa-chevron-right"></i> Platform Terms of Use</a></li>
       </ul>
     </div>
     <div>
-      <h3>Contact</h3>
+      <div class="footer-title">Contact</div>
       <ul>
         <li><a href="mailto:afsvirtualtutorhub369@gmail.com"><i class="fa fa-envelope"></i> afsvirtualtutorhub369@gmail.com</a></li>
         <li><a href="https://wa.me/923120940518" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp AFS Team</a></li>
@@ -1167,7 +1154,7 @@
           <span class="tag tag-gold">${experience}</span>
         </div>
         <div class="tc-actions">
-          <a href="pages/teacher-profile.html?id=${t.id}" class="btn btn-black btn-sm" style="flex:1;justify-content:center;">View Profile</a>
+          <a href="pages/teacher-profile.html?id=${t.id}" rel="nofollow" class="btn btn-black btn-sm" style="flex:1;justify-content:center;">View Profile</a>
           <a href="https://wa.me/${phone}" target="_blank" rel="noopener" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i></a>
         </div>`;
       gridContainer.appendChild(card);
@@ -1232,7 +1219,7 @@
     const c = document.getElementById('hero-dynamic-btns');
     if (!c) return;
     const d = p.role==='admin'?'admin-panel':p.role==='teacher'?'teacher-dashboard':'student-dashboard';
-    c.innerHTML = `<a href="pages/${d}.html" class="btn btn-gold"><i class="fa fa-tachometer-alt"></i> Go to Dashboard</a><a href="pages/faculty.html#demo" class="btn btn-dark"><i class="fa fa-play-circle"></i> Request Free Demo</a>`;
+    c.innerHTML = `<a href="pages/${d}.html" class="btn btn-gold"><i class="fa fa-tachometer-alt"></i> Go to Dashboard</a><a href="pages/faculty.html#demo" class="btn btn-dark" rel="nofollow"><i class="fa fa-play-circle"></i> Request Free Demo</a>`;
   }
 
   fetchRealTeachers();
