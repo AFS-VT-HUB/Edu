@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Faculty – AFS Virtual Tutor Hub</title>
+  <title>Teacher Profile – AFS Virtual Tutor Hub</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link rel="stylesheet" href="../css/animations.css"/>
   <link rel="stylesheet" href="../css/responsive.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  
+
   <style>
     :root {
-      --primary: #111111;
       --accent: #FFD700;
-      --accent-hover: #e6c200;
       --dark-bg: #0a0a0a;
       --card-bg: #111111;
       --input-bg: #1a1a1a;
@@ -21,341 +19,146 @@
       --text-main: #ffffff;
       --text-muted-custom: #aaaaaa;
     }
+    body { background-color: var(--dark-bg); color: var(--text-main); }
 
-    body {
-      background-color: var(--dark-bg);
-      color: var(--text-main);
-    }
+    /* NAVBAR */
+    .navbar { background: #ffffff !important; border-bottom: 1px solid #e5e7eb !important; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .navbar-logo-icon { background: #111111 !important; color: #FFD700 !important; border: 1px solid #111111 !important; }
+    .navbar-logo-text { color: #111111 !important; }
+    .navbar-logo-text span { color: #666666 !important; }
+    .navbar-links a { color: #2d3748 !important; font-weight: 500; }
+    .navbar-links a:hover, .navbar-links a.active { color: #FFD700 !important; }
+    .navbar-links a.active { font-weight: 700; }
+    .navbar-links .btn-outline { border-color: #cbd5e1 !important; color: #2d3748 !important; }
+    .navbar-links .btn-outline:hover { border-color: #FFD700 !important; color: #FFD700 !important; }
+    .mobile-menu { background: #ffffff !important; border-bottom: 1px solid #e5e7eb !important; }
+    .mobile-menu a { color: #2d3748 !important; border-bottom: 1px solid #f3f4f6; }
+    .mobile-menu a:hover { color: #FFD700 !important; }
+    .hamburger span { background-color: #111111 !important; }
 
-    /* WHITE NAVBAR STYLES */
-    .navbar {
-      background: #ffffff !important;
-      border-bottom: 1px solid #e5e7eb !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-    .navbar-logo-icon {
-      background: #111111 !important;
-      color: #FFD700 !important;
-      border: 1px solid #111111 !important;
-    }
-    .navbar-logo-text {
-      color: #111111 !important;
-    }
-    .navbar-logo-text span {
-      color: #666666 !important;
-    }
-    .navbar-links a {
-      color: #2d3748 !important;
-      font-weight: 500;
-    }
-    .navbar-links a:hover {
-      color: #FFD700 !important;
-    }
-    .navbar-links a.active {
-      color: #FFD700 !important;
-      font-weight: 700;
-    }
-    .navbar-links .btn-outline {
-      border-color: #cbd5e1 !important;
-      color: #2d3748 !important;
-    }
-    .navbar-links .btn-outline:hover {
-      border-color: #FFD700 !important;
-      color: #FFD700 !important;
-    }
-    .mobile-menu {
-      background: #ffffff !important;
-      border-bottom: 1px solid #e5e7eb !important;
-    }
-    .mobile-menu a {
-      color: #2d3748 !important;
-      border-bottom: 1px solid #f3f4f6;
-    }
-    .mobile-menu a:hover {
-      color: #FFD700 !important;
-    }
-    .hamburger span {
-      background-color: #111111 !important;
-    }
+    /* PAGE */
+    .profile-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
 
-    /* Wrap structure for grid items sorting */
-    .faculty-wrap { 
-      display: flex; 
-      gap: 28px; 
-      max-width: 1200px; 
-      margin: 0 auto; 
-      padding: 40px 24px; 
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent); font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; margin-bottom: 28px; transition: opacity 0.2s;
     }
+    .back-btn:hover { opacity: 0.7; }
 
-    /* Sidebar sticky filters customization */
-    .filters-sidebar {
-      width: 240px; 
-      flex-shrink: 0;
-      background: var(--card-bg) !important; 
-      border: 1px solid var(--accent) !important;
-      border-radius: var(--radius-lg); 
-      padding: 20px;
-      height: fit-content; 
-      position: sticky; 
-      top: 80px;
-      color: var(--text-main);
+    /* HERO */
+    .profile-hero {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 16px; padding: 36px 32px;
+      display: flex; gap: 28px; align-items: flex-start; margin-bottom: 24px;
     }
-    .filters-sidebar h3 { 
-      font-size: 0.9rem; 
-      text-transform: uppercase; 
-      letter-spacing: 1px; 
-      color: var(--accent) !important; 
-      margin-bottom: 16px; 
+    .profile-avatar {
+      width: 100px; height: 100px; border-radius: 50%;
+      font-size: 2.6rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border: 3px solid var(--accent);
     }
+    .profile-hero-info h1 { font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+    .profile-subjects-line { font-size: 1rem; color: var(--text-muted-custom); margin-bottom: 10px; }
+    .rating-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .stars { color: var(--accent); font-size: 1.1rem; }
 
-    .filter-group { margin-bottom: 20px; }
-    .filter-group label { 
-      font-size: 0.85rem; 
-      font-weight: 600; 
-      color: var(--text-main); 
-      display: block; 
-      margin-bottom: 8px; 
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
+    .stat-card {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 20px; text-align: center;
     }
-    .filter-group select { 
-      width: 100%; 
-      padding: 8px 10px; 
-      border: 1px solid var(--border-color) !important; 
-      background: var(--input-bg) !important;
-      border-radius: 8px; 
-      font-size: 0.88rem; 
-      color: var(--text-main) !important; 
-    }
-    .filter-group select:focus { 
-      outline: none; 
-      border-color: var(--accent) !important; 
-      box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
-    }
-    .filter-group select option {
-      background: var(--card-bg) !important;
-      color: var(--text-main) !important;
-    }
+    .stat-card h3 { font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+    .stat-card p { font-size: 0.8rem; color: var(--text-muted-custom); text-transform: uppercase; letter-spacing: 0.5px; }
 
-    /* Main Grid & Cards Architecture */
-    .faculty-main { flex: 1; min-width: 0; }
-    .faculty-header { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-bottom: 20px; 
-      flex-wrap: wrap; 
-      gap: 12px; 
+    /* DETAIL CARDS */
+    .detail-card {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 24px; margin-bottom: 20px;
     }
-    .faculty-header h2 { font-size: 1.3rem; color: var(--text-main); }
-    
-    /* Search Box styling template override */
-    .search-box { 
-      display: flex; 
-      align-items: center; 
-      gap: 8px; 
-      background: var(--card-bg) !important; 
-      border: 1px solid var(--border-color) !important; 
-      border-radius: 8px; 
-      padding: 8px 14px; 
-      flex: 1; 
-      max-width: 320px; 
+    .detail-card h3 {
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--accent); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
     }
-    .search-box input { 
-      border: none; 
-      outline: none; 
-      font-size: 0.9rem; 
-      color: var(--text-main) !important; 
-      width: 100%; 
-      background: transparent; 
-    }
-    .search-box i { color: var(--accent) !important; }
-    
-    .results-count { font-size: 0.85rem; color: var(--text-muted-custom); margin-bottom: 16px; }
+    .detail-card p { color: #cccccc; line-height: 1.7; font-size: 0.95rem; }
 
-    /* Dynamic runtime elements class matching targets */
-    .teacher-card {
-      background: var(--card-bg) !important;
-      border: 1px solid var(--border-color) !important;
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      color: var(--text-main);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .teacher-card:hover {
-      border-color: var(--accent) !important;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
-      transform: translateY(-2px);
-    }
-    .tc-name { color: var(--text-main) !important; font-weight: 600; font-size: 1.1rem; }
-    .tc-subject { color: var(--accent) !important; font-size: 0.85rem; }
-    .stars { color: var(--accent) !important; }
-    
-    /* Dynamic tag elements overrides inside javascript injector loop */
-    .teacher-card .tag {
-      background: var(--input-bg) !important;
-      color: var(--text-main) !important;
-      border: 1px solid var(--border-color);
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-    }
-    .teacher-card .tag-green {
-      border-color: var(--accent) !important;
-      color: var(--accent) !important;
-    }
+    /* TAGS */
+    .tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 5px 12px; border-radius: 6px; font-size: 0.82rem; }
+    .tag-gold { border-color: var(--accent) !important; color: var(--accent) !important; }
 
-    /* Action buttons consistency setup overrides */
+    /* BUTTONS */
+    .action-row { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
     .btn-primary {
-      background: var(--accent) !important;
-      color: #111111 !important;
-      border: 1px solid var(--accent) !important;
-      font-weight: 700;
-      transition: all 0.3s ease;
+      background: var(--accent) !important; color: #111 !important;
+      border: 1px solid var(--accent) !important; font-weight: 700;
+      padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 0.95rem;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
     }
-    .btn-primary:hover {
-      background: transparent !important;
-      color: var(--accent) !important;
-    }
+    .btn-primary:hover { background: transparent !important; color: var(--accent) !important; }
     .btn-outline {
-      background: transparent !important;
-      border: 1px solid var(--border-color) !important;
-      color: var(--text-main) !important;
-      cursor: pointer;
+      background: transparent !important; border: 1px solid var(--border-color) !important;
+      color: var(--text-main) !important; padding: 12px 24px; border-radius: 8px;
+      cursor: pointer; font-size: 0.95rem; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
     }
-    .btn-outline:hover {
-      border-color: var(--accent) !important;
-      color: var(--accent) !important;
-    }
+    .btn-outline:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
     .btn-wa {
-      background: #25D366 !important;
-      color: #fff !important;
-      border: 1px solid #25D366 !important;
+      background: #25D366 !important; color: #fff !important;
+      border: 1px solid #25D366 !important; padding: 12px 24px; border-radius: 8px;
+      cursor: pointer; font-size: 0.95rem; text-decoration: none; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
     }
-    .btn-wa:hover {
-      background: transparent !important;
-      color: #25D366 !important;
-    }
+    .btn-wa:hover { background: transparent !important; color: #25D366 !important; }
 
-    /* REVIEW & PROFILE MODAL STYLES */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.7);
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background-color: #111111;
-      border: 2px solid var(--accent);
-      padding: 30px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 450px;
-      position: relative;
-    }
-    .close-modal {
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      color: var(--text-muted-custom);
-      font-size: 24px;
-      cursor: pointer;
-    }
+    /* REVIEWS */
+    .review-card { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+    .review-card:last-child { margin-bottom: 0; }
+    .reviewer-name { font-weight: 600; color: var(--text-main); margin-bottom: 4px; }
+    .review-stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 6px; }
+    .review-text { color: #cccccc; font-size: 0.9rem; line-height: 1.5; }
+    .review-date { color: var(--text-muted-custom); font-size: 0.78rem; margin-top: 6px; }
+
+    /* MODAL */
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; }
+    .modal-content { background: #111; border: 2px solid var(--accent); padding: 30px; border-radius: 12px; width: 90%; max-width: 450px; position: relative; }
+    .close-modal { position: absolute; right: 20px; top: 15px; color: var(--text-muted-custom); font-size: 24px; cursor: pointer; }
     .close-modal:hover { color: #fff; }
-    .star-rating-input {
-      display: flex;
-      gap: 8px;
-      font-size: 1.8rem;
-      margin: 12px 0;
-      color: #444;
-    }
+    .star-rating-input { display: flex; gap: 8px; font-size: 1.8rem; margin: 12px 0; color: #444; }
     .star-rating-input i { cursor: pointer; transition: color 0.2s; }
     .star-rating-input i.active { color: var(--accent); }
 
-    /* Stats Grid Container Inside Modal Box */
-    .pm-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 15px 0;
-      background: var(--input-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 12px;
-      text-align: center;
-    }
-    .pm-stat-box h4 {
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin-bottom: 2px;
-      font-weight: 700;
-    }
-    .pm-stat-box p {
-      font-size: 0.75rem;
-      color: var(--text-muted-custom);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+    /* DEMO */
+    .section-alt { background: linear-gradient(135deg, #111, #0a0a0a) !important; border-top: 1px solid var(--border-color); padding: 60px 0; }
+    .section-tag { display: inline-block; background: rgba(255,215,0,0.1) !important; color: var(--accent) !important; border: 1px solid var(--accent); padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin-bottom: 12px; }
+    .demo-form-card { background: #111 !important; border: 2px solid var(--accent) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 12px; padding: 35px; }
+    .demo-form-card label { color: var(--accent) !important; font-weight: 500; display: block; margin-bottom: 6px; font-size: 0.9rem; }
+    .demo-form-card input, .demo-form-card select { background: var(--input-bg) !important; border: 1px solid var(--border-color) !important; color: var(--text-main) !important; width: 100%; padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; outline: none; }
+    .demo-form-card input:focus, .demo-form-card select:focus { border-color: var(--accent) !important; }
+    .form-group { margin-bottom: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    select option { background: #111; color: #fff; }
+    select optgroup { background: #0a0a0a; color: var(--accent); font-style: normal; font-weight: 600; }
 
-    /* Fallback handler if query contains zero listings matches */
-    .no-results { 
-      text-align: center; 
-      padding: 60px 20px; 
-      background: var(--card-bg) !important; 
-      border: 1px solid var(--accent) !important; 
-      border-radius: var(--radius-lg); 
-    }
-    .no-results i { font-size: 3rem; color: var(--accent) !important; margin-bottom: 16px; }
+    /* SKELETON */
+    .skeleton { background: linear-gradient(90deg,#1a1a1a 25%,#262626 50%,#1a1a1a 75%) !important; background-size: 200% 100% !important; animation: loading 1.5s infinite !important; border-radius: 8px; }
 
-    /* Free Demo segment customized parameters */
-    .section-alt {
-      background: linear-gradient(135deg, #111111, #0a0a0a) !important;
-      border-top: 1px solid var(--border-color);
-      padding: 60px 0;
-    }
-    .section-tag {
-      background: rgba(255, 215, 0, 0.1) !important;
-      color: var(--accent) !important;
-      border: 1px solid var(--accent);
-    }
-    .demo-form-card {
-      background: #111111 !important;
-      border: 2px solid var(--accent) !important;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      border-radius: 12px;
-      padding: 35px;
-    }
-    .demo-form-card label {
-      color: var(--accent) !important;
-      font-weight: 500;
-    }
-    .demo-form-card input, .demo-form-card select {
-      background: var(--input-bg) !important;
-      border: 1px solid var(--border-color) !important;
-      color: var(--text-main) !important;
-    }
-    .demo-form-card input:focus, .demo-form-card select:focus {
-      border-color: var(--accent) !important;
-    }
+    /* NOT FOUND */
+    .not-found { text-align: center; padding: 80px 24px; }
+    .not-found i { font-size: 4rem; color: var(--accent); margin-bottom: 20px; display: block; }
+    .not-found h2 { color: var(--accent); margin-bottom: 10px; }
+    .not-found p { color: var(--text-muted-custom); margin-bottom: 24px; }
 
-    /* Skeleton Loading effect matched color gradients */
-    .skeleton {
-      background: linear-gradient(90deg, #1a1a1a 25%, #262626 50%, #1a1a1a 75%) !important;
-      background-size: 200% 100% !important;
-      animation: loading 1.5s infinite !important;
+    @media(max-width:768px) {
+      .profile-hero { flex-direction: column; align-items: center; text-align: center; padding: 24px 20px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .action-row { flex-direction: column; }
+      .action-row a, .action-row button { width: 100%; justify-content: center; }
     }
-
-    @media(max-width:768px){
-      .faculty-wrap { flex-direction:column; padding:20px 16px; }
-      .filters-sidebar { width:100%; position:static; margin-bottom: 20px; }
-      .pm-stats-grid { grid-template-columns: 1fr; gap: 12px; }
-    }
+    @media(max-width:480px) { .stats-row { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -383,7 +186,7 @@
   </div>
   <div class="mobile-menu" id="mobile-menu">
     <a href="../index.html">Home</a>
-    <a href="faculty.html" style="color: #FFD700 !important;">Faculty</a>
+    <a href="faculty.html" style="color:#FFD700!important;">Faculty</a>
     <a href="courses.html">Courses</a>
     <a href="about-ceo.html">About CEO</a>
     <a href="faq.html">FAQ</a>
@@ -393,114 +196,113 @@
   </div>
 </nav>
 
-<div style="background: linear-gradient(135deg, #111111, #1a1a1a); padding:48px 24px; text-align:center; color:#fff; border-bottom: 1px solid #262626;">
-  <h1 style="color:#FFD700; margin-bottom:8px; font-weight: 700;">Our Expert Teachers</h1>
-  <p style="color:#aaaaaa; max-width: 600px; margin: 0 auto;">Verified & approved by CEO Muhammad Awais — All curricula covered</p>
-</div>
+<!-- PROFILE PAGE -->
+<div class="profile-wrap">
 
-<div class="faculty-wrap">
+  <a href="faculty.html" class="back-btn">
+    <i class="fa fa-arrow-left"></i> Back to All Teachers
+  </a>
 
-  <div class="filters-sidebar animate-fadeInUp">
-    <h3><i class="fa fa-filter"></i> Filters</h3>
-    <div class="filter-group">
-      <label>Subject</label>
-      <select id="f-subject">
-        <option value="">All Subjects</option>
-        <option>Mathematics</option>
-        <option>Physics</option>
-        <option>Chemistry</option>
-        <option>Biology</option>
-        <option>English</option>
-        <option>Urdu</option>
-        <option>CSS/PMS</option>
-        <option>ISSB</option>
-        <option>Biomaths</option>
-        <option>Computer Science</option>
-        <option>Further Maths</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <label>Curriculum</label>
-      <select id="f-curriculum">
-        <option value="">All Curricula</option>
-        <option>Pakistani Matric</option>
-        <option>FSc</option>
-        <option>Cambridge O Level</option>
-        <option>Cambridge A Level</option>
-        <option>IGCSE</option>
-        <option>GCSE</option>
-        <option>Edexcel</option>
-        <option>CSS/PMS</option>
-        <option>ISSB</option>
-        <option>Cadet College</option>
-        <option>Indian Curriculum</option>
-        <option>Gulf Curriculum</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <label>Experience</label>
-      <select id="f-experience">
-        <option value="">Any Experience</option>
-        <option value="0-1">Less than 1 year</option>
-        <option value="1-2">1-2 years</option>
-        <option value="3-5">3-5 years</option>
-        <option value="5-10">5-10 years</option>
-        <option value="10+">10+ years</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <label>Sort By</label>
-      <select id="f-sort">
-        <option value="rating">Highest Rating</option>
-        <option value="experience">Most Experienced</option>
-        <option value="newest">Newest First</option>
-      </select>
-    </div>
-    <button class="btn btn-primary btn-block" onclick="applyFilters()">
-      <i class="fa fa-search"></i> Apply Filters
-    </button>
-    <button class="btn btn-outline btn-block" style="margin-top: 8px;" onclick="clearFilters()">
-      Clear Filters
-    </button>
-  </div>
-
-  <div class="faculty-main">
-    <div class="faculty-header">
-      <h2 style="font-weight: 700;">All Approved Instructors</h2>
-      <div class="search-box">
-        <i class="fa fa-search"></i>
-        <input type="text" id="search-input" placeholder="Search teacher by name..."/>
+  <!-- SKELETON -->
+  <div id="profile-skeleton">
+    <div style="display:flex;gap:24px;background:#111;border:1px solid #262626;border-radius:16px;padding:36px 32px;margin-bottom:24px;">
+      <div class="skeleton" style="width:100px;height:100px;border-radius:50%;flex-shrink:0;"></div>
+      <div style="flex:1;">
+        <div class="skeleton" style="height:28px;width:55%;margin-bottom:12px;"></div>
+        <div class="skeleton" style="height:16px;width:40%;margin-bottom:12px;"></div>
+        <div class="skeleton" style="height:16px;width:30%;"></div>
       </div>
     </div>
-    
-    <div class="results-count" id="results-count">Loading...</div>
-    
-    <div class="teachers-grid" id="teachers-grid">
-      <div class="teacher-card">
-        <div class="tc-top">
-          <div class="skeleton" style="width:54px;height:54px;border-radius:50%"></div>
-          <div style="flex:1">
-            <div class="skeleton" style="height:16px;width:60%;margin-bottom:6px"></div>
-            <div class="skeleton" style="height:12px;width:40%"></div>
-          </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;">
+      <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+      <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+      <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+    </div>
+    <div class="skeleton" style="height:120px;border-radius:12px;margin-bottom:20px;"></div>
+    <div class="skeleton" style="height:80px;border-radius:12px;"></div>
+  </div>
+
+  <!-- PROFILE CONTENT -->
+  <div id="profile-content" style="display:none;">
+
+    <div class="profile-hero animate-fadeInUp">
+      <div class="profile-avatar" id="p-avatar"></div>
+      <div class="profile-hero-info">
+        <h1 id="p-name"></h1>
+        <div class="profile-subjects-line" id="p-subjects-line"></div>
+        <div class="rating-row">
+          <span class="stars" id="p-stars"></span>
+          <span id="p-rating" style="font-weight:700;color:#fff;"></span>
+          <span id="p-review-count" style="color:var(--text-muted-custom);font-size:0.88rem;"></span>
         </div>
-        <div class="skeleton" style="height:12px;width:80%;margin:8px 0"></div>
-        <div class="skeleton" style="height:36px;border-radius:8px"></div>
       </div>
     </div>
+
+    <div class="stats-row animate-fadeInUp">
+      <div class="stat-card"><h3 id="s-rating">0.0</h3><p>Avg Rating</p></div>
+      <div class="stat-card"><h3 id="s-students">0</h3><p>Students</p></div>
+      <div class="stat-card"><h3 id="s-demos">0</h3><p>Demos Given</p></div>
+    </div>
+
+    <div class="action-row animate-fadeInUp">
+      <a id="btn-whatsapp" href="#" target="_blank" class="btn-wa">
+        <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+      </a>
+      <button onclick="openReviewModal()" class="btn-outline">
+        <i class="fa fa-pen"></i> Write a Review
+      </button>
+    </div>
+
+    <div class="detail-card animate-fadeInUp">
+      <h3><i class="fa fa-user"></i> About This Teacher</h3>
+      <p id="p-bio"></p>
+    </div>
+
+    <div class="detail-card animate-fadeInUp">
+      <h3><i class="fa fa-book"></i> Subjects Taught</h3>
+      <div class="tags-wrap" id="p-subjects-tags"></div>
+    </div>
+
+    <div class="detail-card animate-fadeInUp">
+      <h3><i class="fa fa-graduation-cap"></i> Curricula Covered</h3>
+      <div class="tags-wrap" id="p-curricula-tags"></div>
+    </div>
+
+    <div class="detail-card animate-fadeInUp">
+      <h3><i class="fa fa-briefcase"></i> Experience</h3>
+      <p id="p-experience"></p>
+    </div>
+
+    <div class="detail-card animate-fadeInUp">
+      <h3><i class="fa fa-star"></i> Student Reviews</h3>
+      <div id="p-reviews-list">
+        <p style="color:var(--text-muted-custom);font-size:0.9rem;">Loading reviews...</p>
+      </div>
+    </div>
+
   </div>
+
+  <!-- NOT FOUND -->
+  <div id="profile-not-found" style="display:none;" class="not-found">
+    <i class="fa fa-user-slash"></i>
+    <h2>Teacher Not Found</h2>
+    <p>This profile does not exist or has been removed.</p>
+    <a href="faculty.html" class="btn-primary" style="display:inline-flex;margin:0 auto;">
+      <i class="fa fa-arrow-left"></i> Back to Faculty
+    </a>
+  </div>
+
 </div>
 
+<!-- REVIEW MODAL -->
 <div id="review-modal" class="modal">
   <div class="modal-content animate-fadeInUp">
     <span class="close-modal" onclick="closeReviewModal()">&times;</span>
-    <h3 style="color: var(--accent); font-weight: 700; margin-bottom: 6px;">Write a Review</h3>
-    <p style="font-size:0.85rem; color: var(--text-muted-custom);" id="modal-teacher-name">Teacher Name</p>
-    
-    <input type="hidden" id="modal-teacher-id" value=""/>
-    
-    <div class="form-group" style="margin-top: 15px;">
-      <label>Your Rating</label>
+    <h3 style="color:var(--accent);font-weight:700;margin-bottom:6px;">Write a Review</h3>
+    <p style="font-size:0.85rem;color:var(--text-muted-custom);" id="modal-teacher-name"></p>
+    <input type="hidden" id="modal-teacher-id"/>
+    <div style="margin-top:15px;">
+      <label style="font-size:0.85rem;font-weight:600;color:#fff;display:block;margin-bottom:4px;">Your Rating</label>
       <div class="star-rating-input" id="star-selector">
         <i class="fa fa-star" data-rating="1"></i>
         <i class="fa fa-star" data-rating="2"></i>
@@ -509,73 +311,25 @@
         <i class="fa fa-star" data-rating="5"></i>
       </div>
     </div>
-
-    <div class="form-group">
-      <label>Feedback Message</label>
-      <textarea id="modal-review-text" rows="4" placeholder="Share your learning experience with this teacher..." style="width:100%; background: var(--input-bg); border: 1px solid var(--border-color); color:#fff; border-radius:8px; padding:10px; resize:none; outline:none; font-size:0.9rem;"></textarea>
+    <div style="margin-top:12px;">
+      <label style="font-size:0.85rem;font-weight:600;color:#fff;display:block;margin-bottom:4px;">Feedback Message</label>
+      <textarea id="modal-review-text" rows="4" placeholder="Share your learning experience..." style="width:100%;margin-top:4px;background:var(--input-bg);border:1px solid var(--border-color);color:#fff;border-radius:8px;padding:10px;resize:none;outline:none;font-size:0.9rem;"></textarea>
     </div>
-
-    <button class="btn btn-primary btn-block" id="btn-submit-review" style="margin-top:15px;">
+    <button class="btn-primary" id="btn-submit-review" style="margin-top:15px;width:100%;justify-content:center;">
       <i class="fa fa-paper-plane"></i> Submit Review
     </button>
   </div>
 </div>
 
-<div id="profile-modal" class="modal" style="display: none;">
-  <div class="modal-content animate-fadeInUp" style="max-width: 600px; width: 90%;">
-    <span class="close-modal" onclick="closeProfileModal()">&times;</span>
-    
-    <div style="text-align: center; margin-bottom: 12px;">
-      <div id="pm-avatar" style="width: 85px; height: 85px; border-radius: 50%; font-size: 2.2rem; font-weight: bold; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;"></div>
-      <h3 id="pm-name" style="color: var(--accent); font-weight: 700; margin-bottom: 4px; font-size: 1.5rem;">Teacher Name</h3>
-      <p id="pm-subject" style="color: var(--text-muted-custom); font-size: 0.9rem; margin-bottom: 4px;"></p>
+<!-- DEMO SECTION -->
+<section class="section-alt" id="demo">
+  <div style="max-width:560px;margin:0 auto;padding:0 24px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="section-tag">Free Demo Class</div>
+      <h2 style="color:#fff;font-weight:700;margin-top:12px;">Request a Free Demo Class</h2>
+      <p style="color:var(--text-muted-custom);">Cambridge, IGCSE, CSS/PMS, ISSB, Cadet College — our tutors will contact you within 24 hours.</p>
     </div>
-
-    <div class="pm-stats-grid">
-      <div class="pm-stat-box" style="border-right: 1px solid var(--border-color);">
-        <h4 id="pm-stat-rating">0.0</h4>
-        <p id="pm-stat-stars" style="color: var(--accent); margin-bottom: 2px; font-size: 0.75rem;">★★★★★</p>
-        <p id="pm-stat-reviews">0 Reviews</p>
-      </div>
-      <div class="pm-stat-box" style="border-right: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center;">
-        <h4 id="pm-stat-students">0</h4>
-        <p>Assigned Students</p>
-      </div>
-      <div class="pm-stat-box" style="display: flex; flex-direction: column; justify-content: center;">
-        <h4 id="pm-stat-demos">0</h4>
-        <p>Demos Given</p>
-      </div>
-    </div>
-
-    <div style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--border-color); padding-top: 15px;">
-      <div>
-        <strong style="color: var(--accent);"><i class="fa fa-graduation-cap"></i> Curricula Covered:</strong>
-        <p id="pm-curricula" style="margin-top: 4px; color: #fff; font-size: 0.9rem;"></p>
-      </div>
-      <div>
-        <strong style="color: var(--accent);"><i class="fa fa-briefcase"></i> Experience:</strong>
-        <p id="pm-experience" style="margin-top: 4px; color: #fff; font-size: 0.9rem;"></p>
-      </div>
-      <div>
-        <strong style="color: var(--accent);"><i class="fa fa-book"></i> About / Bio:</strong>
-        <p id="pm-bio" style="margin-top: 4px; color: #cccccc; line-height: 1.5; text-align: justify; font-size: 0.9rem;"></p>
-      </div>
-    </div>
-    
-    <div id="pm-whatsapp-container" style="margin-top: 20px;">
-      </div>
-  </div>
-</div>
-
-<section class="section section-alt" id="demo">
-  <div class="container" style="max-width:560px;">
-    <div class="section-header" style="text-align: center; margin-bottom: 28px;">
-      <div class="section-tag">Free Demo</div>
-      <h2 style="color: #fff; font-weight: 700; margin-top: 12px;">Request a Free Demo Class</h2>
-      <p style="color: var(--text-muted-custom);">Connect with any expert tutor for a live structural test session</p>
-    </div>
-    
-    <div class="form-wrap demo-form-card animate-fadeInUp">
+    <div class="demo-form-card animate-fadeInUp">
       <div class="form-group">
         <label>Your Name <span style="color:red">*</span></label>
         <input type="text" id="demo-name" placeholder="Muhammad Ali"/>
@@ -589,39 +343,88 @@
           <label>Subject <span style="color:red">*</span></label>
           <select id="demo-subject">
             <option value="">Select</option>
-            <option>Mathematics</option>
-            <option>Physics</option>
-            <option>Chemistry</option>
-            <option>Biology</option>
-            <option>English</option>
-            <option>CSS/PMS</option>
-            <option>Biomaths</option>
-            <option>Other</option>
+            <optgroup label="General &amp; Technical Subjects">
+              <option>Accounting</option>
+              <option>Additional Mathematics</option>
+              <option>Arabic</option>
+              <option>Art &amp; Design</option>
+              <option>Biology</option>
+              <option>Business Management</option>
+              <option>Business Studies</option>
+              <option>Calculus</option>
+              <option>Chemistry</option>
+              <option>Computer Science</option>
+              <option>Economics</option>
+              <option>English</option>
+              <option>English Language</option>
+              <option>English Literature</option>
+              <option>Environmental Science</option>
+              <option>Fine Arts</option>
+              <option>French</option>
+              <option>Geography</option>
+              <option>German</option>
+              <option>History</option>
+              <option>Information Technology (IT)</option>
+              <option>Law</option>
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Political Science</option>
+              <option>Psychology</option>
+              <option>Social Studies</option>
+              <option>Sociology</option>
+              <option>Spanish</option>
+              <option>Statistics</option>
+              <option>Urdu</option>
+            </optgroup>
+            <optgroup label="Madrassa &amp; Islamic Studies">
+              <option>Arabic Grammar</option>
+              <option>Dua &amp; Adhkar</option>
+              <option>Fiqh</option>
+              <option>Hadees</option>
+              <option>Hifz</option>
+              <option>Islamic History</option>
+              <option>Islamic Studies</option>
+              <option>Nazra</option>
+              <option>Quranic Sciences</option>
+              <option>Seerat un Nabi</option>
+              <option>Surah Memorization</option>
+              <option>Tafseer</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
           <label>Curriculum <span style="color:red">*</span></label>
           <select id="demo-curriculum">
             <option value="">Select</option>
-            <option>Pakistani Matric</option>
-            <option>Cambridge O/A</option>
-            <option>IGCSE/GCSE</option>
-            <option>CSS/PMS</option>
-            <option>Other</option>
+            <option>Federal Board (FBISE)</option>
+            <option>Punjab Board</option>
+            <option>Sindh Board</option>
+            <option>Khyber Pakhtunkhwa Board</option>
+            <option>Cambridge O Levels</option>
+            <option>Cambridge A Levels</option>
+            <option>IGCSE</option>
+            <option>GCSE</option>
+            <option>CSS (Central Superior Services)</option>
+            <option>PMS (Provincial Management Services)</option>
+            <option>ISSB</option>
+            <option>Cadet College Admission Test</option>
+            <option>MDCAT / ECAT</option>
+            <option>International Baccalaureate (IB)</option>
+            <option>American Curriculum</option>
+            <option>Madrassa / Islamic Studies</option>
           </select>
         </div>
       </div>
       <div class="form-group">
         <label>Preferred Time</label>
-        <input type="text" id="demo-time" placeholder="e.g. Weekdays 5pm-7pm"/>
+        <input type="text" id="demo-time" placeholder="e.g. Weekdays 5pm–7pm"/>
       </div>
       <div class="form-group">
-        <label>Select Teacher <small style="color:var(--text-muted-custom)">(optional)</small></label>
-        <select id="demo-teacher-select" style="width:100%; padding:10px 14px; font-size:0.95rem;">
-          <option value="">Any available teacher</option>
-        </select>
+        <label>Selected Teacher <small style="color:var(--text-muted-custom)">(auto-filled from profile)</small></label>
+        <input type="text" id="demo-teacher-name" readonly style="opacity:0.7;cursor:not-allowed;"/>
+        <input type="hidden" id="demo-teacher-id"/>
       </div>
-      <button class="btn btn-primary btn-block" id="btn-demo" style="margin-top: 10px;">
+      <button class="btn-primary" id="btn-demo" style="margin-top:10px;width:100%;justify-content:center;">
         <i class="fa fa-paper-plane"></i> Send Demo Request
       </button>
     </div>
@@ -630,13 +433,11 @@
 
 <script src="../js/main.js"></script>
 <script type="module">
-  import { setupNavbar } from '../js/navbar-auth.js';
-
   import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
   import {
-    getFirestore, collection, getDocs, addDoc, updateDoc,
-    serverTimestamp, query, where, doc, getDoc
+    getFirestore, doc, getDoc, collection, addDoc,
+    query, where, getDocs, orderBy, updateDoc, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -647,395 +448,244 @@
     messagingSenderId: "146570288811",
     appId: "1:146570288811:web:96da475a769c18696321ee"
   };
-  const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-  const db  = getFirestore(app);
-  const auth = getAuth(app);
 
-  let allTeachers = [];
+  const app  = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+  const db   = getFirestore(app);
+  const auth = getAuth(app);
+  const ADMIN_WHATSAPP = "+923120940518";
   let selectedRating = 5;
 
-  // ── Auth aware navbar handles white background dynamic states ──
+  // Navbar auth
   onAuthStateChanged(auth, async (user) => {
     if (!user) return;
     const snap = await getDoc(doc(db, 'users', user.uid));
     if (!snap.exists()) return;
     const p = snap.data();
-    const navLinks   = document.getElementById('navbar-links');
-    const mobileMenu = document.getElementById('mobile-menu');
-
+    const navLinks = document.getElementById('navbar-links');
+    const mobile   = document.getElementById('mobile-menu');
     if (p.role === 'admin') {
-      navLinks.innerHTML = `
-        <a href="../index.html" style="color: #2d3748 !important;">Home</a>
-        <a href="../pages/admin-panel.html" class="btn btn-primary btn-sm"><i class="fa fa-shield-alt"></i> Admin Panel</a>`;
-      mobileMenu.innerHTML = `
-        <a href="../index.html" style="color: #2d3748 !important;">Home</a>
-        <a href="admin-panel.html" style="color: #2d3748 !important;">Admin Panel</a>`;
+      navLinks.innerHTML = `<a href="../index.html" style="color:#2d3748!important">Home</a><a href="../pages/admin-panel.html" class="btn btn-primary btn-sm"><i class="fa fa-shield-alt"></i> Admin Panel</a>`;
+      mobile.innerHTML   = `<a href="../index.html" style="color:#2d3748!important">Home</a><a href="admin-panel.html" style="color:#2d3748!important">Admin Panel</a>`;
     } else if (p.role === 'teacher') {
-      navLinks.innerHTML = `
-        <a href="../index.html" style="color: #2d3748 !important;">Home</a>
-        <a href="teacher-dashboard.html" class="btn btn-primary btn-sm"><i class="fa fa-tachometer-alt"></i> My Dashboard</a>`;
-      mobileMenu.innerHTML = `
-        <a href="../index.html" style="color: #2d3748 !important;">Home</a>
-        <a href="teacher-dashboard.html" style="color: #2d3748 !important;">My Dashboard</a>`;
+      navLinks.innerHTML = `<a href="../index.html" style="color:#2d3748!important">Home</a><a href="teacher-dashboard.html" class="btn btn-primary btn-sm"><i class="fa fa-tachometer-alt"></i> My Dashboard</a>`;
+      mobile.innerHTML   = `<a href="../index.html" style="color:#2d3748!important">Home</a><a href="teacher-dashboard.html" style="color:#2d3748!important">My Dashboard</a>`;
     } else {
-      navLinks.innerHTML = `
-        <a href="../index.html" style="color: #2d3748 !important;">Home</a>
-        <a href="faculty.html" class="active" style="color: #FFD700 !important; font-weight:700;">Faculty</a>
-        <a href="courses.html" style="color: #2d3748 !important;">Courses</a>
-        <a href="about-ceo.html" style="color: #2d3748 !important;">About CEO</a>
-        <a href="faq.html" style="color: #2d3748 !important;">FAQ</a>
-        <a href="contact.html" style="color: #2d3748 !important;">Contact</a>
-        <a href="student-dashboard.html" class="btn btn-primary btn-sm"><i class="fa fa-tachometer-alt"></i> Dashboard</a>`;
-      mobileMenu.innerHTML = `
-        <a href="../index.html" style="color: #2d3748 !important;">Home</a>
-        <a href="faculty.html" style="color: #FFD700 !important;">Faculty</a>
-        <a href="student-dashboard.html" style="color: #2d3748 !important;">My Dashboard</a>`;
+      navLinks.innerHTML = `<a href="../index.html" style="color:#2d3748!important">Home</a><a href="faculty.html" class="active" style="color:#FFD700!important;font-weight:700;">Faculty</a><a href="courses.html" style="color:#2d3748!important">Courses</a><a href="about-ceo.html" style="color:#2d3748!important">About CEO</a><a href="faq.html" style="color:#2d3748!important">FAQ</a><a href="contact.html" style="color:#2d3748!important">Contact</a><a href="student-dashboard.html" class="btn btn-primary btn-sm"><i class="fa fa-tachometer-alt"></i> Dashboard</a>`;
+      mobile.innerHTML   = `<a href="../index.html" style="color:#2d3748!important">Home</a><a href="faculty.html" style="color:#FFD700!important">Faculty</a><a href="student-dashboard.html" style="color:#2d3748!important">My Dashboard</a>`;
     }
   });
 
-  // ── Load teachers ──
-  async function loadTeachers() {
+  // Get ID from URL
+  const teacherId = new URLSearchParams(window.location.search).get('id');
+
+  async function loadProfile() {
+    if (!teacherId) { showNotFound(); return; }
     try {
-      const q = query(
-        collection(db, 'users'),
-        where('role', '==', 'teacher'),
-        where('isApproved', '==', true)
-      );
-      const snap = await getDocs(q);
-      allTeachers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      renderTeachers(allTeachers);
-      populateTeacherDropdown(allTeachers);
+      const snap = await getDoc(doc(db, 'users', teacherId));
+      if (!snap.exists() || snap.data().role !== 'teacher') { showNotFound(); return; }
+      renderProfile({ id: snap.id, ...snap.data() });
+      loadReviews(teacherId);
     } catch(e) {
-      console.warn(e.message);
-      allTeachers = [];
-      renderTeachers([]);
+      console.error(e);
+      showNotFound();
     }
   }
 
-  // ── Populate teacher dropdown in demo form ──
-  function populateTeacherDropdown(teachers) {
-    const select = document.getElementById('demo-teacher-select');
-    if(!select) return;
-    select.innerHTML = '<option value="">Any available teacher</option>';
-    teachers.forEach(t => {
-      const opt = document.createElement('option');
-      opt.value = t.id;
-      opt.textContent = `${t.fullName} — ${(t.subjects||[]).slice(0,2).join(', ')}`;
-      select.appendChild(opt);
-    });
-  }
+  function renderProfile(t) {
+    document.title = `${t.fullName || 'Teacher'} – AFS Virtual Tutor Hub`;
 
-  // ── Render teacher cards ──
-  function renderTeachers(teachers) {
-    const grid  = document.getElementById('teachers-grid');
-    const count = document.getElementById('results-count');
-    count.textContent = `${teachers.length} teacher${teachers.length !== 1 ? 's' : ''} found`;
+    // Avatar
+    const initials = (t.fullName || 'T').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+    const av = document.getElementById('p-avatar');
+    av.style.background = 'linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7)';
+    av.style.color = '#111';
+    av.textContent = initials;
 
-    if (teachers.length === 0) {
-      grid.innerHTML = `
-        <div class="no-results" style="grid-column:1/-1">
-          <i class="fa fa-user-slash"></i>
-          <h3 style="color: #FFD700; font-weight:700;">No teachers found</h3>
-          <p style="color: #aaa; margin-bottom: 12px;">Try different filters or check back later</p>
-          <a href="teacher-register.html" class="btn btn-primary mt-16" style="display:inline-block; padding:10px 20px;">Register as Teacher</a>
-        </div>`;
-      return;
-    }
+    // Hero
+    document.getElementById('p-name').textContent          = t.fullName || 'Teacher';
+    document.getElementById('p-subjects-line').textContent = (t.subjects || []).join(' • ') || 'N/A';
 
-    const badgeBackgrounds = [
-      'linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7)',
-      'linear-gradient(135deg, #d4af37, #85581A)',
-      'linear-gradient(135deg, #111, #333)'
-    ];
+    const rv = t.avgRating || 0;
+    const rc = t.reviewCount || 0;
+    document.getElementById('p-stars').textContent        = '★'.repeat(Math.round(rv)) + '☆'.repeat(5 - Math.round(rv));
+    document.getElementById('p-rating').textContent       = rv;
+    document.getElementById('p-review-count').textContent = `(${rc} review${rc !== 1 ? 's' : ''})`;
 
-    grid.innerHTML = teachers.map((t, i) => {
-      const initials = (t.fullName||'T').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-      const bgStyle = badgeBackgrounds[i % badgeBackgrounds.length];
-      const fontColor = (i % badgeBackgrounds.length === 2) ? '#FFD700' : '#111';
-      const borderFix = (i % badgeBackgrounds.length === 2) ? '1px solid #FFD700' : 'none';
-      const stars = '★'.repeat(Math.round(t.avgRating||0)) + '☆'.repeat(5-Math.round(t.avgRating||0));
-      const waNum = (t.whatsapp||'').replace(/\D/g,'');
-      const escapedName = (t.fullName || 'Teacher').replace(/'/g, "\\'");
+    // Stats
+    document.getElementById('s-rating').textContent   = rv;
+    document.getElementById('s-students').textContent = t.assignedStudents || 0;
+    document.getElementById('s-demos').textContent    = t.demosGiven || 0;
 
-      return `
-        <div class="teacher-card animate-fadeInUp">
-          <div class="tc-top">
-            <div class="tc-avatar" style="background:${bgStyle}; color:${fontColor}; border:${borderFix}; font-weight:700; display:flex; align-items:center; justify-content:center;">${initials}</div>
-            <div>
-              <div class="tc-name">${t.fullName||'Teacher'}</div>
-              <div class="tc-subject">${(t.subjects||[]).slice(0,2).join(' • ')}</div>
-            </div>
-          </div>
-          <div class="tc-rating" style="margin: 8px 0; font-size:0.9rem;">
-            <span class="stars">${stars}</span>
-            <span style="color:#fff; font-weight:500; margin-left:4px;">${t.avgRating||0}</span>
-            <small style="color:#aaaaaa">(${t.reviewCount||0} reviews)</small>
-          </div>
-          <div class="tc-tags" style="margin-bottom: 10px; display:flex; gap:6px; flex-wrap:wrap;">
-            ${(t.curricula||[]).slice(0,2).map(c=>`<span class="tag">${c}</span>`).join('')}
-            ${t.experience ? `<span class="tag tag-green">${t.experience} exp</span>` : ''}
-          </div>
-          <div style="font-size:0.85rem; color:#cccccc; margin:4px 0 14px; line-height:1.4; flex-grow:1;">
-            ${t.bio ? t.bio.slice(0,80)+'...' : ''}
-          </div>
-          <div class="tc-actions" style="display:flex; flex-direction:column; gap:8px; margin-top:auto;">
-            <div style="display:flex; gap:8px; width:100%;">
-              <button onclick="openProfileModal('${t.id}')" class="btn btn-outline btn-sm" style="flex:1; text-align:center;">
-                <i class="fa fa-user"></i> Profile
-              </button>
-              ${waNum ? `
-              <a href="https://wa.me/${waNum}?text=Hello, I found you on AFS Virtual Tutor Hub"
-                 target="_blank" class="btn btn-wa btn-sm" style="flex:1; text-align:center;">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-              </a>` : ''}
-            </div>
-            <button onclick="openReviewModal('${t.id}', '${escapedName}')" class="btn btn-outline btn-sm" style="border-color: rgba(255,215,0,0.3) !important; color: var(--accent) !important;">
-              <i class="fa fa-pen"></i> Write Review
-            </button>
-          </div>
-        </div>`;
-    }).join('');
-  }
+    // Bio
+    document.getElementById('p-bio').textContent = t.bio || 'No biography provided.';
 
-  // ── Teacher Profile Modal Controls ──
-  window.openProfileModal = (teacherId) => {
-    const teacher = allTeachers.find(t => t.id === teacherId);
-    if (!teacher) return;
+    // Subject tags
+    document.getElementById('p-subjects-tags').innerHTML =
+      (t.subjects || []).length
+        ? t.subjects.map(s => `<span class="tag tag-gold">${s}</span>`).join('')
+        : '<span style="color:var(--text-muted-custom)">N/A</span>';
 
-    const initials = (teacher.fullName || 'T').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    const badgeBackgrounds = [
-      'linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7)',
-      'linear-gradient(135deg, #d4af37, #85581A)',
-      'linear-gradient(135deg, #111, #333)'
-    ];
-    
-    const avatarEl = document.getElementById('pm-avatar');
-    avatarEl.style.background = badgeBackgrounds[Math.floor(Math.random() * badgeBackgrounds.length)];
-    avatarEl.style.color = avatarEl.style.background.includes('#111') ? '#FFD700' : '#111';
-    avatarEl.textContent = initials;
+    // Curricula tags
+    document.getElementById('p-curricula-tags').innerHTML =
+      (t.curricula || []).length
+        ? t.curricula.map(c => `<span class="tag">${c}</span>`).join('')
+        : '<span style="color:var(--text-muted-custom)">N/A</span>';
 
-    document.getElementById('pm-name').textContent = teacher.fullName || 'Teacher';
-    document.getElementById('pm-subject').textContent = (teacher.subjects || []).join(' • ') || 'N/A';
-    document.getElementById('pm-curricula').textContent = (teacher.curricula || []).join(', ') || 'N/A';
-    document.getElementById('pm-experience').textContent = teacher.experience ? `${teacher.experience} of experience` : 'N/A';
-    document.getElementById('pm-bio').textContent = teacher.bio || 'No biography details provided.';
+    // Experience
+    document.getElementById('p-experience').textContent =
+      t.experience ? `${t.experience} of teaching experience` : 'Not specified';
 
-    // Dynamic Multi-Counters Injector Logic (Rating, Demos, Students Counters)
-    const ratingVal = teacher.avgRating || 0;
-    const starString = '★'.repeat(Math.round(ratingVal)) + '☆'.repeat(5 - Math.round(ratingVal));
-    
-    document.getElementById('pm-stat-rating').textContent = ratingVal;
-    document.getElementById('pm-stat-stars').textContent = starString;
-    document.getElementById('pm-stat-reviews').textContent = `${teacher.reviewCount || 0} Reviews`;
-    document.getElementById('pm-stat-students').textContent = teacher.assignedStudents || 0;
-    document.getElementById('pm-stat-demos').textContent = teacher.demosGiven || 0;
-
-    const waContainer = document.getElementById('pm-whatsapp-container');
-    const waNum = (teacher.whatsapp || '').replace(/\D/g, '');
+    // WhatsApp
+    const waNum = (t.whatsapp || '').replace(/\D/g,'');
+    const waBtn = document.getElementById('btn-whatsapp');
     if (waNum) {
-      waContainer.innerHTML = `
-        <a href="https://wa.me/${waNum}?text=Hello, I found you on AFS Virtual Tutor Hub"
-           target="_blank" class="btn btn-wa btn-block" style="text-align:center; display:block; width:100%;">
-          <i class="fab fa-whatsapp"></i> Contact on WhatsApp
-        </a>`;
+      waBtn.href = `https://wa.me/${waNum}?text=${encodeURIComponent("Hello, I found you on AFS Virtual Tutor Hub. I'd like to learn from you.")}`;
     } else {
-      waContainer.innerHTML = '';
+      const subs = (t.subjects || []).slice(0,2).join(', ');
+      waBtn.href = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(`Hello AFS Virtual Tutor Hub, I am interested in: ${t.fullName} (${subs}). Please guide me.`)}`;
     }
 
-    document.getElementById('profile-modal').style.display = 'flex';
-  };
+    // Demo pre-fill
+    document.getElementById('demo-teacher-name').value = t.fullName || '';
+    document.getElementById('demo-teacher-id').value   = t.id;
 
-  window.closeProfileModal = () => {
-    document.getElementById('profile-modal').style.display = 'none';
-  };
+    // Review modal
+    document.getElementById('modal-teacher-name').textContent = t.fullName || 'Teacher';
+    document.getElementById('modal-teacher-id').value = t.id;
 
-  // ── Review Modal Controls ──
-  window.openReviewModal = (teacherId, teacherName) => {
-    document.getElementById('modal-teacher-id').value = teacherId;
-    document.getElementById('modal-teacher-name').textContent = teacherName;
+    document.getElementById('profile-skeleton').style.display = 'none';
+    document.getElementById('profile-content').style.display  = 'block';
+  }
+
+  async function loadReviews(tid) {
+    const listEl = document.getElementById('p-reviews-list');
+    try {
+      const snap = await getDocs(query(
+        collection(db, 'reviews'),
+        where('teacherId', '==', tid),
+        orderBy('createdAt', 'desc')
+      ));
+      if (snap.empty) {
+        listEl.innerHTML = '<p style="color:var(--text-muted-custom);font-size:0.9rem;">No reviews yet. Be the first to review!</p>';
+        return;
+      }
+      listEl.innerHTML = snap.docs.map(d => {
+        const r = d.data();
+        const stars = '★'.repeat(r.rating||0) + '☆'.repeat(5-(r.rating||0));
+        const date  = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString('en-PK',{day:'numeric',month:'short',year:'numeric'}) : '';
+        return `<div class="review-card">
+          <div class="reviewer-name">${r.studentName||'Anonymous'}</div>
+          <div class="review-stars">${stars}</div>
+          <div class="review-text">${r.reviewText||''}</div>
+          ${date ? `<div class="review-date">${date}</div>` : ''}
+        </div>`;
+      }).join('');
+    } catch(e) {
+      listEl.innerHTML = '<p style="color:var(--text-muted-custom);font-size:0.9rem;">Could not load reviews.</p>';
+    }
+  }
+
+  function showNotFound() {
+    document.getElementById('profile-skeleton').style.display  = 'none';
+    document.getElementById('profile-not-found').style.display = 'block';
+  }
+
+  // Review modal
+  window.openReviewModal = () => {
+    resetStars();
     document.getElementById('modal-review-text').value = '';
-    resetStarSelector();
     document.getElementById('review-modal').style.display = 'flex';
   };
+  window.closeReviewModal = () => { document.getElementById('review-modal').style.display = 'none'; };
 
-  window.closeReviewModal = () => {
-    document.getElementById('review-modal').style.display = 'none';
-  };
-
-  // Setup Star Selection Interaction
-  const starsElements = document.querySelectorAll('#star-selector i');
-  starsElements.forEach(star => {
-    star.addEventListener('click', (e) => {
-      selectedRating = parseInt(e.target.getAttribute('data-rating'));
-      updateStarDisplay(selectedRating);
-    });
-  });
-
-  function updateStarDisplay(rating) {
-    starsElements.forEach(star => {
-      const starValue = parseInt(star.getAttribute('data-rating'));
-      if(starValue <= rating) {
-        star.classList.add('active');
-      } else {
-        star.classList.remove('active');
-      }
-    });
-  }
-
-  function resetStarSelector() {
+  const starEls = document.querySelectorAll('#star-selector i');
+  starEls.forEach(s => s.addEventListener('click', e => {
+    selectedRating = parseInt(e.target.getAttribute('data-rating'));
+    starEls.forEach(x => x.classList.toggle('active', parseInt(x.getAttribute('data-rating')) <= selectedRating));
+  }));
+  function resetStars() {
     selectedRating = 5;
-    updateStarDisplay(5);
+    starEls.forEach(x => x.classList.toggle('active', parseInt(x.getAttribute('data-rating')) <= 5));
   }
 
-  // Submit Review Event Listener with Authentication Routing Logic
   document.getElementById('btn-submit-review').addEventListener('click', async () => {
-    const currentUser = auth.currentUser;
-    
-    // REDIRECT TO LOGIN IF NOT LOGGED IN
-    if (!currentUser) {
-      showToast('Khas khabar! Review dene ke liye login hona lazmi hai. Redirecting to login...', 'error');
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 2000);
+    const user = auth.currentUser;
+    if (!user) {
+      showToast('Review dene ke liye login karein. Redirecting...', 'error');
+      setTimeout(() => window.location.href = 'login.html', 2000);
       return;
     }
-
-    const teacherId = document.getElementById('modal-teacher-id').value;
     const reviewText = document.getElementById('modal-review-text').value.trim();
-
-    if(!reviewText) {
-      showToast('Please enter your feedback message', 'error');
-      return;
-    }
+    const tId        = document.getElementById('modal-teacher-id').value;
+    if (!reviewText) { showToast('Please write your feedback', 'error'); return; }
 
     const btn = document.getElementById('btn-submit-review');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
+    btn.disabled = true; btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
 
     try {
-      const studentSnap = await getDoc(doc(db, 'users', currentUser.uid));
-      const studentData = studentSnap.exists() ? studentSnap.data() : {};
-      const studentName = studentData.fullName || 'Anonymous Student';
+      const stuSnap = await getDoc(doc(db, 'users', user.uid));
+      const stuName = stuSnap.exists() ? (stuSnap.data().fullName || 'Anonymous') : 'Anonymous';
 
       await addDoc(collection(db, 'reviews'), {
-        teacherId: teacherId,
-        studentId: currentUser.uid,
-        studentName: studentName,
-        rating: selectedRating,
-        reviewText: reviewText,
-        createdAt: serverTimestamp()
+        teacherId: tId, studentId: user.uid, studentName: stuName,
+        rating: selectedRating, reviewText, createdAt: serverTimestamp()
       });
 
-      const teacherRef = doc(db, 'users', teacherId);
-      const teacherSnap = await getDoc(teacherRef);
-      
-      if(teacherSnap.exists()) {
-        const tData = teacherSnap.data();
-        const currentCount = tData.reviewCount || 0;
-        const currentAvg = tData.avgRating || 0;
-
-        const newCount = currentCount + 1;
-        const newAvg = parseFloat(((currentAvg * currentCount + selectedRating) / newCount).toFixed(1));
-
-        await updateDoc(teacherRef, {
-          reviewCount: newCount,
-          avgRating: newAvg
-        });
+      const tRef  = doc(db, 'users', tId);
+      const tSnap = await getDoc(tRef);
+      if (tSnap.exists()) {
+        const td       = tSnap.data();
+        const newCount = (td.reviewCount || 0) + 1;
+        const newAvg   = parseFloat((((td.avgRating||0)*(td.reviewCount||0)+selectedRating)/newCount).toFixed(1));
+        await updateDoc(tRef, { reviewCount: newCount, avgRating: newAvg });
       }
 
-      showToast('Review submitted successfully! ✅ Thank you', 'success');
+      showToast('Review submitted! ✅ Thank you', 'success');
       closeReviewModal();
-      loadTeachers(); 
+      loadProfile();
     } catch(e) {
-      showToast('Database Error: ' + e.message, 'error');
+      showToast('Error: ' + e.message, 'error');
     } finally {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Review';
+      btn.disabled = false; btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Review';
     }
   });
 
-  // ── Filters ──
-  window.applyFilters = () => {
-    const subject    = document.getElementById('f-subject').value;
-    const curriculum = document.getElementById('f-curriculum').value;
-    const experience = document.getElementById('f-experience').value;
-    const sort       = document.getElementById('f-sort').value;
-    const search     = document.getElementById('search-input').value.toLowerCase();
+  // Demo request
+  document.getElementById('btn-demo').addEventListener('click', async () => {
+    const name       = document.getElementById('demo-name').value.trim();
+    const contact    = document.getElementById('demo-contact').value.trim();
+    const subject    = document.getElementById('demo-subject').value;
+    const curriculum = document.getElementById('demo-curriculum').value;
+    const time       = document.getElementById('demo-time').value.trim();
+    const tId        = document.getElementById('demo-teacher-id').value;
+    const tName      = document.getElementById('demo-teacher-name').value || 'Any Teacher';
 
-    let filtered = [...allTeachers];
-    if (subject)    filtered = filtered.filter(t => (t.subjects||[]).includes(subject));
-    if (curriculum) filtered = filtered.filter(t => (t.curricula||[]).includes(curriculum));
-    if (experience) filtered = filtered.filter(t => t.experience === experience);
-    if (search)     filtered = filtered.filter(t => (t.fullName||'').toLowerCase().includes(search));
+    if (!name || !contact || !subject || !curriculum) {
+      showToast('Name, contact, subject and curriculum are required', 'error'); return;
+    }
+    const btn = document.getElementById('btn-demo');
+    btn.disabled = true; btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
 
-    if (sort === 'rating')     filtered.sort((a,b) => (b.avgRating||0)-(a.avgRating||0));
-    if (sort === 'experience') filtered.sort((a,b) => parseInt(b.experience||0)-parseInt(a.experience||0));
-    if (sort === 'newest')     filtered.sort((a,b) => (b.registeredAt?.seconds||0)-(a.registeredAt?.seconds||0));
+    try {
+      await addDoc(collection(db, 'demo_requests'), {
+        studentName: name, contact, subject, curriculum,
+        preferredTime: time, teacherId: tId || null, teacherName: tName,
+        status: 'pending', requestDate: serverTimestamp()
+      });
+      showToast('Demo request sent! ✅ We will contact you soon', 'success');
+      document.getElementById('demo-name').value       = '';
+      document.getElementById('demo-contact').value    = '';
+      document.getElementById('demo-subject').value    = '';
+      document.getElementById('demo-curriculum').value = '';
+      document.getElementById('demo-time').value       = '';
+    } catch(e) {
+      showToast('Error: ' + e.message, 'error');
+    } finally {
+      btn.disabled = false; btn.innerHTML = '<i class="fa fa-paper-plane"></i> Send Demo Request';
+    }
+  });
 
-    renderTeachers(filtered);
-  };
-
-  window.clearFilters = () => {
-    document.getElementById('f-subject').value    = '';
-    document.getElementById('f-curriculum').value = '';
-    document.getElementById('f-experience').value = '';
-    document.getElementById('f-sort').value        = 'rating';
-    document.getElementById('search-input').value  = '';
-    renderTeachers(allTeachers);
-  };
-
-  if(document.getElementById('search-input')) {
-    document.getElementById('search-input').addEventListener('input', () => applyFilters());
-  }
-
-  // ── Demo request ──
-  const btnDemo = document.getElementById('btn-demo');
-  if(btnDemo) {
-    btnDemo.addEventListener('click', async () => {
-      const name       = document.getElementById('demo-name').value.trim();
-      const contact    = document.getElementById('demo-contact').value.trim();
-      const subject    = document.getElementById('demo-subject').value;
-      const curriculum = document.getElementById('demo-curriculum').value;
-      const time       = document.getElementById('demo-time').value.trim();
-      const select     = document.getElementById('demo-teacher-select');
-      const teacherId  = select.value;
-      const teacherName = teacherId
-        ? select.options[select.selectedIndex].text.split(' —')[0].trim()
-        : 'Any Teacher';
-
-      if (!name || !contact || !subject || !curriculum) {
-        showToast('Name, contact, subject and curriculum are required', 'error'); return;
-      }
-
-      btnDemo.disabled = true;
-      btnDemo.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
-
-      try {
-        await addDoc(collection(db, 'demo_requests'), {
-          studentName: name, contact, subject, curriculum,
-          preferredTime: time,
-          teacherId:   teacherId   || null,
-          teacherName: teacherName,
-          status: 'pending',
-          requestDate: serverTimestamp()
-        });
-        showToast('Demo request sent! ✅ We will contact you soon', 'success');
-        document.getElementById('demo-name').value    = '';
-        document.getElementById('demo-contact').value = '';
-        document.getElementById('demo-subject').value = '';
-        document.getElementById('demo-curriculum').value = '';
-        document.getElementById('demo-time').value    = '';
-        select.value = '';
-      } catch(e) {
-        showToast('Error: ' + e.message, 'error');
-      }
-
-      btnDemo.disabled = false;
-      btnDemo.innerHTML = '<i class="fa fa-paper-plane"></i> Send Demo Request';
-    });
-  }
-
-  loadTeachers();
+  loadProfile();
 </script>
 </body>
 </html>

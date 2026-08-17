@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tutor Terms and Conditions — AFS Virtual Tutor Hub</title>
+  <meta name="description" content="Read AFS Virtual Tutor Hub's Tutor Terms and Conditions. Learn about tutor expectations, code of conduct, commission structures, and quality standards."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://afs-virtual-tutor-hub.vercel.app/pages/teacher-terms-cond.html"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"/>
+
+  <style>
+    :root {
+      --gold: #FFD700;
+      --gold-hover: #e6c200;
+      --dark: #0a0a0a;
+      --dark2: #111111;
+      --dark3: #1a1a1a;
+      --dark4: #222222;
+      --text: #e8e8e8;
+      --text-muted: #888888;
+      --border: #2a2a2a;
+      --font: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: hidden; scroll-behavior: smooth; }
+    body { font-family: var(--font); background: #f8f8f8; color: #111; overflow-x: hidden; }
+
+    /* ── Navbar ── */
+    .navbar { background: #fff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+    .navbar-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .navbar-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .navbar-logo-icon { width: 40px; height: 40px; background: #111; color: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0; }
+    .navbar-logo-text { font-size: 0.95rem; font-weight: 700; color: #111; line-height: 1.2; }
+    .navbar-logo-text span { display: block; font-size: 0.68rem; font-weight: 500; background: #111; color: var(--gold); padding: 1px 6px; border-radius: 4px; margin-top: 2px; }
+    .navbar-links { display: flex; align-items: center; gap: 4px; }
+    .navbar-links a { font-size: 0.875rem; color: #374151; text-decoration: none; padding: 6px 10px; border-radius: 6px; font-weight: 500; transition: all 0.2s; }
+    .navbar-links a:hover, .navbar-links a.active { color: #b8860b; background: #FFF9E0; }
+    .navbar-links .btn-signup { background: transparent; color: #111; border: 2px solid #111; padding: 6px 16px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; }
+    .navbar-links .btn-signup:hover { background: #111; color: var(--gold); }
+    .navbar-links .btn-login { background: var(--gold); color: #000; border: none; padding: 7px 18px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; }
+    .navbar-links .btn-login:hover { background: var(--gold-hover); }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 200; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #111; border-radius: 2px; transition: all 0.3s; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu { display: none; flex-direction: column; background: #fff; border-top: 1.5px solid #eee; padding: 8px 0 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { padding: 12px 24px; color: #374151; text-decoration: none; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; transition: background 0.15s, color 0.15s; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { background: #FFF9E0; color: #b8860b; }
+    .mobile-menu a:nth-last-child(2) { background: #111; color: var(--gold); font-weight: 700; margin: 10px 24px 4px; border-radius: 8px; border: none; text-align: center; }
+    .mobile-menu a:last-child { background: var(--gold); color: #000; font-weight: 700; margin: 4px 24px 0; border-radius: 8px; border: none; text-align: center; }
+
+    /* ── Page Hero ── */
+    .page-hero {
+      background: linear-gradient(135deg, #050505 0%, #111 60%, #0d0d0d 100%);
+      padding: 56px 24px 52px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid var(--gold);
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,215,0,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .page-hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,215,0,0.1); color: var(--gold);
+      border: 1px solid rgba(255,215,0,0.3);
+      font-size: 0.78rem; font-weight: 600;
+      padding: 5px 14px; border-radius: 999px; margin-bottom: 18px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .page-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.75; max-width: 650px; margin: 0 auto; }
+
+    /* ── Layout ── */
+    .pp-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── TOC Sidebar ── */
+    .pp-toc {
+      position: sticky;
+      top: 84px;
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-top: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .pp-toc h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .pp-toc ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .pp-toc ul li a {
+      display: flex; align-items: center; gap: 8px;
+      color: #555; text-decoration: none;
+      font-size: 0.83rem; font-weight: 500;
+      padding: 7px 10px; border-radius: 8px;
+      transition: all 0.2s; line-height: 1.4;
+    }
+    .pp-toc ul li a i { color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
+    .pp-toc ul li a:hover { background: #FFF9E0; color: #b8860b; }
+    .pp-toc ul li a.active { background: #111; color: var(--gold); }
+
+    .toc-updated {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+      font-size: 0.78rem;
+      color: #999;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .toc-updated i { color: var(--gold); }
+
+    /* ── Content ── */
+    .pp-content { display: flex; flex-direction: column; gap: 32px; }
+
+    .pp-section {
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+    }
+    .pp-section:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.08); }
+
+    .pp-section-header {
+      background: #111;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pp-section-icon {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; color: #111; flex-shrink: 0;
+    }
+    .pp-section-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+
+    .pp-section-body { padding: 28px; }
+
+    .pp-section-body p {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .pp-section-body p:last-child { margin-bottom: 0; }
+
+    .pp-section-body h3 {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: #111;
+      margin: 22px 0 10px;
+      padding-left: 12px;
+      border-left: 3px solid var(--gold);
+    }
+    .pp-section-body h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #333;
+      margin: 18px 0 8px;
+    }
+
+    .pp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .pp-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.65;
+    }
+    .pp-list li::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    /* Data Table */
+    .pp-table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 10px; border: 1px solid #e8e8e8; }
+    .pp-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+    .pp-table thead tr { background: #111; }
+    .pp-table thead th { padding: 12px 16px; color: var(--gold); font-weight: 700; text-align: left; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+    .pp-table tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
+    .pp-table tbody tr:last-child { border-bottom: none; }
+    .pp-table tbody tr:hover { background: #FFFDF0; }
+    .pp-table td { padding: 12px 16px; color: #444; line-height: 1.6; vertical-align: top; }
+    .pp-table td:first-child { font-weight: 600; color: #111; }
+
+    /* Info box */
+    .pp-info-box {
+      background: #FFFDF0;
+      border: 1.5px solid rgba(255,215,0,0.4);
+      border-left: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .pp-info-box i { color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+    .pp-info-box p { font-size: 0.88rem; color: #555; line-height: 1.7; margin: 0; }
+
+    .pp-alert-box {
+      background: rgba(239, 68, 68, 0.05);
+      border: 1.5px solid rgba(239, 68, 68, 0.3);
+      border-left: 4px solid #ef4444;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .pp-alert-box i { color: #ef4444; margin-top: 2px; flex-shrink: 0; }
+    .pp-alert-box p { font-size: 0.88rem; color: #444; line-height: 1.7; margin: 0; }
+
+    /* CEO Quote Box */
+    .pp-ceo-card {
+      background: #111;
+      border-radius: var(--radius);
+      border: 2px solid var(--gold);
+      padding: 32px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      margin-top: 20px;
+    }
+    .pp-ceo-card blockquote {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #eaeaea;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .pp-ceo-card .ceo-name {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .pp-ceo-card .ceo-title {
+      font-size: 0.82rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── Footer ── */
+    .footer { background: #050505; color: #aaa; border-top: 1px solid #1c1a17; padding: 56px 24px 0; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 40px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; color: #888; margin-top: 14px; max-width: 280px; }
+    .footer-socials { display: flex; gap: 10px; margin-top: 18px; }
+    .social-btn { width: 36px; height: 36px; background: #111; color: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border: 1px solid #222; }
+    .social-btn:hover { background: var(--gold); color: #000; }
+    .footer h3 { color: #fff; border-left: 3px solid var(--gold); padding-left: 10px; font-size: 1rem; font-weight: 700; margin-bottom: 18px; }
+    .footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer ul li a { color: #888; text-decoration: none; font-size: 0.87rem; transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+    .footer ul li a:hover { color: var(--gold); }
+    .footer ul li a i { color: var(--gold); width: 14px; }
+    .footer-bottom { border-top: 1px solid #111; padding: 18px 0; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; flex-wrap: wrap; gap: 8px; }
+
+    /* ── Loader ── */
+    #page-loader { position: fixed; inset: 0; background: #050505; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s; }
+    #page-loader.hidden { opacity: 0; pointer-events: none; }
+    .loader-ring { width: 44px; height: 44px; border: 3px solid #222; border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media(max-width: 900px) {
+      .pp-layout { grid-template-columns: 1fr; }
+      .pp-toc { position: static; max-height: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width: 768px) {
+      .navbar-links { display: none !important; }
+      .hamburger { display: flex !important; }
+      .pp-layout { padding: 32px 16px 60px; gap: 24px; }
+      .pp-section-body { padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media(max-width: 480px) {
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="../index.html">
+      <div class="navbar-logo-icon">AFS</div>
+      <div class="navbar-logo-text">Virtual Tutor Hub<span>Expert Teachers. Free Access.</span></div>
+    </a>
+    <div class="navbar-links">
+      <a href="../index.html">Home</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="courses.html">Courses</a>
+      <a href="about-ceo.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html" class="btn-signup">Sign Up</a>
+      <a href="login.html" class="btn-login">Login</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="faculty.html">Faculty</a>
+    <a href="courses.html">Courses</a>
+    <a href="about-ceo.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="student-register.html">Sign Up as Student</a>
+    <a href="login.html">Login</a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-badge"><i class="fa fa-gavel"></i> Policy & Standards</div>
+    <h1>Tutor Terms &amp; <span>Conditions</span></h1>
+    <p>Guiding principles, code of conduct, quality assurances, and operational terms for our esteemed teaching family.</p>
+  </div>
+</div>
+
+<!-- Main Layout -->
+<div class="pp-layout">
+
+  <!-- Sidebar TOC -->
+  <aside class="pp-toc">
+    <h3><i class="fa fa-list"></i> Table of Contents</h3>
+    <ul>
+      <li><a href="#welcome" class="toc-link"><i class="fa fa-circle"></i> 1. Welcome to AFS</a></li>
+      <li><a href="#conduct" class="toc-link"><i class="fa fa-circle"></i> 2. Professional Conduct</a></li>
+      <li><a href="#confidentiality" class="toc-link"><i class="fa fa-circle"></i> 3. Confidentiality &amp; Privacy</a></li>
+      <li><a href="#commission" class="toc-link"><i class="fa fa-circle"></i> 4. Scope &amp; Commission</a></li>
+      <li><a href="#observation" class="toc-link"><i class="fa fa-circle"></i> 5. Class Observation</a></li>
+      <li><a href="#communication" class="toc-link"><i class="fa fa-circle"></i> 6. Student Communication</a></li>
+      <li><a href="#wellbeing" class="toc-link"><i class="fa fa-circle"></i> 7. Success &amp; Well-being</a></li>
+      <li><a href="#termination" class="toc-link"><i class="fa fa-circle"></i> 8. Termination &amp; Resignation</a></li>
+      <li><a href="#community" class="toc-link"><i class="fa fa-circle"></i> 9. Community &amp; Integrity</a></li>
+      <li><a href="#resources" class="toc-link"><i class="fa fa-circle"></i> 10. Resources &amp; Materials</a></li>
+      <li><a href="#liability" class="toc-link"><i class="fa fa-circle"></i> 11. Liability</a></li>
+      <li><a href="#development" class="toc-link"><i class="fa fa-circle"></i> 12. Professional Development</a></li>
+      <li><a href="#vision" class="toc-link"><i class="fa fa-circle"></i> 13. AFS Vision &amp; Quality</a></li>
+      <li><a href="#amendment" class="toc-link"><i class="fa fa-circle"></i> 14. Amendment of Terms</a></li>
+      <li><a href="#agreement" class="toc-link"><i class="fa fa-circle"></i> 15. Agreement</a></li>
+    </ul>
+    <div class="toc-updated"><i class="fa fa-calendar"></i> Effective: April 1, 2026</div>
+  </aside>
+
+  <!-- Content -->
+  <main class="pp-content">
+
+    <!-- Intro box -->
+    <div class="pp-info-box reveal">
+      <i class="fa fa-circle-info fa-lg"></i>
+      <p>Assalam o Alaikum, Dear Tutor! Welcome to the <strong>AFS Virtual Tutor Hub</strong> family. This document outlines the professional expectations, operational protocols, and legal terms governing our relationship to ensure quality education and mutual trust.</p>
+    </div>
+
+    <!-- 1. Welcome to AFS Virtual Tutor Hub -->
+    <div class="pp-section reveal" id="welcome">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-handshake"></i></div>
+        <h2>1. Welcome to AFS Virtual Tutor Hub</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>We are honored to have you join our community of dedicated educators. We are committed to building a transparent and impactful platform for your teaching journey.</p>
+        <h3>Our Vision for You</h3>
+        <ul class="pp-list">
+          <li>We aim to provide you with a platform that showcases your expertise to the world.</li>
+          <li>We are committed to connecting you with students who need your skills and guidance.</li>
+          <li>We believe in fair compensation, professional recognition, and ongoing career growth.</li>
+          <li>We deeply value your dedication and vital role in shaping Pakistan's educational future.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. Professional Conduct -->
+    <div class="pp-section reveal" id="conduct">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-user-check"></i></div>
+        <h2>2. Professional Conduct</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>As an AFS tutor, you represent our brand. We expect the highest standards of ethics and dedication.</p>
+        <h3>2.1 Core Expectations</h3>
+        <ul class="pp-list">
+          <li>Act professionally, honestly, and respectfully with students, parents, and AFS staff at all times.</li>
+          <li>Be punctual and thoroughly prepared for all scheduled sessions.</li>
+          <li>Communicate clearly, courteously, and respectfully in all interactions.</li>
+          <li>Maintain strict professional boundaries and avoid any improper conduct with students.</li>
+          <li>Adhere to AFS rules regarding teaching methodology, communication, and student safety.</li>
+          <li>Obey all applicable legal requirements regarding online tutoring in your jurisdiction.</li>
+        </ul>
+
+        <h3>2.2 Teaching Quality</h3>
+        <ul class="pp-list">
+          <li>Deliver high-quality, engaging lessons centered on concept-based learning rather than rote memory.</li>
+          <li>Adapt your teaching style to accommodate the individual learning pace and needs of each child.</li>
+          <li>Encourage critical thinking, active participation, and independent problem-solving skills.</li>
+          <li>Provide structured and regular progress feedback to parents.</li>
+          <li>Utilize interactive digital tools to keep students focused and engaged.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Confidentiality & Privacy -->
+    <div class="pp-section reveal" id="confidentiality">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-user-shield"></i></div>
+        <h2>3. Confidentiality &amp; Privacy</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>Student trust is the cornerstone of AFS Virtual Tutor Hub. Honoring student and family privacy is non-negotiable.</p>
+        <ul class="pp-list">
+          <li>All student data (academic records, personal details, contact information) is strictly private.</li>
+          <li>Information must be used exclusively to facilitate and support the student’s learning process.</li>
+          <li>You must not share student information with any third party without prior authorization.</li>
+          <li>Keep all communications focused strictly on educational and academic topics.</li>
+          <li>Do not share student data with anyone not authorized by AFS management.</li>
+        </ul>
+        <div class="pp-alert-box">
+          <i class="fa fa-triangle-exclamation"></i>
+          <p><strong>Warning:</strong> Any breach of confidentiality or unauthorized distribution of student information will result in immediate contract termination and legal review.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Service Scope & Commission -->
+    <div class="pp-section reveal" id="commission">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-calculator"></i></div>
+        <h2>4. Service Scope &amp; Commission</h2>
+      </div>
+      <div class="pp-section-body">
+        <h3>4.1 Service Delivery</h3>
+        <ul class="pp-list">
+          <li><strong>Online Tutoring:</strong> Available globally via Zoom, Google Meet, or approved platforms.</li>
+          <li><strong>In-Person Home Tutoring:</strong> Available exclusively in Peshawar, KPK.</li>
+        </ul>
+
+        <h3>4.2 Commission Structure</h3>
+        <div class="pp-table-wrap">
+          <table class="pp-table">
+            <thead>
+              <tr>
+                <th>Tuition Type</th>
+                <th>First Month Commission</th>
+                <th>Subsequent Months Commission</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Local / Regular Tuitions</strong><br><small>(Pakistan-based students)</small></td>
+                <td>30% of first month's fee</td>
+                <td>18% of subsequent months</td>
+              </tr>
+              <tr>
+                <td><strong>International / Premium Tuitions</strong><br><small>(UK, USA, UAE, etc.)</small></td>
+                <td>45% of first month's fee</td>
+                <td>25% of subsequent months</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pp-info-box">
+          <i class="fa fa-circle-info"></i>
+          <div>
+            <p><strong>Important Payment Notes:</strong></p>
+            <ul style="margin-top:5px; padding-left:15px; font-size:0.86rem; color:#555;">
+              <li>Your exact commission/percentage per class will be communicated privately via WhatsApp after application approval.</li>
+              <li>AFS collects the full tuition fee directly from parents/students and disburses your net share after deducting commission.</li>
+              <li>Tutor payments are processed upon completion of 3 consecutive weeks of tuition. No fee is payable if a tutor withdraws prior to completing 3 weeks.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Class Observation & Quality Monitoring -->
+    <div class="pp-section reveal" id="observation">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-video"></i></div>
+        <h2>5. Class Observation &amp; Quality Monitoring</h2>
+      </div>
+      <div class="pp-section-body">
+        <h3>5.1 Quality Assurance</h3>
+        <p>To uphold the highest educational standards across all regions, AFS reserves the right to monitor active sessions.</p>
+        <ul class="pp-list">
+          <li><strong>Unannounced Observations:</strong> AFS management or the CEO reserves the right to join live classes at any time without prior notice to observe teaching quality, professionalism, and student interaction.</li>
+          <li>Observations serve strictly as a quality control mechanism to protect the educational standard provided to students.</li>
+        </ul>
+
+        <h3>5.2 Daily Class Link Sharing</h3>
+        <ul class="pp-list">
+          <li>Tutors must share the live meeting link for each class daily prior to starting session in the assigned AFS management WhatsApp group.</li>
+          <li>This protocol ensures operational accountability and seamless monitoring.</li>
+          <li>Repeated failure or delay in sharing links may lead to formal warnings or account suspension.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. Student Communication & Support -->
+    <div class="pp-section reveal" id="communication">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-comments"></i></div>
+        <h2>6. Student Communication &amp; Support</h2>
+      </div>
+      <div class="pp-section-body">
+        <h3>6.1 Direct Messaging &amp; Response</h3>
+        <p>Students and parents may reach out after class hours regarding course material, assignments, or doubts. You are expected to respond in a timely manner whenever available, with a maximum response window of <strong>24 hours</strong>.</p>
+
+        <h3>6.2 Study Materials</h3>
+        <p>Tutors must provide structured notes, worksheets, and resources following each class via the AFS portal or group chats. All materials must be original, accurate, and professional.</p>
+
+        <h3>6.3 Mandatory Free MCQs &amp; Progress Tests</h3>
+        <p>Tutors are required to conduct <strong>2 to 3 MCQ-based progress tests per student (free of cost)</strong> through the AFS website. Test results must be logged and shared with parents and AFS management to evaluate growth.</p>
+      </div>
+    </div>
+
+    <!-- 7. Student Success & Well-being -->
+    <div class="pp-section reveal" id="wellbeing">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-heart-pulse"></i></div>
+        <h2>7. Student Success &amp; Well-being</h2>
+      </div>
+      <div class="pp-section-body">
+        <ul class="pp-list">
+          <li><strong>No Guarantee of Results:</strong> AFS does not guarantee exam grades or marks, as student performance depends on consistent effort, parental support, and personal aptitude.</li>
+          <li>Maintain regular progress communication with parents to set realistic academic expectations.</li>
+          <li>Report any concerns regarding student well-being, safety, or academic distress directly to AFS Management without sharing sensitive data externally.</li>
+          <li>Treat every child with kindness, empathy, and patience.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. Termination -->
+    <div class="pp-section reveal" id="termination">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-ban"></i></div>
+        <h2>8. Termination &amp; Resignation</h2>
+      </div>
+      <div class="pp-section-body">
+        <h3>8.1 Immediate Termination by AFS</h3>
+        <p>AFS reserves the right to terminate a tutor's contract immediately without prior notice in cases of:</p>
+        <ul class="pp-list">
+          <li>Violation of confidentiality or privacy policies.</li>
+          <li>Misrepresentation or fraudulent information during registration.</li>
+          <li>Substandard teaching quality or unexcused class cancellations.</li>
+          <li>Unprofessional conduct, rude behavior, or abusive language.</li>
+          <li>Attempting to solicit private tuitions outside AFS.</li>
+          <li>Failure to share daily class meeting links or refusal of class observation.</li>
+          <li>Spreading false rumors or negativity regarding AFS, parents, or staff.</li>
+        </ul>
+
+        <h3>8.2 Resignation by Tutor</h3>
+        <p>Tutors may resign by providing a minimum of <strong>5 days' written notice</strong> to AFS Management. All scheduled classes during the notice period must be completed seamlessly, and student materials returned.</p>
+      </div>
+    </div>
+
+    <!-- 9. Community & Integrity -->
+    <div class="pp-section reveal" id="community">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-shield"></i></div>
+        <h2>9. Community &amp; Integrity</h2>
+      </div>
+      <div class="pp-section-body">
+        <ul class="pp-list">
+          <li>Maintain high integrity; if you do not know the answer to a complex question, admit it honestly and commit to researching it.</li>
+          <li><strong>Strict Prohibition on Bypassing:</strong> Never engage in private fee arrangements with parents introduced by AFS. Report any parent who asks you to bypass AFS immediately.</li>
+          <li>Do not engage in discussions regarding irrelevant personal matters with students or parents.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10. Resources & Materials -->
+    <div class="pp-section reveal" id="resources">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-folder-open"></i></div>
+        <h2>10. Resources &amp; Copyright Compliance</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>All study guides, notes, and academic materials uploaded to the AFS platform must be accurate and ethically compliant. Tutors bear sole legal responsibility for ensuring their uploaded materials do not violate third-party copyright or intellectual property laws.</p>
+      </div>
+    </div>
+
+    <!-- 11. Liability -->
+    <div class="pp-section reveal" id="liability">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-scale-balanced"></i></div>
+        <h2>11. Liability &amp; Disclaimers</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>AFS Virtual Tutor Hub serves as a facilitating platform and is not liable for individual tutor misconduct, negligence, or personal disputes. Furthermore, AFS is not responsible for session disruptions caused by personal technical issues, device failures, or internet outages on the tutor's end.</p>
+      </div>
+    </div>
+
+    <!-- 12. Continuous Professional Development -->
+    <div class="pp-section reveal" id="development">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-graduation-cap"></i></div>
+        <h2>12. Continuous Professional Development</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>We believe in upskilling our educators. AFS regularly conducts training sessions, workshops, and a specialized <strong>Digital Tutor Bootcamp</strong> to help tutors master online pedagogy, modern whiteboard tools, and digital classroom management.</p>
+      </div>
+    </div>
+
+    <!-- 13. AFS Vision, Philosophy & Quality -->
+    <div class="pp-section reveal" id="vision">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-lightbulb"></i></div>
+        <h2>13. Educational Philosophy &amp; Quality Commitment</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>AFS is not merely a tutoring service; it is a quality-focused educational movement. We emphasize concept-based learning, student-centered attention, character development, and measurable academic progress.</p>
+        <div class="pp-info-box">
+          <i class="fa fa-star"></i>
+          <p><strong>Core AFS Principle:</strong> Better Learning for every student, Better Teaching for every tutor, and Parent Trust built through complete honesty and operational transparency.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Amendment of Terms -->
+    <div class="pp-section reveal" id="amendment">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-pen-to-square"></i></div>
+        <h2>14. Amendment of Terms</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>AFS Virtual Tutor Hub reserves the right to modify these terms at any time. Updates will be communicated via official email or WhatsApp broadcasts. Continued participation on the platform constitutes full acceptance of revised terms.</p>
+      </div>
+    </div>
+
+    <!-- 15. Agreement & CEO Closing -->
+    <div class="pp-section reveal" id="agreement">
+      <div class="pp-section-header">
+        <div class="pp-section-icon"><i class="fa fa-file-contract"></i></div>
+        <h2>15. Agreement &amp; Acknowledgement</h2>
+      </div>
+      <div class="pp-section-body">
+        <p>By submitting your tutor application and checking the terms box on registration, you confirm that you have read, understood, and agreed to all the rules, commission structures, and policies stated in this agreement.</p>
+
+        <div class="pp-ceo-card">
+          <blockquote>
+            "At AFS, trust is our foundation. By working together with honesty and respect – students, tutors, staff, and parents – we can empower students to reach their full potential. We believe in you, and together, we can create a thriving online learning environment where everyone succeeds."
+          </blockquote>
+          <div class="ceo-name">Muhammad Awais</div>
+          <div class="ceo-title">CEO, AFS Virtual Tutor Hub</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="navbar-logo" href="../index.html" style="text-decoration:none">
+        <div class="navbar-logo-icon" style="background:var(--gold);color:#111;">AFS</div>
+        <div class="navbar-logo-text" style="color:#fff">Virtual Tutor Hub<span>Expert Teachers. Free Access.</span></div>
+      </a>
+      <p>Pakistan's free platform connecting students with verified expert teachers for all major curricula — Cambridge, IGCSE, CSS/PMS, Matric &amp; more.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/profile.php?id=61555784668106" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/923120940518" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="faculty.html"><i class="fa fa-chevron-right"></i> Find a Teacher</a></li>
+        <li><a href="courses.html"><i class="fa fa-chevron-right"></i> Courses Offered</a></li>
+        <li><a href="student-register.html"><i class="fa fa-chevron-right"></i> Student Registration</a></li>
+        <li><a href="teacher-register.html"><i class="fa fa-chevron-right"></i> Teacher Registration</a></li>
+        <li><a href="about-ceo.html"><i class="fa fa-chevron-right"></i> About</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Support</h3>
+      <ul>
+        <li><a href="faq.html"><i class="fa fa-chevron-right"></i> FAQ</a></li>
+        <li><a href="blog.html"><i class="fa fa-chevron-right"></i> Blog</a></li>
+        <li><a href="contact.html"><i class="fa fa-chevron-right"></i> Contact Us</a></li>
+        <li><a href="privacy-policy.html"><i class="fa fa-chevron-right"></i> Privacy Policy</a></li>
+        <li><a href="teacher-terms-cond.html" class="active"><i class="fa fa-chevron-right"></i> Terms of Use</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:afsvirtualtutorhub369@gmail.com"><i class="fa fa-envelope"></i> afsvirtualtutorhub369@gmail.com</a></li>
+        <li><a href="https://wa.me/923120940518" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61555784668106"><i class="fab fa-facebook"></i> Facebook Page</a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AFS Virtual Tutor Hub. All rights reserved.</span>
+    <span>Developer ❤️ <strong style="color:var(--gold)">Muhammad Idrees</strong></span>
+  </div>
+</footer>
+
+<script>
+  // Page loader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('page-loader')?.classList.add('hidden'), 300);
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', function(e) {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // TOC active highlight on scroll
+  const sections = document.querySelectorAll('.pp-section, .pp-info-box');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const scrollObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const id = entry.target.getAttribute('id');
+        if (id) {
+          const active = document.querySelector(`.toc-link[href="#${id}"]`);
+          if (active) active.classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[id]').forEach(el => scrollObs.observe(el));
+</script>
+</body>
+</html>

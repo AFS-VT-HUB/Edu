@@ -53,74 +53,127 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body { background:#0a0a0a; color:#fff; }
-    .courses-wrap { max-width:1100px; margin:0 auto; padding:48px 24px; }
-    .curriculum-section { margin-bottom:52px; }
-    .curriculum-header {
-      display:flex; align-items:center; gap:14px;
-      margin-bottom:24px; padding-bottom:14px;
-      border-bottom:2px solid #222;
+    
+    /* 4-COLUMN MAIN WRAPPER GRID */
+    .courses-grid-4col { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 24px; 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      padding: 48px 24px; 
+      align-items: start;
     }
+
+    .curriculum-column {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 100%;
+    }
+
+    .curriculum-header-vertical {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #222;
+      margin-bottom: 4px;
+    }
+    
     .curriculum-icon {
-      width:48px; height:48px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.4rem; flex-shrink:0; background:#1a1a1a;
-      border:1px solid #FFD700;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      background: #1a1a1a;
+      border: 1px solid #FFD700;
     }
-    .curriculum-header h2 { font-size:1.2rem; margin-bottom:4px; color:#fff; }
-    .curriculum-header p  { font-size:0.85rem; color:#888; margin:0; }
-    .subjects-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px;
-    }
+    
+    .curriculum-header-vertical h2 { font-size: 1.1rem; font-weight: 700; margin: 0; color: #fff; }
+    .curriculum-header-vertical p { font-size: 0.78rem; color: #888; margin: 4px 0 0 0; line-height: 1.3; }
+
+    /* Cards Stacking Vertically Inside Columns */
     .subject-card {
-      background:#111; border:1px solid #222;
-      border-radius:12px; padding:20px;
-      transition:transform .2s, box-shadow .2s, border-color .2s;
+      background: #1a1a1a; 
+      border: 1px solid #262626;
+      border-radius: 12px; 
+      padding: 16px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
     }
     .subject-card:hover {
-      transform:translateY(-3px);
-      border-color:#FFD700;
-      box-shadow:0 4px 20px rgba(255,215,0,0.15);
+      transform: translateY(-3px);
+      border-color: #FFD700;
+      box-shadow: 0 4px 20px rgba(255,215,0,0.15);
     }
-    .subject-card-top { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-    .subject-emoji { font-size:1.6rem; }
-    .subject-card h3 { font-size:0.95rem; font-weight:700; margin-bottom:2px; color:#fff; }
-    .subject-card p  { font-size:0.8rem; color:#888; margin:0; }
-    .subject-card-links { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+    .subject-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .subject-emoji { font-size: 1.4rem; }
+    .subject-card h3 { font-size: 0.9rem; font-weight: 700; margin: 0 0 2px 0; color: #fff; }
+    .subject-card p { font-size: 0.75rem; color: #aaa; margin: 0; }
+    
+    .subject-card-links { display: flex; gap: 8px; margin-top: 14px; }
+    
     .btn-yellow {
-      background:#FFD700; color:#000; border:none;
-      padding:7px 16px; border-radius:8px; font-size:0.85rem;
-      font-weight:700; cursor:pointer; text-decoration:none;
-      display:inline-flex; align-items:center; gap:6px;
-      transition:background .15s, transform .15s;
+      background: #FFD700; color: #000; border: none;
+      padding: 6px 12px; border-radius: 6px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: background .15s, transform .15s;
+      flex: 1;
+      justify-content: center;
     }
-    .btn-yellow:hover { background:#f0c800; transform:translateY(-1px); color:#000; }
+    .btn-yellow:hover { background: #f0c800; transform: translateY(-1px); color: #000; }
+    
     .btn-dark-wa {
-      background:#1a1a1a; color:#25D366; border:1px solid #25D366;
-      padding:7px 14px; border-radius:8px; font-size:0.85rem;
-      font-weight:600; cursor:pointer; text-decoration:none;
-      display:inline-flex; align-items:center; gap:6px;
-      transition:all .15s;
+      background: #1a1a1a; color: #25D366; border: 1px solid #25D366;
+      padding: 6px 10px; border-radius: 6px; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: all .15s;
     }
-    .btn-dark-wa:hover { background:#25D366; color:#fff; }
+    .btn-dark-wa:hover { background: #25D366; color: #fff; }
+
     .section-tag-dark {
-      display:inline-block; background:#1a1a1a; color:#FFD700;
-      border:1px solid #FFD700; font-size:0.78rem; font-weight:600;
-      padding:4px 12px; border-radius:20px; margin-bottom:10px;
+      display: inline-block; background: #1a1a1a; color: #FFD700;
+      border: 1px solid #FFD700; font-size: 0.78rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
     }
     .hero-strip {
-      background:#111; border-bottom:1px solid #222;
-      padding:48px 24px; text-align:center;
+      background: #111; border-bottom: 1px solid #222;
+      padding: 48px 24px; text-align: center;
+    }
+    .cta-container-wrap {
+      max-width: 1400px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
     }
     .cta-strip {
-      background:#111; border:1px solid #FFD700;
-      border-radius:12px; padding:40px; text-align:center;
+      background: #111; border: 1px solid #FFD700;
+      border-radius: 12px; padding: 40px; text-align: center;
     }
-    /* Footer dark */
-    .footer { background:#000; border-top:1px solid #222; }
-    .footer ul li a { color:#888; }
-    .footer ul li a:hover { color:#FFD700; }
-    .footer h4 { color:#FFD700; }
-    .footer-bottom { color:#0c0707ea; border-top:1px solid #0c0707dc; }
+    
+    /* Footer styles setup alignment matching */
+    .footer { background: #000; border-top: 1px solid #222; }
+    .footer ul li a { color: #888; }
+    .footer ul li a:hover { color: #FFD700; }
+    .footer h4 { color: #FFD700; }
+    .footer-bottom { color: #0c0707ea; border-top: 1px solid #0c0707dc; }
+
+    /* Responsive Adapters */
+    @media(max-width: 1200px) {
+      .courses-grid-4col { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 768px) {
+      .courses-grid-4col { grid-template-columns: 1fr; padding: 24px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -129,7 +182,7 @@
 <div id="toast-container"></div>
 
 <!-- NAVBAR -->
-<nav class="navbar" style="background:#fffffffd;border-bottom:1px solid #222;">
+<nav class="navbar" style="background:#fffffffd; border-bottom:1px solid #222;">
   <div class="navbar-inner">
      <a class="navbar-logo" href="index.html">
       <div class="navbar-logo-icon" style="background: #111; color: #FFD700;">AFS</div>
@@ -138,210 +191,261 @@
     <div class="navbar-links" id="navbar-links">
       <a href="../index.html" style="color:#0a0000e5">Home</a>
       <a href="faculty.html" style="color:#110202">Faculty</a>
-      <a href="courses.html" style="color:#FFD700;font-weight:600">Courses</a>
+      <a href="courses.html" style="color:#FFD700; font-weight:600">Courses</a>
       <a href="about-ceo.html" style="color:#110202ee">About CEO</a>
       <a href="faq.html" style="color:#110101">FAQ</a>
       <a href="contact.html" style="color:#130101">Contact</a>
-      <a href="blog.html" style="color:#110202">Blog</a>
       <a href="student-register.html" class="btn-yellow btn-sm">Sign Up</a>
       <a href="login.html" class="btn-yellow btn-sm">Login</a>
     </div>
     <button class="hamburger" id="hamburger"><span style="background:#FFD700"></span><span style="background:#FFD700"></span><span style="background:#FFD700"></span></button>
   </div>
-  <div class="mobile-menu" id="mobile-menu" style="background:#000;border-top:1px solid #222;">
-    <a href="../index.html" style="color:#ccc;border-color:#0e0101ef">Home</a>
-    <a href="faculty.html" style="color:#ccc;border-color:#0e0202c0">Faculty</a>
-    <a href="courses.html" style="color:#FFD700;border-color:#0e0303bb">Courses</a>
-    <a href="about-ceo.html" style="color:#ccc;border-color:#110505">About CEO</a>
-    <a href="faq.html" style="color:#ccc;border-color:#110909f1">FAQ</a>
-    <a href="contact.html" style="color:#ccc;border-color:#0f0e0edc">Contact</a>
-    <a href="student-register.html" style="color:#FFD700;border-color:#110b0bd2">Sign Up</a>
-    <a href="login.html" style="color:#FFD700;border-color:#0f0707b7">Login</a>
+  <div class="mobile-menu" id="mobile-menu" style="background:#000; border-top:1px solid #222;">
+    <a href="../index.html" style="color:#ccc; border-color:#0e0101ef">Home</a>
+    <a href="faculty.html" style="color:#ccc; border-color:#0e0202c0">Faculty</a>
+    <a href="courses.html" style="color:#FFD700; border-color:#0e0303bb">Courses</a>
+    <a href="about-ceo.html" style="color:#ccc; border-color:#110505">About CEO</a>
+    <a href="faq.html" style="color:#ccc; border-color:#110909f1">FAQ</a>
+    <a href="contact.html" style="color:#ccc; border-color:#0f0e0edc">Contact</a>
+    <a href="student-register.html" style="color:#FFD700; border-color:#110b0bd2">Sign Up</a>
+    <a href="login.html" style="color:#FFD700; border-color:#0f0707b7">Login</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero-strip">
-  <div class="section-tag-dark">⭐ All Curricula</div>
-  <h1 style="color:#fff;margin-bottom:8px;">Online Tutoring Courses — Pakistani, Cambridge, IGCSE, CSS/PMS &amp; More</h1>
-  <p style="color:#888;max-width:680px;margin:0 auto;">All major Pakistani &amp; International curricula covered by verified teachers — Matric, FSc, Cambridge O/A Levels, IGCSE, CSS/PMS, ISSB, Cadet College &amp; Biomaths. Browse free, connect via WhatsApp.</p>
+  <div class="section-tag-dark">⭐ Managed Curricula View</div>
+  <h1 style="color:#fff; margin-bottom:8px;">Online Tutoring Channels By Category</h1>
+  <p style="color:#888; max-width:680px; margin:0 auto;">All programs structured down into four dedicated parallel learning tracks. Direct support managed via central operations link.</p>
 </div>
 
-<div class="courses-wrap">
+<!-- 4-COLUMN SYLLABUS GRID HOUSING ALL DATA VERTICALLY STACKED -->
+<div class="courses-grid-4col">
 
-  <!-- Pakistani -->
-  <div class="curriculum-section reveal">
-    <div class="curriculum-header">
+  <!-- COLUMN 1: PAKISTANI CURRICULUM -->
+  <div class="curriculum-column reveal">
+    <div class="curriculum-header-vertical">
       <div class="curriculum-icon">🇵🇰</div>
       <div>
-        <h2>Pakistani Curriculum</h2>
-        <p>All boards — Federal, Punjab, Sindh, KPK, Balochistan</p>
+        <h2>Pakistani</h2>
+        <p>Federal, Punjab, Sindh, KPK & Balochistan Boards</p>
       </div>
     </div>
-    <div class="subjects-grid">
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>Mathematics</h3><p>Matric & FSc | All Boards</p></div></div>
-        <div class="subject-card-links">
-          <a href="faculty.html" class="btn-yellow">Find Teacher</a>
-          <a href="https://wa.me/923120940518" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
-        </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>Mathematics</h3><p>Matric & FSc | All Boards</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Pakistani%20Curriculum%20Mathematics%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">⚛️</div><div><h3>Physics</h3><p>Matric & FSc | All Boards</p></div></div>
-        <div class="subject-card-links">
-          <a href="faculty.html" class="btn-yellow">Find Teacher</a>
-          <a href="https://wa.me/923120940518" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
-        </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">⚛️</div><div><h3>Physics</h3><p>Matric & FSc | All Boards</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Pakistani%20Curriculum%20Physics%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🧪</div><div><h3>Chemistry</h3><p>Matric & FSc | All Boards</p></div></div>
-        <div class="subject-card-links">
-          <a href="faculty.html" class="btn-yellow">Find Teacher</a>
-          <a href="https://wa.me/923120940518" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
-        </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🧪</div><div><h3>Chemistry</h3><p>Matric & FSc | All Boards</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Pakistani%20Curriculum%20Chemistry%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🧬</div><div><h3>Biology</h3><p>Matric & FSc | All Boards</p></div></div>
-        <div class="subject-card-links">
-          <a href="faculty.html" class="btn-yellow">Find Teacher</a>
-          <a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
-        </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🧬</div><div><h3>Biology</h3><p>Matric & FSc | All Boards</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Pakistani%20Curriculum%20Biology%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">📝</div><div><h3>English</h3><p>Matric & FSc | All Boards</p></div></div>
-        <div class="subject-card-links">
-          <a href="faculty.html" class="btn-yellow">Find Teacher</a>
-          <a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
-        </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">📝</div><div><h3>English</h3><p>Matric & FSc | All Boards</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Pakistani%20Curriculum%20English%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🖥️</div><div><h3>Computer Science</h3><p>Matric & FSc | All Boards</p></div></div>
-        <div class="subject-card-links">
-          <a href="faculty.html" class="btn-yellow">Find Teacher</a>
-          <a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
-        </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🖥️</div><div><h3>Computer Science</h3><p>Matric & FSc | Fundamentals & Web</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Pakistani%20Curriculum%20Computer%20Science%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- Cambridge O/A -->
-  <div class="curriculum-section reveal">
-    <div class="curriculum-header">
+  <!-- COLUMN 2: CAMBRIDGE O & A LEVELS -->
+  <div class="curriculum-column reveal">
+    <div class="curriculum-header-vertical">
       <div class="curriculum-icon">🎓</div>
-      <div><h2>Cambridge O & A Levels</h2><p>CAIE — O Level, AS Level, A Level</p></div>
+      <div>
+        <h2>Cambridge O/A</h2>
+        <p>CAIE — O Level, AS Level & Complete A Level tracks</p>
+      </div>
     </div>
-    <div class="subjects-grid">
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>Mathematics (0580)</h3><p>Cambridge O Level</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>Mathematics (0580)</h3><p>Cambridge O Level</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Cambridge%20O%20Level%20Mathematics%20(0580)%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">➕</div><div><h3>Further Mathematics</h3><p>Cambridge A Level</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">➕</div><div><h3>Further Maths</h3><p>Cambridge A Level</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Cambridge%20A%20Level%20Further%20Mathematics%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">⚛️</div><div><h3>Physics (5054/9702)</h3><p>Cambridge O & A Level</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">⚛️</div><div><h3>Physics (5054/9702)</h3><p>Cambridge O & A Level</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Cambridge%20O/A%20Level%20Physics%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🧪</div><div><h3>Chemistry (5070/9701)</h3><p>Cambridge O & A Level</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🧪</div><div><h3>Chemistry (5070/9701)</h3><p>Cambridge O & A Level</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Cambridge%20O/A%20Level%20Chemistry%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">📝</div><div><h3>English Language</h3><p>Cambridge O Level (1123)</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">📝</div><div><h3>English Language</h3><p>Cambridge O Level (1123)</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Cambridge%20O%20Level%20English%20Language%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- IGCSE/GCSE -->
-  <div class="curriculum-section reveal">
-    <div class="curriculum-header">
+  <!-- COLUMN 3: IGCSE & GCSE -->
+  <div class="curriculum-column reveal">
+    <div class="curriculum-header-vertical">
       <div class="curriculum-icon">🌍</div>
-      <div><h2>IGCSE & GCSE</h2><p>Cambridge IGCSE | Edexcel GCSE | Pearson</p></div>
+      <div>
+        <h2>IGCSE & GCSE</h2>
+        <p>International Cambridge, IGCSE, Edexcel & Pearson Boards</p>
+      </div>
     </div>
-    <div class="subjects-grid">
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>IGCSE Mathematics</h3><p>Cambridge & Edexcel</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>IGCSE Mathematics</h3><p>Cambridge & Edexcel</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20IGCSE%20Mathematics%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">⚛️</div><div><h3>IGCSE Physics</h3><p>Cambridge & Edexcel</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">⚛️</div><div><h3>IGCSE Physics</h3><p>Cambridge & Edexcel</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20IGCSE%20Physics%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🧪</div><div><h3>IGCSE Chemistry</h3><p>Cambridge & Edexcel</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🧪</div><div><h3>IGCSE Chemistry</h3><p>Cambridge & Edexcel</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20IGCSE%20Chemistry%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🧬</div><div><h3>IGCSE Biology</h3><p>Cambridge & Edexcel</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🧬</div><div><h3>IGCSE Biology</h3><p>Cambridge & Edexcel</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20IGCSE%20Biology%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- CSS/PMS & ISSB -->
-  <div class="curriculum-section reveal">
-    <div class="curriculum-header">
+  <!-- COLUMN 4: COMPETITIVE & INTERNATIONAL -->
+  <div class="curriculum-column reveal">
+    <div class="curriculum-header-vertical">
       <div class="curriculum-icon">🏛️</div>
-      <div><h2>CSS / PMS & ISSB</h2><p>Competitive exams — CSS, PMS, ISSB, Army/Navy/PAF</p></div>
+      <div>
+        <h2>Competitive & Global</h2>
+        <p>CSS, PMS, ISSB Testing channels & Global board setups</p>
+      </div>
     </div>
-    <div class="subjects-grid">
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">📜</div><div><h3>CSS General Knowledge</h3><p>Federal Public Service Commission</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">📜</div><div><h3>CSS General Know.</h3><p>FPSC Exam Alignment</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20CSS%20General%20Knowledge%20preparation." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>CSS Mathematics</h3><p>Optional Subject — CSS/PMS</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">📐</div><div><h3>CSS Mathematics</h3><p>Optional Subject Strategy</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20CSS%20Mathematics%20optional%20coaching." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🎖️</div><div><h3>ISSB Preparation</h3><p>Inter Services Selection Board</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🎖️</div><div><h3>ISSB Preparation</h3><p>Inter Services Selection Board</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20ISSB%20Test%20Preparation." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🏫</div><div><h3>Cadet College Prep</h3><p>Entry Test Preparation</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🏫</div><div><h3>Cadet College Prep</h3><p>Entry Examination Target</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Cadet%20College%20Entry%20Test%20Preparation." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🧬</div><div><h3>Biomaths</h3><p>Medical Entry Test — MDCAT</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-top"><div class="subject-emoji">🧬</div><div><h3>Biomaths Channel</h3><p>MDCAT Medical Entry Prep</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20Biomaths%20MDCAT%20tuition." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="subject-card" style="border-color: rgba(255,215,0,0.2);">
+      <div class="subject-card-top"><div class="subject-emoji">🌐</div><div><h3>International Boards</h3><p>CBSE, Gulf & IB Streams</p></div></div>
+      <div class="subject-card-links">
+        <a href="faculty.html" class="btn-yellow">Find Teacher</a>
+        <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20am%20interested%20in%20International%20Curricula%20(CBSE/Gulf/IB)%20coaching." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- International -->
-  <div class="curriculum-section reveal">
-    <div class="curriculum-header">
-      <div class="curriculum-icon">🌐</div>
-      <div><h2>International Curricula</h2><p>Indian, Gulf, European & other international boards</p></div>
-    </div>
-    <div class="subjects-grid">
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🇮🇳</div><div><h3>Indian Curriculum</h3><p>CBSE | ICSE | State Boards</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
-      </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🌴</div><div><h3>Gulf Curriculum</h3><p>UAE | Saudi Arabia | Kuwait</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
-      </div>
-      <div class="subject-card">
-        <div class="subject-card-top"><div class="subject-emoji">🇪🇺</div><div><h3>European Boards</h3><p>IB | European curricula</p></div></div>
-        <div class="subject-card-links"><a href="faculty.html" class="btn-yellow">Find Teacher</a><a href="https://wa.me/923000000000" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i></a></div>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <!-- CTA -->
+<!-- CTA -->
+<div class="cta-container-wrap">
   <div class="cta-strip reveal">
-    <h2 style="color:#FFD700;margin-bottom:10px;">Can't Find Your Subject?</h2>
-    <p style="color:#888;margin-bottom:24px;">Contact us directly — we have verified teachers for every subject and curriculum across Pakistan. Response within 24 hours.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <h2 style="color:#FFD700; margin-bottom:10px;">Can't Find Your Subject?</h2>
+    <p style="color:#888; margin-bottom:24px;">Contact us directly — we have verified teachers for every specialized technical course and curriculum. Response within 24 hours.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
       <a href="contact.html" class="btn-yellow">Contact Us</a>
-      <a href="https://wa.me/923120940518" target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://wa.me/923120940518?text=Assalam-o-Alaikum%20AFS%20Hub%2C%20I%20need%20a%20custom%20teacher%20for%20a%20subject%20not%20listed%20on%20the%20portal." target="_blank" class="btn-dark-wa"><i class="fab fa-whatsapp"></i> WhatsApp Hub</a>
     </div>
   </div>
-
 </div>
 
 <!-- SEO Internal Linking Section -->
@@ -353,7 +457,6 @@
       <a href="../index.html" style="background:#111; color:#FFD700; border:1px solid #FFD700; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:0.9rem;"><i class="fa fa-home"></i> Home</a>
       <a href="faculty.html" style="background:#111; color:#FFD700; border:1px solid #FFD700; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:0.9rem;"><i class="fa fa-users"></i> Browse Teachers</a>
       <a href="about-ceo.html" style="background:#111; color:#FFD700; border:1px solid #FFD700; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:0.9rem;"><i class="fa fa-user-tie"></i> About CEO</a>
-      <a href="blog.html" style="background:#111; color:#FFD700; border:1px solid #FFD700; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:0.9rem;"><i class="fa fa-pen"></i> Study Blog</a>
       <a href="faq.html" style="background:#111; color:#FFD700; border:1px solid #FFD700; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:0.9rem;"><i class="fa fa-question-circle"></i> FAQs</a>
       <a href="contact.html" style="background:#111; color:#FFD700; border:1px solid #FFD700; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:0.9rem;"><i class="fa fa-envelope"></i> Contact</a>
     </div>
@@ -364,8 +467,8 @@
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-        <div class="navbar-logo-icon" style="background:#FFD700;color:#000;font-weight:900">AFS</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <div class="navbar-logo-icon" style="background:#FFD700; color:#000; font-weight:900">AFS</div>
         <div class="navbar-logo-text" style="color:#fff">Virtual Tutor Hub<span style="color:#888">Expert Teachers. Free Access.</span></div>
       </div>
       <p>Pakistan's free platform for quality education.</p>
@@ -387,14 +490,14 @@
       <li><a href="privacy-policy.html">Privacy Policy</a></li>
     </ul></div>
     <div><h4>Contact</h4><ul>
-      <li><a href="https://wa.me/923120940518" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp CEO</a></li>
+      <li><a href="https://wa.me/923120940518" target="_blank"><i class="fab fa-whatsapp"></i> AFS TEAM</a></li>
       <li><a href="https://www.facebook.com/profile.php?id=61555784668106"><i class="fab fa-facebook"></i> Facebook</a></li>
       <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
     </ul></div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 AFS Virtual Tutor Hub. All rights reserved.</span>
-    <span>Dev ❤️ by Muhammad Idrees</span>
+    <span style="color:#fcfcfc" >Dev ❤️ by Muhammad Idrees</span>
   </div>
 </footer>
 
@@ -421,7 +524,6 @@ onAuthStateChanged(auth, async (user) => {
   const mobileMenu = document.getElementById('mobile-menu');
 
   if (!user) {
-    addBackButton('Back to Home', '../index.html');
     return;
   }
 
@@ -455,8 +557,6 @@ onAuthStateChanged(auth, async (user) => {
     await signOut(auth);
     window.location.href = '../index.html';
   });
-
-  //addBackButton('Back to Home', '../index.html');
 });
 </script>
 </body>

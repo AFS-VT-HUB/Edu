@@ -1,5 +1,6 @@
 // AFS Virtual Tutor Hub — Service Worker
-const CACHE_NAME = 'afs-tutor-v1';
+// Bumped version — forces old cache to be deleted on next visit
+const CACHE_NAME = 'afs-tutor-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -21,28 +22,36 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
-// Activate — clean old caches
+// Activate — clean ALL old caches immediately
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Fetch — serve from cache, fallback to network
+// Fetch — NETWORK FIRST, fallback to cache only if offline
+// This means: live site always wins. Cache is only a backup for offline use.
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+
+  // Don't cache/intercept Firebase or external API calls
+  if (!event.request.url.startsWith(self.location.origin)) return;
+
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).then(response => {
-        if (!response || response.status !== 200 || response.type !== 'basic') return response;
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+    fetch(event.request)
+      .then(response => {
+        // Got fresh response from network — use it and update cache
+        if (response && response.status === 200 && response.type === 'basic') {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+        }
         return response;
-      });
-    })
+      })
+      .catch(() => {
+        // Network failed (offline) — fall back to cache
+        return caches.match(event.request);
+      })
   );
 });

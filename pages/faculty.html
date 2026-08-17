@@ -7,7 +7,7 @@
 
   <!-- Primary SEO Meta Tags -->
   <meta name="title" content="Find Online Teachers — Cambridge, IGCSE, CSS/PMS Tutors | AFS Virtual Tutor Hub"/>
-  <meta name="description" content="Browse 500+ verified online tutors for Cambridge O/A Levels, IGCSE, Pakistani Matric, CSS/PMS, ISSB &amp; Cadet College. Filter by subject, curriculum and experience. Connect free via WhatsApp."/>
+  <meta name="description" content="Browse 50+ verified online tutors for Cambridge O/A Levels, IGCSE, Pakistani Matric, CSS/PMS, ISSB &amp; Cadet College. Filter by subject, curriculum and experience. Connect free via WhatsApp."/>
   <meta name="keywords" content="online teacher Pakistan, Cambridge tutor online, O Level math teacher, IGCSE physics tutor Pakistan, CSS PMS tutor, ISSB preparation teacher, Cadet College tutor, home tutor Lahore online, A Level chemistry teacher"/>
   <meta name="author" content="Muhammad Awais"/>
   <meta name="robots" content="index, follow"/>
@@ -145,7 +145,7 @@
 
     /* Sidebar sticky filters customization */
     .filters-sidebar {
-      width: 240px; 
+      width: 250px; 
       flex-shrink: 0;
       background: var(--card-bg) !important; 
       border: 1px solid var(--accent) !important;
@@ -189,6 +189,12 @@
     .filter-group select option {
       background: var(--card-bg) !important;
       color: var(--text-main) !important;
+    }
+    .filter-group select optgroup {
+      background: var(--dark-bg) !important;
+      color: var(--accent) !important;
+      font-style: normal;
+      font-weight: 600;
     }
 
     /* Main Grid & Cards Architecture */
@@ -392,35 +398,183 @@
       <label>Subject</label>
       <select id="f-subject">
         <option value="">All Subjects</option>
-        <option>Mathematics</option>
-        <option>Physics</option>
-        <option>Chemistry</option>
-        <option>Biology</option>
-        <option>English</option>
-        <option>Urdu</option>
-        <option>CSS/PMS</option>
-        <option>ISSB</option>
-        <option>Biomaths</option>
-        <option>Computer Science</option>
-        <option>Further Maths</option>
+        <optgroup label="General &amp; Technical Subjects">
+          <option>Accounting</option>
+          <option>Additional Mathematics</option>
+          <option>Arabic</option>
+          <option>Art</option>
+          <option>Art &amp; Design</option>
+          <option>Art History</option>
+          <option>Biology</option>
+          <option>Business Management</option>
+          <option>Business Studies</option>
+          <option>Calculus</option>
+          <option>Calculus AB</option>
+          <option>Calculus BC</option>
+          <option>Chemistry</option>
+          <option>Chinese (Mandarin)</option>
+          <option>Civics</option>
+          <option>Combined Science</option>
+          <option>Computer Science</option>
+          <option>Dance</option>
+          <option>Design &amp; Technology</option>
+          <option>Drama</option>
+          <option>Economics</option>
+          <option>Education</option>
+          <option>English</option>
+          <option>English Language</option>
+          <option>English Literature</option>
+          <option>Environmental Management</option>
+          <option>Environmental Science</option>
+          <option>European History</option>
+          <option>Film</option>
+          <option>Film &amp; Media Studies</option>
+          <option>Fine Arts</option>
+          <option>Food &amp; Nutrition</option>
+          <option>French</option>
+          <option>Geography</option>
+          <option>German</option>
+          <option>Global Perspectives</option>
+          <option>Global Politics</option>
+          <option>Health Education</option>
+          <option>Hindi</option>
+          <option>History</option>
+          <option>History of Art</option>
+          <option>History of Pakistan</option>
+          <option>Home Science</option>
+          <option>Human Geography</option>
+          <option>Indigenous Studies</option>
+          <option>Information Technology (IT)</option>
+          <option>International Baccalaureate (IB)</option>
+          <option>Islamiat</option>
+          <option>Italian</option>
+          <option>Japanese</option>
+          <option>Law</option>
+          <option>Legal Studies</option>
+          <option>Linguistics</option>
+          <option>Marine Science</option>
+          <option>Mathematics</option>
+          <option>Media Studies</option>
+          <option>Music</option>
+          <option>Music Theory</option>
+          <option>National Language</option>
+          <option>Pakistan Studies</option>
+          <option>Pashto</option>
+          <option>Persian</option>
+          <option>Philosophy</option>
+          <option>Physical Education</option>
+          <option>Physics</option>
+          <option>Political Science</option>
+          <option>Psychology</option>
+          <option>Punjabi</option>
+          <option>Russian</option>
+          <option>Sanskrit</option>
+          <option>Social Studies</option>
+          <option>Sociology</option>
+          <option>Spanish</option>
+          <option>Statistics</option>
+          <option>Studio Art</option>
+          <option>Theatre</option>
+          <option>Theory of Knowledge (TOK)</option>
+          <option>Thinking Skills</option>
+          <option>Turkish</option>
+          <option>Urdu</option>
+          <option>Urdu Literature</option>
+          <option>US Government &amp; Politics</option>
+          <option>US History</option>
+          <option>Visual Arts</option>
+          <option>World History</option>
+          <option>World Languages</option>
+        </optgroup>
+        <optgroup label="Madrassa &amp; Islamic Studies">
+          <option>Arabic Grammar</option>
+          <option>Arabic Literature</option>
+          <option>Dua &amp; Adhkar</option>
+          <option>Fiqh</option>
+          <option>Hadees</option>
+          <option>Hifz</option>
+          <option>Islamic History</option>
+          <option>Islamic Studies</option>
+          <option>Nazra</option>
+          <option>Quranic Sciences</option>
+          <option>Seerat un Nabi</option>
+          <option>Surah Memorization</option>
+          <option>Tafseer</option>
+        </optgroup>
       </select>
     </div>
     <div class="filter-group">
       <label>Curriculum</label>
       <select id="f-curriculum">
         <option value="">All Curricula</option>
-        <option>Pakistani Matric</option>
-        <option>FSc</option>
-        <option>Cambridge O Level</option>
-        <option>Cambridge A Level</option>
-        <option>IGCSE</option>
-        <option>GCSE</option>
-        <option>Edexcel</option>
-        <option>CSS/PMS</option>
-        <option>ISSB</option>
-        <option>Cadet College</option>
-        <option>Indian Curriculum</option>
-        <option>Gulf Curriculum</option>
+        <optgroup label="🇵🇰 Pakistan (All Boards)">
+          <option>Federal Board (FBISE)</option>
+          <option>Punjab Board (BISE Lahore, Multan, etc.)</option>
+          <option>Sindh Board (BISE Karachi, Hyderabad, etc.)</option>
+          <option>Khyber Pakhtunkhwa Board (BISE Peshawar, etc.)</option>
+          <option>Balochistan Board (BISE Quetta, etc.)</option>
+          <option>Aga Khan University Examination Board (AKU-EB)</option>
+        </optgroup>
+        <optgroup label="🇬🇧 United Kingdom &amp; International">
+          <option>Cambridge O Levels</option>
+          <option>Cambridge A Levels</option>
+          <option>IGCSE</option>
+          <option>GCSE</option>
+          <option>Edexcel / Pearson</option>
+        </optgroup>
+        <optgroup label="🇮🇳 India">
+          <option>CBSE</option>
+          <option>ICSE</option>
+          <option>State Boards</option>
+        </optgroup>
+        <optgroup label="🇦🇪 Gulf Region">
+          <option>UAE Curriculum (MOE)</option>
+          <option>Saudi Arabia Curriculum</option>
+          <option>Kuwait Curriculum</option>
+          <option>Qatar Curriculum</option>
+          <option>Oman Curriculum</option>
+          <option>Bahrain Curriculum</option>
+        </optgroup>
+        <optgroup label="🇪🇺 Europe">
+          <option>European Baccalaureate</option>
+          <option>French Baccalaureate</option>
+          <option>German Abitur</option>
+          <option>Italian Maturità</option>
+          <option>Spanish Selectividad</option>
+        </optgroup>
+        <optgroup label="🌍 Other International">
+          <option>International Baccalaureate (IB)</option>
+          <option>American Curriculum (AP, SAT)</option>
+          <option>Australian Curriculum</option>
+          <option>Canadian Curriculum</option>
+        </optgroup>
+        <optgroup label="🎯 Specialized Exams">
+          <option>CSS (Central Superior Services)</option>
+          <option>PMS (Provincial Management Services)</option>
+          <option>ISSB (Inter Services Selection Board)</option>
+          <option>Cadet College Admission Test</option>
+          <option>MDCAT (Medical Entry Test)</option>
+          <option>ECAT (Engineering Entry Test)</option>
+          <option>SAT (Scholastic Assessment Test)</option>
+          <option>GRE (Graduate Record Examination)</option>
+          <option>IELTS</option>
+          <option>TOEFL</option>
+        </optgroup>
+        <optgroup label="🕌 Madrassa / Islamic Studies">
+          <option>Nazra (Reading)</option>
+          <option>Quran Recitation with Tajweed</option>
+          <option>Hifz (Memorization)</option>
+          <option>Tafseer (Interpretation)</option>
+          <option>Seerat un Nabi</option>
+          <option>Hadees (Hadith)</option>
+          <option>Fiqh (Jurisprudence)</option>
+          <option>Aqeedah (Islamic Creed)</option>
+          <option>Arabic Grammar (Nahw/Sarf)</option>
+          <option>Quranic Sciences</option>
+          <option>Islamic History</option>
+          <option>Dua &amp; Adhkar</option>
+          <option>Manners &amp; Ethics (Akhlaq)</option>
+        </optgroup>
       </select>
     </div>
     <div class="filter-group">
@@ -510,25 +664,76 @@
           <label>Subject <span style="color:red">*</span></label>
           <select id="demo-subject">
             <option value="">Select</option>
-            <option>Mathematics</option>
-            <option>Physics</option>
-            <option>Chemistry</option>
-            <option>Biology</option>
-            <option>English</option>
-            <option>CSS/PMS</option>
-            <option>Biomaths</option>
-            <option>Other</option>
+            <optgroup label="General &amp; Technical Subjects">
+              <option>Accounting</option>
+              <option>Additional Mathematics</option>
+              <option>Arabic</option>
+              <option>Art</option>
+              <option>Art &amp; Design</option>
+              <option>Biology</option>
+              <option>Business Management</option>
+              <option>Business Studies</option>
+              <option>Calculus</option>
+              <option>Chemistry</option>
+              <option>Computer Science</option>
+              <option>Economics</option>
+              <option>English</option>
+              <option>English Language</option>
+              <option>English Literature</option>
+              <option>Environmental Science</option>
+              <option>Fine Arts</option>
+              <option>French</option>
+              <option>Geography</option>
+              <option>German</option>
+              <option>History</option>
+              <option>Information Technology (IT)</option>
+              <option>Law</option>
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Political Science</option>
+              <option>Psychology</option>
+              <option>Social Studies</option>
+              <option>Sociology</option>
+              <option>Spanish</option>
+              <option>Statistics</option>
+              <option>Urdu</option>
+            </optgroup>
+            <optgroup label="Madrassa &amp; Islamic Studies">
+              <option>Arabic Grammar</option>
+              <option>Dua &amp; Adhkar</option>
+              <option>Fiqh</option>
+              <option>Hadees</option>
+              <option>Hifz</option>
+              <option>Islamic History</option>
+              <option>Islamic Studies</option>
+              <option>Nazra</option>
+              <option>Quranic Sciences</option>
+              <option>Seerat un Nabi</option>
+              <option>Surah Memorization</option>
+              <option>Tafseer</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
           <label>Curriculum <span style="color:red">*</span></label>
           <select id="demo-curriculum">
             <option value="">Select</option>
-            <option>Pakistani Matric</option>
-            <option>Cambridge O/A</option>
-            <option>IGCSE/GCSE</option>
-            <option>CSS/PMS</option>
-            <option>Other</option>
+            <option>Federal Board (FBISE)</option>
+            <option>Punjab Board</option>
+            <option>Sindh Board</option>
+            <option>Khyber Pakhtunkhwa Board</option>
+            <option>Cambridge O Levels</option>
+            <option>Cambridge A Levels</option>
+            <option>IGCSE</option>
+            <option>GCSE</option>
+            <option>CSS (Central Superior Services)</option>
+            <option>PMS (Provincial Management Services)</option>
+            <option>ISSB</option>
+            <option>Cadet College Admission Test</option>
+            <option>MDCAT / ECAT</option>
+            <option>International Baccalaureate (IB)</option>
+            <option>American Curriculum</option>
+            <option>Madrassa / Islamic Studies</option>
           </select>
         </div>
       </div>
@@ -588,9 +793,12 @@
   const db  = getFirestore(app);
   const auth = getAuth(app);
 
+  // ── ADMIN WHATSAPP NUMBER CONFIGURATION ──
+  // Is number ko aap apne official WhatsApp number se replace kar sakte hain (Baghair '+' sign ke, pure country code ke sath)
+  const ADMIN_WHATSAPP = "+923120940518"; 
+
   let allTeachers = [];
 
-  // ── Auth aware navbar handles white background dynamic states ──
   onAuthStateChanged(auth, async (user) => {
     if (!user) return;
     const snap = await getDoc(doc(db, 'users', user.uid));
@@ -629,7 +837,6 @@
     }
   });
 
-  // ── Load teachers ──
   async function loadTeachers() {
     try {
       const q = query(
@@ -648,7 +855,6 @@
     }
   }
 
-  // ── Populate teacher dropdown in demo form ──
   function populateTeacherDropdown(teachers) {
     const select = document.getElementById('demo-teacher-select');
     select.innerHTML = '<option value="">Any available teacher</option>';
@@ -660,7 +866,6 @@
     });
   }
 
-  // ── Render teacher cards ──
   function renderTeachers(teachers) {
     const grid  = document.getElementById('teachers-grid');
     const count = document.getElementById('results-count');
@@ -689,14 +894,19 @@
       const fontColor = (i % badgeBackgrounds.length === 2) ? '#FFD700' : '#111';
       const borderFix = (i % badgeBackgrounds.length === 2) ? '1px solid #FFD700' : 'none';
       const stars = '★'.repeat(Math.round(t.avgRating||0)) + '☆'.repeat(5-Math.round(t.avgRating||0));
-      const waNum = (t.whatsapp||'').replace(/\D/g,'');
+      
+      // ── ADMIN WHATSAPP MESSAGE ROUTING ──
+      const teacherName = t.fullName || 'Teacher';
+      const teacherSubs = (t.subjects || []).slice(0, 2).join(', ');
+      const whatsappText = encodeURIComponent(`Hello AFS Virtual Tutor Hub, I am looking for an online class. I am interested in learning from your verified teacher: ${teacherName} (Specialization: ${teacherSubs}). Please guide me about the registration process.`);
+      const adminWaUrl = `https://wa.me/${ADMIN_WHATSAPP}?text=${whatsappText}`;
       
       return `
         <div class="teacher-card animate-fadeInUp">
           <div class="tc-top">
             <div class="tc-avatar" style="background:${bgStyle}; color:${fontColor}; border:${borderFix}; font-weight:700; display:flex; align-items:center; justify-content:center;">${initials}</div>
             <div>
-              <div class="tc-name">${t.fullName||'Teacher'}</div>
+              <div class="tc-name">${teacherName}</div>
               <div class="tc-subject">${(t.subjects||[]).slice(0,2).join(' • ')}</div>
             </div>
           </div>
@@ -716,17 +926,14 @@
             <a href="teacher-profile.html?id=${t.id}" class="btn btn-outline btn-sm" style="flex:1; text-align:center;">
               <i class="fa fa-user"></i> Profile
             </a>
-            ${waNum ? `
-            <a href="https://wa.me/${waNum}?text=Hello, I found you on AFS Virtual Tutor Hub"
-               target="_blank" class="btn btn-wa btn-sm" style="flex:1; text-align:center;">
+            <a href="${adminWaUrl}" target="_blank" class="btn btn-wa btn-sm" style="flex:1; text-align:center;">
               <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>` : ''}
+            </a>
           </div>
         </div>`;
     }).join('');
   }
 
-  // ── Filters ──
   window.applyFilters = () => {
     const subject    = document.getElementById('f-subject').value;
     const curriculum = document.getElementById('f-curriculum').value;
@@ -735,8 +942,23 @@
     const search     = document.getElementById('search-input').value.toLowerCase();
 
     let filtered = [...allTeachers];
-    if (subject)    filtered = filtered.filter(t => (t.subjects||[]).includes(subject));
-    if (curriculum) filtered = filtered.filter(t => (t.curricula||[]).includes(curriculum));
+    
+    if (subject) {
+      filtered = filtered.filter(t => {
+        const teacherSubs = (t.subjects || []).map(s => s.toLowerCase().trim());
+        const targetSub = subject.toLowerCase().trim();
+        return teacherSubs.some(s => s.includes(targetSub) || targetSub.includes(s));
+      });
+    }
+    
+    if (curriculum) {
+      filtered = filtered.filter(t => {
+        const teacherCurs = (t.curricula || []).map(c => c.toLowerCase().trim());
+        const targetCur = curriculum.toLowerCase().trim();
+        return teacherCurs.some(c => c.includes(targetCur) || targetCur.includes(c));
+      });
+    }
+
     if (experience) filtered = filtered.filter(t => t.experience === experience);
     if (search)     filtered = filtered.filter(t => (t.fullName||'').toLowerCase().includes(search));
 
@@ -758,7 +980,6 @@
 
   document.getElementById('search-input').addEventListener('input', () => applyFilters());
 
-  // ── Demo request ──
   document.getElementById('btn-demo').addEventListener('click', async () => {
     const name       = document.getElementById('demo-name').value.trim();
     const contact    = document.getElementById('demo-contact').value.trim();
