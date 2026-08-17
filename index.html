@@ -35,12 +35,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-title" content="AFS Tutors"/>
 
-  <link rel="preconnect" href="https://afs-virtual-tutor-hub.firebaseapp.com"/>
-  <link rel="preconnect" href="https://apis.google.com"/>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
-  <link rel="preconnect" href="https://www.gstatic.com"/>
+  <!-- Optimized Preconnects for Response Time Improvement -->
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
   <script type="application/ld+json">
@@ -201,7 +200,6 @@
     .section-dark .section-header h2 { color: #fff; }
     .section-dark .section-header p { color: #888; }
 
-    /* Card Titles Replacement for Headings SEO optimization */
     .card-title-text { font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 8px; }
     .card-title-dark { color: #fff; }
 
@@ -415,7 +413,7 @@
 <div id="page-loader"><div class="loader-ring"></div></div>
 <div id="toast-container"></div>
 
-<!-- Navbar -->
+<!-- Navbar with Unique Anchor Texts -->
 <nav class="navbar">
   <div class="navbar-inner">
     <a class="navbar-logo" href="index.html">
@@ -993,7 +991,7 @@
     </div>
   </div>
 
-  <!-- ── INTERNAL LINKS ── -->
+  <!-- ── INTERNAL LINKS (Unique Anchors) ── -->
   <div class="internal-links">
     <div class="container">
       <div class="section-header reveal">
@@ -1014,7 +1012,7 @@
 
 </main>
 
-<!-- Footer -->
+<!-- Footer (Unique Anchors) -->
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -1043,7 +1041,7 @@
     <div>
       <div class="footer-title">Help & Legal</div>
       <ul>
-        <li><a href="pages/faq.html"><i class="fa fa-chevron-right"></i> Frequently Asked Questions</a></li>
+        <li><a href="pages/faq.html"><i class="fa fa-chevron-right"></i> Platform FAQs</a></li>
         <li><a href="pages/blog.html"><i class="fa fa-chevron-right"></i> Educational Articles</a></li>
         <li><a href="pages/contact.html"><i class="fa fa-chevron-right"></i> Official Support Channel</a></li>
         <li><a href="pages/privacy-policy.html"><i class="fa fa-chevron-right"></i> Data Privacy Policy</a></li>
@@ -1207,11 +1205,11 @@
         </a>
       </div>`;
     if (p.role === 'admin') {
-      navLinks.innerHTML = `<a href="index.html">Home</a><a href="pages/faculty.html">Faculty</a><a href="pages/courses.html">Courses</a><a href="pages/about-ceo.html">About</a><a href="pages/admin-panel.html" class="btn-login"><i class="fa fa-shield-alt"></i> Admin Panel</a>${profileHTML}`;
+      navLinks.innerHTML = `<a href="index.html">Home</a><a href="pages/faculty.html">Verified Faculty</a><a href="pages/courses.html">Our Courses</a><a href="pages/about-ceo.html">About Us</a><a href="pages/admin-panel.html" class="btn-login"><i class="fa fa-shield-alt"></i> Admin Panel</a>${profileHTML}`;
     } else if (p.role === 'teacher') {
-      navLinks.innerHTML = `<a href="index.html">Home</a><a href="pages/faculty.html">Faculty</a><a href="pages/courses.html">Courses</a><a href="pages/about-ceo.html">About</a><a href="pages/teacher-dashboard.html" class="btn-login"><i class="fa fa-tachometer-alt"></i> Dashboard</a>${profileHTML}`;
+      navLinks.innerHTML = `<a href="index.html">Home</a><a href="pages/faculty.html">Verified Faculty</a><a href="pages/courses.html">Our Courses</a><a href="pages/about-ceo.html">About Us</a><a href="pages/teacher-dashboard.html" class="btn-login"><i class="fa fa-tachometer-alt"></i> Dashboard</a>${profileHTML}`;
     } else {
-      navLinks.innerHTML = `<a href="index.html" class="active">Home</a><a href="pages/faculty.html">Faculty</a><a href="pages/courses.html">Courses</a><a href="pages/about-ceo.html">About</a><a href="pages/faq.html">FAQ</a><a href="pages/contact.html">Contact</a>${profileHTML}`;
+      navLinks.innerHTML = `<a href="index.html" class="active">Home</a><a href="pages/faculty.html">Verified Faculty</a><a href="pages/courses.html">Our Courses</a><a href="pages/about-ceo.html">About Us</a><a href="pages/faq.html">Help FAQs</a><a href="pages/contact.html">Get in Touch</a>${profileHTML}`;
     }
   }
 
